@@ -1,0 +1,21 @@
+{
+    #物品
+    "item.paimeng.chicken"="甜甜花酿鸡",
+    #方块
+    "block.paimeng.cooking_pot"="烹饪锅",
+    "block.paimeng.cooking_bench"="灶台",
+    #物品信息
+    "paimeng.text.itemInfo.infinity_head"="§6饱腹，氧气",
+    "paimeng.text.blockInfo.infinity_sword"="无限",
+    #聊天信息
+    "paimeng.message.pot_fuel"="没有燃料",
+    "paimeng.message.pot_fuel_add"="无法用做燃料",
+    "paimeng.message.pot_fuel_add1"="燃料数量不足",
+    "paimeng.message.pot_open"="未在燃烧，无法打开",
+    #GUI
+    "gui.paimeng.pot"="烹饪锅",
+    "gui.paimeng.pot_button"="烹饪锅",
+    "gui.paimeng.cooking"="烹饪界面",
+    #物品页
+    "itemGroup.PaiMeng"="应急食品"
+}

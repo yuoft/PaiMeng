@@ -1,0 +1,16 @@
+package com.yuo.PaiMeng.Tiles;
+
+import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.PaiMeng;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+public class TileTypeRegistry {
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, PaiMeng.MOD_ID);
+
+    public static final RegistryObject<TileEntityType<PotTile>> POT_TILE = TILE_ENTITIES.register("pot_tile",
+            () -> TileEntityType.Builder.create(PotTile::new, BlockRegistry.cookingPot.get()).build(null));
+
+}

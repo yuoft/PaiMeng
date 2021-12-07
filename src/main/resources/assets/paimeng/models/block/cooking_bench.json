@@ -4,7 +4,7 @@
 	"textures": {
 		"1": "paimeng:block/cooking_bench",
 		"2": "paimeng:block/bench_fire",
-		"particle": "paimeng:block/cooking_bench"
+		"particle": "minecraft:block/bricks"
 	},
 	"elements": [
 		{

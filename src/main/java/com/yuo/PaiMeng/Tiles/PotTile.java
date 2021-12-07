@@ -21,10 +21,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 public class PotTile extends LockableTileEntity implements ITickableTileEntity {
-    private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
+    public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
     private final int FIRE_TIME[] = {0, 20 * 60 * 2, 20 * 60 * 4, 20 * 60 * 6, 20 * 60 * 8}; //总燃烧时间 每个燃料时间为两分钟
     private int TIME; //已燃烧时间
-    private final PotIntArray data = new PotIntArray();
+    public final PotIntArray data = new PotIntArray();
 
     public PotTile() {
         super(TileTypeRegistry.POT_TILE.get());
@@ -56,6 +56,10 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
+        readData(state, nbt);
+    }
+
+    private void readData(BlockState state, CompoundNBT nbt){
         this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, this.items);
         this.TIME = nbt.getInt("time");
@@ -63,9 +67,13 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.putInt("time", this.TIME);
-        ItemStackHelper.saveAllItems(compound, this.items);
-        return super.write(compound);
+        return super.write(writeData(compound));
+    }
+
+    private CompoundNBT writeData(CompoundNBT nbt){
+        nbt.putInt("time", this.TIME);
+        ItemStackHelper.saveAllItems(nbt, this.items);
+        return nbt;
     }
 
     @Nullable
@@ -76,22 +84,19 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        this.pos = pkt.getPos();
         handleUpdateTag(world.getBlockState(pkt.getPos()), pkt.getNbtCompound());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT compound = super.getUpdateTag();
-        compound.putInt("time", this.TIME);
-        ItemStackHelper.saveAllItems(compound, this.items);
-        return compound;
+        return writeData(compound);
     }
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(tag, this.items);
-        this.TIME = tag.getInt("time");
+        readData(state, tag);
     }
 
     //gui名称

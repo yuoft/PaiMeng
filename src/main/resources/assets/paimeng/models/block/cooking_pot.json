@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"1": "paimeng:block/cooking_pot",
-		"particle": "paimeng:block/cooking_pot"
+		"particle": "minecraft:block/oak_log"
 	},
 	"elements": [
 		{

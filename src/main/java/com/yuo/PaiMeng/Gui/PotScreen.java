@@ -61,7 +61,7 @@ public class PotScreen extends ContainerScreen<PotContainer> {
     //按下按钮后
     private void button(Button button){
         if (minecraft != null) {
-            minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this.container,1));
+            minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,1));
         }
     }
 

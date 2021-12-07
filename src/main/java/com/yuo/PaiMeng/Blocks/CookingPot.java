@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Blocks;
 
+import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Tiles.PotTile;
-import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -87,6 +87,7 @@ public class CookingPot extends Block {
                 if (tileEntity instanceof PotTile){ //打开gui
                     player.openContainer((INamedContainerProvider) tileEntity);
                     player.addStat(Stats.INTERACT_WITH_FURNACE);
+//                    NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, pos);
                 }
                 return ActionResultType.SUCCESS;
             }
@@ -101,12 +102,13 @@ public class CookingPot extends Block {
                             PotTile potTile = (PotTile) tile;
                             potTile.setBurnTime(state.get(FUEL) + 1);
                         }
-                        heldItem.setCount(heldItem.getCount() - i);
+                        if (!player.isCreative()) heldItem.setCount(heldItem.getCount() - i);
                     }else player.sendMessage(new TranslationTextComponent("paimeng.message.pot_fuel_add1"), UUID.randomUUID());
                 }else player.sendMessage(new TranslationTextComponent("paimeng.message.pot_fuel_add"), UUID.randomUUID());
                 return ActionResultType.SUCCESS;
             }
         }
+        else PaiMeng.PROXY.setRefrencedTE(worldIn.getTileEntity(pos)); //保存当前tile坐标
         return ActionResultType.SUCCESS;
     }
 
@@ -199,7 +201,7 @@ public class CookingPot extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileTypeRegistry.POT_TILE.get().create();
+        return new PotTile();
     }
 
     @Override

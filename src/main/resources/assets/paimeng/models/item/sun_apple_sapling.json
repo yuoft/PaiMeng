@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paimeng:block/tree/sun_apple_sapling"
+  }
+}

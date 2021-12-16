@@ -42,6 +42,9 @@ public class PotScreen extends ContainerScreen<PotContainer> {
         if (burnTime > 0) {
             blit(matrixStack, i + 65, j + 36 + 14 - burnTime, 176, 14 - burnTime, 14, burnTime);
         }
+        if (!container.canRecipe()){ //叉号
+            blit(matrixStack, i + 90,j + 35,190,0,22,15);
+        }
     }
 
     @Override
@@ -55,13 +58,17 @@ public class PotScreen extends ContainerScreen<PotContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.button.render(matrixStack, mouseX, mouseY, partialTicks);
+        if (!container.canRecipe()) //切换按钮可用状态
+            this.button.active = false;
+        else this.button.active = true;
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     //按下按钮后
     private void button(Button button){
         if (minecraft != null) {
-            minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,1));
+            if (container.canRecipe())
+                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel()));
         }
     }
 

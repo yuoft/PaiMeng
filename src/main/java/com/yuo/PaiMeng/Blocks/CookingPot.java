@@ -100,7 +100,7 @@ public class CookingPot extends Block {
                         TileEntity tile = worldIn.getTileEntity(pos); //同时设置tile燃烧时间
                         if (tile instanceof PotTile) {
                             PotTile potTile = (PotTile) tile;
-                            potTile.setBurnTime(state.get(FUEL) + 1);
+                            potTile.setBurnTime();
                         }
                         if (!player.isCreative()) heldItem.setCount(heldItem.getCount() - i);
                     }else player.sendMessage(new TranslationTextComponent("paimeng.message.pot_fuel_add1"), UUID.randomUUID());

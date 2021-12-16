@@ -1,39 +1,34 @@
 package com.yuo.PaiMeng.Gui;
 
-import com.yuo.PaiMeng.NetWork.NetWorkHandler;
-import com.yuo.PaiMeng.NetWork.PotPacket;
-import com.yuo.PaiMeng.PaiMeng;
+import com.yuo.PaiMeng.Items.OrdinaryMaterial;
 import com.yuo.PaiMeng.Tiles.PotTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
 public class PotContainer extends Container {
-    private final IInventory items; //存储食材
+    private final PotTile potTile; //存储食材
     private final PotIntArray data;
 
     public PotContainer(int id, PlayerInventory playerInventory){
-        this(id, playerInventory , new Inventory(5), new PotIntArray());
+        this(id, playerInventory , new PotTile());
     }
 
-    public PotContainer(int id, PlayerInventory playerInventory, IInventory inventory, PotIntArray intArray) {
+    public PotContainer(int id, PlayerInventory playerInventory, PotTile tile) {
         super(ContainerTypeRegistry.potContainer.get(), id);
-        this.items = inventory;
-        this.data = intArray;
+        this.potTile = tile;
+        this.data = tile.data;
         trackIntArray(data); //同步数据
         //食材槽
         for (int m = 0; m < 2; m++){
             for (int n = 0; n < 2; n++){
-                this.addSlot(new PotInputSlot(items, n + m * 2, 8 + n * 30, 22 + m * 27));
+                this.addSlot(new PotInputSlot(potTile, n + m * 2, 8 + n * 30, 22 + m * 27));
             }
         }
         //食品槽
-        this.addSlot(new PotOutputSlot(items, 4, 132, 33));
+        this.addSlot(new PotOutputSlot(potTile, 4, 132, 33));
         //添加玩家物品栏
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -54,7 +49,7 @@ public class PotContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.items.isUsableByPlayer(playerIn);
+        return this.potTile.isUsableByPlayer(playerIn);
     }
 
     //玩家shift行为
@@ -66,6 +61,8 @@ public class PotContainer extends Container {
             ItemStack itemStack1 = slot.getStack();
             itemstack = itemStack1.copy();
             if (index > 4){
+                if (itemstack.getItem() instanceof OrdinaryMaterial)
+                    if (!this.mergeItemStack(itemStack1, 0, 4, false)) return ItemStack.EMPTY;
                 if (index >= 5 && index < 32) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;
                 } else if (index >= 32 && index < 41 ) {
@@ -83,13 +80,11 @@ public class PotContainer extends Container {
         return itemstack;
     }
 
-    /**
-     * 发送数据包给服务端
-     * @param stack //要产出的食物
-     */
-    public void  sendPotPacket(ItemStack stack) {
-        TileEntity te = PaiMeng.PROXY.getRefrencedTE();
-        if (te instanceof PotTile)
-            NetWorkHandler.INSTANCE.sendToServer(new PotPacket(stack, te.getPos()));
+    public boolean canRecipe(){
+        return this.data.get(1) != 0;
+    }
+
+    public int getFoodLevel(){
+        return this.data.get(2);
     }
 }

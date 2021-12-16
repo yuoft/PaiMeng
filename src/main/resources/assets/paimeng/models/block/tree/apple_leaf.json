@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "paimeng:block/tree/apple_leaves"
+  }
+}

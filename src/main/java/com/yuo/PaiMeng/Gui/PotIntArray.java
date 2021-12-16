@@ -4,9 +4,8 @@ import net.minecraft.util.IIntArray;
 
 public class PotIntArray implements IIntArray {
     private int time; //燃烧时间
-    private int posX; //坐标x
-    private int posY;
-    private int posZ;
+    private int flag; //合成标识
+    private int level; //配方等级
 
     @Override
     public int get(int index) {
@@ -14,11 +13,9 @@ public class PotIntArray implements IIntArray {
             case 0:
                 return time;
             case 1:
-                return posX;
+                return flag;
             case 2:
-                return posY;
-            case 3:
-                return posZ;
+                return level;
             default:
                 return 0;
         }
@@ -31,19 +28,16 @@ public class PotIntArray implements IIntArray {
                 time = value;
                 break;
             case 1:
-                posX = value;
+                flag = value;
                 break;
             case 2:
-                posY = value;
-                break;
-            case 3:
-                posZ = value;
+                level = value;
                 break;
         }
     }
 
     @Override
     public int size() {
-        return 1;
+        return 3;
     }
 }

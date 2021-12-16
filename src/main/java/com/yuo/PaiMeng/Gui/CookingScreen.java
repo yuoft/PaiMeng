@@ -2,12 +2,11 @@ package com.yuo.PaiMeng.Gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.PaiMeng;
+import com.yuo.PaiMeng.Tiles.TileUtils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -22,7 +21,7 @@ public class CookingScreen extends Screen {
     private final int textureHeight = 12;
     private ContainerScreen screen; //容器
     private final int LEVEL; //食品等级
-    private int LEVEL_GROW; //指针速度
+    private double LEVEL_GROW = 0; //指针速度
     private int minValue; //成功区间最小值
     private int maxValue; //最大值
     private Random random = new Random();
@@ -30,7 +29,6 @@ public class CookingScreen extends Screen {
     protected CookingScreen(ITextComponent titleIn, ContainerScreen screen, int lv) {
         super(titleIn);
         this.LEVEL = lv;
-        this.LEVEL_GROW = lv;
         this.screen = screen;
         this.minValue = random.nextInt(80 + LEVEL * 20);
         this.maxValue = this.minValue + (120 - LEVEL * 20);
@@ -57,23 +55,29 @@ public class CookingScreen extends Screen {
         this.minecraft.getTextureManager().bindTexture(RESOURCE);
         int i = (this.width - this.textureWidth) / 2;
         int j = (this.height - this.textureHeight) / 2;
-        LEVEL_GROW += LEVEL; //模拟指针移动
+        setLEVEL_GROW(LEVEL);; //模拟指针移动
         blit(matrixStack, i, j, 0, 0, textureWidth, textureHeight);
         blit(matrixStack, i + minValue, j + 1, 0,12, 120 - LEVEL * 20, 10); //成功区间
         if (LEVEL_GROW <= 200)
-            blit(matrixStack, i + LEVEL_GROW, j - 5, 0, 22, 10, 18); //指针
+            blit(matrixStack, i + (int) Math.floor(LEVEL_GROW), j - 5, 0, 22, 10, 18); //指针
         if (LEVEL_GROW > 200) this.button.onClick(0,0);
     }
 
     private void button(Button button){
         if (LEVEL_GROW >= minValue && LEVEL_GROW <= maxValue){ //成功烹饪
             if (screen instanceof PotScreen){
-                PotContainer potContainer = ((PotScreen) screen).getContainer();
-                potContainer.sendPotPacket(new ItemStack(ItemRegistry.tiantianhuaNiangji.get())); //发送数据包设置产出
+               TileUtils.sendPotPacket();//发送数据包设置产出
             }
         }
         if (minecraft != null){
             minecraft.displayGuiScreen(screen);
         }
+    }
+
+    //设置指针速度
+    private void setLEVEL_GROW(int lv){
+        if (lv <= 2) LEVEL_GROW += 1;
+        else if (lv <= 4) LEVEL_GROW += 1.5d;
+        else LEVEL_GROW += 2;
     }
 }

@@ -1,8 +1,9 @@
 package com.yuo.PaiMeng.NetWork;
 
+import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Tiles.PotTile;
+import com.yuo.PaiMeng.Tiles.TileUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -14,20 +15,16 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class PotPacket {
-    private static ItemStack stack;
     private static BlockPos pos;
     public PotPacket(PacketBuffer buffer) {
-        stack = buffer.readItemStack();
         pos = buffer.readBlockPos();
     }
 
-    public PotPacket(ItemStack message, BlockPos pos) {
-        this.stack = message;
+    public PotPacket(BlockPos pos) {
         this.pos = pos;
     }
 
     public void toBytes(PacketBuffer buf) {
-        buf.writeItemStack(this.stack);
         buf.writeBlockPos(this.pos);
     }
 
@@ -38,15 +35,14 @@ public class PotPacket {
             if (!world.isRemote && world.isBlockLoaded(pos)){ //检查此坐标区块是否加载
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile instanceof PotTile){
-                    ((PotTile) tile).setInventorySlotContents(4, stack);
+                    PotTile potTile = (PotTile) tile;
+                    potTile.setInventorySlotContents(4, TileUtils.getTileStack(world, ModRecipeType.POT, potTile));
+                    TileUtils.shirkItem(potTile, TileUtils.getRecipeInputs(world, ModRecipeType.POT, potTile));
                 }
             }
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> PotClientPacker.handlePacket(msg, ctx)); //处理服务端发送给客户端的消息
         });
         ctx.get().setPacketHandled(true);
-    }
-    public static ItemStack getStack() {
-        return stack;
     }
 
     public static BlockPos getPos() {

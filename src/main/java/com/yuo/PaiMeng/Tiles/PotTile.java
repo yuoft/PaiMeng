@@ -3,6 +3,8 @@ package com.yuo.PaiMeng.Tiles;
 import com.yuo.PaiMeng.Blocks.CookingPot;
 import com.yuo.PaiMeng.Gui.PotContainer;
 import com.yuo.PaiMeng.Gui.PotIntArray;
+import com.yuo.PaiMeng.Items.Food.OrdinaryFood;
+import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,8 +24,10 @@ import javax.annotation.Nullable;
 
 public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
-    private final int FIRE_TIME[] = {0, 20 * 60 * 2, 20 * 60 * 4, 20 * 60 * 6, 20 * 60 * 8}; //总燃烧时间 每个燃料时间为两分钟
+    private final int FIRE_TIME[] = {0, 20 * 90 * 1, 20 * 90 * 2, 20 * 90 * 3, 20 * 90 * 4}; //总燃烧时间 每个燃料时间为一分半钟
     private int TIME; //已燃烧时间
+    private boolean FLAG; //是否可以合成
+    private int LEVEL; //配方等级
     public final PotIntArray data = new PotIntArray();
 
     public PotTile() {
@@ -33,22 +37,36 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     @Override
     public void tick() {
         if (world.isRemote || world == null) return;
-        TIME--;
-        if (TIME < 0) TIME = 0;
-        this.data.set(0, TIME);
         BlockState state = world.getBlockState(pos); //当前方块
+        if (state.get(CookingPot.FIRE)) { //燃烧时时间减少
+            TIME--;
+            if (TIME < 0) TIME = 0;
+            this.data.set(0, TIME);
+        }
         Integer fuel = state.get(CookingPot.FUEL);
         if (TIME <= FIRE_TIME[fuel - 1 < 0 ? 0:fuel - 1]){ //到达燃烧时间
             world.setBlockState(pos, state.with(CookingPot.FUEL, fuel - 1 < 0 ? 0:fuel - 1)); //减少燃料
         }
         if (fuel == 0) world.setBlockState(pos, state.with(CookingPot.FIRE, false)); //燃料消耗完 火焰熄灭
-
-        markDirty();
+        ItemStack output = TileUtils.getRecipeOutput(world, ModRecipeType.POT, this);
+        if (!output.isEmpty() && output.getItem() instanceof OrdinaryFood){
+            LEVEL = ((OrdinaryFood) output.getItem()).getLEVEL();
+            this.data.set(2, LEVEL);
+        }
+        if (!output.isEmpty() && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){
+            //有输出 产物栏无物品或物品相同 则能合成
+            FLAG = true;
+            this.data.set(1, 1);
+            markDirty();
+        }else {
+            FLAG = false;
+            this.data.set(1, 0);
+        }
     }
 
-    //设置燃烧时间
-    public void setBurnTime(int fuel){
-        TIME = FIRE_TIME[fuel];
+    //设置燃烧时间 每次时间增加一分钟
+    public void setBurnTime(){
+        TIME = Math.min(TIME + FIRE_TIME[1], FIRE_TIME[4]);
         this.data.set(0, TIME);
         markDirty();
     }
@@ -63,6 +81,8 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
         this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, this.items);
         this.TIME = nbt.getInt("time");
+        this.FLAG = nbt.getBoolean("flag");
+        this.LEVEL = nbt.getInt("level");
     }
 
     @Override
@@ -72,6 +92,8 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
 
     private CompoundNBT writeData(CompoundNBT nbt){
         nbt.putInt("time", this.TIME);
+        nbt.putBoolean("flag", this.FLAG);
+        nbt.putInt("level", this.LEVEL);
         ItemStackHelper.saveAllItems(nbt, this.items);
         return nbt;
     }
@@ -108,7 +130,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     //打开gui
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new PotContainer(id, player, this, this.data);
+        return new PotContainer(id, player, this);
     }
 
     @Override

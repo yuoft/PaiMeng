@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
+    "parent": "paimeng:block/cross",
     "textures": {
-		"crop": "paimeng:block/crop/huluobo_crop"
+		"cross": "paimeng:block/crop/huluobo_crop"
     }
 }

@@ -15,5 +15,8 @@ public class ContainerTypeRegistry {
     public static final RegistryObject<ContainerType<PotContainer>> potContainer = CONTAINERS.register("pot_container", () ->
             IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                     new PotContainer(windowId, inv)));
+    public static final RegistryObject<ContainerType<BenchContainer>> benchContainer = CONTAINERS.register("bench_container", () ->
+            IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                    new BenchContainer(windowId, inv)));
 
 }

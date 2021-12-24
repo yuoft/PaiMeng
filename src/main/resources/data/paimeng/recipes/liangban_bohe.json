@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:bohe",
+      "count": 4
+    },
+    {
+      "item": "paimeng:jueyun_jiaojiao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:liangban_bohe"
+  }
+}

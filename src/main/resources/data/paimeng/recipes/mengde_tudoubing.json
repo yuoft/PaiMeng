@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:songguo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:guojiang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:mengde_tudoubing"
+  }
+}

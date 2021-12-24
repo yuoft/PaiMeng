@@ -1,28 +1,40 @@
 package com.yuo.PaiMeng.Blocks;
 
+import com.yuo.PaiMeng.PaiMeng;
+import com.yuo.PaiMeng.Tiles.BenchTile;
+import com.yuo.PaiMeng.Tiles.PotTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.stats.Stats;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nullable;
 import java.util.Random;
+import java.util.UUID;
 
 public class CookingBench extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING; //朝向
@@ -32,6 +44,74 @@ public class CookingBench extends Block {
         super(Properties.create(Material.IRON).hardnessAndResistance(10, 20).harvestLevel(1)
                 .harvestTool(ToolType.PICKAXE).setRequiresTool());
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(FIRE, Boolean.FALSE));
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        ItemStack heldItem = player.getHeldItem(handIn);
+        if (!worldIn.isRemote){
+            if (heldItem.isEmpty()){ //空手右键打开gui
+                if (!state.get(FIRE)) {
+                    player.sendMessage(new TranslationTextComponent("paimeng.message.pot_open"), UUID.randomUUID());
+                    return ActionResultType.SUCCESS;
+                }
+                TileEntity tileEntity = worldIn.getTileEntity(pos);
+                if (tileEntity instanceof BenchTile){ //打开gui
+                    player.openContainer((INamedContainerProvider) tileEntity);
+                    player.addStat(Stats.INTERACT_WITH_FURNACE);
+                }
+                return ActionResultType.SUCCESS;
+            }
+            int burnTime = ForgeHooks.getBurnTime(heldItem);
+            if (burnTime > 0){ //手持燃料
+                TileEntity tileEntity = worldIn.getTileEntity(pos);
+                if (!(tileEntity instanceof BenchTile)) return ActionResultType.FAIL;
+                BenchTile benchTile = (BenchTile) tileEntity;
+                int i = (int) (Math.ceil(burnTime / 1600d * 60d)); //增加时间
+                i = Math.max(i * 20, 1);
+                int fuleCount = getFuleCount(benchTile, i);
+                if (fuleCount > heldItem.getCount()){ //燃料不足
+                    benchTile.setBurnTime(heldItem.getCount() * i);
+                    if (!player.isCreative()) heldItem.setCount(0);
+                }else {
+                    benchTile.setBurnTime(fuleCount * i);
+                    if (!player.isCreative()) heldItem.shrink(fuleCount);
+                }
+                return ActionResultType.SUCCESS;
+            }
+        }
+        else PaiMeng.PROXY.setRefrencedTE(worldIn.getTileEntity(pos)); //保存当前tile坐标
+        return ActionResultType.SUCCESS;
+    }
+
+    //消耗多个燃料时 所需具体数量
+    private int getFuleCount(BenchTile benchTile, int time){
+        int tileTIME = benchTile.getTIME(); //当前时间
+        return (int) Math.floor((benchTile.MAX_TIME - tileTIME) / time);
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new BenchTile();
+    }
+
+    //破坏后掉落
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.isIn(newState.getBlock())) {
+            TileEntity tileentity = worldIn.getTileEntity(pos);
+            if (tileentity instanceof PotTile) {
+                InventoryHelper.dropInventoryItems(worldIn, pos, (PotTile)tileentity);
+                worldIn.updateComparatorOutputLevel(pos, this);
+            }
+
+            super.onReplaced(state, worldIn, pos, newState, isMoving);
+        }
     }
 
     //设置放下时的状态

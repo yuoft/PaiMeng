@@ -24,9 +24,9 @@ public class NetWorkHandler {
                 (version) -> version.equals(VERSION)
         );
         INSTANCE.registerMessage(nextID(), //数据包序号
-                        PotPacket.class,  //自定义数据包类
-                        PotPacket::toBytes, //序列化数据包
-                        PotPacket::new, //反序列化
-                        PotPacket::handler); //接收数据后进行操作
+                        CookingPacket.class,  //自定义数据包类
+                        CookingPacket::toBytes, //序列化数据包
+                        CookingPacket::new, //反序列化
+                        CookingPacket::handler); //接收数据后进行操作
     }
 }

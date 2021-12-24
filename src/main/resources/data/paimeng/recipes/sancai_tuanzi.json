@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niunai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:jinyucao",
+      "count": 2
+    },
+    {
+      "item": "paimeng:feiying_xiuqiu",
+      "count": 2
+    },
+    {
+      "item": "paimeng:daomi",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:sancai_tuanzi"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:bailuobo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:hujiao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:zha_luobo_wanzi"
+  }
+}

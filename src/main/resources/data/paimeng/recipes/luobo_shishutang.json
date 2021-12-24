@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:bailuobo",
+      "count": 1
+    },
+    {
+      "item": "paimeng:bohe",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:luobo_shishutang"
+  }
+}

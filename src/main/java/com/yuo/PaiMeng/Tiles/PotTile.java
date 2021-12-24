@@ -38,6 +38,10 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     public void tick() {
         if (world.isRemote || world == null) return;
         BlockState state = world.getBlockState(pos); //当前方块
+        if (world.isRainingAt(pos.up()) && state.get(CookingPot.FIRE)){ //下雨熄灭
+            world.playEvent(null, 1009, pos, 0);
+            world.setBlockState(pos, state.with(CookingPot.FIRE, Boolean.FALSE));
+        }
         if (state.get(CookingPot.FIRE)) { //燃烧时时间减少
             TIME--;
             if (TIME < 0) TIME = 0;
@@ -53,8 +57,8 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
             LEVEL = ((OrdinaryFood) output.getItem()).getLEVEL();
             this.data.set(2, LEVEL);
         }
-        if (!output.isEmpty() && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){
-            //有输出 产物栏无物品或物品相同 则能合成
+        if (!output.isEmpty() && LEVEL <= 3 && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){
+            //有输出 食物等级<=3 产物栏无物品或物品相同 则能合成
             FLAG = true;
             this.data.set(1, 1);
             markDirty();

@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:daomi",
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "paimeng:jinqiangyu_shousi"
+  }
+}

@@ -1,8 +1,9 @@
 package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
-import com.yuo.PaiMeng.NetWork.PotPacket;
+import com.yuo.PaiMeng.NetWork.CookingPacket;
 import com.yuo.PaiMeng.PaiMeng;
+import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import com.yuo.PaiMeng.Recipes.PotRecipe;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -44,7 +45,8 @@ public class TileUtils {
         if (inputs.size() <= 0) return;
         NonNullList<ItemStack> stacks = NonNullList.create();
         if (tile instanceof PotTile) stacks = ((PotTile) tile).items;
-//        if (tile instanceof PotTile) stacks = ((PotTile) tile).items;
+        if (tile instanceof BenchTile) stacks = ((BenchTile) tile).items;
+
         if (stacks.size() <= 0) return;
         for (ItemStack stack : stacks){
             if (!stack.isEmpty()){
@@ -71,6 +73,8 @@ public class TileUtils {
             if (recipe.matches(inventory, world)){
                 if (recipe instanceof PotRecipe)
                 return ((PotRecipe) recipe).getInputs();
+                if (recipe instanceof BenchRecipe)
+                return ((BenchRecipe) recipe).getInputs();
             }
         }
         return NonNullList.create();
@@ -98,6 +102,9 @@ public class TileUtils {
     public static void  sendPotPacket() {
         TileEntity te = PaiMeng.PROXY.getRefrencedTE();
         if (te instanceof PotTile)
-            NetWorkHandler.INSTANCE.sendToServer(new PotPacket(te.getPos()));
+            NetWorkHandler.INSTANCE.sendToServer(new CookingPacket(te.getPos()));
+        if (te instanceof BenchTile){
+            NetWorkHandler.INSTANCE.sendToServer(new CookingPacket(te.getPos()));
+        }
     }
 }

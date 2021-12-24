@@ -95,7 +95,7 @@ public class CookingPot extends Block {
                 int i = damageWoodCount(heldItem);
                 int count = heldItem.getCount();
                 if (i > 0){
-                    if (count > i){
+                    if (count >= i){
                         worldIn.setBlockState(pos, state.with(FUEL, state.get(FUEL) + 1), 2);
                         TileEntity tile = worldIn.getTileEntity(pos); //同时设置tile燃烧时间
                         if (tile instanceof PotTile) {

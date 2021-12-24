@@ -12,5 +12,7 @@ public class TileTypeRegistry {
 
     public static final RegistryObject<TileEntityType<PotTile>> POT_TILE = TILE_ENTITIES.register("pot_tile",
             () -> TileEntityType.Builder.create(PotTile::new, BlockRegistry.cookingPot.get()).build(null));
+    public static final RegistryObject<TileEntityType<BenchTile>> BENCH_TILE = TILE_ENTITIES.register("bench_tile",
+            () -> TileEntityType.Builder.create(BenchTile::new, BlockRegistry.cookingBench.get()).build(null));
 
 }

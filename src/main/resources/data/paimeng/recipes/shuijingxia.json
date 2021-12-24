@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:daomi",
+      "count": 3
+    },
+    {
+      "item": "paimeng:xiaren",
+      "count": 3
+    },
+    {
+      "item": "paimeng:huluobo",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:shuijingxia"
+  }
+}

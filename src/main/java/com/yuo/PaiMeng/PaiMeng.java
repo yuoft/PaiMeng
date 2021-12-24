@@ -2,6 +2,7 @@ package com.yuo.PaiMeng;
 
 import com.yuo.PaiMeng.Blocks.BlockRegistry;
 import com.yuo.PaiMeng.Blocks.Tree.AppleSapling;
+import com.yuo.PaiMeng.Gui.BenchScreen;
 import com.yuo.PaiMeng.Gui.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Gui.PotScreen;
 import com.yuo.PaiMeng.Items.ItemRegistry;
@@ -45,10 +46,12 @@ public class PaiMeng {
         event.enqueueWork(() -> {
             RenderTypeLookup.setRenderLayer(BlockRegistry.cookingPot.get(), RenderType.getCutoutMipped());
             RenderTypeLookup.setRenderLayer(BlockRegistry.cookingBench.get(), RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(BlockRegistry.zhusunCrop.get(), RenderType.getCutout());
         });
         //绑定Container和ContainerScreen
         event.enqueueWork(() -> {
             ScreenManager.registerFactory(ContainerTypeRegistry.potContainer.get(), PotScreen::new);
+            ScreenManager.registerFactory(ContainerTypeRegistry.benchContainer.get(), BenchScreen::new);
         });
         //透明方块的渲染
         for (RegistryObject r : BlockRegistry.BLOCKS.getEntries()){

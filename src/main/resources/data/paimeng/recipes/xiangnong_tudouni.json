@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:tudou",
+      "count": 6
+    },
+    {
+      "item": "paimeng:naiyou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:hujiao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:xiangnong_tudouni"
+  }
+}

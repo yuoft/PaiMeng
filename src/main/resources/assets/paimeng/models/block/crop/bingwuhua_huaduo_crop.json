@@ -1,5 +1,5 @@
 {
-    "parent": "block/cross",
+    "parent": "paimeng:block/cross",
     "textures": {
 		"cross": "paimeng:block/crop/bingwuhua_huaduo_crop"
     }

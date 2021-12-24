@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "xyx",
+    "zxz"
+  ],
+  "key": {
+    "y": {
+      "item": "minecraft:cauldron"
+    },
+    "x": {
+      "tag": "minecraft:logs"
+    },
+    "z": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "result": {
+    "item": "paimeng:cooking_pot"
+  }
+}

@@ -26,7 +26,7 @@ public class PotScreen extends ContainerScreen<PotContainer> {
     @Override
     protected void init() {
         this.button = new Button((this.width - this.xSize) / 2 + 90, (this.height - this.ySize) / 2 + 55, 30, 20,
-                new TranslationTextComponent("gui.paimeng.pot_button"), this::button); //回调
+                new TranslationTextComponent("gui.paimeng.cooking_button"), this::button); //回调
         this.addButton(button);
         super.init();
     }

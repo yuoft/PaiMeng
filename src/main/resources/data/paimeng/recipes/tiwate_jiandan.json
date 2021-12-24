@@ -1,0 +1,12 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niaodan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:tiwate_jiandan"
+  }
+}

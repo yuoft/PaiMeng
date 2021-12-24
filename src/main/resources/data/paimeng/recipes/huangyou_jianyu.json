@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:huangyou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yurou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xiaodengcao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:huangyou_jianyu"
+  }
+}

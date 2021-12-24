@@ -10,5 +10,6 @@ public class RecipeSerializerRegistry {
     public static final DeferredRegister RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PaiMeng.MOD_ID);
 
     public static final RegistryObject<IRecipeSerializer<?>> POT = RECIPE_TYPES.register("pot", () -> new PotRecipe.Serializer());
+    public static final RegistryObject<IRecipeSerializer<?>> BENCH = RECIPE_TYPES.register("bench", () -> new BenchRecipe.Serializer());
 
 }

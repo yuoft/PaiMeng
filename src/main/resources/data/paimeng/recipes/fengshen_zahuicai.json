@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:huluobo",
+      "count": 4
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:yangcong",
+      "count": 4
+    }
+  ],
+  "result": {
+    "item": "paimeng:fengshen_zahuicai"
+  }
+}

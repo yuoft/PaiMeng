@@ -1,6 +1,5 @@
 package com.yuo.PaiMeng.Recipes;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.IInventory;
@@ -80,7 +79,8 @@ public class PotRecipe implements IRecipe<IInventory> {
             ItemStack itemstack = inv.getStackInSlot(j);
             if (!itemstack.isEmpty()) {
                 for (ItemStack stack : inputs){
-                    if (stack.getItem() == itemstack.getItem()){
+                    //物品和物品数量匹配
+                    if (stack.getItem() == itemstack.getItem() && itemstack.getCount() >= stack.getCount()){
                         ++i;
                     }
                 }
@@ -132,20 +132,6 @@ public class PotRecipe implements IRecipe<IInventory> {
     @Override
     public IRecipeType<?> getType() {
         return ModRecipeType.POT;
-    }
-
-    //从json中获取物品
-    public static NonNullList<Ingredient> readIngredients(JsonArray ingredientArray) {
-        NonNullList<Ingredient> nonnulllist = NonNullList.create();
-
-        for(int i = 0; i < ingredientArray.size(); ++i) {
-            Ingredient ingredient = Ingredient.deserialize(ingredientArray.get(i));
-            if (!ingredient.hasNoMatchingItems()) {
-                nonnulllist.add(ingredient);
-            }
-        }
-
-        return nonnulllist;
     }
 
 }

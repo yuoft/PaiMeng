@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=1": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=2": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=3": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=4": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=5": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=6": {
+      "model": "paimeng:block/fertile_farmland"
+    },
+    "moisture=7": {
+      "model": "paimeng:block/fertile_farmland_moist"
+    }
+  }
+}

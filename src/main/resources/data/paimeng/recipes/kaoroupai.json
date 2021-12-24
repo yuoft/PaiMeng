@@ -1,0 +1,12 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:kaoroupai"
+  }
+}

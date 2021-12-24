@@ -37,7 +37,7 @@ public class CookingScreen extends Screen {
     @Override
     protected void init() {
         this.button = new Button(this.width / 2 -15, this.height / 2 + 20, 30, 20,
-                new TranslationTextComponent("gui.paimeng.pot_button"), this::button); //回调
+                new TranslationTextComponent("gui.paimeng.cooking_button"), this::button); //回调
         this.addButton(button);
         super.init();
     }
@@ -55,11 +55,12 @@ public class CookingScreen extends Screen {
         this.minecraft.getTextureManager().bindTexture(RESOURCE);
         int i = (this.width - this.textureWidth) / 2;
         int j = (this.height - this.textureHeight) / 2;
-        setLEVEL_GROW(LEVEL);; //模拟指针移动
         blit(matrixStack, i, j, 0, 0, textureWidth, textureHeight);
         blit(matrixStack, i + minValue, j + 1, 0,12, 120 - LEVEL * 20, 10); //成功区间
-        if (LEVEL_GROW <= 200)
+        if (LEVEL_GROW <= 200) {
+            setLEVEL_GROW(LEVEL); //模拟指针移动
             blit(matrixStack, i + (int) Math.floor(LEVEL_GROW), j - 5, 0, 22, 10, 18); //指针
+        }
         if (LEVEL_GROW > 200) this.button.onClick(0,0);
     }
 
@@ -67,6 +68,9 @@ public class CookingScreen extends Screen {
         if (LEVEL_GROW >= minValue && LEVEL_GROW <= maxValue){ //成功烹饪
             if (screen instanceof PotScreen){
                TileUtils.sendPotPacket();//发送数据包设置产出
+            }
+            if (screen instanceof BenchScreen){
+                TileUtils.sendPotPacket();
             }
         }
         if (minecraft != null){

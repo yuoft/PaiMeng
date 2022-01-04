@@ -17,7 +17,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -26,17 +25,18 @@ public class WorldEventHandler {
 
     @SubscribeEvent
     public static void biomeLoading(final BiomeLoadingEvent event){
-        genTree(event);
+        WorldOreGen.generateOres(event); //矿物
+        WorldPlantGen.generatePlants(event); //植物
+        genTree(event); //树
     }
 
     //树生成
     public static void genTree(final BiomeLoadingEvent event){
-        Random random = new Random();
         //获取生物群系列表
         RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
         Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
 
-        if (types.contains(BiomeDictionary.Type.FOREST)){
+        if (types.contains(BiomeDictionary.Type.FOREST)){ //森林
             List<Supplier<ConfiguredFeature<?, ?>>> features = event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
             //添加自定义树世界生成规则
             features.add(() -> FeatureInit.APPLE_TREE.get().withConfiguration(NoFeatureConfig.field_236559_b_)

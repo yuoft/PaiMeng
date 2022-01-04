@@ -28,5 +28,15 @@ public class NetWorkHandler {
                         CookingPacket::toBytes, //序列化数据包
                         CookingPacket::new, //反序列化
                         CookingPacket::handler); //接收数据后进行操作
+        INSTANCE.registerMessage(nextID(),
+                TransferPacket.class,
+                TransferPacket::toBytes,
+                TransferPacket::new,
+                TransferPacket::handler);
+        INSTANCE.registerMessage(nextID(),
+                BenchPacket.class,
+                BenchPacket::toBytes,
+                BenchPacket::new,
+                BenchPacket::handler);
     }
 }

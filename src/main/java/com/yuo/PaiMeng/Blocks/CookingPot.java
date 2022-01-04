@@ -2,10 +2,7 @@ package com.yuo.PaiMeng.Blocks;
 
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Tiles.PotTile;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -52,7 +49,7 @@ public class CookingPot extends Block {
 
     public CookingPot() {
         super(Properties.create(Material.IRON).hardnessAndResistance(10, 10).harvestLevel(0)
-                .harvestTool(ToolType.PICKAXE).setRequiresTool().notSolid());
+                .harvestTool(ToolType.PICKAXE).setRequiresTool().notSolid().setLightLevel(CookingBench.getLightValueLit(10)));
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(FIRE, Boolean.FALSE).with(FUEL, 0));
     }
 
@@ -91,7 +88,7 @@ public class CookingPot extends Block {
                 }
                 return ActionResultType.SUCCESS;
             }
-            if (state.get(FUEL) < 4 && ForgeHooks.getBurnTime(heldItem) > 0){ //手持木头添加燃料
+            if (state.get(FUEL) < 4 && ForgeHooks.getBurnTime(heldItem) > 0 && !(heldItem.getItem() instanceof BucketItem)){ //手持木头添加燃料
                 int i = damageWoodCount(heldItem);
                 int count = heldItem.getCount();
                 if (i > 0){

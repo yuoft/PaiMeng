@@ -1,0 +1,5 @@
+{
+    "variants": {
+		"": { "model": "paimeng:block/ore/shipo_ore" }
+    }
+}

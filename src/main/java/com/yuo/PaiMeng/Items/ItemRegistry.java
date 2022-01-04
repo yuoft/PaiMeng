@@ -336,6 +336,26 @@ public class ItemRegistry {
 			() -> new BlockItem(BlockRegistry.fertileFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
 	public static RegistryObject<BlockItem> aquaticFarmland = ITEMS.register("aquatic_farmland",
 			() -> new BlockItem(BlockRegistry.aquaticFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
+	public static RegistryObject<BlockItem> baitieOre = ITEMS.register("baitie_ore",
+			() -> new BlockItem(BlockRegistry.baitieOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> dianqiShuijingOre = ITEMS.register("dianqi_shuijing_ore",
+			() -> new BlockItem(BlockRegistry.dianqiShuijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> heitieOre = ITEMS.register("heitie_ore",
+			() -> new BlockItem(BlockRegistry.heitieOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> jinghuaGusuiOre = ITEMS.register("jinghua_gusui_ore",
+			() -> new BlockItem(BlockRegistry.jinghuaGusuiOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> mojingOre = ITEMS.register("mojing_ore",
+			() -> new BlockItem(BlockRegistry.mojingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> shipoOre = ITEMS.register("shipo_ore",
+			() -> new BlockItem(BlockRegistry.shipoOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> shuijingOre = ITEMS.register("shuijing_ore",
+			() -> new BlockItem(BlockRegistry.shuijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> xingyinOre = ITEMS.register("xingyin_ore",
+			() -> new BlockItem(BlockRegistry.xingyinOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> yeboshiOre = ITEMS.register("yeboshi_ore",
+			() -> new BlockItem(BlockRegistry.yeboshiOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> zijingOre = ITEMS.register("zijing_ore",
+			() -> new BlockItem(BlockRegistry.zijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
 
 	public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
 	public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;

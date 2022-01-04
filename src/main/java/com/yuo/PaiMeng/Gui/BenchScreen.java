@@ -40,7 +40,7 @@ public class BenchScreen extends ContainerScreen<BenchContainer> {
         blit(matrixStack, i, j, 0, 0, xSize, ySize);
         int time = this.container.getTime();
         if (time > 0) {
-            blit(matrixStack, i + 65, j + 36 + 14, 176, 0, 14, 15);
+            blit(matrixStack, i + 65, j + 36, 176, 0, 14, 15);
         }
         if (!container.canRecipe()){ //叉号
             blit(matrixStack, i + 90,j + 35,190,0,22,15);

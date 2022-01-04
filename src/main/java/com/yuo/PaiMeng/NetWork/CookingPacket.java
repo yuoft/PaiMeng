@@ -9,8 +9,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -46,7 +44,6 @@ public class CookingPacket {
                     TileUtils.shirkItem(benchTile, TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, benchTile));
                 }
             }
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CookingClientPacket.handlePacket(msg, ctx)); //处理服务端发送给客户端的消息
         });
         ctx.get().setPacketHandled(true);
     }

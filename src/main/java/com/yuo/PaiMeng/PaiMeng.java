@@ -1,23 +1,24 @@
 package com.yuo.PaiMeng;
 
 import com.yuo.PaiMeng.Blocks.BlockRegistry;
-import com.yuo.PaiMeng.Blocks.Tree.AppleSapling;
 import com.yuo.PaiMeng.Gui.BenchScreen;
 import com.yuo.PaiMeng.Gui.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Gui.PotScreen;
 import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.Recipes.RecipeSerializerRegistry;
+import com.yuo.PaiMeng.Render.BenchTileTER;
 import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import com.yuo.PaiMeng.WorldGen.FeatureInit;
 import net.minecraft.block.Block;
-import net.minecraft.block.CropsBlock;
+import net.minecraft.block.BushBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -40,6 +41,7 @@ public class PaiMeng {
         RecipeSerializerRegistry.RECIPE_TYPES.register(modEventBus);
         FeatureInit.FEATURES.register(modEventBus);
         PROXY.init();
+//        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldOreGen::generateOres); //注册矿物生成
     }
 
     private  void clientSetup(final FMLClientSetupEvent event) {
@@ -47,6 +49,7 @@ public class PaiMeng {
             RenderTypeLookup.setRenderLayer(BlockRegistry.cookingPot.get(), RenderType.getCutoutMipped());
             RenderTypeLookup.setRenderLayer(BlockRegistry.cookingBench.get(), RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(BlockRegistry.zhusunCrop.get(), RenderType.getCutout());
+            ClientRegistry.bindTileEntityRenderer(TileTypeRegistry.BENCH_TILE.get(), BenchTileTER::new);
         });
         //绑定Container和ContainerScreen
         event.enqueueWork(() -> {
@@ -55,7 +58,7 @@ public class PaiMeng {
         });
         //透明方块的渲染
         for (RegistryObject r : BlockRegistry.BLOCKS.getEntries()){
-            if (r.get() instanceof CropsBlock || r.get() instanceof AppleSapling){
+            if (r.get() instanceof BushBlock){
                 RenderTypeLookup.setRenderLayer((Block) r.get(), RenderType.getCutout());
             }
         }

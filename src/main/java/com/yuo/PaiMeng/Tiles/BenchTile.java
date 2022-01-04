@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -23,11 +24,12 @@ import net.minecraft.util.text.TranslationTextComponent;
 import javax.annotation.Nullable;
 
 public class BenchTile extends LockableTileEntity implements ITickableTileEntity {
-    public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
+    public NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY); //物品栏
     public final int MAX_TIME = 20 * 60 * 16; //最大燃烧时间16分钟
     private int TIME; //剩余燃烧时间
     private boolean FLAG; //是否可以合成
     private int LEVEL; //配方等级
+    private Item fuelItem; //燃料
     public final PotIntArray data = new PotIntArray();
 
     public BenchTile() {
@@ -78,6 +80,16 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
 //        world.setBlockState(pos, world.getBlockState(pos).with(CookingBench.FIRE, true));
         this.data.set(0, TIME);
         markDirty();
+    }
+
+    public void setFuelItem(Item item){
+        this.fuelItem = item;
+        this.items.set(5, new ItemStack(item));
+        markDirty();
+    }
+
+    public Item getFuelItem() {
+        return fuelItem;
     }
 
     public int getTIME() {

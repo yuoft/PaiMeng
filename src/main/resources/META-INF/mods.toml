@@ -7,7 +7,8 @@ version="1.0.0"
 displayName="PaiMeng"
 authors="yuo" 
 description='''
-应急食品。1.16.4
+应急食品。1.16.4。
+部分素材纹理来自《原神》。
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.examplemod]] #optional

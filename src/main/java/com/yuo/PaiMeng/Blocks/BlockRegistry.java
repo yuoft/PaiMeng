@@ -1,16 +1,11 @@
 package com.yuo.PaiMeng.Blocks;
 
-import com.yuo.PaiMeng.Blocks.Crop.AppleCrop;
-import com.yuo.PaiMeng.Blocks.Crop.ModWaterCropBlock;
-import com.yuo.PaiMeng.Blocks.Crop.ModXCropBlock;
+import com.yuo.PaiMeng.Blocks.Crop.*;
 import com.yuo.PaiMeng.Blocks.Tree.AppleSapling;
 import com.yuo.PaiMeng.Items.CropUseBlockEnum;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.WorldGen.TreeInit;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,12 +18,25 @@ public class BlockRegistry {
     public static final Block.Properties PLANK = Block.Properties.from(Blocks.BIRCH_PLANKS); //树干
     public static final Block.Properties LEAF = Block.Properties.from(Blocks.BIRCH_LEAVES); //树叶
     public static final Block.Properties SAPLING = Block.Properties.from(Blocks.BIRCH_SAPLING); //树苗
+    public static final Block.Properties PLANT = Block.Properties.from(Blocks.FLOWER_POT); //树苗
     public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
     public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;
     public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;
 
     public static RegistryObject<Block> cookingPot = BLOCKS.register("cooking_pot", CookingPot::new);
     public static RegistryObject<Block> cookingBench = BLOCKS.register("cooking_bench", CookingBench::new);
+
+    //矿物
+    public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> dianqiShuijingOre = BLOCKS.register("dianqi_shuijing_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> heitieOre = BLOCKS.register("heitie_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> jinghuaGusuiOre = BLOCKS.register("jinghua_gusui_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> mojingOre = BLOCKS.register("mojing_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> shipoOre = BLOCKS.register("shipo_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> shuijingOre = BLOCKS.register("shuijing_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> xingyinOre = BLOCKS.register("xingyin_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> yeboshiOre = BLOCKS.register("yeboshi_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> zijingOre = BLOCKS.register("zijing_ore", () -> new OrdinaryOre(1,  5));
 
     //X型作物
     public static RegistryObject<Block> bailuoboCrop = BLOCKS.register("bailuobo_crop", () -> new ModXCropBlock(COMMON));
@@ -67,6 +75,38 @@ public class BlockRegistry {
     public static RegistryObject<Block> yangcongCrop = BLOCKS.register("yangcong_crop", () -> new ModXCropBlock(COMMON));
     public static RegistryObject<Block> youdengxunCrop = BLOCKS.register("youdengxun_crop", () -> new ModXCropBlock(FERTILE));
     public static RegistryObject<Block> zhusunCrop = BLOCKS.register("zhusun_crop", () -> new ModXCropBlock(FERTILE));
+
+    //植物
+    public static RegistryObject<Block> bingwuhuaHuaduoPlant = BLOCKS.register("bingwuhua_huaduo_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> bohePlant = BLOCKS.register("bohe_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> ceciliaHuaPlant = BLOCKS.register("cecilia_hua_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> dudulianPlant = BLOCKS.register("dudulian_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> fengchejuPlant = BLOCKS.register("fengcheju_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> gougouguoPlant = BLOCKS.register("gougouguo_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> haicaoPlant = BLOCKS.register("haicao_plant", () -> new PlantWaterBlock(PLANT));
+    public static RegistryObject<Block> hailingzhiPlant = BLOCKS.register("hailingzhi_plant", () -> new PlantWaterBlock(PLANT));
+    public static RegistryObject<Block> jinyucaoPlant = BLOCKS.register("jinyucao_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> jueyunJiaojiaoPlant = BLOCKS.register("jueyun_jiaojiao_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> lianpengPlant = BLOCKS.register("lianpeng_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> lieyanhuaHuaruiPlant = BLOCKS.register("lieyanhua_huarui_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> liuliBaihePlant = BLOCKS.register("liuli_baihe_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> liuliDaiPlant = BLOCKS.register("liuli_dai_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> luoluomeiPlant = BLOCKS.register("luoluomei_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> maweiPlant = BLOCKS.register("mawei_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> mingcaoPlant = BLOCKS.register("mingcao_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> moguPlant = BLOCKS.register("mogu_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> mufengMoguPlant = BLOCKS.register("mufeng_mogu_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> nichanghuaPlant = BLOCKS.register("nichanghua_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> pugongyingPlant = BLOCKS.register("pugongying_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> qingxinPlant = BLOCKS.register("qingxin_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> shumeiPlant = BLOCKS.register("shumei_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> songrongPlant = BLOCKS.register("songrong_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> tiantianhuaPlant = BLOCKS.register("tiantianhua_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> tianyunCaoshiPlant = BLOCKS.register("tianyun_caoshi_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> xiaodengcaoPlant = BLOCKS.register("xiaodengcao_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> xuekuiPlant = BLOCKS.register("xuekui_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> youdengxunPlant = BLOCKS.register("youdengxun_plant", () -> new PlantBlock(PLANT));
+    public static RegistryObject<Block> zhusunPlant = BLOCKS.register("zhusun_plant", () -> new PlantBlock(PLANT));
 
     //耕地
     public static RegistryObject<Block> commonFarmland = BLOCKS.register("common_farmland", CommonFarmland::new);

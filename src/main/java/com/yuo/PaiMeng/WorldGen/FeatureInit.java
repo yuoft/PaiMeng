@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.WorldGen;
 
 import com.yuo.PaiMeng.PaiMeng;
+import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.fml.RegistryObject;
@@ -16,5 +17,13 @@ public class FeatureInit {
             () -> new AppleTreeFeature(NoFeatureConfig.field_236558_a_));
     public static final RegistryObject<AppleTreeFeature> PURPLE_APPLE_TREE = FEATURES.register("purple_apple_tree",
             () -> new AppleTreeFeature(NoFeatureConfig.field_236558_a_));
+    public static final RegistryObject<RiverFeature> RIVER_PLANT = FEATURES.register("river_plant",
+            () -> new RiverFeature(PlantConfig.CODEC));
+    public static final RegistryObject<MountainFeature> MOUNTAIN_PLANT = FEATURES.register("mountain_plant",
+            () -> new MountainFeature(BlockClusterFeatureConfig.field_236587_a_));
+    public static final RegistryObject<OceanFeature> OCEAN_PLANT = FEATURES.register("ocean_plant",
+            () -> new OceanFeature(OceanProbabilityConfig.CODEC));
+    public static final RegistryObject<NetherFeature> NETHER_PLANT = FEATURES.register("nether_plant",
+            () -> new NetherFeature(NetherConfig.CODEC));
 
 }

@@ -48,8 +48,12 @@ public class JeiPlugin implements IModPlugin {
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
 //        registration.addRecipeTransferHandler(PotContainer.class, PotRecipeCategory.UID, 0, 3, 4, 36);
 //        registration.addRecipeTransferHandler(BenchContainer.class, BenchRecipeCategory.UID, 0, 3, 4, 36);
-        registration.addRecipeTransferHandler(new PotTransferInfo());
-        registration.addRecipeTransferHandler(new BenchTransferInfo());
+//        registration.addRecipeTransferHandler(new PotTransferInfo());
+//        registration.addRecipeTransferHandler(new BenchTransferInfo());
+        registration.addRecipeTransferHandler(new CookingTransferHandler(
+                registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new PotTransferInfo()), PotRecipeCategory.UID);
+        registration.addRecipeTransferHandler(new CookingTransferHandler(
+                registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new BenchTransferInfo()), BenchRecipeCategory.UID);
     }
 
     //注册机器合成

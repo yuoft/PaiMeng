@@ -1,5 +1,7 @@
 package com.yuo.PaiMeng.Blocks;
 
+import com.yuo.PaiMeng.NetWork.BenchPacket;
+import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Tiles.BenchTile;
 import com.yuo.PaiMeng.Tiles.PotTile;
@@ -9,9 +11,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -31,10 +35,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.UUID;
+import java.util.function.ToIntFunction;
 
 public class CookingBench extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING; //朝向
@@ -42,8 +48,12 @@ public class CookingBench extends Block {
 
     public CookingBench() {
         super(Properties.create(Material.IRON).hardnessAndResistance(10, 20).harvestLevel(1)
-                .harvestTool(ToolType.PICKAXE).setRequiresTool());
+                .harvestTool(ToolType.PICKAXE).setRequiresTool().setLightLevel(getLightValueLit(13)));
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(FIRE, Boolean.FALSE));
+    }
+
+    public static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+        return (state) -> state.get(BlockStateProperties.LIT) ? lightValue : 0;
     }
 
     @Override
@@ -52,7 +62,7 @@ public class CookingBench extends Block {
         if (!worldIn.isRemote){
             if (heldItem.isEmpty()){ //空手右键打开gui
                 if (!state.get(FIRE)) {
-                    player.sendMessage(new TranslationTextComponent("paimeng.message.pot_open"), UUID.randomUUID());
+                    player.sendMessage(new TranslationTextComponent("paimeng.message.bench_open"), UUID.randomUUID());
                     return ActionResultType.SUCCESS;
                 }
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
@@ -63,7 +73,7 @@ public class CookingBench extends Block {
                 return ActionResultType.SUCCESS;
             }
             int burnTime = ForgeHooks.getBurnTime(heldItem);
-            if (burnTime > 0){ //手持燃料
+            if (burnTime > 0 && !(heldItem.getItem() instanceof BucketItem)){ //手持燃料
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
                 if (!(tileEntity instanceof BenchTile)) return ActionResultType.FAIL;
                 BenchTile benchTile = (BenchTile) tileEntity;
@@ -72,9 +82,16 @@ public class CookingBench extends Block {
                 int fuleCount = getFuleCount(benchTile, i);
                 if (fuleCount > heldItem.getCount()){ //燃料不足
                     benchTile.setBurnTime(heldItem.getCount() * i);
+                    benchTile.setFuelItem(heldItem.getItem());
+                    NetWorkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+                            new BenchPacket(pos, heldItem));
                     if (!player.isCreative()) heldItem.setCount(0);
                 }else {
                     benchTile.setBurnTime(fuleCount * i);
+                    benchTile.setFuelItem(heldItem.getItem());
+                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+                    NetWorkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+                            new BenchPacket(pos, heldItem));
                     if (!player.isCreative()) heldItem.shrink(fuleCount);
                 }
                 return ActionResultType.SUCCESS;

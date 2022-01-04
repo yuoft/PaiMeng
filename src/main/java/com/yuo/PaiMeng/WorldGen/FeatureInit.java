@@ -25,5 +25,7 @@ public class FeatureInit {
             () -> new OceanFeature(OceanProbabilityConfig.CODEC));
     public static final RegistryObject<NetherFeature> NETHER_PLANT = FEATURES.register("nether_plant",
             () -> new NetherFeature(NetherConfig.CODEC));
+    public static final RegistryObject<LavaFeature> LAVA_PLANT = FEATURES.register("lava_plant",
+            () -> new LavaFeature(PlantConfig.CODEC));
 
 }

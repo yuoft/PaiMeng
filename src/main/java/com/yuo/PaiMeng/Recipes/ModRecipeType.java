@@ -8,4 +8,5 @@ public interface ModRecipeType<T extends IRecipe> extends IRecipeType {
 
     IRecipeType<PotRecipe> POT = IRecipeType.register(PaiMeng.MOD_ID + ":pot");
     IRecipeType<BenchRecipe> BENCH = IRecipeType.register(PaiMeng.MOD_ID + ":bench");
+
 }

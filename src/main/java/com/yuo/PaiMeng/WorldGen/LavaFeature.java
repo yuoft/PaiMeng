@@ -11,18 +11,18 @@ import net.minecraft.world.gen.feature.Feature;
 
 import java.util.Random;
 
-public class RiverFeature extends Feature<PlantConfig> {
-    public RiverFeature(Codec<PlantConfig> codec) {
+public class LavaFeature extends Feature<PlantConfig> {
+    public LavaFeature(Codec<PlantConfig> codec) {
         super(codec);
     }
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, PlantConfig config) {
         BlockState blockstate = config.getState(); //植物
-        if(reader.getFluidState(pos).isTagged(FluidTags.WATER)) return false; //当前位置不能是水
-        BlockState state = reader.getBlockState(pos.down()); //下方是沙子 泥土
-        boolean water = isWater(pos, reader);
-        if (water && (state.isIn(Blocks.DIRT) || state.isIn(Blocks.GRASS_BLOCK) || state.isIn(Blocks.SAND)) ){
+        if(!reader.isAirBlock(pos)) return false; //当前位置是空气
+        BlockState state = reader.getBlockState(pos.down()); //下方是石头
+        boolean lava = isLava(pos, reader);
+        if (lava && state.isIn(Blocks.STONE) ){
             reader.setBlockState(pos, blockstate, 3);
             return true;
         }
@@ -30,15 +30,15 @@ public class RiverFeature extends Feature<PlantConfig> {
     }
 
     /**
-     * 周围一格内有没有水
+     * 周围一格内有没有 岩浆
      * @param pos
      * @param reader
      * @return
      */
-    private boolean isWater(BlockPos pos, ISeedReader reader){
+    private boolean isLava(BlockPos pos, ISeedReader reader){
         Iterable<BlockPos> allInBox = BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 0, 1));
         for (BlockPos inBox : allInBox) {
-            if (reader.getFluidState(inBox).isTagged(FluidTags.WATER)) return true;
+            if (reader.getFluidState(inBox).isTagged(FluidTags.LAVA)) return true;
         }
         return false;
     }

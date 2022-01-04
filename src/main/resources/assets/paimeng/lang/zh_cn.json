@@ -342,6 +342,7 @@
     "paimeng.text.itemInfo.aquatic_seed"="§3楚此渚田可种植",
     "paimeng.text.itemInfo.shanbianzhichen1"="可参与合成，转换物质",
     "paimeng.text.itemInfo.shanbianzhichen2"="对耕地右键使用，将其转变为更高级的耕地",
+    "paimeng.text.itemInfo.food"="§c仅用于合成",
     "paimeng.text.blockInfo.infinity_sword"="无限",
     #聊天信息
     "paimeng.message.pot_fuel"="没有燃料",
@@ -350,6 +351,7 @@
     "paimeng.message.pot_open"="请先点燃篝火",
     "paimeng.message.bench_open"="请先添加燃料",
     "paimeng.message.un_plant"="无法种植此作物",
+    "paimeng.message.food"="无法食用!",
     #GUI
     "gui.paimeng.pot"="烹饪锅",
     "gui.paimeng.bench"="灶台",

@@ -25,11 +25,11 @@ public class OceanFeature extends Feature<OceanProbabilityConfig> {
             BlockState blockstate = config.getState();
             BlockState state = reader.getBlockState(pos.down());
             if ((state.isIn(Blocks.SAND) || state.isIn(Blocks.GRAVEL)) && flag){ //下面是沙子或沙砾
-                if (blockstate.isIn(BlockRegistry.haicaoPlant.get()) && k + 5 >= 63){ //海草 距海平面小于5格
+                if (blockstate.isIn(BlockRegistry.haicaoPlant.get()) && k + 6 >= 63){ //海草 距海平面小于6格
                     reader.setBlockState(pos, blockstate, 3);
                     return true;
                 }
-                if (blockstate.isIn(BlockRegistry.hailingzhiPlant.get()) && k + 10 <= 63){ //海灵芝 大于10格
+                if (blockstate.isIn(BlockRegistry.hailingzhiPlant.get()) && k + 15 <= 63){ //海灵芝 大于15格
                     reader.setBlockState(pos, blockstate, 3);
                     return true;
                 }

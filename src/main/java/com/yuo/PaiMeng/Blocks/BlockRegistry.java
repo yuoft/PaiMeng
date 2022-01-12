@@ -18,7 +18,7 @@ public class BlockRegistry {
     public static final Block.Properties PLANK = Block.Properties.from(Blocks.BIRCH_PLANKS); //树干
     public static final Block.Properties LEAF = Block.Properties.from(Blocks.BIRCH_LEAVES); //树叶
     public static final Block.Properties SAPLING = Block.Properties.from(Blocks.BIRCH_SAPLING); //树苗
-    public static final Block.Properties PLANT = Block.Properties.from(Blocks.FLOWER_POT); //树苗
+    public static final Block.Properties PLANT = Block.Properties.from(Blocks.GRASS); //植物
     public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
     public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;
     public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;

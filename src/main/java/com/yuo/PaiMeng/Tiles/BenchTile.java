@@ -3,7 +3,7 @@ package com.yuo.PaiMeng.Tiles;
 import com.yuo.PaiMeng.Blocks.CookingBench;
 import com.yuo.PaiMeng.Gui.BenchContainer;
 import com.yuo.PaiMeng.Gui.PotIntArray;
-import com.yuo.PaiMeng.Items.Food.OrdinaryFood;
+import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -55,8 +55,8 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
         }
 
         ItemStack output = TileUtils.getRecipeOutput(world, ModRecipeType.BENCH, this);
-        if (!output.isEmpty() && output.getItem() instanceof OrdinaryFood){
-            LEVEL = ((OrdinaryFood) output.getItem()).getLEVEL();
+        if (!output.isEmpty() && output.getItem() instanceof PaiMengFood){
+            LEVEL = ((PaiMengFood) output.getItem()).getLEVEL();
             this.data.set(2, LEVEL);
         }
         if (!output.isEmpty() && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){

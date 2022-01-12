@@ -1,6 +1,10 @@
 package com.yuo.PaiMeng;
 
 import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Capability.BlowCapability;
+import com.yuo.PaiMeng.Capability.IBlowCapability;
+import com.yuo.PaiMeng.Capability.ModStorage;
+import com.yuo.PaiMeng.Effects.EffectRegistry;
 import com.yuo.PaiMeng.Gui.BenchScreen;
 import com.yuo.PaiMeng.Gui.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Gui.PotScreen;
@@ -15,6 +19,7 @@ import net.minecraft.block.BushBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
@@ -40,6 +45,7 @@ public class PaiMeng {
         ContainerTypeRegistry.CONTAINERS.register(modEventBus);
         RecipeSerializerRegistry.RECIPE_TYPES.register(modEventBus);
         FeatureInit.FEATURES.register(modEventBus);
+        EffectRegistry.EFFECTS.register(modEventBus);
         PROXY.init();
 //        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldOreGen::generateOres); //注册矿物生成
     }
@@ -66,5 +72,9 @@ public class PaiMeng {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(NetWorkHandler::registerMessage); //创建数据包
+        event.enqueueWork( () -> {
+            //能力实例 数据保存 默认创建
+            CapabilityManager.INSTANCE.register(IBlowCapability.class, new ModStorage(), BlowCapability::new);
+        });
     }
 }

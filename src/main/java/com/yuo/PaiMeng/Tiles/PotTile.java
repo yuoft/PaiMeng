@@ -3,7 +3,7 @@ package com.yuo.PaiMeng.Tiles;
 import com.yuo.PaiMeng.Blocks.CookingPot;
 import com.yuo.PaiMeng.Gui.PotContainer;
 import com.yuo.PaiMeng.Gui.PotIntArray;
-import com.yuo.PaiMeng.Items.Food.OrdinaryFood;
+import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -53,8 +53,8 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
         }
         if (fuel == 0) world.setBlockState(pos, state.with(CookingPot.FIRE, false)); //燃料消耗完 火焰熄灭
         ItemStack output = TileUtils.getRecipeOutput(world, ModRecipeType.POT, this);
-        if (!output.isEmpty() && output.getItem() instanceof OrdinaryFood){
-            LEVEL = ((OrdinaryFood) output.getItem()).getLEVEL();
+        if (!output.isEmpty() && output.getItem() instanceof PaiMengFood){
+            LEVEL = ((PaiMengFood) output.getItem()).getLEVEL();
             this.data.set(2, LEVEL);
         }
         if (!output.isEmpty() && LEVEL <= 3 && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){

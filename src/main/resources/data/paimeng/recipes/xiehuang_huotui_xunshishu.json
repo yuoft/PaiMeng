@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:baocai",
+      "item": "minecraft:totem_of_undying",
       "count": 1
     },
     {
@@ -19,6 +19,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:xiehuang_huotui_xunrou_shishu"
+    "item": "paimeng:xiehuang_huotui_xunshishu"
   }
 }

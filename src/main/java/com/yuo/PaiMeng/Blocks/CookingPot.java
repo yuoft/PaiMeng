@@ -110,6 +110,7 @@ public class CookingPot extends Block {
     }
 
     //破坏后掉落
+    @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.isIn(newState.getBlock())) {
             TileEntity tileentity = worldIn.getTileEntity(pos);

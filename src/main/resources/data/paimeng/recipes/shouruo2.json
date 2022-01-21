@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:mutton"
+    },
+    {
+      "item": "minecraft:mutton"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:shourou"
+  }
+}

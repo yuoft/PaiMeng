@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:tropical_fish"
+    },
+    {
+      "item": "minecraft:tropical_fish"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:yurou"
+  }
+}

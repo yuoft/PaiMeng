@@ -23,14 +23,6 @@ public class WorldOreGen {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
         //主世界
         if (!(event.getCategory().equals(Biome.Category.THEEND) || event.getCategory().equals(Biome.Category.NETHER))){
-            if (event.getCategory().equals(Biome.Category.JUNGLE)){ //丛林
-                addFeatureOverWorld(generation, BlockRegistry.mojingOre.get().getDefaultState(),
-                        5, 8, 32, 4);
-            }
-            if (event.getCategory().equals(Biome.Category.TAIGA)){ //针叶林
-                addFeatureOverWorld(generation, BlockRegistry.yeboshiOre.get().getDefaultState(),
-                        4, 16, 48, 4);
-            }
             if (event.getCategory().equals(Biome.Category.ICY)){ //冰原
                 addFeatureOverWorld(generation, BlockRegistry.xingyinOre.get().getDefaultState(),
                         8, 8, 32, 6);
@@ -47,14 +39,8 @@ public class WorldOreGen {
                 addFeatureOverWorld(generation, BlockRegistry.jinghuaGusuiOre.get().getDefaultState(),
                         4, 16, 48, 4);
             }
-            if (event.getCategory().equals(Biome.Category.SWAMP)){ //沼泽
-                addFeatureOverWorld(generation, BlockRegistry.zijingOre.get().getDefaultState(),
-                        5, 16, 64, 4);
-            }
-            if (event.getCategory().equals(Biome.Category.MUSHROOM)){ //蘑菇岛
-                addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
-                        4, 8, 32, 3);
-            }
+            addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
+                    4, 8, 32, 3);
             addFeatureOverWorld(generation, BlockRegistry.baitieOre.get().getDefaultState(),
                     8, 0, 32, 6);
             addFeatureOverWorld(generation, BlockRegistry.heitieOre.get().getDefaultState(),
@@ -62,13 +48,15 @@ public class WorldOreGen {
         }
         //下届
         if (event.getCategory().equals(Biome.Category.NETHER)){
-            addFeatureNether(generation, BlockRegistry.baitieOre.get().getDefaultState(),
-                    3, 0, 32, 10);
+            addFeatureNether(generation, BlockRegistry.mojingOre.get().getDefaultState(),
+                    5, 8, 32, 16);
+            addFeatureNether(generation, BlockRegistry.zijingOre.get().getDefaultState(),
+                    5, 96, 128, 16);
         }
         //末地
         if (event.getCategory().equals(Biome.Category.THEEND)){
-            addFeatureTheend(generation, BlockRegistry.baitieOre.get().getDefaultState(),
-                    6, 32, 64, 5);
+            addFeatureTheend(generation, BlockRegistry.yeboshiOre.get().getDefaultState(),
+                    4, 32, 48, 4);
         }
     }
 

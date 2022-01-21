@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "paimeng:block/cooking_bench",
-		"particle": "paimeng:block/cooking_bench"
+		"particle": "minecraft:block/bricks"
 	},
 	"elements": [
 		{

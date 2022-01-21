@@ -52,11 +52,11 @@ public class EventHandler {
     public static List<String> playerDefense = new ArrayList<>();
     public static List<String> playerAttack = new ArrayList<>();
 
-    private static final float attrCriticalRate = 0.12f; //属性变更基础系数
-    private static final float attrCriticalDamage = 0.18f;
-    private static final float attrDefense = 2.0f;
-    private static final float attrAttack = 3.0f;
-    private static final float attrAttackPhysics = 2.0f;
+    public static final float attrCriticalRate = 0.12f; //属性变更基础系数
+    public static final float attrCriticalDamage = 0.18f;
+    public static final float attrDefense = 2.0f;
+    public static final float attrAttack = 3.0f;
+    public static final float attrAttackPhysics = 2.0f;
 
     //禁用原版食物
     @SubscribeEvent
@@ -114,17 +114,17 @@ public class EventHandler {
             CompoundNBT bags = old.serializeNBT();
             event.getPlayer().getCapability(ModCapability.BLOW_CAPABILITY).ifPresent(c -> c.deserializeNBT(bags));
         });
-//        if (!event.isWasDeath()) {
-//            LazyOptional<IBlowCapability> oldSpeedCap = event.getOriginal().getCapability(ModCapability.BLOW_CAPABILITY);
-//            LazyOptional<IBlowCapability> newSpeedCap = event.getPlayer().getCapability(ModCapability.BLOW_CAPABILITY);
-//            if (oldSpeedCap.isPresent() && newSpeedCap.isPresent()) {
-//                newSpeedCap.ifPresent((newCap) -> {
-//                    oldSpeedCap.ifPresent((oldCap) -> {
-//                        newCap.deserializeNBT(oldCap.serializeNBT());
-//                    });
-//                });
-//            }
-//        }
+        if (event.isWasDeath()) {
+            PlayerEntity player = event.getPlayer();
+            if (event.isWasDeath()){ //玩家死亡时重生 从变量中清key
+                String key = player.getGameProfile().getName()+":"+player.world.isRemote;
+                playerAttack.remove(key);
+                playerDefense.remove(key);
+                playerCriticalRate.remove(key);
+                playerCriticalDamage.remove(key);
+                EventHelper.changeAttribute(player);
+            }
+        }
     }
 
     //实体更新 药水生效
@@ -133,58 +133,7 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity && !entityLiving.world.isRemote){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            boolean criticalRate = player.getActivePotionEffect(EffectRegistry.CRITICAL_RATE.get()) != null;
-            boolean criticalDamage = player.getActivePotionEffect(EffectRegistry.CRITICAL_DAMAGE.get()) != null;
-            boolean defense = player.getActivePotionEffect(EffectRegistry.DEFENSE.get()) != null;
-            boolean attack = player.getActivePotionEffect(EffectRegistry.ATTACK.get()) != null;
-            //确定某一个玩家
-            String key = player.getGameProfile().getName()+":"+player.world.isRemote;
-            LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
-            if (!capability.isPresent()) return; //能力为空
-            //暴击率
-            if (!playerCriticalRate.contains(key)){ //没有时
-                if (criticalRate){
-                    int amplifier = EventHelper.setBuffLevel(player, EffectRegistry.CRITICAL_RATE.get());
-                    capability.ifPresent(e -> e.setCriticalRate(attrCriticalRate * amplifier)); //暴击率增加
-                    playerCriticalRate.add(key); //有效果add
-                }
-            }else if (!criticalRate){ //效果结束时清楚增益
-                int level = EventHelper.getBuffLevel(player, EffectRegistry.CRITICAL_RATE.get());
-                capability.ifPresent(e -> e.setCriticalRate(-attrCriticalRate * level));
-                playerCriticalRate.remove(key);
-            }
-            //暴击伤害
-            if (!playerCriticalDamage.contains(key)){
-                if (criticalDamage){
-                    int amplifier = EventHelper.setBuffLevel(player, EffectRegistry.CRITICAL_DAMAGE.get());
-                    capability.ifPresent(e -> e.setCriticalDamage(attrCriticalDamage * amplifier));
-                    playerCriticalDamage.add(key);
-                }
-            }else if (!criticalDamage){
-                int level = EventHelper.getBuffLevel(player, EffectRegistry.CRITICAL_DAMAGE.get());
-                capability.ifPresent(e -> e.setCriticalDamage(-attrCriticalDamage * level));
-                playerCriticalDamage.remove(key);
-            }
-            //防御
-            if (!playerDefense.contains(key)){
-                if (defense){
-                    EventHelper.upAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), attrDefense);
-                    playerDefense.add(key);
-                }
-            }else if (!defense){
-                EventHelper.downAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), attrDefense);
-                playerDefense.remove(key);
-            }
-            //攻击力
-            if (!playerAttack.contains(key)){
-                if (attack){
-                    EventHelper.upAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), attrAttack);
-                    playerAttack.add(key);
-                }
-            }else if (!attack){
-                EventHelper.downAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), attrAttack);
-                playerAttack.remove(key);
-            }
+            EventHelper.changeAttribute(player);
         }
     }
 
@@ -258,11 +207,20 @@ public class EventHandler {
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event){
         //重置双爆属性
         PlayerEntity player = event.getPlayer();
-        LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
-        capability.ifPresent(e -> e.resetCritical());
+        String key = player.getGameProfile().getName()+":"+player.world.isRemote;
+        if (!playerCriticalRate.contains(key)){
+            LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
+            capability.ifPresent(e -> e.resetCritical());
+        }
         //重置玩家属性 防止属性叠加
-        EventHelper.downAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), attrDefense);
-        EventHelper.downAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), attrAttack);
+        if (!playerDefense.contains(key)){ //变量中不含key：重启游戏，需要重置属性； 含有key：重进游戏，不需要重置
+            boolean defense = player.getActivePotionEffect(EffectRegistry.DEFENSE.get()) != null;
+            if (defense) EventHelper.downAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), attrDefense);
+        }
+        if (!playerAttack.contains(key)){
+            boolean attack = player.getActivePotionEffect(EffectRegistry.ATTACK.get()) != null;
+            if (attack) EventHelper.downAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), attrAttack);
+        }
         //发送消息
         player.sendMessage(new TranslationTextComponent("paimeng.message.login")
                 .setStyle(Style.EMPTY.setHoverEvent(HoverEvent.Action.SHOW_TEXT.deserialize(new TranslationTextComponent("paimeng.message.login0")))

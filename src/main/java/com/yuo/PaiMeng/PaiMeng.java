@@ -5,9 +5,7 @@ import com.yuo.PaiMeng.Capability.BlowCapability;
 import com.yuo.PaiMeng.Capability.IBlowCapability;
 import com.yuo.PaiMeng.Capability.ModStorage;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
-import com.yuo.PaiMeng.Gui.BenchScreen;
-import com.yuo.PaiMeng.Gui.ContainerTypeRegistry;
-import com.yuo.PaiMeng.Gui.PotScreen;
+import com.yuo.PaiMeng.Gui.*;
 import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.Recipes.RecipeSerializerRegistry;
@@ -61,6 +59,8 @@ public class PaiMeng {
         event.enqueueWork(() -> {
             ScreenManager.registerFactory(ContainerTypeRegistry.potContainer.get(), PotScreen::new);
             ScreenManager.registerFactory(ContainerTypeRegistry.benchContainer.get(), BenchScreen::new);
+            ScreenManager.registerFactory(ContainerTypeRegistry.synPlatContainer.get(), SynPlatScreen::new);
+            ScreenManager.registerFactory(ContainerTypeRegistry.seedBoxContainer.get(), SeedBoxScreen::new);
         });
         //透明方块的渲染
         for (RegistryObject r : BlockRegistry.BLOCKS.getEntries()){

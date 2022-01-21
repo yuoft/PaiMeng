@@ -1,16 +1,19 @@
 package com.yuo.PaiMeng.Gui;
 
-import com.yuo.PaiMeng.Items.OrdinaryMaterial;
+import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Tiles.BenchTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class BenchContainer extends Container {
     private final BenchTile potTile; //存储食材
-    private final PotIntArray data;
+    private final CookingIntArray data;
+    private World world;
 
     public BenchContainer(int id, PlayerInventory playerInventory){
         this(id, playerInventory , new BenchTile());
@@ -19,16 +22,17 @@ public class BenchContainer extends Container {
     public BenchContainer(int id, PlayerInventory playerInventory, BenchTile tile) {
         super(ContainerTypeRegistry.benchContainer.get(), id);
         this.potTile = tile;
+        this.world = playerInventory.player.world;
         this.data = tile.data;
         trackIntArray(data); //同步数据
         //食材槽
         for (int m = 0; m < 2; m++){
             for (int n = 0; n < 2; n++){
-                this.addSlot(new PotInputSlot(potTile, n + m * 2, 8 + n * 30, 22 + m * 27));
+                this.addSlot(new Slot(potTile, n + m * 2, 8 + n * 30, 22 + m * 27));
             }
         }
         //食品槽
-        this.addSlot(new PotOutputSlot(potTile, 4, 132, 33));
+        this.addSlot(new ModOutputSlot(potTile, 4, 132, 33));
         //添加玩家物品栏
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -60,7 +64,7 @@ public class BenchContainer extends Container {
             ItemStack itemStack1 = slot.getStack();
             itemstack = itemStack1.copy();
             if (index > 4){
-                if (itemstack.getItem() instanceof OrdinaryMaterial)
+                if (hasRecipe(itemStack1))
                     if (!this.mergeItemStack(itemStack1, 0, 4, false)) return ItemStack.EMPTY;
                 if (index >= 5 && index < 32) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;
@@ -77,6 +81,9 @@ public class BenchContainer extends Container {
         }
 
         return itemstack;
+    }
+    protected boolean hasRecipe(ItemStack stack) {
+        return this.world.getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, new Inventory(stack), this.world).isPresent();
     }
 
     public boolean canRecipe(){

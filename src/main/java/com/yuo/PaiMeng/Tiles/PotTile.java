@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.CookingPot;
 import com.yuo.PaiMeng.Gui.PotContainer;
-import com.yuo.PaiMeng.Gui.PotIntArray;
+import com.yuo.PaiMeng.Gui.CookingIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import net.minecraft.block.BlockState;
@@ -28,7 +28,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     private int TIME; //已燃烧时间
     private boolean FLAG; //是否可以合成
     private int LEVEL; //配方等级
-    public final PotIntArray data = new PotIntArray();
+    public final CookingIntArray data = new CookingIntArray();
 
     public PotTile() {
         super(TileTypeRegistry.POT_TILE.get());

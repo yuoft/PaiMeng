@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "paimeng:niunai"
+  }
+}

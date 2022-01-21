@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:salmon"
+    },
+    {
+      "item": "minecraft:salmon"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:yurou"
+  }
+}

@@ -18,5 +18,11 @@ public class ContainerTypeRegistry {
     public static final RegistryObject<ContainerType<BenchContainer>> benchContainer = CONTAINERS.register("bench_container", () ->
             IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                     new BenchContainer(windowId, inv)));
+    public static final RegistryObject<ContainerType<SynPlatContainer>> synPlatContainer = CONTAINERS.register("syn_plat_container", () ->
+            IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                    new SynPlatContainer(windowId, inv)));
+    public static final RegistryObject<ContainerType<SeedBoxContainer>> seedBoxContainer = CONTAINERS.register("seed_box_container", () ->
+            IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                    new SeedBoxContainer(windowId, inv)));
 
 }

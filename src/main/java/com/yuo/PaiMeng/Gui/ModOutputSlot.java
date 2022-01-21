@@ -4,8 +4,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
-public class PotOutputSlot extends Slot {
-    public PotOutputSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+public class ModOutputSlot extends Slot {
+    public ModOutputSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
     }
 

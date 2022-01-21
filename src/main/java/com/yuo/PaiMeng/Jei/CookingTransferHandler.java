@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
+import com.yuo.PaiMeng.Gui.SynPlatContainer;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.NetWork.TransferPacket;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -106,7 +107,7 @@ public class CookingTransferHandler<C extends Container> implements IRecipeTrans
         //获取所需物品槽位
         // 修改此处为槽位序号+物品数量
         MatchingItemsResult matchingItemsResult =
-                getMatchingItems(stackHelper, availableItemStacks, itemStackGroup.getGuiIngredients());
+                getMatchingItems(stackHelper, availableItemStacks, itemStackGroup.getGuiIngredients(), getContainerClass());
 
         if (matchingItemsResult.missingItems.size() > 0) {
             String message = Translator.translateToLocal("jei.tooltip.error.recipe.transfer.missing");
@@ -167,7 +168,7 @@ public class CookingTransferHandler<C extends Container> implements IRecipeTrans
         }
     }
 
-    public static MatchingItemsResult getMatchingItems(IStackHelper stackhelper, Map<Integer, ItemStack> availableItemStacks, Map<Integer, ? extends IGuiIngredient<ItemStack>> ingredientsMap) {
+    public MatchingItemsResult getMatchingItems(IStackHelper stackhelper, Map<Integer, ItemStack> availableItemStacks, Map<Integer, ? extends IGuiIngredient<ItemStack>> ingredientsMap, Class<C> containerClass) {
         MatchingItemsResult matchingItemResult = new MatchingItemsResult();
 
         int recipeSlotNumber = -1;
@@ -195,7 +196,10 @@ public class CookingTransferHandler<C extends Container> implements IRecipeTrans
                 if (matchingStack.getCount() == 0) {
                     availableItemStacks.remove(matching);
                 }
-                matchingItemResult.matchingItems.put(recipeSlotNumber, new MatchingItem(matching, count));
+                if (containerClass.equals(SynPlatContainer.class)){
+                    matchingItemResult.matchingItems.put(key, new MatchingItem(matching, count));
+                }
+                else matchingItemResult.matchingItems.put(recipeSlotNumber, new MatchingItem(matching, count));
             }
         }
 

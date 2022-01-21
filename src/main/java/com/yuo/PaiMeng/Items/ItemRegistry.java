@@ -19,6 +19,8 @@ public class ItemRegistry {
 
 	//物品
 	public static RegistryObject<Item> shanbianzhichen = ITEMS.register("shanbianzhichen", EvolutionDust::new);
+	public static RegistryObject<Item> yimengrongmei = ITEMS.register("yimengrongmei", EvolutionDust::new);
+	public static RegistryObject<Item> huazhongxia = ITEMS.register("huazhongxia", SeedBox::new);
 	public static RegistryObject<Item> aaa = ITEMS.register("aaa", ExampleItem::new);
 
 	//素材
@@ -331,6 +333,8 @@ public class ItemRegistry {
 			() -> new BlockItem(BlockRegistry.cookingPot.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> cookingBench = ITEMS.register("cooking_bench",
 			() -> new BlockItem(BlockRegistry.cookingBench.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> syntheticPlatform = ITEMS.register("synthetic_platform",
+			() -> new BlockItem(BlockRegistry.syntheticPlatform.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> commonFarmland = ITEMS.register("common_farmland",
 			() -> new BlockItem(BlockRegistry.commonFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
 	public static RegistryObject<BlockItem> fertileFarmland = ITEMS.register("fertile_farmland",

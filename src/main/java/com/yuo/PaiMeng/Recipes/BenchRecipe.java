@@ -73,20 +73,8 @@ public class BenchRecipe implements IRecipe<IInventory> {
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-        int i = 0; //以匹配数量
-
-        for(int j = 0; j < inv.getSizeInventory(); ++j) {
-            ItemStack itemstack = inv.getStackInSlot(j);
-            if (!itemstack.isEmpty()) {
-                for (ItemStack stack : inputs){
-                    if (stack.getItem() == itemstack.getItem() && itemstack.getCount() >= stack.getCount()){
-                        ++i;
-                    }
-                }
-            }
-        }
-
-        return i == this.inputs.size();
+        int size = RecipeUtils.match(inv.getSizeInventory() - 2, inv, inputs);
+        return size == this.inputs.size();
     }
 
     @Override

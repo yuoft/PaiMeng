@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.CookingBench;
 import com.yuo.PaiMeng.Gui.BenchContainer;
-import com.yuo.PaiMeng.Gui.PotIntArray;
+import com.yuo.PaiMeng.Gui.CookingIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import net.minecraft.block.BlockState;
@@ -30,7 +30,7 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
     private boolean FLAG; //是否可以合成
     private int LEVEL; //配方等级
     private Item fuelItem; //燃料
-    public final PotIntArray data = new PotIntArray();
+    public final CookingIntArray data = new CookingIntArray();
 
     public BenchTile() {
         super(TileTypeRegistry.BENCH_TILE.get());

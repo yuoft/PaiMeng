@@ -1,11 +1,16 @@
 package com.yuo.PaiMeng.Event;
 
+import com.yuo.PaiMeng.Capability.IBlowCapability;
+import com.yuo.PaiMeng.Capability.ModCapability;
+import com.yuo.PaiMeng.Effects.EffectRegistry;
 import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Effect;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class EventHelper {
 
@@ -104,5 +109,64 @@ public class EventHelper {
         }
         ModifiableAttributeInstance attribute = player.getAttribute(attr);
         attribute.setBaseValue(attribute.getValue() - 0);
+    }
+
+    /**
+     * 更改玩家属性
+     * @param player 玩家
+     */
+    public static void changeAttribute(PlayerEntity player){
+        boolean criticalRate = player.getActivePotionEffect(EffectRegistry.CRITICAL_RATE.get()) != null;
+        boolean criticalDamage = player.getActivePotionEffect(EffectRegistry.CRITICAL_DAMAGE.get()) != null;
+        boolean defense = player.getActivePotionEffect(EffectRegistry.DEFENSE.get()) != null;
+        boolean attack = player.getActivePotionEffect(EffectRegistry.ATTACK.get()) != null;
+        //确定某一个玩家
+        String key = player.getGameProfile().getName()+":"+player.world.isRemote;
+        LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
+        if (!capability.isPresent()) return; //能力为空
+        //暴击率
+        if (!EventHandler.playerCriticalRate.contains(key)){ //没有时
+            if (criticalRate){
+                int amplifier = EventHelper.setBuffLevel(player, EffectRegistry.CRITICAL_RATE.get());
+                capability.ifPresent(e -> e.setCriticalRate(EventHandler.attrCriticalRate * amplifier)); //暴击率增加
+                EventHandler.playerCriticalRate.add(key); //有效果add
+            }
+        }else if (!criticalRate){ //效果结束时清楚增益
+            int level = EventHelper.getBuffLevel(player, EffectRegistry.CRITICAL_RATE.get());
+            capability.ifPresent(e -> e.setCriticalRate(-EventHandler.attrCriticalRate * level));
+            EventHandler.playerCriticalRate.remove(key);
+        }
+        //暴击伤害
+        if (!EventHandler.playerCriticalDamage.contains(key)){
+            if (criticalDamage){
+                int amplifier = EventHelper.setBuffLevel(player, EffectRegistry.CRITICAL_DAMAGE.get());
+                capability.ifPresent(e -> e.setCriticalDamage(EventHandler.attrCriticalDamage * amplifier));
+                EventHandler.playerCriticalDamage.add(key);
+            }
+        }else if (!criticalDamage){
+            int level = EventHelper.getBuffLevel(player, EffectRegistry.CRITICAL_DAMAGE.get());
+            capability.ifPresent(e -> e.setCriticalDamage(-EventHandler.attrCriticalDamage * level));
+            EventHandler.playerCriticalDamage.remove(key);
+        }
+        //防御
+        if (!EventHandler.playerDefense.contains(key)){
+            if (defense){
+                EventHelper.upAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), EventHandler.attrDefense);
+                EventHandler.playerDefense.add(key);
+            }
+        }else if (!defense){
+            EventHelper.downAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), EventHandler.attrDefense);
+            EventHandler.playerDefense.remove(key);
+        }
+        //攻击力
+        if (!EventHandler.playerAttack.contains(key)){
+            if (attack){
+                EventHelper.upAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), EventHandler.attrAttack);
+                EventHandler.playerAttack.add(key);
+            }
+        }else if (!attack){
+            EventHelper.downAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), EventHandler.attrAttack);
+            EventHandler.playerAttack.remove(key);
+        }
     }
 }

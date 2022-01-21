@@ -19,7 +19,7 @@ public class ModGroup{
 		//图标
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.xiantiaoqiang.get());
+			return new ItemStack(ItemRegistry.sunAppleSapling.get());
 		}
 
 	}

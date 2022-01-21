@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:zhusun",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:zhusun_seed"
+  }
+}

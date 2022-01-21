@@ -33,7 +33,7 @@ public class ExampleItem extends Item {
                 + " 防御力：" + playerIn.getAttribute(Attributes.ARMOR).getValue() + " 攻击力：" +
                         playerIn.getAttribute(Attributes.ATTACK_DAMAGE).getValue()), UUID.randomUUID());
             });
-            playerIn.getFoodStats().addStats(-19,-19);
+//            playerIn.getFoodStats().addStats(-19,-19);
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }

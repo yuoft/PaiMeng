@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "paimeng:tang"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:liuli_dai",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:liuli_dai_seed"
+  }
+}

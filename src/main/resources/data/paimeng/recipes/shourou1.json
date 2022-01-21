@@ -1,0 +1,15 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:lenxianrou"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:shourou",
+    "count": 2
+  }
+}

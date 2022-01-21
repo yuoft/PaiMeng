@@ -11,5 +11,7 @@ public class RecipeSerializerRegistry {
 
     public static final RegistryObject<IRecipeSerializer<?>> POT = RECIPE_TYPES.register("pot", () -> new PotRecipe.Serializer());
     public static final RegistryObject<IRecipeSerializer<?>> BENCH = RECIPE_TYPES.register("bench", () -> new BenchRecipe.Serializer());
+    public static final RegistryObject<IRecipeSerializer<?>> SYN_PLAT = RECIPE_TYPES.register("syn_plat", () -> new SynPlatRecipe.Serializer());
+    public static final RegistryObject<IRecipeSerializer<?>> SEED_BOX = RECIPE_TYPES.register("seed_box", () -> new SeedBoxRecipe.Serializer());
 
 }

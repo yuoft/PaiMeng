@@ -1,0 +1,17 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:apple"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:pingguo"
+  }
+}

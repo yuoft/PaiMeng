@@ -6,6 +6,7 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -25,12 +26,12 @@ public class PaiMengFood extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.star"));
         if (LEVEL != 0){ //星级信息
-            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.star" + LEVEL));
+            tooltip.add(new StringTextComponent(new TranslationTextComponent("paimeng.text.itemInfo.star").getString()
+                    + new TranslationTextComponent("paimeng.text.itemInfo.star" + LEVEL).getString()));
         }
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.type"));
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.type" + TYPE));
+        tooltip.add(new StringTextComponent(new TranslationTextComponent("paimeng.text.itemInfo.type").getString()
+                + new TranslationTextComponent("paimeng.text.itemInfo.type" + TYPE).getString()));
     }
 
     public int getLEVEL() {

@@ -5,6 +5,8 @@ import com.yuo.PaiMeng.NetWork.CookingPacket;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import com.yuo.PaiMeng.Recipes.PotRecipe;
+import com.yuo.PaiMeng.Recipes.SeedBoxRecipe;
+import com.yuo.PaiMeng.Recipes.SynPlatRecipe;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -72,9 +74,13 @@ public class TileUtils {
         for (IRecipe recipe : recipes) {
             if (recipe.matches(inventory, world)){
                 if (recipe instanceof PotRecipe)
-                return ((PotRecipe) recipe).getInputs();
+                    return ((PotRecipe) recipe).getInputs();
                 if (recipe instanceof BenchRecipe)
-                return ((BenchRecipe) recipe).getInputs();
+                    return ((BenchRecipe) recipe).getInputs();
+                if (recipe instanceof SynPlatRecipe)
+                    return ((SynPlatRecipe) recipe).getInputs();
+                if (recipe instanceof SeedBoxRecipe)
+                    return ((SeedBoxRecipe) recipe).getInputs();
             }
         }
         return NonNullList.create();

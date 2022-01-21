@@ -1,0 +1,21 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:pangxie",
+      "count": 2
+    },
+    {
+      "item": "paimeng:pangxie"
+    },
+    {
+      "item": "paimeng:pangxie"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "paimeng:xiehuang"
+  }
+}

@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Gui;
 
 import net.minecraft.util.IIntArray;
 
-public class PotIntArray implements IIntArray {
+public class CookingIntArray implements IIntArray {
     private int time; //燃烧时间
     private int flag; //合成标识
     private int level; //配方等级

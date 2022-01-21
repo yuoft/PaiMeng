@@ -27,8 +27,13 @@ public class EvolutionDust extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen1"));
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen2"));
+        if (stack.getItem() == ItemRegistry.shanbianzhichen.get()){
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen1"));
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen2"));
+        }
+        if (stack.getItem() == ItemRegistry.yimengrongmei.get()){
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.yimengrongemi"));
+        }
     }
 
     @Override

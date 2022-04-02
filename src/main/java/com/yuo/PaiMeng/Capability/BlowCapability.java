@@ -5,8 +5,8 @@ import net.minecraft.nbt.ListNBT;
 
 //能力
 public class BlowCapability implements IBlowCapability{
-    private float criticalRate;
-    private float criticalDamage;
+    private double criticalRate; //暴击率
+    private double criticalDamage; //暴击伤害
 
     public BlowCapability(float criticalRate, float criticalDamage) {
         this.criticalRate = criticalRate;
@@ -26,26 +26,26 @@ public class BlowCapability implements IBlowCapability{
 
     //增加多少暴击率 0-100
     @Override
-    public void setCriticalRate(float criticalRate) {
+    public void setCriticalRate(double criticalRate) {
         this.criticalRate += criticalRate;
-        this.criticalRate = this.criticalRate > 1.0f ? 1.0f : this.criticalRate;
-        this.criticalRate = this.criticalRate < 0 ? 0 : this.criticalRate;
+        this.criticalRate = Math.min(this.criticalRate, 1);
+        this.criticalRate = Math.max(this.criticalRate, 0);
     }
 
     // 0 - 无上限
     @Override
-    public void setCriticalDamage(float criticalDamage) {
+    public void setCriticalDamage(double criticalDamage) {
         this.criticalDamage += criticalDamage;
-        this.criticalDamage = this.criticalDamage < 0 ? 0 : this.criticalDamage;
+        this.criticalDamage = Math.max(this.criticalDamage, 0);
     }
 
     @Override
-    public float getCriticalRate() {
+    public double getCriticalRate() {
         return this.criticalRate;
     }
 
     @Override
-    public float getCriticalDamage() {
+    public double getCriticalDamage() {
         return this.criticalDamage;
     }
 
@@ -54,8 +54,8 @@ public class BlowCapability implements IBlowCapability{
         ListNBT listNBT = new ListNBT();
         CompoundNBT criticalRate = new CompoundNBT();
         CompoundNBT criticalDamage = new CompoundNBT();
-        criticalRate.putFloat("critical_rate", this.criticalRate);
-        criticalDamage.putFloat("critical_damage", this.criticalDamage);
+        criticalRate.putDouble("critical_rate", this.criticalRate);
+        criticalDamage.putDouble("critical_damage", this.criticalDamage);
         listNBT.add(0,criticalRate);
         listNBT.add(1,criticalDamage);
         CompoundNBT nbt = new CompoundNBT();
@@ -68,8 +68,8 @@ public class BlowCapability implements IBlowCapability{
         ListNBT listNBT = (ListNBT) nbt.get("critical");
         CompoundNBT criticalRateNbt = (CompoundNBT) listNBT.get(0);
         CompoundNBT criticalDamageNbt = (CompoundNBT) listNBT.get(1);
-        float playerHit = criticalRateNbt.getFloat("critical_rate");
-        float playerDamage = criticalDamageNbt.getFloat("critical_damage");
+        double playerHit = criticalRateNbt.getDouble("critical_rate");
+        double playerDamage = criticalDamageNbt.getDouble("critical_damage");
         this.criticalRate = playerHit;
         this.criticalDamage = playerDamage;
     }

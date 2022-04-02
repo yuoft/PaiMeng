@@ -1,10 +1,12 @@
 package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.CookingPot;
+import com.yuo.PaiMeng.Gui.FoodRecipesIntArray;
 import com.yuo.PaiMeng.Gui.PotContainer;
 import com.yuo.PaiMeng.Gui.CookingIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
+import com.yuo.PaiMeng.WorldData.FoodLevelWorldSaveData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,11 +26,13 @@ import javax.annotation.Nullable;
 
 public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
-    private final int FIRE_TIME[] = {0, 20 * 90 * 1, 20 * 90 * 2, 20 * 90 * 3, 20 * 90 * 4}; //总燃烧时间 每个燃料时间为一分半钟
+    private final int[] FIRE_TIME = {0, 20 * 90, 20 * 90 * 2, 20 * 90 * 3, 20 * 90 * 4}; //总燃烧时间 每个燃料时间为一分半钟
     private int TIME; //已燃烧时间
     private boolean FLAG; //是否可以合成
     private int LEVEL; //配方等级
     public final CookingIntArray data = new CookingIntArray();
+    public final FoodRecipesIntArray foodData = new FoodRecipesIntArray();
+    public PlayerEntity player;
 
     public PotTile() {
         super(TileTypeRegistry.POT_TILE.get());
@@ -36,7 +40,18 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
 
     @Override
     public void tick() {
-        if (world.isRemote || world == null) return;
+        if (world == null || world.isRemote) return;
+
+        //同步玩家烹饪经验数据
+        FoodLevelWorldSaveData saveData = FoodLevelWorldSaveData.get(world);
+        if (player != null){
+            FoodLevelWorldSaveData.PlayerFoodRecipesInfo info = saveData.getInfo(player.getName().getString());
+            if (!info.isEmpty()){
+                this.foodData.set(0, info.getLevel() );
+                this.foodData.set(1, info.getExp());
+            }
+        }
+
         BlockState state = world.getBlockState(pos); //当前方块
         if (world.isRainingAt(pos.up()) && state.get(CookingPot.FIRE)){ //下雨熄灭
             world.playEvent(null, 1009, pos, 0);
@@ -47,9 +62,9 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
             if (TIME < 0) TIME = 0;
             this.data.set(0, TIME);
         }
-        Integer fuel = state.get(CookingPot.FUEL);
-        if (TIME <= FIRE_TIME[fuel - 1 < 0 ? 0:fuel - 1]){ //到达燃烧时间
-            world.setBlockState(pos, state.with(CookingPot.FUEL, fuel - 1 < 0 ? 0:fuel - 1)); //减少燃料
+        int fuel = state.get(CookingPot.FUEL);
+        if (TIME <= FIRE_TIME[Math.max(fuel - 1, 0)]){ //到达燃烧时间
+            world.setBlockState(pos, state.with(CookingPot.FUEL, Math.max(fuel - 1, 0))); //减少燃料
         }
         if (fuel == 0) world.setBlockState(pos, state.with(CookingPot.FIRE, false)); //燃料消耗完 火焰熄灭
         ItemStack output = TileUtils.getRecipeOutput(world, ModRecipeType.POT, this);
@@ -67,7 +82,10 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
             this.data.set(1, 0);
         }
     }
-
+    //设置玩家
+    public void setPlayer(PlayerEntity player){
+        this.player = player;
+    }
     //设置燃烧时间 每次时间增加一分钟
     public void setBurnTime(){
         TIME = Math.min(TIME + FIRE_TIME[1], FIRE_TIME[4]);
@@ -184,6 +202,8 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity {
     public boolean isUsableByPlayer(PlayerEntity player) {
         if (this.world.getTileEntity(this.pos) != this) {
             return false;
+        }else if (this.world.getBlockState(this.pos).get(CookingPot.FIRE)){
+            return true;
         } else {
             return this.TIME > 0 && player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
         }

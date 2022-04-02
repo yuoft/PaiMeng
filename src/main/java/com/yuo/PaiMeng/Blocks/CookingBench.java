@@ -67,6 +67,7 @@ public class CookingBench extends Block {
                 }
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
                 if (tileEntity instanceof BenchTile){ //打开gui
+                    ((BenchTile) tileEntity).setPlayer(player);
                     player.openContainer((INamedContainerProvider) tileEntity);
                     player.addStat(Stats.INTERACT_WITH_FURNACE);
                 }
@@ -104,7 +105,7 @@ public class CookingBench extends Block {
     //消耗多个燃料时 所需具体数量
     private int getFuleCount(BenchTile benchTile, int time){
         int tileTIME = benchTile.getTIME(); //当前时间
-        return (int) Math.floor((benchTile.MAX_TIME - tileTIME) / time);
+        return (int) Math.floor((benchTile.MAX_TIME - tileTIME) / (time * 1d));
     }
 
     @Override

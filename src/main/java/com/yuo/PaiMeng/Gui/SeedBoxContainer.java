@@ -56,7 +56,7 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
         ItemStack itemstack = ItemStack.EMPTY;
         //获取配方
-        Optional<SeedBoxRecipe> optional = world.getServer().getRecipeManager().getRecipe(ModRecipeType.SEED_BOX, matrix, world);
+        Optional<SeedBoxRecipe> optional = world.getRecipeManager().getRecipe(ModRecipeType.SEED_BOX, matrix, world);
         if (optional.isPresent()) {
             SeedBoxRecipe recipe = optional.get();
             if (outputInventory.canUseRecipe(world, serverPlayer, recipe)) {
@@ -96,9 +96,9 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
             else if (index > 1){
                 if (hasRecipe(itemStack1)) //包含在配方中
                     if (!this.mergeItemStack(itemStack1, 0, 1, false)) return ItemStack.EMPTY;
-                if (index >= 2 && index < 29) { //从物品栏到快捷栏
+                if (index < 29) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 30, 38, false)) return ItemStack.EMPTY;
-                } else if (index >= 29 && index < 38 ) {
+                } else if (index < 38) {
                     if (!this.mergeItemStack(itemStack1, 2, 29, false)) return ItemStack.EMPTY;
                 }
             }else if (!this.mergeItemStack(itemStack1, 2 ,38, false)) return ItemStack.EMPTY; //取出来
@@ -162,6 +162,24 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
 
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
+        ItemStack stack = inputInventory.getStackInSlot(0);
+        if (!stack.isEmpty()){
+            clearContainer(playerIn, world, inputInventory);
+        }
         super.onContainerClosed(playerIn);
+    }
+
+    protected void clearContainer(PlayerEntity playerIn, World worldIn, IInventory inventoryIn) {
+        if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity)playerIn).hasDisconnected()) {
+            for(int j = 0; j < inventoryIn.getSizeInventory(); ++j) {
+                playerIn.dropItem(inventoryIn.removeStackFromSlot(j), false);
+            }
+
+        } else {
+            for(int i = 0; i < inventoryIn.getSizeInventory(); ++i) {
+                playerIn.inventory.placeItemBackInInventory(worldIn, inventoryIn.removeStackFromSlot(i));
+            }
+
+        }
     }
 }

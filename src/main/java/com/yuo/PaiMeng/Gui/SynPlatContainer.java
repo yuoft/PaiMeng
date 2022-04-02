@@ -65,12 +65,11 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
     //输入改变时设置输出
     @Override
     public void onCraftMatrixChanged(IInventory matrix) {
-        World world = player.world;
         if (world.isRemote) return;
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
         ItemStack itemstack = ItemStack.EMPTY;
         //获取配方
-        Optional<SynPlatRecipe> optional = world.getServer().getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, matrix, world);
+        Optional<SynPlatRecipe> optional = world.getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, matrix, world);
         if (optional.isPresent()) {
             SynPlatRecipe recipe = optional.get();
             if (outputInventory.canUseRecipe(world, serverPlayer, recipe)) {
@@ -97,15 +96,14 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
             if (index == 4){
                 if (!this.mergeItemStack(itemStack1, 5, 41, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(itemStack1, itemstack);
-            }
-            else if (index > 4){
+            } else if (index > 4){
                 if (hasRecipe(itemStack1)) //包含在配方中
-                    if (!this.mergeItemStack(itemStack1, 0, 2, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemStack1, 0, 3, false)) return ItemStack.EMPTY;
                 if (itemstack.getItem() instanceof EvolutionDust) //嬗变之尘
                     if (!this.mergeItemStack(itemStack1, 3, 4, false)) return ItemStack.EMPTY;
-                if (index >= 5 && index < 32) { //从物品栏到快捷栏
+                if (index < 32) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;
-                } else if (index >= 32 && index < 41 ) {
+                } else if (index < 41) {
                     if (!this.mergeItemStack(itemStack1, 5, 32, false)) return ItemStack.EMPTY;
                 }
             }else if (!this.mergeItemStack(itemStack1, 5, 41, false)) return ItemStack.EMPTY; //取出来

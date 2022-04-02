@@ -7,4 +7,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 public class ModCapability {
     @CapabilityInject(IBlowCapability.class)
     public static Capability<IBlowCapability> BLOW_CAPABILITY;
+
+    @CapabilityInject(RelicsItemHandler.class)
+    public static Capability<RelicsItemHandler> RELICS_CAPABILITY;
 }

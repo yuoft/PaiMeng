@@ -38,5 +38,10 @@ public class NetWorkHandler {
                 BenchPacket::toBytes,
                 BenchPacket::new,
                 BenchPacket::handler);
+        INSTANCE.registerMessage(nextID(),
+                RelicsGuiPacket.class,
+                RelicsGuiPacket::toBytes,
+                RelicsGuiPacket::new,
+                RelicsGuiPacket::handler);
     }
 }

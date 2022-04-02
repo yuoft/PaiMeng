@@ -30,10 +30,6 @@ public class SeedBoxRecipe implements IRecipe<IInventory> {
         public SeedBoxRecipe read(ResourceLocation recipeId, JsonObject json) { //从json中获取信息
             ItemStack input = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "input"));
             ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            String type = JSONUtils.getString(json, "type");
-            if (!type.equals("paimeng:seed_box")){
-                throw new IllegalStateException("Type is not found");
-            }
             return new SeedBoxRecipe(recipeId, input, result);
         }
 
@@ -42,10 +38,6 @@ public class SeedBoxRecipe implements IRecipe<IInventory> {
         public SeedBoxRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
             ItemStack input = buffer.readItemStack();
             ItemStack result = buffer.readItemStack();
-            String type = buffer.readString();
-            if (!type.equals("paimeng:seed_box")){
-                throw new IllegalStateException("Type is not found");
-            }
             return new SeedBoxRecipe(recipeId, input, result);
         }
 
@@ -112,4 +104,8 @@ public class SeedBoxRecipe implements IRecipe<IInventory> {
         return ModRecipeType.SEED_BOX;
     }
 
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 }

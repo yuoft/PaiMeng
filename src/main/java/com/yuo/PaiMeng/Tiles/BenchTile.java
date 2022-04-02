@@ -3,8 +3,10 @@ package com.yuo.PaiMeng.Tiles;
 import com.yuo.PaiMeng.Blocks.CookingBench;
 import com.yuo.PaiMeng.Gui.BenchContainer;
 import com.yuo.PaiMeng.Gui.CookingIntArray;
+import com.yuo.PaiMeng.Gui.FoodRecipesIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
+import com.yuo.PaiMeng.WorldData.FoodLevelWorldSaveData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -31,6 +33,8 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
     private int LEVEL; //配方等级
     private Item fuelItem; //燃料
     public final CookingIntArray data = new CookingIntArray();
+    public final FoodRecipesIntArray foodData = new FoodRecipesIntArray(); //玩家烹饪数据
+    public PlayerEntity player;
 
     public BenchTile() {
         super(TileTypeRegistry.BENCH_TILE.get());
@@ -38,7 +42,18 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
 
     @Override
     public void tick() {
-        if (world.isRemote || world == null) return;
+        if (world == null || world.isRemote) return;
+
+        //同步玩家烹饪经验数据
+        FoodLevelWorldSaveData saveData = FoodLevelWorldSaveData.get(world);
+        if (player != null){
+            FoodLevelWorldSaveData.PlayerFoodRecipesInfo info = saveData.getInfo(player.getName().getString());
+            if (!info.isEmpty()){
+                this.foodData.set(0, info.getLevel() );
+                this.foodData.set(1, info.getExp());
+            }
+        }
+
         boolean burning = this.isBurning();
         BlockState state = world.getBlockState(pos); //当前方块
         if (!state.get(CookingBench.FIRE) && burning){ //点燃
@@ -72,6 +87,11 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
         if (burning != this.isBurning()){
             world.setBlockState(pos, state.with(CookingBench.FIRE, this.isBurning()));
         }
+    }
+
+    //设置玩家
+    public void setPlayer(PlayerEntity player){
+        this.player = player;
     }
 
     //增加燃烧时间
@@ -209,7 +229,9 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
     public boolean isUsableByPlayer(PlayerEntity player) {
         if (this.world.getTileEntity(this.pos) != this) {
             return false;
-        } else {
+        }else if (this.world.getBlockState(this.pos).get(CookingBench.FIRE)){
+            return true;
+        }  else {
             return this.TIME > 0 && player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
         }
     }

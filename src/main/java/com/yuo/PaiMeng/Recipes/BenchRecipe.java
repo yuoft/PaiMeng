@@ -2,27 +2,22 @@ package com.yuo.PaiMeng.Recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
-public class BenchRecipe implements IRecipe<IInventory> {
-    private final NonNullList<ItemStack> inputs; //输入
-    private final ItemStack result; //输出
-    private final ResourceLocation id;
+public class BenchRecipe extends CookingRecipe {
 
     public BenchRecipe(ResourceLocation idIn, NonNullList<ItemStack> inputIn, ItemStack resultIn){
-        this.id = idIn;
-        this.inputs = inputIn;
-        this.result = resultIn;
+        super(idIn, inputIn, resultIn);
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BenchRecipe>{
@@ -35,10 +30,6 @@ public class BenchRecipe implements IRecipe<IInventory> {
                 if (!stack.isEmpty()) inputs.add(stack);
             }
             ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            String type = JSONUtils.getString(json, "type");
-            if (!type.equals("paimeng:bench")){
-                throw new IllegalStateException("Type is not found");
-            }
             if (inputs.isEmpty() || inputs.size() > 4){
                 throw new IllegalStateException("Recipe is not Error");
             }
@@ -54,10 +45,6 @@ public class BenchRecipe implements IRecipe<IInventory> {
                 list.add(j, buffer.readItemStack());
             }
             ItemStack result = buffer.readItemStack();
-            String type = buffer.readString();
-            if (!type.equals("paimeng:bench")){
-                throw new IllegalStateException("Type is not found");
-            }
             return new BenchRecipe(recipeId, list, result);
         }
 
@@ -72,46 +59,6 @@ public class BenchRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
-        int size = RecipeUtils.match(inv.getSizeInventory() - 2, inv, inputs);
-        return size == this.inputs.size();
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (ItemStack input : inputs) {
-            list.add(Ingredient.fromStacks(input));
-        }
-
-        return list;
-    }
-
-    public NonNullList<ItemStack> getInputs(){
-        return this.inputs;
-    }
-
-    @Override
-    public ItemStack getCraftingResult(IInventory inv) {
-        return this.result.copy();
-    }
-
-    @Override
-    public boolean canFit(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return this.result;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return this.id;
-    }
-
-    @Override
     public IRecipeSerializer<?> getSerializer() {
         return RecipeSerializerRegistry.BENCH.get();
     }
@@ -120,5 +67,4 @@ public class BenchRecipe implements IRecipe<IInventory> {
     public IRecipeType<?> getType() {
         return ModRecipeType.BENCH;
     }
-
 }

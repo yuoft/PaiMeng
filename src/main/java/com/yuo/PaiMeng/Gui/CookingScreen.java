@@ -19,16 +19,18 @@ public class CookingScreen extends Screen {
     private Button button;
     private final int textureWidth = 202;
     private final int textureHeight = 12;
-    private ContainerScreen screen; //容器
+    private ContainerScreen<?> screen; //容器
     private final int LEVEL; //食品等级
     private double LEVEL_GROW = 0; //指针速度
     private int minValue; //成功区间最小值
     private int maxValue; //最大值
-    private Random random = new Random();
+    private final Random random = new Random();
+    private int count;
 
-    protected CookingScreen(ITextComponent titleIn, ContainerScreen screen, int lv) {
+    protected CookingScreen(ITextComponent titleIn, ContainerScreen<?> screen, int lv, int count) {
         super(titleIn);
         this.LEVEL = lv;
+        this.count = count;
         this.screen = screen;
         this.minValue = random.nextInt(80 + LEVEL * 20);
         this.maxValue = this.minValue + (120 - LEVEL * 20);
@@ -36,7 +38,7 @@ public class CookingScreen extends Screen {
 
     @Override
     protected void init() {
-        this.button = new Button(this.width / 2 -15, this.height / 2 + 20, 30, 20,
+        this.button = new Button(this.width / 2 - 15, this.height / 2 + 20, 30, 20,
                 new TranslationTextComponent("gui.paimeng.cooking_button"), this::button); //回调
         this.addButton(button);
         super.init();
@@ -65,13 +67,14 @@ public class CookingScreen extends Screen {
     }
 
     private void button(Button button){
-        if (LEVEL_GROW >= minValue && LEVEL_GROW <= maxValue){ //成功烹饪
-            if (screen instanceof PotScreen){
-               TileUtils.sendPotPacket();//发送数据包设置产出
-            }
-            if (screen instanceof BenchScreen){
-                TileUtils.sendPotPacket();
-            }
+        if (LEVEL_GROW < minValue || LEVEL_GROW > maxValue){ //成功烹饪
+            count = 0;
+        }
+        if (screen instanceof PotScreen){
+            TileUtils.sendPotPacket(count, LEVEL, LEVEL);//发送数据包设置产出
+        }
+        if (screen instanceof BenchScreen){
+            TileUtils.sendPotPacket(count, LEVEL, LEVEL);
         }
         if (minecraft != null){
             minecraft.displayGuiScreen(screen);

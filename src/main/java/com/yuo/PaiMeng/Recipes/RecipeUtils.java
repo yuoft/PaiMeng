@@ -11,12 +11,12 @@ public class RecipeUtils {
      * @param num 匹配槽位个数（0 ~ num-1）
      * @param inv 待匹配物品容器
      * @param inputs 配方输入
-     * @return
+     * @return 已匹配数量
      */
     public static int match(int num, IInventory inv, NonNullList<ItemStack> inputs){
         int size = 0; //以匹配数量
         NonNullList<ItemStack> stacks = NonNullList.create();
-        inputs.forEach(e -> stacks.add(e));
+        stacks.addAll(inputs);
 
         for(int j = 0; j < num; ++j) {
             ItemStack itemstack = inv.getStackInSlot(j);

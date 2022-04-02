@@ -82,6 +82,7 @@ public class CookingPot extends Block {
                 }
                 TileEntity tileEntity = worldIn.getTileEntity(pos);
                 if (tileEntity instanceof PotTile){ //打开gui
+                    ((PotTile) tileEntity).setPlayer(player);
                     player.openContainer((INamedContainerProvider) tileEntity);
                     player.addStat(Stats.INTERACT_WITH_FURNACE);
 //                    NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, pos);

@@ -1,38 +1,47 @@
 package com.yuo.PaiMeng.Event;
 
-import com.yuo.PaiMeng.Capability.BlowCapanilityProvider;
-import com.yuo.PaiMeng.Capability.IBlowCapability;
-import com.yuo.PaiMeng.Capability.ModCapability;
+import com.google.common.collect.Multimap;
+import com.yuo.PaiMeng.Capability.*;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
+import com.yuo.PaiMeng.Effects.ReviveEffect;
+import com.yuo.PaiMeng.Items.*;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.PaiMeng;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -44,19 +53,18 @@ import java.util.UUID;
 /**
  * 事件处理类
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = PaiMeng.MOD_ID)
+@Mod.EventBusSubscriber(modid = PaiMeng.MOD_ID)
 public class EventHandler {
     private final static Random random = new Random();
+    public static List<String> playerCritical = new ArrayList<>();
     public static List<String> playerCriticalRate = new ArrayList<>();
     public static List<String> playerCriticalDamage = new ArrayList<>();
-    public static List<String> playerDefense = new ArrayList<>();
-    public static List<String> playerAttack = new ArrayList<>();
 
-    public static final float attrCriticalRate = 0.12f; //属性变更基础系数
-    public static final float attrCriticalDamage = 0.18f;
-    public static final float attrDefense = 2.0f;
-    public static final float attrAttack = 3.0f;
-    public static final float attrAttackPhysics = 2.0f;
+    public static final double attrCriticalRate = 0.12; //属性变更基础系数 暴击率
+    public static final double attrCriticalDamage = 0.18; //暴击伤害
+    public static final double attrDefense = 2.5; //防御力
+    public static final double attrAttackDamage = 2.0; //攻击力
+    public static final double attrAttackPhysics = 2.5; //物理攻击
 
     //禁用原版食物
     @SubscribeEvent
@@ -65,7 +73,7 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            if (item.isFood() && !(item.getItem() instanceof PaiMengFood)){//原版食物
+            if (item.isFood() && EventHelper.getNameSpace(item).equals("minecraft") && !(item.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){//原版食物
                     player.sendStatusMessage(new TranslationTextComponent("paimeng.message.food"), true);
                     event.setCanceled(true);
             }
@@ -79,7 +87,7 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            if (item.isFood() && item.getItem() instanceof PaiMengFood){
+            if (item.isFood() && item.getItem() instanceof PaiMengFood && !(item.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){
                 PaiMengFood food = (PaiMengFood) item.getItem();
                 int type = food.getTYPE();
                 if (type == 0){
@@ -92,7 +100,7 @@ public class EventHandler {
     @SubscribeEvent
     public static void itemMessage(ItemTooltipEvent event){
         ItemStack stack = event.getItemStack();
-        if (stack.isFood() && !(stack.getItem() instanceof PaiMengFood)){ //原版食物
+        if (stack.isFood() && EventHelper.getNameSpace(stack).equals("minecraft") && !(stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){ //原版食物
             List<ITextComponent> toolTip = event.getToolTip();
             toolTip.add(new TranslationTextComponent("paimeng.text.itemInfo.food"));
         }
@@ -103,7 +111,8 @@ public class EventHandler {
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation(PaiMeng.MOD_ID, "blow"), new BlowCapanilityProvider());
+            event.addCapability(new ResourceLocation(PaiMeng.MOD_ID, "blow"), new BlowCapabilityProvider());
+            event.addCapability(new ResourceLocation(PaiMeng.MOD_ID, "relics"), new RelicsItemCapabilityProvider());
         }
     }
 
@@ -114,17 +123,10 @@ public class EventHandler {
             CompoundNBT bags = old.serializeNBT();
             event.getPlayer().getCapability(ModCapability.BLOW_CAPABILITY).ifPresent(c -> c.deserializeNBT(bags));
         });
-        if (event.isWasDeath()) {
-            PlayerEntity player = event.getPlayer();
-            if (event.isWasDeath()){ //玩家死亡时重生 从变量中清key
-                String key = player.getGameProfile().getName()+":"+player.world.isRemote;
-                playerAttack.remove(key);
-                playerDefense.remove(key);
-                playerCriticalRate.remove(key);
-                playerCriticalDamage.remove(key);
-                EventHelper.changeAttribute(player);
-            }
-        }
+        event.getOriginal().getCapability(ModCapability.RELICS_CAPABILITY).ifPresent(old -> {
+            CompoundNBT bags = old.serializeNBT();
+            event.getPlayer().getCapability(ModCapability.RELICS_CAPABILITY).ifPresent(c -> c.deserializeNBT(bags));
+        });
     }
 
     //实体更新 药水生效
@@ -133,6 +135,12 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity && !entityLiving.world.isRemote){
             PlayerEntity player = (PlayerEntity) entityLiving;
+            LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
+            capability.ifPresent(e -> {
+                RelicsHelper.clearModifier(player);
+                Multimap<Attribute, AttributeModifier> relicsModifier = RelicsHelper.getRelicsModifier(player);
+                player.getAttributeManager().reapplyModifiers(relicsModifier);
+            });
             EventHelper.changeAttribute(player);
         }
     }
@@ -145,81 +153,57 @@ public class EventHandler {
         if (source instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) source;
             DamageSource damageSource = event.getSource();
-            if (damageSource == DamageSource.GENERIC){ //普通伤害
-                boolean effect = player.getActivePotionEffect(EffectRegistry.ATTACK_PHYSICS.get()) != null;
-                if (effect){
-                    int amplifier = player.getActivePotionEffect(EffectRegistry.ATTACK_PHYSICS.get()).getAmplifier() + 1;
-                    if (amplifier > 0){ //有buff
-                        event.setAmount(event.getAmount() + amplifier * attrAttackPhysics);
-                    }
+            if (damageSource == DamageSource.GENERIC){ //普通伤害 物理伤害提升
+                int attackPhysics = EventHelper.getEffectLevel(player, EffectRegistry.ATTACK_PHYSICS.get());
+                if (attackPhysics > 0){ //有buff
+                    event.setAmount((float) (event.getAmount() + attackPhysics * attrAttackPhysics));
                 }
+                float amount = event.getAmount(); //物理伤害加成
+                event.setAmount((float) (amount + amount * RelicsHelper.getRelicsAttackPhysics(player)));
             }
             //暴击系统伤害计算 增益基础伤害（会受到护甲等减免）
             LazyOptional<IBlowCapability> critical = player.getCapability(ModCapability.BLOW_CAPABILITY);
             critical.ifPresent(e ->{
-                float criticalRate = e.getCriticalRate();
-                float criticalDamage = e.getCriticalDamage();
+                double criticalRate = e.getCriticalRate();
+                double criticalDamage = e.getCriticalDamage();
                 float amount = event.getAmount();
                 if (random.nextFloat() <= criticalRate){ //暴击了
-                    event.setAmount(amount * (1 + criticalDamage));
+                    event.setAmount((float) (amount * (1 + criticalDamage)));
                     World world = entityLiving.getEntityWorld();
-                    for (int i = 0; i < 5; i++)
-                        world.addParticle(ParticleTypes.HEART, entityLiving.getPosX() + random.nextDouble() / 2, entityLiving.getPosY() + random.nextDouble() / 2, entityLiving.getPosZ() + random.nextDouble() / 2,
+                    for (int i = 0; i < 10; i++) //暴击粒子
+                        world.addParticle(ParticleTypes.CRIT, entityLiving.getPosX() + random.nextDouble() / 2, entityLiving.getPosY() + random.nextDouble() / 2, entityLiving.getPosZ() + random.nextDouble() / 2,
                                 random.nextGaussian(), random.nextGaussian(), random.nextGaussian());
                 }
             });
         }
     }
 
-    //实体死亡时
     @SubscribeEvent
     public static void entityDeath(LivingDeathEvent event){
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
             //复活buff
-            boolean revive = player.getActivePotionEffect(EffectRegistry.REVIVE.get()) != null;
-            if (revive){
-                int amplifier = player.getActivePotionEffect(EffectRegistry.REVIVE.get()).getAmplifier() + 1;
-                if (amplifier > 0){
-                    event.setCanceled(true);
-                    if (player instanceof ServerPlayerEntity) {
-                        ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)player;
-                        serverplayerentity.addStat(Stats.ITEM_USED.get(Items.TOTEM_OF_UNDYING));
-                        CriteriaTriggers.USED_TOTEM.trigger(serverplayerentity, new ItemStack(Items.TOTEM_OF_UNDYING));
-                    }
-                    player.setHealth(2 * amplifier); //血量
-                    player.clearActivePotions(); //清除buff
-                    player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, (40 + 10 * amplifier) * 20, 0)); //防火
-                    player.addPotionEffect(new EffectInstance(Effects.REGENERATION, (45 + 10 * amplifier) * 20, amplifier)); //生命恢复
-                    player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, (5 * amplifier) * 20, amplifier)); //伤害吸收
-                    player.world.setEntityState(player, (byte) 35);
-                }
+            int revive = EventHelper.getEffectLevel(player, EffectRegistry.REVIVE.get());
+            if (revive > 0){
+                event.setCanceled(true);
+                ReviveEffect.revive(player,revive);
             }
             //重置双爆属性
             LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
-            capability.ifPresent(e -> e.resetCritical());
+            capability.ifPresent(IBlowCapability::resetCritical);
         }
     }
 
-    //玩家登入
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event){
-        //重置双爆属性
         PlayerEntity player = event.getPlayer();
-        String key = player.getGameProfile().getName()+":"+player.world.isRemote;
-        if (!playerCriticalRate.contains(key)){
+        boolean isRemote = player.world.isRemote;
+        String key = player.getGameProfile().getName()+":"+ isRemote;
+        //重启游戏时添加key 重置双爆属性 防止属性叠加
+        if (!playerCriticalRate.contains(key) && !isRemote){
             LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
-            capability.ifPresent(e -> e.resetCritical());
-        }
-        //重置玩家属性 防止属性叠加
-        if (!playerDefense.contains(key)){ //变量中不含key：重启游戏，需要重置属性； 含有key：重进游戏，不需要重置
-            boolean defense = player.getActivePotionEffect(EffectRegistry.DEFENSE.get()) != null;
-            if (defense) EventHelper.downAttribute(player, Attributes.ARMOR, EffectRegistry.DEFENSE.get(), attrDefense);
-        }
-        if (!playerAttack.contains(key)){
-            boolean attack = player.getActivePotionEffect(EffectRegistry.ATTACK.get()) != null;
-            if (attack) EventHelper.downAttribute(player, Attributes.ATTACK_DAMAGE, EffectRegistry.ATTACK.get(), attrAttack);
+            capability.ifPresent(IBlowCapability::resetCritical);
         }
         //发送消息
         player.sendMessage(new TranslationTextComponent("paimeng.message.login")
@@ -227,38 +211,109 @@ public class EventHandler {
                         .setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://space.bilibili.com/21854371"))), UUID.randomUUID());
     }
 
-    //玩家攻击时 物理伤害提升
     @SubscribeEvent
-    public static void playerAttack(LivingAttackEvent event){
+    public static void playerLoginOut(PlayerEvent.PlayerLoggedOutEvent event){
+        PlayerEntity player = event.getPlayer();
+        boolean isRemote = player.world.isRemote;
+        String key = player.getGameProfile().getName()+":"+ isRemote;
+        if (!isRemote)
+            playerCritical.remove(key);
+    }
+
+    @SubscribeEvent
+    public static void blockDrop(BlockEvent.BreakEvent event){
+        BlockPos pos = event.getPos();
+        IWorld world = event.getWorld();
+        BlockState state = world.getBlockState(pos);
+        PlayerEntity player = event.getPlayer();
+        if (state.getBlock() == Blocks.SPRUCE_LEAVES){ //云杉树叶掉落松果
+            ItemStack mainhand = player.getHeldItemMainhand();
+            int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, mainhand);
+            if (random.nextInt(100) < level * 5 + 5){
+                ItemEntity item = new ItemEntity((World) world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.songguo.get(),
+                        random.nextInt(2 + level)));
+                world.addEntity(item);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void heal(LivingHealEvent event){
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-
+            float amount = event.getAmount(); //增加血量回复
+            event.setAmount((float) (amount + amount * RelicsHelper.getRelicsHeal(player)));
         }
     }
-    /*
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onLivingDeath(LivingDeathEvent event) {
 
-        if(PotionRevival.instance != null && event.entityLiving.isPotionActive(PotionRevival.instance)) {
-
-            int level = event.entityLiving.getActivePotionEffect(PotionRevival.instance).getAmplifier() + 1;
-
-            event.setCanceled(true);
-
-            event.entityLiving.setHealth(PotionRevival.reviveHealth*level);
-            event.entityLiving.worldObj.playSoundAtEntity(event.entityLiving, "random.levelup", 1.0F, 0.6F);
-
-            PacketBuffer out = new PacketBuffer(Unpooled.buffer());
-
-            out.writeInt(PacketHandlerClient.REVIVAL_HEARTS);
-            out.writeInt(event.entityLiving.getEntityId());
-
-            SToCMessage packet = new SToCMessage(out);
-            PotionCore.networkWrapper.sendToAllAround(packet, new TargetPoint(event.entityLiving.worldObj.provider.getDimensionId(), event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, 16));
-
-            event.entityLiving.removePotionEffect(PotionRevival.instance.getId());
+    @SubscribeEvent
+    public static void wearRelics(PlayerInteractEvent.RightClickItem event){
+        PlayerEntity player = event.getPlayer();
+        ItemStack stack = event.getItemStack();
+        if (stack.getItem() instanceof Relics){ //快速装备圣遗物
+            LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
+            capability.ifPresent(e ->{
+                NonNullList<ItemStack> stacks = e.getStacks();
+                EventHelper.wearRelics(player, event.getWorld(), RelicsHelper.getTypeForStack(stack).getId(), stacks, stack);
+            });
         }
-    }*/
+    }
+
+    @SubscribeEvent
+    public static void dropRelicsBox(LivingDropsEvent event){
+        LivingEntity entityLiving = event.getEntityLiving();
+        Entity source = event.getSource().getTrueSource();
+        if (source instanceof PlayerEntity){
+            PlayerEntity player = (PlayerEntity) source; //圣物匣掉落受幸运，不幸和抢夺影响
+            int luck = EventHelper.getEffectLevel(player, Effects.LUCK);
+            int unLuck = EventHelper.getEffectLevel(player, Effects.UNLUCK);
+            int looting = event.getLootingLevel();
+            if (!entityLiving.isNonBoss()){ //是boss
+                ItemStack stack = new ItemStack(ItemRegistry.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) stack.getItem()).setLevel(1);
+                EventHelper.addEntityDrops(event, stack, entityLiving);
+                ItemStack stack1 = new ItemStack(ItemRegistry.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) stack1.getItem()).setLevel(2);
+                EventHelper.addEntityDrops(event, stack1, entityLiving);
+                ItemStack stack2 = new ItemStack(ItemRegistry.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) stack2.getItem()).setLevel(3);
+                EventHelper.addEntityDrops(event, stack2, entityLiving);
+            }else {
+                //0.01%掉落一等圣物匣
+                if (random.nextDouble() < (0.0001 + 0.0002 * (luck - unLuck) + 0.0003 * looting)){
+                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
+                    ((RelicsBox) stack.getItem()).setLevel(1);
+                    EventHelper.addEntityDrops(event, stack, entityLiving);
+                }
+                //0.1%掉落二等圣物匣
+                if (random.nextDouble() < (0.001 + 0.002 * (luck - unLuck) + 0.003 * looting)){
+                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
+                    ((RelicsBox) stack.getItem()).setLevel(2);
+                    EventHelper.addEntityDrops(event, stack, entityLiving);
+                }
+                //1%掉落三等圣物匣
+                if (random.nextDouble() < (0.01 + 0.02 * (luck - unLuck) + 0.03 * looting)){
+                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
+                    ((RelicsBox) stack.getItem()).setLevel(3);
+                    EventHelper.addEntityDrops(event, stack, entityLiving);
+                }
+            }
+        }
+    }
+
+    //战利品添加
+//    @SubscribeEvent
+    public static void lootTableAdd(LootTableLoadEvent event){
+        ResourceLocation name = event.getName();
+        for (ResourceLocation r : EventHelper.RS){
+            if (name.equals(r)){
+                LootTable table = event.getTable();
+                table.addPool(EventHelper.getPool(EventHelper.songguoEntry));
+                event.setTable(table);
+            }
+        }
+    }
+
 }
 

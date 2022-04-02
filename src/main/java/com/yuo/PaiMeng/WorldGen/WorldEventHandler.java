@@ -28,6 +28,7 @@ public class WorldEventHandler {
         WorldOreGen.generateOres(event); //矿物
         WorldPlantGen.generatePlants(event); //植物
         genTree(event); //树
+        EntityGen.onEntitySpawn(event); //实体
     }
 
     //树生成

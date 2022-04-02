@@ -24,5 +24,8 @@ public class ContainerTypeRegistry {
     public static final RegistryObject<ContainerType<SeedBoxContainer>> seedBoxContainer = CONTAINERS.register("seed_box_container", () ->
             IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                     new SeedBoxContainer(windowId, inv)));
+    public static final RegistryObject<ContainerType<RelicsContainer>> relicsContainer = CONTAINERS.register("relics_container", () ->
+            IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                    new RelicsContainer(windowId, inv)));
 
 }

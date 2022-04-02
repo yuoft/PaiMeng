@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "1.16.4-1.0.0"
+version = "1.16.4-1.1.0"
 group = 'com.github.yuoft' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'PaiMeng'
 
@@ -80,17 +80,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 //引入仓库
 repositories {
-    maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
+//    maven {
+//        name = "CurseForge"
+//        url = "https://minecraft.curseforge.com/api/maven/"
+//    }
     maven {
         name = "CurseMaven"
         url "https://www.cursemaven.com"
     }
     maven {
         name = "JEI"
-        url = "http://dvs1.progwml6.com/files/maven"
+        url = "https://dvs1.progwml6.com/files/maven"
     }
 }
 dependencies {

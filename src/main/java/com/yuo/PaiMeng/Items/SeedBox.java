@@ -22,7 +22,7 @@ public class SeedBox extends Item {
     private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("gui.paimeng.seed_box");
 
     public SeedBox() {
-        super(new Properties().group(ModGroup.PaiMengOther));
+        super(new Properties().group(ModGroup.PaiMengOther).maxStackSize(1));
     }
 
     @Override

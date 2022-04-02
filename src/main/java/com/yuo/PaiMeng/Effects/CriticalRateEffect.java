@@ -7,4 +7,5 @@ public class CriticalRateEffect extends Effect {
     protected CriticalRateEffect() {
         super(EffectType.BENEFICIAL, 999900);
     }
+
 }

@@ -8,6 +8,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+//客户端控制灶台燃料显示
 public class BenchClientPacket {
     public static void handlePacket(BenchPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() ->{

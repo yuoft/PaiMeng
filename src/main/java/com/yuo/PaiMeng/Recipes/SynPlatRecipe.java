@@ -38,10 +38,6 @@ public class SynPlatRecipe implements IRecipe<IInventory> {
             }
             ItemStack catalyzer = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "catalyzer"));
             ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            String type = JSONUtils.getString(json, "type");
-            if (!type.equals("paimeng:syn_plat")){
-                throw new IllegalStateException("Type is not found");
-            }
             if (inputs.isEmpty() || inputs.size() > 4){
                 throw new IllegalStateException("Recipe is not Error");
             }
@@ -58,10 +54,6 @@ public class SynPlatRecipe implements IRecipe<IInventory> {
             }
             ItemStack catalyzer = buffer.readItemStack();
             ItemStack result = buffer.readItemStack();
-            String type = buffer.readString();
-            if (!type.equals("paimeng:syn_plat")){
-                throw new IllegalStateException("Type is not found");
-            }
             return new SynPlatRecipe(recipeId, list, catalyzer, result);
         }
 
@@ -94,19 +86,24 @@ public class SynPlatRecipe implements IRecipe<IInventory> {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
-        for (ItemStack input : inputs) {
-            list.add(Ingredient.fromStacks(input));
+        for (int i = 0; i < 3; i++){
+            if (inputs.size() >= i + 1){
+                list.add(Ingredient.fromStacks(inputs.get(i)));
+            }else list.add(Ingredient.fromStacks(ItemStack.EMPTY));
         }
-
+//        for (ItemStack input : inputs) {
+//            list.add(Ingredient.fromStacks(input));
+//        }
         list.add(Ingredient.fromStacks(catalyzer));
-
         return list;
     }
 
     public NonNullList<ItemStack> getInputs(){
         NonNullList<ItemStack> list = NonNullList.create();
-        for (ItemStack stack : inputs){
-            list.add(stack);
+        for (int i = 0; i < 3; i++){
+            if (inputs.size() >= i + 1){
+                list.add(inputs.get(i));
+            }else list.add(ItemStack.EMPTY);
         }
         list.add(catalyzer);
         return list;
@@ -146,4 +143,8 @@ public class SynPlatRecipe implements IRecipe<IInventory> {
         return ModRecipeType.SYN_PLAT;
     }
 
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 }

@@ -18,7 +18,7 @@ public class BenchRecipeCategory implements IRecipeCategory<BenchRecipe> {
 
     public static final ResourceLocation UID = new ResourceLocation(PaiMeng.MOD_ID, "bench");
     //合成配方背景
-    public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/pot.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/bench.png");
 
     private final IDrawable background;
     private final IDrawable icon;

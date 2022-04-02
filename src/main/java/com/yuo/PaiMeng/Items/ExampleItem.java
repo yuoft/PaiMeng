@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.UUID;
 
 public class ExampleItem extends Item {
@@ -27,20 +28,25 @@ public class ExampleItem extends Item {
             LazyOptional<IBlowCapability> capability = playerIn.getCapability(ModCapability.BLOW_CAPABILITY);
             //当返回值不是null时需要做什么。这里的lambda表达式参数e就是之前getCapbility调用的返回值
             capability.ifPresent( e -> {
-                float criticalRate = e.getCriticalRate();
-                float criticalDamage = e.getCriticalDamage();
+                double criticalRate = e.getCriticalRate();
+                double criticalDamage = e.getCriticalDamage();
                 playerIn.sendMessage(new StringTextComponent("暴击率：" + getMath(criticalRate) + " 暴击伤害：" + getMath(criticalDamage)
-                + " 防御力：" + playerIn.getAttribute(Attributes.ARMOR).getValue() + " 攻击力：" +
-                        playerIn.getAttribute(Attributes.ATTACK_DAMAGE).getValue()), UUID.randomUUID());
+                + " 防御力：" + getMath0(playerIn.getAttribute(Attributes.ARMOR).getValue()) + " 攻击力：" +
+                        getMath0(playerIn.getAttribute(Attributes.ATTACK_DAMAGE).getValue())
+                + "生命值：" + getMath0(playerIn.getAttribute(Attributes.MAX_HEALTH).getValue())), UUID.randomUUID());
             });
-//            playerIn.getFoodStats().addStats(-19,-19);
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     //返回百分比数值
-    private String getMath(float a){
-        BigDecimal bd = new BigDecimal(a * 100).setScale(2, BigDecimal.ROUND_HALF_UP);
-        return bd.toString() + "%";
+    private String getMath(double a){
+        BigDecimal bd = new BigDecimal(a * 100).setScale(2, RoundingMode.HALF_EVEN);
+        return bd + "%";
+    }
+
+    private Double getMath0(double a){
+        BigDecimal bd = new BigDecimal(a).setScale(2, RoundingMode.HALF_EVEN);
+        return bd.doubleValue();
     }
 }

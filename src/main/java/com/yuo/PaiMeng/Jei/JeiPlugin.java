@@ -2,7 +2,10 @@ package com.yuo.PaiMeng.Jei;
 
 import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.PaiMeng;
-import com.yuo.PaiMeng.Recipes.*;
+import com.yuo.PaiMeng.Recipes.BenchRecipe;
+import com.yuo.PaiMeng.Recipes.CookingRecipe;
+import com.yuo.PaiMeng.Recipes.ModRecipeType;
+import com.yuo.PaiMeng.Recipes.PotRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -13,6 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -30,6 +35,7 @@ public class JeiPlugin implements IModPlugin {
         registration.addRecipeCategories(
                 new PotRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new BenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
+                new CookingRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new SynPlatRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new SeedBoxRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
@@ -39,13 +45,26 @@ public class JeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Objects.requireNonNull(Minecraft.getInstance().world).getRecipeManager();
         registration.addRecipes(recipeManager.getRecipesForType(ModRecipeType.POT).stream()
-                .filter(r -> r instanceof PotRecipe).collect(Collectors.toList()), PotRecipeCategory.UID);
+                .filter(Objects::nonNull).collect(Collectors.toList()), PotRecipeCategory.UID);
         registration.addRecipes(recipeManager.getRecipesForType(ModRecipeType.BENCH).stream()
-                .filter(r -> r instanceof BenchRecipe).collect(Collectors.toList()), BenchRecipeCategory.UID);
+                .filter(Objects::nonNull).collect(Collectors.toList()), BenchRecipeCategory.UID);
+        registration.addRecipes(recipeManager.getRecipesForType(ModRecipeType.POT).stream()
+                .filter(Objects::nonNull).collect(Collectors.toList()), CookingRecipeCategory.UID);
         registration.addRecipes(recipeManager.getRecipesForType(ModRecipeType.SYN_PLAT).stream()
-                .filter(r -> r instanceof SynPlatRecipe).collect(Collectors.toList()), SynPlatRecipeCategory.UID);
+                .filter(Objects::nonNull).collect(Collectors.toList()), SynPlatRecipeCategory.UID);
         registration.addRecipes(recipeManager.getRecipesForType(ModRecipeType.SEED_BOX).stream()
-                .filter(r -> r instanceof SeedBoxRecipe).collect(Collectors.toList()), SeedBoxRecipeCategory.UID);
+                .filter(Objects::nonNull).collect(Collectors.toList()), SeedBoxRecipeCategory.UID);
+    }
+
+    private List<CookingRecipe> getBenchRecipes(RecipeManager recipeManager){
+        List<PotRecipe> pot = recipeManager.getRecipesForType(ModRecipeType.POT).stream()
+                .filter(Objects::nonNull).collect(Collectors.toList());
+        List<BenchRecipe> bench = recipeManager.getRecipesForType(ModRecipeType.BENCH).stream()
+                .filter(Objects::nonNull).collect(Collectors.toList());
+        List<CookingRecipe> recipes = new ArrayList<>();
+        recipes.addAll(pot);
+        recipes.addAll(bench);
+        return recipes;
     }
 
     //注册+号添加
@@ -55,6 +74,8 @@ public class JeiPlugin implements IModPlugin {
                 registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new PotTransferInfo()), PotRecipeCategory.UID);
         registration.addRecipeTransferHandler(new CookingTransferHandler(
                 registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new BenchTransferInfo()), BenchRecipeCategory.UID);
+        registration.addRecipeTransferHandler(new CookingTransferHandler(
+                registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new CookingTransferInfo()), CookingRecipeCategory.UID);
         registration.addRecipeTransferHandler(new CookingTransferHandler(
                 registration.getJeiHelpers().getStackHelper(), registration.getTransferHelper(), new SynPlatTransferInfo()), SynPlatRecipeCategory.UID);
         registration.addRecipeTransferHandler(new CookingTransferHandler(
@@ -66,6 +87,7 @@ public class JeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingPot.get()), PotRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingBench.get()), BenchRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingBench.get()), CookingRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.syntheticPlatform.get()), SynPlatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.huazhongxia.get()), SeedBoxRecipeCategory.UID);
     }

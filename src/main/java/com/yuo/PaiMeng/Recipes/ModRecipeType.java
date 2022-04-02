@@ -11,4 +11,7 @@ public interface ModRecipeType<T extends IRecipe> extends IRecipeType {
     IRecipeType<SynPlatRecipe> SYN_PLAT = IRecipeType.register(PaiMeng.MOD_ID + ":syn_plat");
     IRecipeType<SeedBoxRecipe> SEED_BOX = IRecipeType.register(PaiMeng.MOD_ID + ":seed_box");
 
+
 }
+
+

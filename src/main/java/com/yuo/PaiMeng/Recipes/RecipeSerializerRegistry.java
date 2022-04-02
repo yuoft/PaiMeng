@@ -7,11 +7,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class RecipeSerializerRegistry {
-    public static final DeferredRegister RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PaiMeng.MOD_ID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PaiMeng.MOD_ID);
 
-    public static final RegistryObject<IRecipeSerializer<?>> POT = RECIPE_TYPES.register("pot", () -> new PotRecipe.Serializer());
-    public static final RegistryObject<IRecipeSerializer<?>> BENCH = RECIPE_TYPES.register("bench", () -> new BenchRecipe.Serializer());
-    public static final RegistryObject<IRecipeSerializer<?>> SYN_PLAT = RECIPE_TYPES.register("syn_plat", () -> new SynPlatRecipe.Serializer());
-    public static final RegistryObject<IRecipeSerializer<?>> SEED_BOX = RECIPE_TYPES.register("seed_box", () -> new SeedBoxRecipe.Serializer());
+    public static final RegistryObject<IRecipeSerializer<PotRecipe>> POT = RECIPE_TYPES.register("pot", PotRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<BenchRecipe>> BENCH = RECIPE_TYPES.register("bench", BenchRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<SynPlatRecipe>> SYN_PLAT = RECIPE_TYPES.register("syn_plat", SynPlatRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<SeedBoxRecipe>> SEED_BOX = RECIPE_TYPES.register("seed_box", SeedBoxRecipe.Serializer::new);
 
 }

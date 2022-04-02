@@ -7,8 +7,10 @@ import net.minecraft.item.ItemStack;
 //创造模式物品栏 实例化
 public class ModGroup{
 	public static ItemGroup PaiMengFood = new GroupFood();
+	public static ItemGroup PaiMengFoods = new GroupFoods();
 	public static ItemGroup PaiMengMaterial = new GroupMaterial();
 	public static ItemGroup PaiMengCrop = new GroupCrop();
+	public static ItemGroup PaiMengRelics = new GroupRelics();
 	public static ItemGroup PaiMengOther = new GroupOther();
 
 	private static class GroupFood extends ItemGroup{
@@ -19,7 +21,7 @@ public class ModGroup{
 		//图标
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.sunAppleSapling.get());
+			return new ItemStack(ItemRegistry.xiantiaoqiang.get());
 		}
 
 	}
@@ -27,6 +29,17 @@ public class ModGroup{
 
 		public GroupMaterial() {
 			super(ItemGroup.GROUPS.length, "PaiMengMaterial");
+		}
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ItemRegistry.longya1.get());
+		}
+
+	}
+	private static class GroupFoods extends ItemGroup{
+
+		public GroupFoods() {
+			super(ItemGroup.GROUPS.length, "PaiMengFoods");
 		}
 		@Override
 		public ItemStack createIcon() {
@@ -41,7 +54,18 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.baocai.get());
+			return new ItemStack(ItemRegistry.sunAppleSapling.get());
+		}
+
+	}
+	private static class GroupRelics extends ItemGroup{
+
+		public GroupRelics() {
+			super(ItemGroup.GROUPS.length, "PaiMengRelics");
+		}
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ItemRegistry.juedoushiRelics.get());
 		}
 
 	}

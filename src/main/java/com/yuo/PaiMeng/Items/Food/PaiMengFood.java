@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Items.Food;
 
+import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
@@ -26,12 +27,19 @@ public class PaiMengFood extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (LEVEL != 0){ //星级信息
+        if (LEVEL != 0 && LEVEL <= 6){ //星级信息
             tooltip.add(new StringTextComponent(new TranslationTextComponent("paimeng.text.itemInfo.star").getString()
                     + new TranslationTextComponent("paimeng.text.itemInfo.star" + LEVEL).getString()));
         }
         tooltip.add(new StringTextComponent(new TranslationTextComponent("paimeng.text.itemInfo.type").getString()
                 + new TranslationTextComponent("paimeng.text.itemInfo.type" + TYPE).getString()));
+        if (stack.getItem() == ItemRegistry.bugFood.get()){
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.bug_food"));
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.bug_food1"));
+        }
+        if (stack.getItem() == ItemRegistry.paimengFood.get()){
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.good_food"));
+        }
     }
 
     public int getLEVEL() {
@@ -41,4 +49,5 @@ public class PaiMengFood extends Item {
     public int getTYPE() {
         return TYPE;
     }
+
 }

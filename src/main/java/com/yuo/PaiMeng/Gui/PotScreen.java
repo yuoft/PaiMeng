@@ -15,6 +15,7 @@ public class PotScreen extends ContainerScreen<PotContainer> {
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private Button button; //按钮
+    private Button buttonCount;
 
     public PotScreen(PotContainer potContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(potContainer, inv, titleIn);
@@ -25,9 +26,12 @@ public class PotScreen extends ContainerScreen<PotContainer> {
 
     @Override
     protected void init() {
-        this.button = new Button((this.width - this.xSize) / 2 + 90, (this.height - this.ySize) / 2 + 55, 30, 20,
+        this.button = new Button((this.width - this.xSize) / 2 + 75, (this.height - this.ySize) / 2 + 58, 30, 20,
                 new TranslationTextComponent("gui.paimeng.cooking_button"), this::button); //回调
+        this.buttonCount = new Button((this.width - this.xSize) / 2 + 110, (this.height - this.ySize) / 2 + 58, 30, 20,
+                new TranslationTextComponent("gui.paimeng.cooking_button_count"), this::buttonCount); //回调
         this.addButton(button);
+        this.addButton(buttonCount);
         super.init();
     }
 
@@ -45,11 +49,15 @@ public class PotScreen extends ContainerScreen<PotContainer> {
         if (!container.canRecipe()){ //叉号
             blit(matrixStack, i + 90,j + 35,190,0,22,15);
         }
+        int exp = container.getExp();
+        blit(matrixStack, i + 110, j + 9, 176, 15, 51, 5);
+        blit(matrixStack, i + 110, j + 9, 176, 20, 1 + exp, 5);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
-        drawString(matrixStack, font, Integer.toString(this.container.getTime()), 65, 25, 0x696969);
+        this.font.drawString(matrixStack, Integer.toString(this.container.getTime()), 65, 25, 0x696969);
+        this.font.drawString(matrixStack, Integer.toString(this.container.getFoodRecipesLevel()), 103, 8, 0x000);
         super.drawGuiContainerForegroundLayer(matrixStack, x, y);
     }
 
@@ -58,9 +66,10 @@ public class PotScreen extends ContainerScreen<PotContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.button.render(matrixStack, mouseX, mouseY, partialTicks);
-        if (!container.canRecipe()) //切换按钮可用状态
-            this.button.active = false;
-        else this.button.active = true;
+        this.buttonCount.render(matrixStack,mouseX,mouseY,partialTicks);
+        //切换按钮可用状态
+        this.button.active = container.canRecipe();
+        this.buttonCount.active = container.canRecipe() && container.getFoodRecipesLevel() >= container.getFoodLevel() && container.getItemMaxCount() > 1;
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
@@ -68,8 +77,14 @@ public class PotScreen extends ContainerScreen<PotContainer> {
     private void button(Button button){
         if (minecraft != null) {
             if (container.canRecipe())
-                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel()));
+                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel(), 1));
         }
     }
 
+    private void buttonCount(Button button){
+        if (minecraft != null) {
+            if (container.canRecipe())
+                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel(), container.getItemMaxCount()));
+        }
+    }
 }

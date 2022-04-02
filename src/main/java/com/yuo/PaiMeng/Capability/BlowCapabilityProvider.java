@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 //能力提供器
-public class BlowCapanilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
+public class BlowCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     private IBlowCapability blowCapability;
 
     @Nonnull

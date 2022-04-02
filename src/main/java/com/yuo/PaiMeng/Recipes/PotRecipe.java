@@ -2,27 +2,22 @@ package com.yuo.PaiMeng.Recipes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
-public class PotRecipe implements IRecipe<IInventory> {
-    private final NonNullList<ItemStack> inputs; //输入
-    private final ItemStack result; //输出
-    private final ResourceLocation id;
+public class PotRecipe extends CookingRecipe {
 
     public PotRecipe(ResourceLocation idIn, NonNullList<ItemStack> inputIn, ItemStack resultIn){
-        this.id = idIn;
-        this.inputs = inputIn;
-        this.result = resultIn;
+        super(idIn, inputIn, resultIn);
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<PotRecipe>{
@@ -35,14 +30,16 @@ public class PotRecipe implements IRecipe<IInventory> {
                 if (!stack.isEmpty()) inputs.add(stack);
             }
             ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            String type = JSONUtils.getString(json, "type");
-            if (!type.equals("paimeng:pot")){
-                throw new IllegalStateException("Type is not found");
-            }
             if (inputs.isEmpty() || inputs.size() > 4){
                 throw new IllegalStateException("Recipe is not Error");
             }
-            return new PotRecipe(recipeId, inputs, result);
+//            Item item = result.getItem();
+//            if (item instanceof PaiMengFood){
+//                PaiMengFood food = (PaiMengFood) item;
+//                if (food.getLEVEL() > 3) return new BenchRecipe(recipeId, inputs, result);
+//                else
+                    return new PotRecipe(recipeId, inputs, result);
+//            }else throw new IllegalStateException("Recipe Error");
         }
 
         @Nullable
@@ -54,10 +51,6 @@ public class PotRecipe implements IRecipe<IInventory> {
                 list.add(j, buffer.readItemStack());
             }
             ItemStack result = buffer.readItemStack();
-            String type = buffer.readString();
-            if (!type.equals("paimeng:pot")){
-                throw new IllegalStateException("Type is not found");
-            }
             return new PotRecipe(recipeId, list, result);
         }
 
@@ -69,46 +62,6 @@ public class PotRecipe implements IRecipe<IInventory> {
             }
             buffer.writeItemStack(recipe.result);
         }
-    }
-
-    @Override
-    public boolean matches(IInventory inv, World worldIn) {
-        int size = RecipeUtils.match(inv.getSizeInventory() - 1, inv, inputs);
-        return size == this.inputs.size();
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (ItemStack input : inputs) {
-            list.add(Ingredient.fromStacks(input));
-        }
-
-        return list;
-    }
-
-    public NonNullList<ItemStack> getInputs(){
-        return this.inputs;
-    }
-
-    @Override
-    public ItemStack getCraftingResult(IInventory inv) {
-        return this.result.copy();
-    }
-
-    @Override
-    public boolean canFit(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput() {
-        return this.result;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return this.id;
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": { "model": "paimeng:block/crop/crop0" },
+    "age=1": { "model": "paimeng:block/crop/crop0" },
+    "age=2": { "model": "paimeng:block/crop/crop1" },
+    "age=3": { "model": "paimeng:block/crop/crop1" },
+    "age=4": { "model": "paimeng:block/crop/crop2" },
+    "age=5": { "model": "paimeng:block/crop/crop2" },
+    "age=6": { "model": "paimeng:block/crop/crop3" },
+    "age=7": { "model": "paimeng:block/crop/luoluomei_crop" }
+  }
+}

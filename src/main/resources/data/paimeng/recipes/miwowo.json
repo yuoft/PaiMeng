@@ -1,0 +1,14 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mawei"
+    },
+    {
+      "item": "paimeng:daomi"
+    }
+  ],
+  "result": {
+    "item": "paimeng:miwowo"
+  }
+}

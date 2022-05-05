@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:cecilia_hua",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:cecilia_hua_seed"
+  }
+}

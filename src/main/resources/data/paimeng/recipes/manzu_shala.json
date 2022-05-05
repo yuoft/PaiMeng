@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:baocai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:pingguo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:niaodan",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:manzu_shala"
+  }
+}

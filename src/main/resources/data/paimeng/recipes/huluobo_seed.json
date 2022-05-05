@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:huluobo",
+    "count": 5
+  },
+  "result": {
+    "item": "paimeng:huluobo_seed"
+  }
+}

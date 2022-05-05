@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "paimeng:item/seed/seed_base0",
+        "layer1": "paimeng:item/seed/bohe_seed"
+    }
+}

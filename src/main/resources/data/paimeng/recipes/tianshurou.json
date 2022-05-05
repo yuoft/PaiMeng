@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 2
+    },
+    {
+      "item": "paimeng:qingxin",
+      "count": 2
+    },
+    {
+      "item": "paimeng:songrong",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:tianshurou"
+  }
+}

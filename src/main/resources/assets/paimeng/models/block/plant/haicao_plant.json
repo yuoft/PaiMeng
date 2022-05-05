@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paimeng:block/plant/haicao_plant"
+  }
+}

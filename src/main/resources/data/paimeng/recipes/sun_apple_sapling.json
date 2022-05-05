@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "xyx",
+    " x "
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:diamond"
+    },
+    "y": {
+      "tag": "minecraft:saplings"
+    }
+  },
+  "result": {
+    "item": "paimeng:sun_apple_sapling"
+  }
+}

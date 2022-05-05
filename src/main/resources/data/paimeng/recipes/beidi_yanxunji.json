@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yangcong",
+      "count": 1
+    },
+    {
+      "item": "paimeng:baocai",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yanxunrou",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:beidi_yanxunji"
+  }
+}

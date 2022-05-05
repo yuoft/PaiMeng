@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:huotui",
+      "count": 2
+    },
+    {
+      "item": "paimeng:songrong",
+      "count": 2
+    },
+    {
+      "item": "paimeng:jinyucao",
+      "count": 1
+    },
+    {
+      "item": "paimeng:hujiao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:ganguo_larou"
+  }
+}

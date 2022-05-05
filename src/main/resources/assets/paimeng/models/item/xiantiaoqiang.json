@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paimeng:item/food/xiantiaoqiang",
+    "layer1": "paimeng:gui/star5"
+  }
+}

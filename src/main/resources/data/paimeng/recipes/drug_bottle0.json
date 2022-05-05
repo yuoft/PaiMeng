@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " y ",
+    "x x",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:glass_pane"
+    },
+    "y": {
+      "tag": "minecraft:wooden_buttons"
+    }
+  },
+  "result": {
+    "item": "paimeng:drug_bottle"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " z ",
+    "xyx",
+    " x "
+  ],
+  "key": {
+    "x": {
+      "item": "paimeng:baitie"
+    },
+    "y": {
+      "item": "paimeng:shuijing"
+    },
+    "z": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "paimeng:huazhongxia"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "paimeng:block//tree/apple_log_top",
+    "side": "paimeng:block/tree/apple_log"
+  }
+}

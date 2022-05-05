@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:jinyucao",
+      "count": 2
+    },
+    {
+      "item": "paimeng:doufu",
+      "count": 2
+    },
+    {
+      "item": "paimeng:lianpeng",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:zhenzhu_feicui_baiyutang"
+  }
+}

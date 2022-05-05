@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niaodan",
+      "count": 3
+    },
+    {
+      "item": "paimeng:daomi",
+      "count": 2
+    },
+    {
+      "item": "paimeng:niunai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:mifan_buding"
+  }
+}

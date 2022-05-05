@@ -1,0 +1,18 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yan"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:yanxunrou"
+  }
+}

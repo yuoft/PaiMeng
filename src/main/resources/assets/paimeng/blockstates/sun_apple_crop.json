@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {   "when": { "age": "0" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop0"}
+    },
+    {   "when": { "age": "1" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop0"}
+    },
+    {   "when": { "age": "2" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop1"}
+    },
+    {   "when": { "age": "3" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop1"}
+    },
+    {   "when": { "age": "4" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop1"}
+    },
+    {   "when": { "age": "5" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop2"}
+    },
+    {   "when": { "age": "6" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop2"}
+    },
+    {   "when": { "age": "7" },
+      "apply": { "model": "paimeng:block/crop/sun_apple_crop"}
+    }
+  ]
+}

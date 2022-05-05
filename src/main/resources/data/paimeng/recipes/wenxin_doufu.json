@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:doufu",
+      "count": 4
+    },
+    {
+      "item": "paimeng:zhusun",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 1
+    },
+    {
+      "item": "paimeng:qinrou",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:wenxin_doufu"
+  }
+}

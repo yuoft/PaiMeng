@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:niunai"
+    },
+    {
+      "item": "paimeng:niunai"
+    },
+    {
+      "item": "paimeng:niunai"
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shanbianzhichen"
+  },
+  "result": {
+    "item": "paimeng:nailao"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "multipart": [
+    {   "when": { "facing": "north|south" },
+      "apply": { "model": "paimeng:block/cooking_pot", "y": 90}
+    },
+    {   "when": { "facing": "east|west" },
+      "apply": { "model": "paimeng:block/cooking_pot"}
+    },
+    {   "when": { "lit": "true" },
+      "apply": { "model": "paimeng:block/pot_fire"}
+    },
+    {   "when": { "fuel": "0" },
+      "apply": { "model": "paimeng:block/pot_fuel"}
+    },
+    {   "when": { "fuel": "1" },
+      "apply": { "model": "paimeng:block/pot_fuel1"}
+    },
+    {   "when": { "fuel": "2" },
+      "apply": { "model": "paimeng:block/pot_fuel2"}
+    },
+    {   "when": { "fuel": "3" },
+      "apply": { "model": "paimeng:block/pot_fuel3"}
+    },
+    {   "when": { "fuel": "4" },
+      "apply": { "model": "paimeng:block/pot_fuel4"}
+    }
+  ]
+}

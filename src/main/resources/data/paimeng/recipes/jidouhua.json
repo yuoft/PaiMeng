@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 2
+    },
+    {
+      "item": "paimeng:niaodan",
+      "count": 2
+    },
+    {
+      "item": "paimeng:jinyucao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:jidouhua"
+  }
+}

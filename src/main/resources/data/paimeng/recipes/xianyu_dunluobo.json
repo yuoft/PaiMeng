@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:bailuobo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:xianyu_dunluobo"
+  }
+}

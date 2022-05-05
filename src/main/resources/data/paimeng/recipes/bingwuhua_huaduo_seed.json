@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:bingwuhua_huaduo",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:bingwuhua_huaduo_seed"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xzx",
+    "xyx",
+    "zxz"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:black_concrete"
+    },
+    "y": {
+      "item": "paimeng:cooking_pot"
+    },
+    "z": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "result": {
+    "item": "paimeng:cooking_bench"
+  }
+}

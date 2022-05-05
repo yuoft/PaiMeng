@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paimeng:item/drug0",
+    "layer1": "paimeng:item/drug1"
+  }
+}

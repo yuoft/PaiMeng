@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:huangyou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:pangxie",
+      "count": 4
+    },
+    {
+      "item": "paimeng:haicao",
+      "count": 2
+    },
+    {
+      "item": "paimeng:songrong",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:huangyou_xiexie"
+  }
+}

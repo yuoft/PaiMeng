@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:xiaren",
+      "count": 5
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:jinsi_xiaqiu"
+  }
+}

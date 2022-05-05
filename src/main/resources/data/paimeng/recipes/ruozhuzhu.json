@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:zhusun",
+      "count": 3
+    },
+    {
+      "item": "paimeng:haicao",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:ruozhuzhu"
+  }
+}

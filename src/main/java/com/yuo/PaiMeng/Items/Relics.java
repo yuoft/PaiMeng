@@ -20,9 +20,9 @@ public class Relics extends Item {
     private RelicsType type; //圣遗物使用位置
     private final int minStar; //圣遗物最小星级
     private final int maxStar;
-    private int star; //星级
+    private int star; //星级 1~5
     private int level = 0; //当前等级 默认0
-    private int exp = 0; //当前经验
+    private int exp = 0; //当前经验 0
 
     public Relics(int minLevel, int maxLevel) {
         super(new Properties().group(ModGroup.PaiMengRelics).maxStackSize(1));
@@ -33,13 +33,20 @@ public class Relics extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        RelicsType relicsType = RelicsHelper.getTypeForStack(stack);
         //部位
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_" + RelicsHelper.getTypeForStack(stack).getName()));
+        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_" + relicsType.getName()));
+        int star = RelicsHelper.getStarFormStack(stack);
         //等级
-        if (RelicsHelper.hasLevelNbt(stack))
-            tooltip.add(new StringTextComponent("+" + RelicsHelper.getRelicsLevel(stack)).mergeStyle(TextFormatting.RED));
+        if (RelicsHelper.hasLevelNbt(stack)){
+            int relicsLevel = RelicsHelper.getRelicsLevel(stack);
+            tooltip.add(new StringTextComponent("+" + relicsLevel).mergeStyle(TextFormatting.GOLD));
+            if (relicsLevel == star * 4){
+                tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_exp_max").mergeStyle(TextFormatting.RED));
+            }else tooltip.add(new StringTextComponent( RelicsHelper.getRelicsExp(stack)+ "/" + RelicsHelper.getUpExpForLevel(star, relicsLevel)).mergeStyle(TextFormatting.DARK_PURPLE));
+        }
         //描述
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo." + getI18nName() + RelicsHelper.getTypeForStack(stack).getName()));
+        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo." + getI18nName() + relicsType.getName()));
         //属性
         tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_attr"));
         if (RelicsHelper.hasMainAttrNbt(stack)) {
@@ -48,16 +55,18 @@ public class Relics extends Item {
                     RelicsHelper.getMathTwo(mainAttr)).mergeStyle(TextFormatting.BLUE));
         }
         else tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_no_attr").mergeStyle(TextFormatting.BLUE));
-        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_attr1"));
-        if (RelicsHelper.hasViceAttr(stack)){
-            for (RelicsHelper.RandomAttrValue type : RelicsHelper.getViceAttrTypeFormStack(stack)) {
-                if (type.getAttrType().getId() != 0){
-                    tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_" + type.getAttrType().getTip(),
-                            RelicsHelper.getMathTwo(type)).mergeStyle(TextFormatting.BLUE));
+        if (star > 1){
+            tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_attr1"));
+            if (RelicsHelper.hasViceAttr(stack)){
+                for (RelicsHelper.RandomAttrValue type : RelicsHelper.getViceAttrTypeFormStack(stack)) {
+                    if (type.getAttrType().getId() != 0){
+                        tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_" + type.getAttrType().getTip(),
+                                RelicsHelper.getMathTwo(type)).mergeStyle(TextFormatting.BLUE));
+                    }
                 }
             }
+            else tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_no_attr").mergeStyle(TextFormatting.BLUE));
         }
-        else tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_no_attr").mergeStyle(TextFormatting.BLUE));
     }
 
     //生成同一圣遗物不同星级

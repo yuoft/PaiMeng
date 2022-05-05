@@ -4,8 +4,11 @@ import com.google.common.collect.Multimap;
 import com.yuo.PaiMeng.Capability.*;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
 import com.yuo.PaiMeng.Effects.ReviveEffect;
-import com.yuo.PaiMeng.Items.*;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
+import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.Relics;
+import com.yuo.PaiMeng.Items.RelicsBox;
+import com.yuo.PaiMeng.Items.RelicsHelper;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,6 +20,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
@@ -45,10 +49,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 事件处理类
@@ -66,6 +67,21 @@ public class EventHandler {
     public static final double attrAttackDamage = 2.0; //攻击力
     public static final double attrAttackPhysics = 2.5; //物理攻击
 
+    //不被禁用的原版食物
+    private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.APPLE, Items.SWEET_BERRIES);
+
+    /**
+     * 判断食物是否在例外列表中
+     * @param stack 要判断的食物
+     * @return 是:true
+     */
+    private static boolean isExceptionItem(ItemStack stack){
+        for (Item item : ITEMS) {
+            if (stack.getItem() == item) return true;
+        }
+        return false;
+    }
+
     //禁用原版食物
     @SubscribeEvent
     public static void eatFood(LivingEntityUseItemEvent.Start event){
@@ -73,7 +89,7 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            if (item.isFood() && EventHelper.getNameSpace(item).equals("minecraft") && !(item.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){//原版食物
+            if (item.isFood() && EventHelper.getNameSpace(item).equals("minecraft") && !isExceptionItem(item)){//原版食物
                     player.sendStatusMessage(new TranslationTextComponent("paimeng.message.food"), true);
                     event.setCanceled(true);
             }
@@ -87,7 +103,7 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            if (item.isFood() && item.getItem() instanceof PaiMengFood && !(item.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){
+            if (item.isFood() && item.getItem() instanceof PaiMengFood && !isExceptionItem(item)){
                 PaiMengFood food = (PaiMengFood) item.getItem();
                 int type = food.getTYPE();
                 if (type == 0){
@@ -100,7 +116,7 @@ public class EventHandler {
     @SubscribeEvent
     public static void itemMessage(ItemTooltipEvent event){
         ItemStack stack = event.getItemStack();
-        if (stack.isFood() && EventHelper.getNameSpace(stack).equals("minecraft") && !(stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE)){ //原版食物
+        if (stack.isFood() && EventHelper.getNameSpace(stack).equals("minecraft") && !isExceptionItem(stack)){ //原版食物
             List<ITextComponent> toolTip = event.getToolTip();
             toolTip.add(new TranslationTextComponent("paimeng.text.itemInfo.food"));
         }

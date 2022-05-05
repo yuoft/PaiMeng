@@ -1,5 +1,7 @@
 package com.yuo.PaiMeng.Recipes;
 
+import com.yuo.PaiMeng.Tiles.BenchTile;
+import com.yuo.PaiMeng.Tiles.PotTile;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -59,8 +61,15 @@ public abstract class CookingRecipe implements IRecipe<IInventory> {
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-        int size = RecipeUtils.match(inv.getSizeInventory() - 1, inv, inputs);
-        return size == this.inputs.size();
+        if (inv instanceof BenchTile){
+            int size = RecipeUtils.match(inv.getSizeInventory() - 2, inv, inputs);
+            return size == this.inputs.size() && size == ((BenchTile) inv).getInputSize();
+        }
+        if (inv instanceof PotTile){
+            int size = RecipeUtils.match(inv.getSizeInventory() - 1, inv, inputs);
+            return size == this.inputs.size() && size == ((PotTile) inv).getInputSize();
+        }
+        return false;
     }
 
     @Override

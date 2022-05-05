@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.LazyOptional;
 
@@ -102,6 +103,25 @@ public class RelicsHelper {
     public static final float[] mainHealRateBase = {0.024f, 0.032f, 0.04f, 0.048f, 0.054f};
     public static final float[] mainHealRateMAx = {0.061f, 0.105f, 0.178f, 0.268f, 0.359f};
 
+    //圣遗物基础提供经验值
+    public static final int[] relicsExpBase = {420, 840, 1260, 2520, 3780};
+    //五星圣遗物每级所需经验值
+    public static final int[] relicsExpFive = {0, 3000 , 3750, 4425, 5150, 5900, 6675, 7500, 8350, 9225, 10125, 11050, 12025, 13025, 15150
+        , 17600, 20375, 23500, 27050, 31050, 35575};
+    //五星圣遗物所需总经验值
+    public static final int[] relicsExpCountFive = {0, 3000, 6725, 11150, 16300, 22200, 28875, 36375, 44725, 53950, 64075, 75125, 87150,
+        100175, 115325, 132925, 153300, 176800, 203850, 234900, 270475};
+    public static final int[] relicsExpFour = {0, 2400 , 2975, 3550, 4125, 4725, 5350, 6000, 6675, 7375, 8100, 8850, 9625, 10425, 12125
+        , 14075, 16300};
+    public static final int[] relicsExpCountFour = {0, 2400, 5375, 8925, 13050, 17775, 23125, 29125, 35800, 43175, 51275, 60125, 69750,
+        80175, 92300, 106375, 122675};
+    public static final int[] relicsExpThree = {0, 1800 , 2225, 2650, 3100, 3550, 4000, 4500, 500, 5525, 6075, 6625, 7225};
+    public static final int[] relicsExpCountThree = {0, 1800, 4025, 6675, 9775, 13325, 17325, 21825, 26825, 32350, 38425, 45050, 52275};
+    public static final int[] relicsExpTwo = {0, 1200, 1500, 1775, 2075, 2400, 2750, 3125, 3525};
+    public static final int[] relicsExpCountTwo = {0, 1200, 2700, 4475, 6525, 8600, 11000, 13750, 17275};
+    public static final int[] relicsExpOne = {0, 600 , 750, 875, 1025, };
+    public static final int[] relicsExpCountOne = {0, 600, 1350, 2225, 3250};
+
     public static Random random = new Random();
 
     /**
@@ -157,6 +177,18 @@ public class RelicsHelper {
     }
 
     /**
+     * 获取物品经验值
+     * @param stack 物品
+     * @return 经验值
+     */
+    public static int getRelicsExp(ItemStack stack){
+        CompoundNBT compoundNBT = (CompoundNBT) stack.getOrCreateTag().get(NBT_RELICS);
+        if (compoundNBT != null && compoundNBT.contains(NBT_EXP))
+            return compoundNBT.getInt(NBT_EXP);
+        return 0;
+    }
+
+    /**
      * 已字符形式返回物品属性值 保留一位小数
      * @param value 属性类
      * @return 转化的字符值
@@ -167,43 +199,6 @@ public class RelicsHelper {
             bd = new BigDecimal(value.baseValue * 100).setScale(1, RoundingMode.HALF_UP);
             return bd + "%";
         }else return new BigDecimal(value.baseValue).setScale(1, RoundingMode.HALF_UP).toString();
-    }
-
-    /**
-     * 根据属性类别 星级 等级 计算当前主属性数值
-     * @param star 星级
-     * @param level 等级
-     * @param type 属性分类
-     * @return 结果
-     */
-    public static float getMainAttrUp(int star, int level, RelicsAttrType type){
-        float base = 0;
-        switch (type){
-            case HEALTH:
-                break;
-            case HEALTH_RATE:
-                break;
-            case DEFENSE:
-                break;
-            case DEFENSE_RATE:
-                break;
-            case ATTACK_DAMAGE:
-                break;
-            case ATTACK_DAMAGE_RATE:
-                break;
-            case CRITICAL_RATE:
-                break;
-            case CRITICAL_DAMAGE:
-                break;
-            case HEAL:
-                break;
-            case ATTACK_PHYSICS:
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + type);
-        }
-        if (star == 1) return base * (0.15f + 0.85f * (level / 15f));
-        return base * (0.15f + 0.85f * (level / 20f));
     }
 
     /**
@@ -281,7 +276,7 @@ public class RelicsHelper {
         nbt.putInt(NBT_LEVEL, 0);
         nbt.putInt(NBT_EXP, 0);
         if (star > 1)
-            setViceAttr(nbt, nbt.copy(), star);
+            setViceAttr(nbt, nbt.getInt(NBT_ATTR_TYPE), star);
         orCreateTag.put(NBT_RELICS, nbt);
     }
 
@@ -360,10 +355,11 @@ public class RelicsHelper {
     /**
      * 根据星级生成副属性
      * @param nbt 数据
+     * @param mainTypeId 主属性id
      * @param star 星级
      */
-    private static void setViceAttr(CompoundNBT nbt, CompoundNBT mainNbt, int star){
-        List<RandomAttrValue> list = getRandomViceAttrForStar(mainNbt, star);
+    private static void setViceAttr(CompoundNBT nbt, int mainTypeId, int star){
+        List<RandomAttrValue> list = getRandomViceAttrForStar(mainTypeId, star);
         switch (list.size()) {
             case 0: return;
             case 1:
@@ -401,16 +397,17 @@ public class RelicsHelper {
 
     /**
      * 生成副属性
+     * @param mainTypeId 主属性id
      * @param star 星级
      * @return 属性
      */
-    private static List<RandomAttrValue> getRandomViceAttrForStar(CompoundNBT mainNbt, int star){
+    private static List<RandomAttrValue> getRandomViceAttrForStar(int mainTypeId, int star){
         List<RandomAttrValue> list = new ArrayList<>();
         if (random.nextDouble() < 0.8d) { // 副属性不满
             if (star <= 2) return list;
             int i = star - 2;
             while (i != 0){
-                RandomAttrValue viceAttr = spawnViceAttr(mainNbt, star);
+                RandomAttrValue viceAttr = spawnViceAttr(mainTypeId, star);
                 if (isRepeat(list, viceAttr)){
                     i--;
                     list.add(viceAttr);
@@ -420,7 +417,7 @@ public class RelicsHelper {
             int i = star - 1;
             if (star <= 1) return list;
             while (i != 0){
-                RandomAttrValue viceAttr = spawnViceAttr(mainNbt, star);
+                RandomAttrValue viceAttr = spawnViceAttr(mainTypeId, star);
                 if (isRepeat(list, viceAttr)){
                     i--;
                     list.add(viceAttr);
@@ -446,13 +443,12 @@ public class RelicsHelper {
 
     /**
      * 随机生成一个副属性
-     * @param mainNbt 主属性nbt
      * @param star 星级
+     * @param mainTypeId 主属性id
      * @return 副属性
      */
-    private static RandomAttrValue spawnViceAttr(CompoundNBT mainNbt, int star){
+    private static RandomAttrValue spawnViceAttr(int mainTypeId, int star){
         RandomAttrValue attrValue = new RandomAttrValue(0, RelicsAttrType.EMPTY);
-        int mainTypeId = mainNbt.getInt(NBT_ATTR_TYPE); //主属性类型
         RelicsAttrType mainType = RelicsAttrType.getRelicsAttrTypeFormId(mainTypeId);
         if (mainType != null){
             RelicsAttrType viceAttrType = getViceAttrType(mainType);
@@ -470,7 +466,7 @@ public class RelicsHelper {
     private static RelicsAttrType getViceAttrType(RelicsAttrType mainType){
         RelicsAttrType attrType;
         int i = 0;
-        while (i < 100){
+        while (i < 100){ //最多尝试100次生成
             attrType = RelicsAttrType.ALL_VICE[random.nextInt(RelicsAttrType.ALL_VICE.length)];
             if (!mainType.isEquals(attrType)) return attrType;
             i++;
@@ -768,6 +764,11 @@ public class RelicsHelper {
         return 0;
     }
 
+    /**
+     * 获取圣遗物物流伤害加成
+     * @param player 玩家
+     * @return 数值
+     */
     public static double getRelicsAttackPhysics(PlayerEntity player){
         for (RandomAttrValue value : getRelicsData(player)) {
             if (value.attrType.isEquals(RelicsAttrType.ATTACK_PHYSICS)) return value.baseValue;
@@ -789,14 +790,210 @@ public class RelicsHelper {
     }
 
     /**
+     * 获取当前消耗素材的总经验值
+     * @param nullList 素材列表
+     * @return 总经验值
+     */
+    public static int getListRelicsExp(NonNullList<ItemStack> nullList){
+        int exp = 0;
+        for (ItemStack stack : nullList) {
+            if (stack.getItem() instanceof Relics){
+                int star = getStarFormStack(stack); //圣遗物星级
+                int level = getRelicsLevel(stack); //等级
+                int relicsExp = getRelicsExp(stack) + getCountExpForLevel(star, level); //圣遗物已有经验值 转化80%
+                int starExp = relicsExpBase[star - 1]; //星级提供的基础经验值
+                exp += (starExp + (int) Math.ceil(relicsExp * 0.8));
+            }else if (stack.getItem() instanceof RelicsExp){
+                RelicsExp relicsExp = (RelicsExp) stack.getItem();
+                exp += relicsExp.getExp() * stack.getCount();
+            }
+        }
+        return exp;
+    }
+
+    /**
+     * 根据星级获取当前等级所需经验
+     * @param star 星级
+     * @param level 当前等级
+     * @return 所需经验
+     */
+    public static int getUpExpForLevel(int star, int level){
+        if (level == star * 4) return 0;
+        switch (star){
+            case 1: return relicsExpOne[level + 1];
+            case 2: return relicsExpTwo[level + 1];
+            case 3: return relicsExpThree[level + 1];
+            case 4: return relicsExpFour[level + 1]; //所需经验
+            case 5: return relicsExpFive[level + 1];
+            default: return 0;
+        }
+    }
+
+    /**
+     * 根据星级和等级获取当前等级总经验值
+     * @param star 星级
+     * @param level 等级
+     * @return 经验值
+     */
+    public static int getCountExpForLevel(int star, int level){
+        switch (star){
+            case 1: return relicsExpCountOne[level];
+            case 2: return relicsExpCountTwo[level];
+            case 3: return relicsExpCountThree[level];
+            case 4: return relicsExpCountFour[level]; //总经验
+            case 5: return relicsExpCountFive[level];
+            default: return 0;
+        }
+    }
+
+    /**
+     * 获取提升的等级和剩余经验
+     * @param star 星级
+     * @param exp 经验
+     * @param level 等级
+     * @return 提升等级 剩余经验
+     */
+    public static int[] getRelicsInfoInLevelUp(int star, int exp, int level){
+        int[] arr = new int[2];
+        int levelCopy = level;
+        int i = 0;
+        for ( ; i < star * 4 - levelCopy; i++){ //提升等级不会超过星级限制
+            int upExpForLevel = getUpExpForLevel(star, level);
+            if (exp >= upExpForLevel) {
+                exp -= upExpForLevel;
+                level++;
+                continue;
+            }
+            break;
+        }
+        arr[0] = i;
+        if (levelCopy + i < star * 4)  //等级上限时无剩余经验
+            arr[1] = exp;
+        return arr;
+    }
+
+    /**
+     * 根据当前等级与星级获取对应主属性值
+     * @param star 星级
+     * @param level 等级
+     * @return 数值
+     */
+    public static float getMainAttrValueForLevelAndStar(int star, int level, RandomAttrValue attrValue){
+        RelicsAttrType attrType = attrValue.getAttrType();
+        float mainAttrValue;
+        float mainAttrValueBase = 0;
+        float mainAttrValueMax = 0;
+        switch (attrType){
+            case HEALTH:
+                mainAttrValueBase = mainHealthBase[star];
+                mainAttrValueMax = mainHealthMAx[star];
+                break;
+            case ATTACK_DAMAGE:
+                mainAttrValueBase = mainAttackDamageBase[star];
+                mainAttrValueMax = mainAttackDamageMAx[star];
+                break;
+            case HEALTH_RATE:
+            case ATTACK_DAMAGE_RATE:
+                mainAttrValueBase = mainHealthAttackRateBase[star];
+                mainAttrValueMax = mainHealthAttackRateMAx[star];
+                break;
+            case DEFENSE_RATE:
+            case ATTACK_PHYSICS:
+                mainAttrValueBase = mainDefensePhysicsRateBase[star];
+                mainAttrValueMax = mainDefensePhysicsRateMAx[star];
+                break;
+            case CRITICAL_RATE:
+                mainAttrValueBase = mainCriticalRateBase[star];
+                mainAttrValueMax = mainCriticalRateMAx[star];
+                break;
+            case CRITICAL_DAMAGE:
+                mainAttrValueBase = mainCriticalDamageBase[star];
+                mainAttrValueMax = mainCriticalDamageMAx[star];
+                break;
+            case HEAL:
+                mainAttrValueBase = mainHealRateBase[star];
+                mainAttrValueMax = mainHealRateMAx[star];
+                break;
+        }
+
+        mainAttrValue = mainAttrValueBase + (mainAttrValueMax - mainAttrValueBase) / ((star + 1) * 4) * level;
+        return mainAttrValue;
+    }
+
+    /**
+     * 更新等级和主属性
+     * @param stack 圣遗物
+     * @param level 等级
+     * @param lvUp 增加等级，剩余经验
+     * @param mainValue 属性值
+     */
+    public static void updateMainAttr(ItemStack stack, int level, int[] lvUp, float mainValue){
+        CompoundNBT nbt = (CompoundNBT) stack.getOrCreateTag().get(NBT_RELICS);
+        if (nbt == null) nbt = new CompoundNBT();
+        if (lvUp[0] > 0){ //等级增加提升数值
+            nbt.putFloat(NBT_ATTR, mainValue); //主属性
+            nbt.putInt(NBT_LEVEL, level + lvUp[0]); //当前等级
+        }
+        nbt.putInt(NBT_EXP, lvUp[1]); //剩余经验
+    }
+
+    /**
+     * 强化副属性
+     * @param stack 圣遗物
+     * @param star 星级
+     * @param num 副属性提升次数
+     * @param viceAttr 副属性列表
+     */
+    public static void updateViceAttr(ItemStack stack, int star, int num, List<RandomAttrValue> viceAttr){
+        int maxSize = star - 1;
+        CompoundNBT nbt = (CompoundNBT) stack.getOrCreateTag().get(NBT_RELICS);
+        if (nbt == null) nbt = new CompoundNBT();
+        for (int i = 0; i < num; i++){
+            int size = viceAttr.size();
+            if (size < maxSize){ //新增一条副属性
+                RandomAttrValue attrValue = spawnViceAttr(nbt.getInt(NBT_ATTR_TYPE), star);
+                if (isRepeat(viceAttr, attrValue)){ //不冲突 添加属性
+                    viceAttr.add(attrValue);
+                    nbt.putInt("nbt_attr_type" + maxSize, attrValue.attrType.getId());
+                    nbt.putFloat("nbt_attr" + maxSize,  attrValue.baseValue);
+                }
+            }else { //强化一条副属性
+                int index = random.nextInt(size);
+                RandomAttrValue attrValue = viceAttr.get(index);
+                nbt.putFloat("nbt_attr" + (index + 1), attrValue.baseValue + getViceAttrBaseValue(attrValue.attrType, star)[random.nextInt(4)]);
+            }
+        }
+    }
+
+    /**
+     * 圣遗物强化
+     * @param list 经验
+     * @param relics 被强化圣遗物
+     */
+    public static void relicsLevelUp(NonNullList<ItemStack> list, ItemStack relics){
+        int relicsExp = getListRelicsExp(list); //被强化圣遗物已有强化经验 有20%损耗
+        int star = getStarFormStack(relics); //被强化圣遗物星级
+        int level = getRelicsLevel(relics); //强化前等级
+        int exp = getRelicsExp(relics); //强化前经验
+        int[] levelUp = getRelicsInfoInLevelUp(star, exp + (int) Math.ceil(relicsExp * 0.8), level);
+        RandomAttrValue attrValue = getMainAttrTypeFormStack(relics); //主属性类型
+        float mainValue = getMainAttrValueForLevelAndStar(star - 1, level + levelUp[0], attrValue);
+        updateMainAttr(relics, level, levelUp, mainValue);
+        int upNum = (level % 4 + levelUp[0]) / 4;
+        if (upNum > 0){ //等级有提升
+            updateViceAttr(relics, star, upNum, getViceAttrTypeFormStack(relics));
+        }
+    }
+
+    /**
      * 属性工具类
      */
     public static class RandomAttrValue {
         private float baseValue;
         private final RelicsAttrType attrType;
-        public RandomAttrValue(float vualue, RelicsAttrType type){
+        public RandomAttrValue(float value, RelicsAttrType type){
             this.attrType = type;
-            this.baseValue = vualue;
+            this.baseValue = value;
         }
 
         public float getBaseValue() {

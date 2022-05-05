@@ -1,6 +1,5 @@
-package com.yuo.PaiMeng.NetWork;
+package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Jei.CookingTransferHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;

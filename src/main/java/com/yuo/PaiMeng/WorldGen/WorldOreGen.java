@@ -38,9 +38,11 @@ public class WorldOreGen {
             if (event.getCategory().equals(Biome.Category.MESA)){ //平顶山
                 addFeatureOverWorld(generation, BlockRegistry.jinghuaGusuiOre.get().getDefaultState(),
                         4, 16, 48, 4);
+                addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
+                        4, 0, 16, 6);
             }
             addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
-                    4, 8, 32, 3);
+                    4, 8, 32, 4);
             addFeatureOverWorld(generation, BlockRegistry.baitieOre.get().getDefaultState(),
                     8, 0, 32, 6);
             addFeatureOverWorld(generation, BlockRegistry.heitieOre.get().getDefaultState(),

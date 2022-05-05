@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Blocks;
 
-import com.yuo.PaiMeng.Gui.SynPlatContainer;
+import com.yuo.PaiMeng.Container.SynPlatContainer;
 import com.yuo.PaiMeng.Tiles.SynPlatTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

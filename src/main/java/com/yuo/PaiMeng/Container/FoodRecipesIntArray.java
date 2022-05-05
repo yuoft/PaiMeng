@@ -1,21 +1,18 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import net.minecraft.util.IIntArray;
 
-public class CookingIntArray implements IIntArray {
-    private int time; //燃烧时间
-    private int flag; //合成标识
-    private int level; //配方等级
+public class FoodRecipesIntArray implements IIntArray {
+    private int level;
+    private int exp;
 
     @Override
     public int get(int index) {
         switch(index) {
             case 0:
-                return time;
-            case 1:
-                return flag;
-            case 2:
                 return level;
+            case 1:
+                return exp;
             default:
                 return 0;
         }
@@ -25,19 +22,16 @@ public class CookingIntArray implements IIntArray {
     public void set(int index, int value) {
         switch(index) {
             case 0:
-                time = value;
+                level = value;
                 break;
             case 1:
-                flag = value;
-                break;
-            case 2:
-                level = value;
+                exp = value;
                 break;
         }
     }
 
     @Override
     public int size() {
-        return 3;
+        return 2;
     }
 }

@@ -1,5 +1,6 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
+import com.yuo.PaiMeng.Items.OrdinaryFoods;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Recipes.SeedBoxRecipe;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,7 +32,7 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
         this.player = playerInventory.player;
         this.world = playerInventory.player.world;
         //输入槽
-        this.addSlot(new Slot(inputInventory, 0, 51 , 35));
+        this.addSlot(new CookingSlot(inputInventory, 0, 51 , 35));
         //输出槽
         this.addSlot(new ModReslutSlot(ModRecipeType.SEED_BOX, player, inputInventory, outputInventory, 1, 109, 35));
         //添加玩家物品栏
@@ -94,7 +95,7 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
                 slot.onSlotChange(itemStack1, itemstack);
             }
             else if (index > 1){
-                if (hasRecipe(itemStack1)) //包含在配方中
+                if (itemStack1.getItem() instanceof OrdinaryFoods) //包含在配方中
                     if (!this.mergeItemStack(itemStack1, 0, 1, false)) return ItemStack.EMPTY;
                 if (index < 29) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 30, 38, false)) return ItemStack.EMPTY;
@@ -111,10 +112,6 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
         }
 
         return itemstack;
-    }
-
-    protected boolean hasRecipe(ItemStack stack) {
-        return this.world.getRecipeManager().getRecipe(ModRecipeType.SEED_BOX, new Inventory(stack), this.world).isPresent();
     }
 
     @Override

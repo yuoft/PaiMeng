@@ -18,8 +18,8 @@ public class BenchPacket {
     }
 
     public BenchPacket(BlockPos pos, ItemStack stack) {
-        this.pos = pos;
-        this.stack = stack;
+        BenchPacket.pos = pos;
+        BenchPacket.stack = stack;
     }
 
     public void toBytes(PacketBuffer buf) {

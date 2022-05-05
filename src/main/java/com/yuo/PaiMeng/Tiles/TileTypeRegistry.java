@@ -16,5 +16,7 @@ public class TileTypeRegistry {
             () -> TileEntityType.Builder.create(BenchTile::new, BlockRegistry.cookingBench.get()).build(null));
     public static final RegistryObject<TileEntityType<SynPlatTile>> SYN_PLAT_TILE = TILE_ENTITIES.register("syn_plat_tile",
             () -> TileEntityType.Builder.create(SynPlatTile::new, BlockRegistry.syntheticPlatform.get()).build(null));
+    public static final RegistryObject<TileEntityType<StrengthenTableTile>> strengthenTableTile = TILE_ENTITIES.register("strengthen_table_tile",
+            () -> TileEntityType.Builder.create(StrengthenTableTile::new, BlockRegistry.strengthenTable.get()).build(null));
 
 }

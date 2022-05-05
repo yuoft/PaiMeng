@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.Tiles.SynPlatTile;
 import net.minecraft.inventory.CraftResultInventory;

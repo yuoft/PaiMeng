@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "zyz",
+    " z "
+  ],
+  "key": {
+    "y": {
+      "item": "minecraft:lectern"
+    },
+    "x": {
+      "item": "minecraft:experience_bottle"
+    },
+    "z": {
+      "item": "paimeng:mojing"
+    }
+  },
+  "result": {
+    "item": "paimeng:strengthen_table"
+  }
+}

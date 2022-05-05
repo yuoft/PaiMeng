@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.NetWork;
 
 import com.yuo.PaiMeng.Jei.CookingTransferHandler;
+import com.yuo.PaiMeng.Jei.RecipeTransferHandlerServer;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;

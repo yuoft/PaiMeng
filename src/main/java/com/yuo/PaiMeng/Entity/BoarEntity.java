@@ -10,19 +10,24 @@ import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.TickRangeConverter;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class BoarEntity extends PigEntity implements IAngerable {
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT);
-//    protected static final DataParameter<Boolean> TARGET = EntityDataManager.createKey(BoarEntity.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Boolean> TARGET = EntityDataManager.createKey(BoarEntity.class, DataSerializers.BOOLEAN);
     private static final RangedInteger angerRange = TickRangeConverter.convertRange(20, 39);
     private int angerTime;
     private UUID angerTarget;
@@ -34,6 +39,17 @@ public class BoarEntity extends PigEntity implements IAngerable {
     //后代
     public PigEntity func_241840_a(ServerWorld serverWorld, AgeableEntity entity) {
         return EntityTypeRegister.BOAR.get().create(serverWorld);
+    }
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(TARGET, false);
+    }
+
+    @Override
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     //AI

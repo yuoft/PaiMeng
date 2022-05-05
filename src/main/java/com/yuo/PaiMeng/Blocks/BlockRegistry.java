@@ -26,6 +26,7 @@ public class BlockRegistry {
     public static RegistryObject<Block> cookingPot = BLOCKS.register("cooking_pot", CookingPot::new);
     public static RegistryObject<Block> cookingBench = BLOCKS.register("cooking_bench", CookingBench::new);
     public static RegistryObject<Block> syntheticPlatform = BLOCKS.register("synthetic_platform", SyntheticPlatform::new);
+    public static RegistryObject<Block> strengthenTable = BLOCKS.register("strengthen_table", StrengthenTable::new);
 
     //矿物
     public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore", () -> new OrdinaryOre(1,  5));

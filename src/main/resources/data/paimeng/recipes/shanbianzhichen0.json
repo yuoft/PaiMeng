@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xyz",
+    "yoy",
+    "xyx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "y": {
+      "item": "minecraft:iron_ingot"
+    },
+    "z": {
+      "item": "minecraft:enchanted_book"
+    },
+    "o": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "paimeng:shanbianzhichen",
+    "count": 8
+  }
+}

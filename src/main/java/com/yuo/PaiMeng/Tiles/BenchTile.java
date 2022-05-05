@@ -1,15 +1,17 @@
 package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.CookingBench;
-import com.yuo.PaiMeng.Gui.BenchContainer;
-import com.yuo.PaiMeng.Gui.CookingIntArray;
-import com.yuo.PaiMeng.Gui.FoodRecipesIntArray;
+import com.yuo.PaiMeng.Container.BenchContainer;
+import com.yuo.PaiMeng.Container.CookingIntArray;
+import com.yuo.PaiMeng.Container.FoodRecipesIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
+import com.yuo.PaiMeng.Items.OrdinaryFoods;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.WorldData.FoodLevelWorldSaveData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
@@ -19,13 +21,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 import javax.annotation.Nullable;
 
-public class BenchTile extends LockableTileEntity implements ITickableTileEntity {
+public class BenchTile extends LockableTileEntity implements ITickableTileEntity, ISidedInventory {
     public NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY); //物品栏
     public final int MAX_TIME = 20 * 60 * 16; //最大燃烧时间16分钟
     private int TIME; //剩余燃烧时间
@@ -187,6 +193,14 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
         return this.items.size();
     }
 
+    public int getInputSize(){
+        int i = 0;
+        for (ItemStack item : items.subList(0, 4)) {
+            if (!item.isEmpty()) i++;
+        }
+        return i;
+    }
+
     @Override
     public boolean isEmpty() {
         for (ItemStack stack : this.items.subList(0, 5)) {
@@ -241,4 +255,30 @@ public class BenchTile extends LockableTileEntity implements ITickableTileEntity
         this.items.clear();
     }
 
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        return side == Direction.DOWN ? new int[]{4} : new int[]{0,1,2,3};
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+        return direction != Direction.DOWN && index < 4 && itemStackIn.getItem() instanceof OrdinaryFoods;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+        return direction == Direction.DOWN && index == 4;
+    }
+
+    @Nullable
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        if (!this.removed && side != null && cap == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (side == Direction.DOWN)
+                return SidedInvWrapper.create(this, Direction.DOWN)[0].cast();
+            else
+                return SidedInvWrapper.create(this, Direction.UP, Direction.WEST, Direction.EAST, Direction.SOUTH, Direction.NORTH)[0].cast();
+        }
+        return super.getCapability(cap, side);
+    }
 }

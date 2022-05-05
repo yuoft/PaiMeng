@@ -4,6 +4,7 @@ import com.yuo.PaiMeng.Blocks.BlockRegistry;
 import com.yuo.PaiMeng.Capability.BlowCapability;
 import com.yuo.PaiMeng.Capability.IBlowCapability;
 import com.yuo.PaiMeng.Capability.ModStorage;
+import com.yuo.PaiMeng.Container.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
 import com.yuo.PaiMeng.Entity.BoarEntity;
 import com.yuo.PaiMeng.Entity.CraneEntity;
@@ -27,9 +28,12 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -78,11 +82,12 @@ public class PaiMeng {
             ScreenManager.registerFactory(ContainerTypeRegistry.synPlatContainer.get(), SynPlatScreen::new);
             ScreenManager.registerFactory(ContainerTypeRegistry.seedBoxContainer.get(), SeedBoxScreen::new);
             ScreenManager.registerFactory(ContainerTypeRegistry.relicsContainer.get(), RelicsScreen::new);
+            ScreenManager.registerFactory(ContainerTypeRegistry.strengthenTableContainer.get(), StrengthenTableScreen::new);
         });
         //透明方块的渲染
-        for (RegistryObject r : BlockRegistry.BLOCKS.getEntries()){
+        for (RegistryObject<Block> r : BlockRegistry.BLOCKS.getEntries()){
             if (r.get() instanceof BushBlock){
-                RenderTypeLookup.setRenderLayer((Block) r.get(), RenderType.getCutout());
+                RenderTypeLookup.setRenderLayer(r.get(), RenderType.getCutout());
             }
         }
         //圣遗物
@@ -110,11 +115,23 @@ public class PaiMeng {
         event.enqueueWork(NetWorkHandler::registerMessage); //创建数据包
         event.enqueueWork( () -> {
             //能力实例 数据保存 默认创建
-            CapabilityManager.INSTANCE.register(IBlowCapability.class, new ModStorage(), BlowCapability::new);
+            CapabilityManager.INSTANCE.register(IBlowCapability.class, new ModStorage<>(), BlowCapability::new);
 
             //实体属性
             GlobalEntityTypeAttributes.put(EntityTypeRegister.BOAR.get(), BoarEntity.setCustomAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeRegister.CRANE.get(), CraneEntity.setCustomAttributes().create());
         });
+
+    }
+
+    //注册物品染色
+    @SubscribeEvent
+    public static void itemColors(ColorHandlerEvent.Item event) {
+//        for (RegistryObject<Item> object : ItemRegistry.ITEMS.getEntries()) {
+//            Item item = object.get();
+//            if (item instanceof Drug){
+//            }
+//        }
+        event.getItemColors().register((stack, color) -> color > 0 ? -1 : PotionUtils.getColor(stack), ItemRegistry.drug.get());
     }
 }

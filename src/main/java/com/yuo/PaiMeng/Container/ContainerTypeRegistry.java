@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,5 +27,8 @@ public class ContainerTypeRegistry {
     public static final RegistryObject<ContainerType<RelicsContainer>> relicsContainer = CONTAINERS.register("relics_container", () ->
             IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
                     new RelicsContainer(windowId, inv)));
+    public static final RegistryObject<ContainerType<StrengthenTableContainer>> strengthenTableContainer = CONTAINERS.register("strengthen_table_container", () ->
+            IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) ->
+                    new StrengthenTableContainer(windowId, inv)));
 
 }

@@ -31,6 +31,9 @@ public enum RelicsAttrType {
     //副属性 可选值
     public static final RelicsAttrType[] ALL_VICE = new RelicsAttrType[]{HEALTH, HEALTH_RATE, DEFENSE, DEFENSE_RATE, ATTACK_DAMAGE,
             ATTACK_DAMAGE_RATE, CRITICAL_RATE, CRITICAL_DAMAGE};
+    //主属性 可选值
+    public static final RelicsAttrType[] ALL_MAIN = new RelicsAttrType[]{HEALTH, HEALTH_RATE, DEFENSE_RATE, ATTACK_DAMAGE,
+            ATTACK_DAMAGE_RATE, CRITICAL_RATE, CRITICAL_DAMAGE, HEAL, ATTACK_PHYSICS};
     //含有修饰符属性
     public static final RelicsAttrType[] ALL_MODIFIER = new RelicsAttrType[]{HEALTH, HEALTH_RATE, DEFENSE, DEFENSE_RATE, ATTACK_DAMAGE,
             ATTACK_DAMAGE_RATE};

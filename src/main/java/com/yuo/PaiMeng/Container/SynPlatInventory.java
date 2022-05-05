@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.Tiles.SynPlatTile;
 import net.minecraft.inventory.CraftingInventory;
@@ -19,6 +19,11 @@ public class SynPlatInventory extends CraftingInventory {
     }
 
     @Override
+    public boolean isEmpty() {
+        return craftTile.isEmpty();
+    }
+
+    @Override
     public ItemStack getStackInSlot(int index) {
         return index >= this.getSizeInventory() ? ItemStack.EMPTY : craftTile.getStackInSlot(index);
     }
@@ -30,13 +35,17 @@ public class SynPlatInventory extends CraftingInventory {
             ItemStack itemstack;
             if (stack.getCount() <= count) {
                 itemstack = stack.copy();
-                craftTile.setInventorySlotContents(index, ItemStack.EMPTY);
+                if (stack.hasContainerItem()){
+                    craftTile.setInventorySlotContents(index, stack.getContainerItem());
+                }else craftTile.setInventorySlotContents(index, ItemStack.EMPTY);
                 container.onCraftMatrixChanged(this);
                 return itemstack;
             } else {
                 itemstack = stack.split(count);
                 if (stack.getCount() == 0) {
-                    craftTile.setInventorySlotContents(index, ItemStack.EMPTY);
+                    if (stack.hasContainerItem()){
+                        craftTile.setInventorySlotContents(index, stack.getContainerItem());
+                    }else craftTile.setInventorySlotContents(index, ItemStack.EMPTY);
                 }
                 container.onCraftMatrixChanged(this);
                 return itemstack;

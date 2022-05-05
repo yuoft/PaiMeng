@@ -1,6 +1,6 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
-import com.yuo.PaiMeng.Items.OrdinaryMaterial;
+import com.yuo.PaiMeng.Items.OrdinaryFoods;
 import com.yuo.PaiMeng.NetWork.CookingPacket;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Tiles.BenchTile;
@@ -37,7 +37,7 @@ public class BenchContainer extends Container {
         //食材槽
         for (int m = 0; m < 2; m++){
             for (int n = 0; n < 2; n++){
-                this.addSlot(new Slot(benchTile, n + m * 2, 8 + n * 30, 22 + m * 27));
+                this.addSlot(new CookingSlot(benchTile, n + m * 2, 8 + n * 30, 22 + m * 27));
             }
         }
         //食品槽
@@ -59,6 +59,10 @@ public class BenchContainer extends Container {
         return (int) Math.ceil(this.data.get(0) / 20d);
     }
 
+    /**
+     * 获取当前容器内食材 能够烹饪的最大食物数量
+     * @return 数量
+     */
     public int getItemMaxCount(){
         NonNullList<ItemStack> inputs = TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, this.benchTile);
         NonNullList<ItemStack> items = this.benchTile.items;
@@ -108,7 +112,7 @@ public class BenchContainer extends Container {
             ItemStack itemStack1 = slot.getStack();
             itemstack = itemStack1.copy();
             if (index > 4){
-                if (itemStack1.getItem() instanceof OrdinaryMaterial)
+                if (itemStack1.getItem() instanceof OrdinaryFoods)
                     if (!this.mergeItemStack(itemStack1, 0, 4, false)) return ItemStack.EMPTY;
                 if (index < 32) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;

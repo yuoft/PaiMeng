@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.Gui.SeedBoxContainer;
+import com.yuo.PaiMeng.Container.SeedBoxContainer;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;

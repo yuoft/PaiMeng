@@ -1,0 +1,21 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:mojing"
+    },
+    {
+      "item": "minecraft:prismarine_shard"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:experience_bottle"
+  },
+  "result": {
+    "item": "paimeng:relics_exp_small",
+    "count": 8
+  }
+}

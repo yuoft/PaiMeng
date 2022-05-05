@@ -1,6 +1,7 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.Items.EvolutionDust;
+import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Recipes.SynPlatRecipe;
 import com.yuo.PaiMeng.Tiles.SynPlatTile;
@@ -10,16 +11,21 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.RecipeBookContainer;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.RecipeBookCategory;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.network.play.server.SSetSlotPacket;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.world.World;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
@@ -68,16 +74,93 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
         if (world.isRemote) return;
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
         ItemStack itemstack = ItemStack.EMPTY;
-        //获取配方
-        Optional<SynPlatRecipe> optional = world.getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, matrix, world);
-        if (optional.isPresent()) {
-            SynPlatRecipe recipe = optional.get();
-            if (outputInventory.canUseRecipe(world, serverPlayer, recipe)) {
-                itemstack = recipe.getCraftingResult(matrix); //获取配方输出
+        if (isPotionAndCheng(inputInventory)){
+            ItemStack drug = getDrug(inputInventory);
+            if (!drug.isEmpty())
+                itemstack = drug;
+        }else {
+            //获取配方
+            Optional<SynPlatRecipe> optional = world.getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, matrix, world);
+            if (optional.isPresent()) {
+                SynPlatRecipe recipe = optional.get();
+                if (outputInventory.canUseRecipe(world, serverPlayer, recipe)) {
+                    itemstack = recipe.getCraftingResult(matrix); //获取配方输出
+                }
             }
         }
         outputInventory.setInventorySlotContents(4, itemstack); //设置产出
         serverPlayer.connection.sendPacket(new SSetSlotPacket(windowId, 4, itemstack)); //发包同步数据
+    }
+
+    /**
+     * 输入是否是药水,药剂瓶,善变之尘 输入相同
+     * @param inventory 输入物品栏
+     * @return 是 true
+     */
+    private boolean isPotionAndCheng(SynPlatInventory inventory){
+        if(inventory.isEmpty()) return false;
+        ItemStack slot0 = inventory.getStackInSlot(0);
+        ItemStack slot1 = inventory.getStackInSlot(1);
+        ItemStack slot2 = inventory.getStackInSlot(2);
+        ItemStack slot3 = inventory.getStackInSlot(3); //转呗催化剂
+        return isPotionEqual(slot0, slot1) && slot0.getItem() instanceof PotionItem
+                && slot2.getItem() == ItemRegistry.drugBottle.get() && slot1.getItem() instanceof PotionItem
+                && slot3.getItem() == ItemRegistry.shanbianzhichen.get();
+    }
+
+    /**
+     * 判断物品是否相同 药水类型是否相同
+     * @param stack 物品0
+     * @param stack1 物品1
+     * @return 相同 true
+     */
+    private boolean isPotionEqual(ItemStack stack, ItemStack stack1){
+        if (stack.isItemEqual(stack1)){ //物品相同
+            if (stack.getOrCreateTag().contains("Potion")){ //酿造药水
+                Potion potion0 = PotionUtils.getPotionFromItem(stack);
+                Potion potion1 = PotionUtils.getPotionFromItem(stack1);
+                return potion0 == potion1;
+            }else if (stack.getOrCreateTag().contains("CustomPotionEffects")){
+                List<EffectInstance> effects0 = PotionUtils.getEffectsFromStack(stack);
+                List<EffectInstance> effects1 = PotionUtils.getEffectsFromStack(stack1);
+                if (effects0.size() != effects1.size()) return false;
+                else return effects0.containsAll(effects1);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取药剂
+     * @param inventory 输入栏
+     * @return 药剂
+     */
+    private ItemStack getDrug(SynPlatInventory inventory){
+        ItemStack slot0 = inventory.getStackInSlot(0);
+        if (slot0.getOrCreateTag().contains("Potion")){
+            return PotionUtils.addPotionToItemStack(new ItemStack(ItemRegistry.drug.get()), PotionUtils.getPotionFromItem(slot0));
+        }else if (slot0.getOrCreateTag().contains("CustomPotionEffects")){
+            return PotionUtils.appendEffects(new ItemStack(ItemRegistry.drug.get()), PotionUtils.getEffectsFromStack(slot0));
+        }else return ItemStack.EMPTY;
+    }
+
+    /**
+     * 合并集合 重复保留值高者
+     * @param mainList 需要追加的列表
+     * @param list 追加列表
+     */
+    private void appendList(List<EffectInstance> mainList, List<EffectInstance> list){
+        for (EffectInstance next : mainList) {
+            Iterator<EffectInstance> iterator1 = list.iterator();
+            while (iterator1.hasNext()) {
+                EffectInstance next1 = iterator1.next();
+                if (next.getPotion() == next1.getPotion()) {
+                    next.combine(next1); //保留值高者
+                    iterator1.remove(); //去除以转移值
+                }
+            }
+        }
+        mainList.addAll(list); //讲不重复的
     }
 
     @Override
@@ -97,7 +180,7 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
                 if (!this.mergeItemStack(itemStack1, 5, 41, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(itemStack1, itemstack);
             } else if (index > 4){
-                if (hasRecipe(itemStack1)) //包含在配方中
+                if (!itemStack1.isDamageable()) //包含在配方中
                     if (!this.mergeItemStack(itemStack1, 0, 3, false)) return ItemStack.EMPTY;
                 if (itemstack.getItem() instanceof EvolutionDust) //嬗变之尘
                     if (!this.mergeItemStack(itemStack1, 3, 4, false)) return ItemStack.EMPTY;
@@ -116,10 +199,6 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
         }
 
         return itemstack;
-    }
-
-    protected boolean hasRecipe(ItemStack stack) {
-        return this.world.getRecipeManager().getRecipe(ModRecipeType.SYN_PLAT, new Inventory(stack), this.world).isPresent();
     }
 
     @Override

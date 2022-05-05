@@ -23,6 +23,9 @@ public class ItemRegistry {
 	public static RegistryObject<Item> yimengrongmei = ITEMS.register("yimengrongmei", EvolutionDust::new);
 	public static RegistryObject<Item> huazhongxia = ITEMS.register("huazhongxia", SeedBox::new);
 	public static RegistryObject<Item> aaa = ITEMS.register("aaa", ExampleItem::new);
+	public static RegistryObject<Item> drug = ITEMS.register("drug", Drug::new);
+	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
+
 	public static RegistryObject<ModSpawnEgg> boarSpawnEgg = ITEMS.register("boar_spawn_egg", () ->
 			new ModSpawnEgg(EntityTypeRegister.BOAR, 0x112233, 0x332211));
 	public static RegistryObject<ModSpawnEgg> craneSpawnEgg = ITEMS.register("crane_spawn_egg", () ->
@@ -347,6 +350,10 @@ public class ItemRegistry {
 	public static RegistryObject<Item> juedoushiRelics = ITEMS.register("juedoushi_relics", () -> new Relics(4, 5));
 	public static RegistryObject<Item> yuetuanRelics = ITEMS.register("yuetuan_relics", () -> new Relics(4, 5));
 
+	//圣遗物经验瓶
+	public static RegistryObject<Item> relicsExpBig = ITEMS.register("relics_exp_big", () -> new RelicsExp(10000));
+	public static RegistryObject<Item> relicsExpSmall = ITEMS.register("relics_exp_small", () -> new RelicsExp(1000));
+
 	//圣物匣
 	public static RegistryObject<Item> relicsBoxOne = ITEMS.register("relics_box_one", () -> new RelicsBox(1));
 	public static RegistryObject<Item> relicsBoxTwo = ITEMS.register("relics_box_two", () -> new RelicsBox(2));
@@ -385,6 +392,8 @@ public class ItemRegistry {
 			() -> new BlockItem(BlockRegistry.yeboshiOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> zijingOre = ITEMS.register("zijing_ore",
 			() -> new BlockItem(BlockRegistry.zijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> strengthenTable = ITEMS.register("strengthen_table",
+			() -> new BlockItem(BlockRegistry.strengthenTable.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
 
 	public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
 	public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;

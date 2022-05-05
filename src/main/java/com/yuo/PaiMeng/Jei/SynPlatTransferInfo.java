@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Gui.SynPlatContainer;
+import com.yuo.PaiMeng.Container.SynPlatContainer;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;

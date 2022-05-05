@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.container.Container;

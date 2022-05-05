@@ -13,9 +13,11 @@ public class BenchClientPacket {
     public static void handlePacket(BenchPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() ->{
             ClientWorld world = Minecraft.getInstance().world;
-            TileEntity tileEntity = world.getTileEntity(msg.getPos());
-            if (tileEntity instanceof BenchTile){
-                ((BenchTile) tileEntity).items.set(5, msg.getStack());
+            if (world != null){
+                TileEntity tileEntity = world.getTileEntity(msg.getPos());
+                if (tileEntity instanceof BenchTile){
+                    ((BenchTile) tileEntity).items.set(5, msg.getStack());
+                }
             }
         });
         ctx.get().setPacketHandled(true);

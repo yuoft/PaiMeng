@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Gui.SynPlatContainer;
+import com.yuo.PaiMeng.Container.SynPlatContainer;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.NetWork.TransferPacket;
 import mezz.jei.api.gui.IRecipeLayout;

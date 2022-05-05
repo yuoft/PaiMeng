@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.NetWork;
 
-import com.yuo.PaiMeng.Gui.RelicsContainer;
+import com.yuo.PaiMeng.Container.RelicsContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;

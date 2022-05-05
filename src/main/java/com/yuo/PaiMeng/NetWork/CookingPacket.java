@@ -20,10 +20,10 @@ import java.util.function.Supplier;
 
 //控制
 public class CookingPacket {
-    private static BlockPos pos;
-    private static int count;
-    private static int exp;
-    private static int star;
+    private static BlockPos pos; //坐标
+    private static int count; //数量
+    private static int exp; //经验
+    private static int star; //星级
     public CookingPacket(PacketBuffer buffer) {
         pos = buffer.readBlockPos();
         count = buffer.readInt();
@@ -123,10 +123,12 @@ public class CookingPacket {
      * @param tile 方块实体
      */
     public static void spawnFood(World world, TileEntity tile){
-        if (count > 0 && world.rand.nextDouble() > 0.98 * (star - 1) * 0.02d){ //1% + star * 2%概率产生 派蒙
+        Random rand = world.rand;
+        if (count > 0 && rand.nextDouble() > 0.99 - (star - 1) * 0.01d){ //1% + 每级星级增加1%概率产生 派蒙
             world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(),pos.getZ(), new ItemStack(ItemRegistry.paimengFood.get())));
         }
-        if (count == 0 && new Random().nextDouble() > 0.94 - (star - 1) * 0.03d){ //5% + star + * 3%概率产生 裁决之时
+        //烹饪失败
+        if (count == 0 && rand.nextDouble() > 0.97 - (star - 1) * 0.01d){ //3% + 每级星级增加1%概率产生 裁决之时
             ItemStack stack = new ItemStack(ItemRegistry.bugFood.get());
             if (tile instanceof PotTile){
                 ItemStack itemStack = ((PotTile) tile).getStackInSlot(4);

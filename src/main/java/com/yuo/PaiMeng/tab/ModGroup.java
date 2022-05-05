@@ -11,6 +11,7 @@ public class ModGroup{
 	public static ItemGroup PaiMengMaterial = new GroupMaterial();
 	public static ItemGroup PaiMengCrop = new GroupCrop();
 	public static ItemGroup PaiMengRelics = new GroupRelics();
+	public static ItemGroup PaiMengDrug = new GroupDrug();
 	public static ItemGroup PaiMengOther = new GroupOther();
 
 	private static class GroupFood extends ItemGroup{
@@ -66,6 +67,18 @@ public class ModGroup{
 		@Override
 		public ItemStack createIcon() {
 			return new ItemStack(ItemRegistry.juedoushiRelics.get());
+		}
+
+	}
+
+	private static class GroupDrug extends ItemGroup{
+
+		public GroupDrug() {
+			super(ItemGroup.GROUPS.length, "PaiMengDrug");
+		}
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ItemRegistry.drugBottle.get());
 		}
 
 	}

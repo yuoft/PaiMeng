@@ -90,7 +90,6 @@ public class CookingBench extends Block {
                 }else {
                     benchTile.setBurnTime(fuleCount * i);
                     benchTile.setFuelItem(heldItem.getItem());
-                    ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
                     NetWorkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
                             new BenchPacket(pos, heldItem));
                     if (!player.isCreative()) heldItem.shrink(fuleCount);
@@ -134,6 +133,7 @@ public class CookingBench extends Block {
     }
 
     //设置放下时的状态
+    @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(FIRE, Boolean.FALSE);
     }

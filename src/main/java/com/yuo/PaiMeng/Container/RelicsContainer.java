@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.Capability.ModCapability;
 import com.yuo.PaiMeng.Capability.RelicsItemHandler;
@@ -10,7 +10,6 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class RelicsContainer extends Container {
     private final RelicsItemHandler itemHandler; //存储食材
@@ -24,7 +23,7 @@ public class RelicsContainer extends Container {
         //圣遗物槽
         for (int m = 0; m < 2; ++m){
             for (int n = 0; n < 3; ++n){
-                this.addSlot(new SlotItemHandler(this.itemHandler, n + m * 3, 8 + m * 28, 8 + n * 23));
+                this.addSlot(new RelicsSlot(this.itemHandler, n + m * 3, 8 + m * 28, 8 + n * 23));
             }
         }
         //添加玩家物品栏

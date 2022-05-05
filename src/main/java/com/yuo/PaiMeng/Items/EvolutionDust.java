@@ -5,7 +5,6 @@ import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -38,7 +37,6 @@ public class EvolutionDust extends Item {
 
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
         BlockPos pos = context.getPos();
         World world = context.getWorld();
         BlockState state = world.getBlockState(pos);

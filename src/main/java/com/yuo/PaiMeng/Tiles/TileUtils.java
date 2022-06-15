@@ -27,7 +27,7 @@ public class TileUtils {
     public static ItemStack getRecipeOutput(World world, IRecipeType recipeType, IInventory inventory){
         Set<IRecipe<?>> recipes = world.getRecipeManager().getRecipes().stream().filter(recipe ->{
                    if (recipeType == ModRecipeType.BENCH)
-                       return recipe.getType() ==recipeType || recipe.getType() == ModRecipeType.POT;
+                       return recipe.getType() == recipeType || recipe.getType() == ModRecipeType.POT;
                    else return recipe.getType() == recipeType;
                 }).collect(Collectors.toSet());
         for (IRecipe recipe : recipes) {

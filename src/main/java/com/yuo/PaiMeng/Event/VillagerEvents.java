@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
 import net.minecraft.util.IItemProvider;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,7 +24,7 @@ import java.util.Random;
 /**
  * 添加村民交易处理类
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = PaiMeng.MOD_ID)
+@Mod.EventBusSubscriber(modid = PaiMeng.MOD_ID)
 public class VillagerEvents {
     @SubscribeEvent
     public static void registerTrades(VillagerTradesEvent event) {

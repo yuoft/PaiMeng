@@ -2,16 +2,23 @@ package com.yuo.PaiMeng.Event;
 
 import com.google.common.collect.Multimap;
 import com.yuo.PaiMeng.Capability.*;
+import com.yuo.PaiMeng.ClientProxy;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
 import com.yuo.PaiMeng.Effects.ReviveEffect;
+import com.yuo.PaiMeng.Gui.RelicsButton;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
 import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsBox;
 import com.yuo.PaiMeng.Items.RelicsHelper;
+import com.yuo.PaiMeng.NetWork.NetWorkHandler;
+import com.yuo.PaiMeng.NetWork.RelicsGuiPacket;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -40,9 +47,11 @@ import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -71,6 +80,27 @@ public class EventHandler {
 
     //不被禁用的原版食物
     private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.APPLE, Items.SWEET_BERRIES);
+
+    //在玩家物品栏界面上添加切换到圣遗物界面的按钮
+    @SubscribeEvent
+    public static void playerScreen(GuiScreenEvent.InitGuiEvent.Post event){
+        Screen gui = event.getGui();
+        if (gui instanceof InventoryScreen){
+            InventoryScreen screen = (InventoryScreen) gui;
+            if (event.getWidgetList() != null)
+                event.addWidget(new RelicsButton(screen,77,44, 16, 16));
+        }
+    }
+
+    //圣遗物gui打开
+    @SubscribeEvent
+    public static void playerTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.START) {
+            if (ClientProxy.KEY_OPEN_RELICS.isPressed() && Minecraft.getInstance().isGameFocused()) {
+                NetWorkHandler.INSTANCE.sendToServer(new RelicsGuiPacket(true));
+            }
+        }
+    }
 
     /**
      * 判断食物是否在例外列表中

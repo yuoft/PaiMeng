@@ -320,7 +320,7 @@ public class ItemRegistry {
 	public static RegistryObject<Item> ganshaoXiangyu = ITEMS.register("ganshao_xiangyu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
 	public static RegistryObject<Item> manrouChapaofan = ITEMS.register("manrou_chapaofan",
-			() -> new PaiMengFood(ModFoodEffects.RECOVER_FOUR,3,0));
+			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
 	public static RegistryObject<Item> qiaomaimian = ITEMS.register("qiaomaimian",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
 	public static RegistryObject<Item> riluoChouyushao = ITEMS.register("riluo_chouyushao",

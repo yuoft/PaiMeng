@@ -25,7 +25,7 @@ import java.util.Random;
 /**
  * 添加村民交易处理类
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = PaiMeng.MOD_ID)
+@Mod.EventBusSubscriber(modid = PaiMeng.MOD_ID)
 public class VillagerEvents {
     @SubscribeEvent
     public static void registerTrades(VillagerTradesEvent event) {

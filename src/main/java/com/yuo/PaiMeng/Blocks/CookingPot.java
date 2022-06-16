@@ -224,7 +224,7 @@ public class CookingPot extends Block {
     private int damageWoodCount(ItemStack stack){
         Item item = stack.getItem();
         Block block = Block.getBlockFromItem(item);
-        if (block != null && block.getDefaultState().getMaterial() == Material.WOOD){
+        if (block.getDefaultState().getMaterial() == Material.WOOD){
             int burnTime = ForgeHooks.getBurnTime(stack);
             if (burnTime < 600) return  (int) Math.ceil(300.0 / burnTime);
             return 1;

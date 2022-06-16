@@ -3,7 +3,9 @@ package com.yuo.PaiMeng.Items;
 import com.yuo.PaiMeng.Capability.IBlowCapability;
 import com.yuo.PaiMeng.Capability.ModCapability;
 import com.yuo.PaiMeng.tab.ModGroup;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,12 +33,19 @@ public class ExampleItem extends Item {
                 double criticalRate = e.getCriticalRate();
                 double criticalDamage = e.getCriticalDamage();
                 playerIn.sendMessage(new StringTextComponent("暴击率：" + getMath(criticalRate) + " 暴击伤害：" + getMath(criticalDamage)
-                + " 防御力：" + getMath0(playerIn.getAttribute(Attributes.ARMOR).getValue()) + " 攻击力：" +
-                        getMath0(playerIn.getAttribute(Attributes.ATTACK_DAMAGE).getValue())
-                + "生命值：" + getMath0(playerIn.getAttribute(Attributes.MAX_HEALTH).getValue())), UUID.randomUUID());
+                + " 防御力：" + getAttrValue(Attributes.ARMOR, playerIn) + " 攻击力：" + getAttrValue(Attributes.ATTACK_DAMAGE, playerIn)
+                + "生命值：" + getAttrValue(Attributes.MAX_HEALTH, playerIn)), UUID.randomUUID());
             });
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    private double getAttrValue(Attribute attribute, PlayerEntity player){
+        ModifiableAttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null){
+            return getMath0(instance.getValue());
+        }
+        return 0;
     }
 
     //返回百分比数值

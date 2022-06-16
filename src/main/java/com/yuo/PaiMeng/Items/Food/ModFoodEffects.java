@@ -91,6 +91,15 @@ public class ModFoodEffects {
     public static final Food DEFENSE_FIVE = (new Food.Builder()).hunger(9).saturation(5).effect(
             () -> new EffectInstance(EffectRegistry.DEFENSE.get(),  180 * 20, 3), 1).setAlwaysEdible().build();
 
+    //暴击类
+    public static final Food RATE_TWO = (new Food.Builder()).hunger(4).saturation(1).effect(
+            () -> new EffectInstance(EffectRegistry.CRITICAL_RATE.get(), 60 * 20, 0),1).setAlwaysEdible().build();
+    public static final Food RATE_THREE = (new Food.Builder()).hunger(5).saturation(2).effect(
+            () -> new EffectInstance(EffectRegistry.CRITICAL_RATE.get(), 120 * 20, 1),1).setAlwaysEdible().build();
+    public static final Food RATE_FOUR = (new Food.Builder()).hunger(6).saturation(3).effect(
+            () -> new EffectInstance(EffectRegistry.CRITICAL_RATE.get(), 180 * 20, 2),1).setAlwaysEdible().build();
+
+
     //体力类 额外恢复饱食度 + 饱腹效果
     public static final Food FOOD_ONE = (new Food.Builder()).hunger(3).saturation(2).effect(
             () -> new EffectInstance(Effects.SATURATION,  1 * 20, 0), 1).build();

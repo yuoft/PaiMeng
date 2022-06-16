@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:xiaomai_seed",
+    "item": "paimeng:xiaomai",
     "count": 5
   },
   "result": {

@@ -19,4 +19,13 @@ public class TileTypeRegistry {
     public static final RegistryObject<TileEntityType<StrengthenTableTile>> strengthenTableTile = TILE_ENTITIES.register("strengthen_table_tile",
             () -> TileEntityType.Builder.create(StrengthenTableTile::new, BlockRegistry.strengthenTable.get()).build(null));
 
+    public static final RegistryObject<TileEntityType<LieYanHauPlantTile>> lieyanhuaPlant = TILE_ENTITIES.register("lieyanhua_plant",
+            () -> TileEntityType.Builder.create(LieYanHauPlantTile::new, BlockRegistry.lieyanhuaHuaruiPlant.get()).build(null));
+    public static final RegistryObject<TileEntityType<LieYanHauCropTile>> lieyanhuaCrop = TILE_ENTITIES.register("lieyanhua_crop",
+            () -> TileEntityType.Builder.create(LieYanHauCropTile::new, BlockRegistry.lieyanhuaHuaruiCrop.get()).build(null));
+    public static final RegistryObject<TileEntityType<BingWuHuaPlantTile>> bingwuhuaPlant = TILE_ENTITIES.register("bingwuhua_plant",
+            () -> TileEntityType.Builder.create(BingWuHuaPlantTile::new, BlockRegistry.bingwuhuaHuaduoPlant.get()).build(null));
+    public static final RegistryObject<TileEntityType<BingWuHuaCropTile>> bingwuhuaCrop = TILE_ENTITIES.register("bingwuhua_crop",
+            () -> TileEntityType.Builder.create(BingWuHuaCropTile::new, BlockRegistry.bingwuhuaHuaduoCrop.get()).build(null));
+
 }

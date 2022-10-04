@@ -233,9 +233,9 @@ public class EventHandler {
             PlayerEntity player = (PlayerEntity) entityLiving;
             //复活buff
             int revive = EventHelper.getEffectLevel(player, EffectRegistry.REVIVE.get());
-            if (revive > 0){
+            if (revive >= 0){
                 event.setCanceled(true);
-                ReviveEffect.revive(player,revive);
+                ReviveEffect.revive(player, revive);
             }
             //重置双爆属性
             LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);

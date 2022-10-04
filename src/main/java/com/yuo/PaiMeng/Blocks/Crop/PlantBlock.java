@@ -1,10 +1,7 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
 import com.yuo.PaiMeng.Blocks.BlockRegistry;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BushBlock;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -14,6 +11,7 @@ public class PlantBlock extends BushBlock {
         super(builder);
     }
 
+    //可存在什么方块上面？
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         if (this == BlockRegistry.liuliDaiPlant.get() || this == BlockRegistry.qingxinPlant.get() || this == BlockRegistry.ceciliaHuaPlant.get()){
@@ -29,12 +27,6 @@ public class PlantBlock extends BushBlock {
         if (this == BlockRegistry.mufengMoguPlant.get()){
             return state.matchesBlock(Blocks.MYCELIUM);
         }
-        if (this == BlockRegistry.bingwuhuaHuaduoPlant.get()){
-            return state.isIn(BlockTags.ICE) || state.matchesBlock(Blocks.SNOW_BLOCK);
-        }
-        if (this == BlockRegistry.lieyanhuaHuaruiPlant.get()){
-            return state.matchesBlock(Blocks.CRIMSON_NYLIUM) || state.matchesBlock(Blocks.STONE);
-        }
         if (this == BlockRegistry.youdengxunPlant.get()){
             return state.matchesBlock(Blocks.WARPED_NYLIUM);
         }
@@ -43,4 +35,5 @@ public class PlantBlock extends BushBlock {
         }
         return super.isValidGround(state, worldIn, pos);
     }
+
 }

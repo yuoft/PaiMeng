@@ -3,23 +3,27 @@ package com.yuo.PaiMeng.Blocks.Crop;
 import com.yuo.PaiMeng.Blocks.BlockRegistry;
 import com.yuo.PaiMeng.Blocks.CommonFarmland;
 import com.yuo.PaiMeng.Items.CropUseBlockEnum;
+import com.yuo.PaiMeng.Items.ItemRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class ModXCropBlock extends CropsBlock{
-    private static Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+    private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
             zeroHardnessAndResistance().sound(SoundType.CROP); //作物
-    private CropUseBlockEnum useBlockEnum;
+    private final CropUseBlockEnum useBlockEnum;
 
     public ModXCropBlock(CropUseBlockEnum blockEnum) {
         super(CROP);
@@ -71,5 +75,84 @@ public class ModXCropBlock extends CropsBlock{
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Override
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+
+    @Override
+    protected IItemProvider getSeedsItem() {
+        if (this == BlockRegistry.bailuoboCrop.get()){
+            return ItemRegistry.bailuoboSeed.get();
+        }else if (this == BlockRegistry.baocaiCrop.get()){
+            return ItemRegistry.baocaiSeed.get();
+        }else if (this == BlockRegistry.boheCrop.get()){
+            return ItemRegistry.boheSeed.get();
+        }else if (this == BlockRegistry.ceciliaHuaCrop.get()){
+            return ItemRegistry.ceciliaHuaSeed.get();
+        }else if (this == BlockRegistry.dudulianCrop.get()){
+            return ItemRegistry.dudulianSeed.get();
+        }else if (this == BlockRegistry.fanqieCrop.get()){
+            return ItemRegistry.fanqieSeed.get();
+        }else if (this == BlockRegistry.fengchejuCrop.get()){
+            return ItemRegistry.fengchejuSeed.get();
+        }else if (this == BlockRegistry.gougouguoCrop.get()){
+            return ItemRegistry.gougouguoSeed.get();
+        }else if (this == BlockRegistry.haicaoCrop.get()){
+            return ItemRegistry.haicaoSeed.get();
+        }else if (this == BlockRegistry.hailingzhiCrop.get()){
+            return ItemRegistry.hailingzhiSeed.get();
+        }else if (this == BlockRegistry.huluoboCrop.get()){
+            return ItemRegistry.huluoboSeed.get();
+        }else if (this == BlockRegistry.jinyucaoCrop.get()){
+            return ItemRegistry.jinyucaoSeed.get();
+        }else if (this == BlockRegistry.jueyunJiaojiaoCrop.get()){
+            return ItemRegistry.jueyunJiaojiaoSeed.get();
+        }else if (this == BlockRegistry.lianpengCrop.get()){
+            return ItemRegistry.lianpengSeed.get();
+        }else if (this == BlockRegistry.liuliBaiheCrop.get()){
+            return ItemRegistry.liuliBaiheSeed.get();
+        }else if (this == BlockRegistry.liuliDaiCrop.get()){
+            return ItemRegistry.liuliDaiSeed.get();
+        }else if (this == BlockRegistry.luoluomeiCrop.get()){
+            return ItemRegistry.luoluomeiSeed.get();
+        }else if (this == BlockRegistry.maweiCrop.get()){
+            return ItemRegistry.maweiSeed.get();
+        }else if (this == BlockRegistry.mingcaoCrop.get()){
+            return ItemRegistry.mingcaoSeed.get();
+        }else if (this == BlockRegistry.moguCrop.get()){
+            return ItemRegistry.moguSeed.get();
+        }else if (this == BlockRegistry.mufengMoguCrop.get()){
+            return ItemRegistry.mufengMoguSeed.get();
+        }else if (this == BlockRegistry.nichanghuaCrop.get()){
+            return ItemRegistry.nichanghuaSeed.get();
+        }else if (this == BlockRegistry.pugongyingCrop.get()){
+            return ItemRegistry.pugongyingSeed.get();
+        }else if (this == BlockRegistry.qingxinCrop.get()){
+            return ItemRegistry.qingxinSeed.get();
+        }else if (this == BlockRegistry.shumeiCrop.get()){
+            return ItemRegistry.shumeiSeed.get();
+        }else if (this == BlockRegistry.songrongCrop.get()){
+            return ItemRegistry.songrongSeed.get();
+        }else if (this == BlockRegistry.tiantianhuaCrop.get()){
+            return ItemRegistry.tiantianhuaSeed.get();
+        }else if (this == BlockRegistry.tianyunCaoshiCrop.get()){
+            return ItemRegistry.tianyunCaoshiSeed.get();
+        }else if (this == BlockRegistry.xiaodengcaoCrop.get()){
+            return ItemRegistry.xiaodengcaoSeed.get();
+        }else if (this == BlockRegistry.xiaomaiCrop.get()){
+            return ItemRegistry.xiaomaiSeed.get();
+        }else if (this == BlockRegistry.xuekuiCrop.get()){
+            return ItemRegistry.xuekuiSeed.get();
+        }else if (this == BlockRegistry.yangcongCrop.get()){
+            return ItemRegistry.yangcongSeed.get();
+        }else if (this == BlockRegistry.youdengxunCrop.get()){
+            return ItemRegistry.youdengxunSeed.get();
+        }else if (this == BlockRegistry.zhusunCrop.get()){
+            return ItemRegistry.zhusunSeed.get();
+        }
+        return super.getSeedsItem();
     }
 }

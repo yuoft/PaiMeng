@@ -34,7 +34,7 @@ public class AbsBingWuHuaTile extends TileEntity implements ITickableTileEntity 
         if (world == null || world.isRemote) return;
         tick++;
 
-        if (tick == 60) {
+        if (tick == 50) {
             BlockState state = world.getBlockState(pos);
             if (state.getBlock() instanceof BingWuHuaCrop){
                 Integer age = state.get(CropsBlock.AGE);
@@ -66,6 +66,9 @@ public class AbsBingWuHuaTile extends TileEntity implements ITickableTileEntity 
                 world.setBlockState(blockpos, blockstate);
                 world.getPendingBlockTicks().scheduleTick(blockpos, Blocks.FROSTED_ICE, MathHelper.nextInt(rand, 120, 180));
             }
+            if (state.getBlock() == Blocks.FROSTED_ICE){
+                world.setBlockState(blockpos, Blocks.ICE.getDefaultState());
+            }
         }
     }
 
@@ -75,7 +78,7 @@ public class AbsBingWuHuaTile extends TileEntity implements ITickableTileEntity 
      * @param pos
      */
     private void offLava(World world, BlockPos pos){
-        for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, -1, 1))) {
+        for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 0, 1))) {
             BlockState state = world.getBlockState(blockPos);
             if (state.getBlock() == Blocks.LAVA){
                 Block block = world.getFluidState(blockPos).isSource() ? Blocks.OBSIDIAN : Blocks.COBBLESTONE;

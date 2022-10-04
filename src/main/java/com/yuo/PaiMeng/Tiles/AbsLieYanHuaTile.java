@@ -48,7 +48,7 @@ public class AbsLieYanHuaTile extends TileEntity implements ITickableTileEntity 
      * @param pos
      */
     private void meltIce(World world, BlockPos pos){
-        for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, -1, 1))) {
+        for (BlockPos blockPos : BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 0, 1))) {
             BlockState state = world.getBlockState(blockPos);
             if (state.getBlock() == Blocks.ICE){
                turnIntoWater(state, world, blockPos);

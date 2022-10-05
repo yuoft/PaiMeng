@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
+import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.Tiles.AbsLieYanHuaTile;
 import com.yuo.PaiMeng.Tiles.LieYanHauPlantTile;
 import net.minecraft.block.BlockState;
@@ -7,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -18,7 +20,7 @@ import java.util.Random;
 public class LieYanHuaPlant extends BushBlock {
 
     public LieYanHuaPlant(Properties builder) {
-        super(builder);
+        super(builder.setLightLevel(e -> 15));
     }
 
     //粒子
@@ -41,6 +43,11 @@ public class LieYanHuaPlant extends BushBlock {
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.matchesBlock(Blocks.CRIMSON_NYLIUM) || state.matchesBlock(Blocks.STONE);
+    }
+
+    @Override
+    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+        return new ItemStack(ItemRegistry.lieyanhua_huarui.get());
     }
 
     @Override

@@ -7,30 +7,36 @@ import com.yuo.PaiMeng.Items.ItemRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.WaterFluid;
-import net.minecraft.pathfinding.PathType;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
+import java.util.function.ToIntFunction;
 
 public class ModXCropBlock extends CropsBlock{
-    private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+    private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).setLightLevel(getLightValueLit()).doesNotBlockMovement().tickRandomly().
             zeroHardnessAndResistance().sound(SoundType.CROP); //作物
     private final CropUseBlockEnum useBlockEnum;
 
     public ModXCropBlock(CropUseBlockEnum blockEnum) {
         super(CROP);
         this.useBlockEnum = blockEnum;
+    }
+
+    public static ToIntFunction<BlockState> getLightValueLit() {
+        return (state) -> {
+            Block block = state.getBlock();
+            if (block == BlockRegistry.lieyanhuaHuaruiCrop.get()) return 15;
+            if (block == BlockRegistry.xiaodengcaoCrop.get()) return 8;
+            if (block == BlockRegistry.youdengxunCrop.get()) return 5;
+            return 0;
+        };
     }
 
     //生长时间更长

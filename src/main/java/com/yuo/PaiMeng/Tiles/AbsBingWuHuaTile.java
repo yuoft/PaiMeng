@@ -1,23 +1,15 @@
 package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.Crop.BingWuHuaCrop;
-import com.yuo.PaiMeng.Blocks.Crop.LieYanHuaCrop;
+import com.yuo.PaiMeng.PMConfig;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.LavaFluid;
-import net.minecraft.fluid.WaterFluid;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -34,7 +26,7 @@ public class AbsBingWuHuaTile extends TileEntity implements ITickableTileEntity 
         if (world == null || world.isRemote) return;
         tick++;
 
-        if (tick == 50) {
+        if (tick == PMConfig.SERVER.bingWUHuaTime.get()) {
             BlockState state = world.getBlockState(pos);
             if (state.getBlock() instanceof BingWuHuaCrop){
                 Integer age = state.get(CropsBlock.AGE);
@@ -43,7 +35,7 @@ public class AbsBingWuHuaTile extends TileEntity implements ITickableTileEntity 
             tick = 0;
         }
 
-        if (tick % 5 == 0){
+        if (tick % PMConfig.SERVER.lieYanHuaAndBingWUHuaTime.get() == 0){
             offLava(world, pos);
         }
     }

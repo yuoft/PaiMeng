@@ -3,7 +3,6 @@ package com.yuo.PaiMeng.Blocks.Crop;
 import com.yuo.PaiMeng.Items.CropUseBlockEnum;
 import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.Tiles.BingWuHuaCropTile;
-import com.yuo.PaiMeng.Tiles.LieYanHauCropTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

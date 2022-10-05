@@ -1,14 +1,13 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Items.ItemRegistry;
 import com.yuo.PaiMeng.Tiles.BingWuHuaPlantTile;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.BlockTags;
@@ -48,6 +47,11 @@ public class BingWuHuaPlant extends BushBlock {
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.isIn(BlockTags.ICE) || state.matchesBlock(Blocks.SNOW_BLOCK);
+    }
+
+    @Override
+    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+        return new ItemStack(ItemRegistry.bingwuhua_huaduo.get());
     }
 
     @Override

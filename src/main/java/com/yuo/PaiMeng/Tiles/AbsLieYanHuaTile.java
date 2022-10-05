@@ -1,16 +1,17 @@
 package com.yuo.PaiMeng.Tiles;
 
 import com.yuo.PaiMeng.Blocks.Crop.LieYanHuaCrop;
-import net.minecraft.block.*;
+import com.yuo.PaiMeng.PMConfig;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
@@ -28,7 +29,7 @@ public class AbsLieYanHuaTile extends TileEntity implements ITickableTileEntity 
         if (world == null || world.isRemote) return;
         tick++;
 
-        if (tick == 40) {
+        if (tick == PMConfig.SERVER.lieYanHuaTime.get()) {
             BlockState state = world.getBlockState(pos);
             if (state.getBlock() instanceof LieYanHuaCrop){
                 Integer age = state.get(CropsBlock.AGE);
@@ -37,7 +38,7 @@ public class AbsLieYanHuaTile extends TileEntity implements ITickableTileEntity 
             tick = 0;
         }
 
-        if (tick % 5 == 0){
+        if (tick % PMConfig.SERVER.lieYanHuaAndBingWUHuaTime.get() == 0){
             meltIce(world, pos);
         }
     }

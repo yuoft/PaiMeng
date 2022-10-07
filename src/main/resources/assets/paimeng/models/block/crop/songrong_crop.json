@@ -1,5 +1,5 @@
 {
-    "parent": "paimeng:block/cross",
+    "parent": "paimeng:block/wall_cross",
     "textures": {
 		"cross": "paimeng:block/crop/songrong_crop"
     }

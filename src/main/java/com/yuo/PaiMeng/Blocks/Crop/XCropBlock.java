@@ -7,36 +7,30 @@ import com.yuo.PaiMeng.Items.ItemRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import java.util.Random;
 import java.util.function.ToIntFunction;
 
-public class ModXCropBlock extends CropsBlock{
-    private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).setLightLevel(getLightValueLit()).doesNotBlockMovement().tickRandomly().
-            zeroHardnessAndResistance().sound(SoundType.CROP); //作物
-    private final CropUseBlockEnum useBlockEnum;
-
-    public ModXCropBlock(CropUseBlockEnum blockEnum) {
-        super(CROP);
+public class XCropBlock extends CropsBlock{
+    private final CropUseBlockEnum useBlockEnum; //作物是否可存在此类方块上
+    public XCropBlock(CropUseBlockEnum blockEnum, Properties properties) {
+        super(properties);
         this.useBlockEnum = blockEnum;
     }
 
-    public static ToIntFunction<BlockState> getLightValueLit() {
-        return (state) -> {
-            Block block = state.getBlock();
-            if (block == BlockRegistry.lieyanhuaHuaruiCrop.get()) return 15;
-            if (block == BlockRegistry.xiaodengcaoCrop.get()) return 8;
-            if (block == BlockRegistry.youdengxunCrop.get()) return 5;
-            return 0;
-        };
+    @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return state.get(AGE) >= 7 ? super.getLightValue(state, world, pos) : 0;
     }
 
     //生长时间更长
@@ -58,14 +52,15 @@ public class ModXCropBlock extends CropsBlock{
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
         CropUseBlockEnum useBlockEnum = getUseBlockEnum();
         BlockState blockState = worldIn.getBlockState(pos.down());
-        if (blockState.getBlock() instanceof CommonFarmland){
-            switch (useBlockEnum){
-                case COMMON: return blockState.matchesBlock(BlockRegistry.commonFarmland.get());
-                case FERTILE: return blockState.matchesBlock(BlockRegistry.fertileFarmland.get());
-                default: return false;
+        switch (useBlockEnum){
+            case COMMON: return blockState.matchesBlock(BlockRegistry.commonFarmland.get());
+            case FERTILE: return blockState.matchesBlock(BlockRegistry.fertileFarmland.get());
+            case LOGS: {
+
+                return blockState.isIn(BlockTags.LOGS);
             }
+            default: return false;
         }
-        return false;
     }
 
     //部分不能使用骨粉催熟
@@ -126,9 +121,9 @@ public class ModXCropBlock extends CropsBlock{
             return ItemRegistry.maweiSeed.get();
         }else if (this == BlockRegistry.mingcaoCrop.get()){
             return ItemRegistry.mingcaoSeed.get();
-        }else if (this == BlockRegistry.moguCrop.get()){
+        }else if (this == BlockRegistry.moguCrop.get() || this == BlockRegistry.moguWallCrop.get()){
             return ItemRegistry.moguSeed.get();
-        }else if (this == BlockRegistry.mufengMoguCrop.get()){
+        }else if (this == BlockRegistry.mufengMoguCrop.get() || this == BlockRegistry.mufengMoguWallCrop.get()){
             return ItemRegistry.mufengMoguSeed.get();
         }else if (this == BlockRegistry.nichanghuaCrop.get()){
             return ItemRegistry.nichanghuaSeed.get();
@@ -138,7 +133,7 @@ public class ModXCropBlock extends CropsBlock{
             return ItemRegistry.qingxinSeed.get();
         }else if (this == BlockRegistry.shumeiCrop.get()){
             return ItemRegistry.shumeiSeed.get();
-        }else if (this == BlockRegistry.songrongCrop.get()){
+        }else if (this == BlockRegistry.songrongCrop.get() || this == BlockRegistry.songrongWallCrop.get()){
             return ItemRegistry.songrongSeed.get();
         }else if (this == BlockRegistry.tiantianhuaCrop.get()){
             return ItemRegistry.tiantianhuaSeed.get();
@@ -152,7 +147,7 @@ public class ModXCropBlock extends CropsBlock{
             return ItemRegistry.xuekuiSeed.get();
         }else if (this == BlockRegistry.yangcongCrop.get()){
             return ItemRegistry.yangcongSeed.get();
-        }else if (this == BlockRegistry.youdengxunCrop.get()){
+        }else if (this == BlockRegistry.youdengxunCrop.get() || this == BlockRegistry.youdengxunWallCrop.get()){
             return ItemRegistry.youdengxunSeed.get();
         }else if (this == BlockRegistry.zhusunCrop.get()){
             return ItemRegistry.zhusunSeed.get();

@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
-public class PlantWaterBlock extends BushBlock implements ILiquidContainer {
-    public PlantWaterBlock(Properties properties) {
+public class WaterPlant extends BushBlock implements ILiquidContainer {
+    public WaterPlant(Properties properties) {
         super(properties);
     }
 

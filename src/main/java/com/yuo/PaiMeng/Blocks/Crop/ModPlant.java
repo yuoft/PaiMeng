@@ -11,21 +11,11 @@ import net.minecraft.world.IBlockReader;
 
 import java.util.function.ToIntFunction;
 
-public class PlantBlock extends BushBlock {
+public class ModPlant extends BushBlock {
 
-    public PlantBlock(Properties builder) {
-        super(builder.setLightLevel(getLightValueLit()));
+    public ModPlant(Properties builder) {
+        super(builder);
     }
-
-    public static ToIntFunction<BlockState> getLightValueLit() {
-        return (state) -> {
-            Block block = state.getBlock();
-            if (block == BlockRegistry.xiaodengcaoPlant.get()) return 8;
-            if (block == BlockRegistry.youdengxunPlant.get()) return 5;
-            return 0;
-        };
-    }
-
 
     //可存在什么方块上面？
     @Override
@@ -85,7 +75,9 @@ public class PlantBlock extends BushBlock {
             item = ItemRegistry.mawei.get();
         }else if (this == BlockRegistry.mingcaoPlant.get()){
             item = ItemRegistry.mingcao.get();
-        }else if (this == BlockRegistry.moguPlant.get()){
+        }else if (this == BlockRegistry.moguPlant.get() || this == BlockRegistry.moguWallPlant.get()){
+            item = ItemRegistry.mogu.get();
+        }else if (this == BlockRegistry.mufengMoguPlant.get() || this == BlockRegistry.mufengMoguWallPlant.get()){
             item = ItemRegistry.mufeng_mogu.get();
         }else if (this == BlockRegistry.nichanghuaPlant.get()){
             item = ItemRegistry.nichanghua.get();
@@ -95,7 +87,7 @@ public class PlantBlock extends BushBlock {
             item = ItemRegistry.qingxin.get();
         }else if (this == BlockRegistry.shumeiPlant.get()){
             item = ItemRegistry.shumei.get();
-        }else if (this == BlockRegistry.songrongPlant.get()){
+        }else if (this == BlockRegistry.songrongPlant.get() || this == BlockRegistry.songrongWallPlant.get()){
             item = ItemRegistry.songrong.get();
         }else if (this == BlockRegistry.tiantianhuaPlant.get()){
             item = ItemRegistry.tiantianhua.get();
@@ -105,7 +97,7 @@ public class PlantBlock extends BushBlock {
             item = ItemRegistry.xiaodengcao.get();
         }else if (this == BlockRegistry.xuekuiPlant.get()){
             item = ItemRegistry.xuekui.get();
-        }else if (this == BlockRegistry.youdengxunPlant.get()){
+        }else if (this == BlockRegistry.youdengxunPlant.get() || this == BlockRegistry.youdengxunWallPlant.get()){
             item = ItemRegistry.youdengxun.get();
         }else if (this == BlockRegistry.zhusunPlant.get()){
             item = ItemRegistry.zhusun.get();

@@ -16,10 +16,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class LieYanHuaCrop extends ModXCropBlock{
+public class LieYanHuaCrop extends XCropBlock {
 
-    public LieYanHuaCrop(CropUseBlockEnum blockEnum) {
-        super(blockEnum);
+    public LieYanHuaCrop(CropUseBlockEnum blockEnum, Properties properties) {
+        super(blockEnum, properties);
     }
 
     @Override

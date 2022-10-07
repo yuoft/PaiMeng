@@ -18,10 +18,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BingWuHuaCrop extends ModXCropBlock{
+public class BingWuHuaCrop extends XCropBlock {
 
-    public BingWuHuaCrop(CropUseBlockEnum blockEnum) {
-        super(blockEnum);
+    public BingWuHuaCrop(CropUseBlockEnum blockEnum, Properties properties) {
+        super(blockEnum, properties);
     }
 
     @Override

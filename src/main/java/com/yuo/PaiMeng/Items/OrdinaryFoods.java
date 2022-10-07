@@ -13,7 +13,7 @@ import java.util.List;
 public class OrdinaryFoods extends Item{
 
 	public OrdinaryFoods() {
-		super(new Properties().group(ModGroup.PaiMengFoods));
+		super(new Properties().group(ModGroup.PaiMengFoods).isImmuneToFire());
 	}
 
 	@Override

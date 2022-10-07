@@ -20,7 +20,7 @@ import java.util.Random;
 public class LieYanHuaPlant extends BushBlock {
 
     public LieYanHuaPlant(Properties builder) {
-        super(builder.setLightLevel(e -> 15));
+        super(builder);
     }
 
     //粒子

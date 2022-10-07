@@ -27,5 +27,7 @@ public class FeatureInit {
             () -> new NetherFeature(NetherConfig.CODEC));
     public static final RegistryObject<LavaFeature> LAVA_PLANT = FEATURES.register("lava_plant",
             () -> new LavaFeature(PlantConfig.CODEC));
+    public static final RegistryObject<WallFeature> WALL_PLANT = FEATURES.register("wall_plant",
+            () -> new WallFeature(PlantConfig.CODEC));
 
 }

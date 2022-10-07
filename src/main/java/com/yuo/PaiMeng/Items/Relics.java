@@ -25,7 +25,7 @@ public class Relics extends Item {
     private int exp = 0; //当前经验 0
 
     public Relics(int minLevel, int maxLevel) {
-        super(new Properties().group(ModGroup.PaiMengRelics).maxStackSize(1));
+        super(new Properties().group(ModGroup.PaiMengRelics).maxStackSize(1).isImmuneToFire());
         this.type = RelicsType.EMPTY;
         this.minStar = minLevel;
         this.maxStar = maxLevel;

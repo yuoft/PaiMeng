@@ -9,7 +9,7 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "paimeng:tianyun_caoshi_crop",
+              "block": "paimeng:mufeng_mogu_wall_crop",
               "properties": {
                 "age": "7"
               }
@@ -21,7 +21,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1,
-                "max": 5
+                "max": 2
               },
               "add": false
             },
@@ -31,7 +31,7 @@
               "formula": "minecraft:ore_drops"
             }
           ],
-          "name": "paimeng:tianyun_caoshi"
+          "name": "paimeng:mufeng_mogu"
         }
       ],
       "conditions": [
@@ -59,13 +59,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "paimeng:tianyun_caoshi_crop",
+              "block": "paimeng:mufeng_mogu_wall_crop",
               "properties": {
                 "age": "7"
               }
             }
           ],
-          "name": "paimeng:tianyun_caoshi_seed"
+          "name": "paimeng:mufeng_mogu_seed"
         }
       ],
       "conditions": [

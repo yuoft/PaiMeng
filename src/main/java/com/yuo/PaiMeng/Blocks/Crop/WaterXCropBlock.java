@@ -20,12 +20,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ModWaterCropBlock extends CropsBlock implements ILiquidContainer{
+public class WaterXCropBlock extends CropsBlock implements ILiquidContainer{
     private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
             zeroHardnessAndResistance().sound(SoundType.CROP); //作物
     private final CropUseBlockEnum useBlockEnum;
 
-    public ModWaterCropBlock(CropUseBlockEnum blockEnum) {
+    public WaterXCropBlock(CropUseBlockEnum blockEnum) {
         super(CROP);
         this.useBlockEnum = blockEnum;
     }

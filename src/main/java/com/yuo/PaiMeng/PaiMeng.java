@@ -16,6 +16,7 @@ import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import com.yuo.PaiMeng.WorldGen.FeatureInit;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -53,11 +54,8 @@ public class PaiMeng {
         event.enqueueWork( () -> {
             //能力实例 数据保存 默认创建
             CapabilityManager.INSTANCE.register(IBlowCapability.class, new ModStorage<>(), BlowCapability::new);
-
-            //实体属性
-            GlobalEntityTypeAttributes.put(EntityTypeRegister.BOAR.get(), BoarEntity.setCustomAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeRegister.CRANE.get(), CraneEntity.setCustomAttributes().create());
         });
+
 
     }
 

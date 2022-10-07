@@ -17,6 +17,9 @@ public class FeatureInit {
             () -> new AppleTreeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<AppleTreeFeature> PURPLE_APPLE_TREE = FEATURES.register("purple_apple_tree",
             () -> new AppleTreeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<WitheredTreeFeature> WITHERED_TREE = FEATURES.register("withered_tree",
+            () -> new WitheredTreeFeature(NoFeatureConfig.CODEC));
+
     public static final RegistryObject<RiverFeature> RIVER_PLANT = FEATURES.register("river_plant",
             () -> new RiverFeature(PlantConfig.CODEC));
     public static final RegistryObject<MountainFeature> MOUNTAIN_PLANT = FEATURES.register("mountain_plant",
@@ -27,7 +30,5 @@ public class FeatureInit {
             () -> new NetherFeature(NetherConfig.CODEC));
     public static final RegistryObject<LavaFeature> LAVA_PLANT = FEATURES.register("lava_plant",
             () -> new LavaFeature(PlantConfig.CODEC));
-    public static final RegistryObject<WallFeature> WALL_PLANT = FEATURES.register("wall_plant",
-            () -> new WallFeature(PlantConfig.CODEC));
 
 }

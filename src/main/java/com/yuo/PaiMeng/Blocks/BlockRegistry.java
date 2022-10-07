@@ -130,6 +130,7 @@ public class BlockRegistry {
 
     //树木
     public static RegistryObject<Block> appleLog = BLOCKS.register("apple_log", () -> new RotatedPillarBlock(LOG));
+    public static RegistryObject<Block> witheredLog = BLOCKS.register("withered_log", () -> new RotatedPillarBlock(LOG));
     public static RegistryObject<Block> applePlank = BLOCKS.register("apple_plank", () -> new RotatedPillarBlock(PLANK));
     public static RegistryObject<Block> appleLeaf = BLOCKS.register("apple_leaf", () -> new LeavesBlock(LEAF));
     public static RegistryObject<Block> appleSapling = BLOCKS.register("apple_sapling", () -> new AppleSapling(TreeInit.APPLE_TREE, SAPLING));

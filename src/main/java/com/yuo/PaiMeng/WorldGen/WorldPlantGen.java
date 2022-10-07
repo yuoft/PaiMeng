@@ -35,13 +35,8 @@ public class WorldPlantGen {
         if (key.equals(Biomes.CRIMSON_FOREST)) { //绯红森林
             addFeatureNether(generation, BlockRegistry.lieyanhuaHuaruiPlant.get().getDefaultState(), Blocks.CRIMSON_NYLIUM.getDefaultState(), 1);
         }
-        if (key.equals(Biomes.FOREST)) { //森林
-            addFeatureWallPlant(generation, BlockRegistry.moguWallPlant.get().getDefaultState(), 5, 5);
-            addFeatureWallPlant(generation, BlockRegistry.mufengMoguWallPlant.get().getDefaultState(), 5, 5);
-        }
         if (key.equals(Biomes.WARPED_FOREST)){ //诡异森林
             addFeatureNether(generation, BlockRegistry.youdengxunPlant.get().getDefaultState(), Blocks.WARPED_NYLIUM.getDefaultState(), 1);
-            addFeatureWallPlant(generation, BlockRegistry.youdengxunWallPlant.get().getDefaultState(), 5, 5);
         }
         if (key.equals(Biomes.DARK_FOREST) || key.equals(Biomes.DARK_FOREST_HILLS)){ //黑森林
             addFeaturePlainFlower(generation, BlockRegistry.xiaodengcaoPlant.get().getDefaultState(), 16, 3);
@@ -68,7 +63,6 @@ public class WorldPlantGen {
         }
         if (category.equals(Biome.Category.TAIGA)) { //针叶林
             addFeaturePlainFlower(generation, BlockRegistry.songrongPlant.get().getDefaultState(), 3, 1);
-            addFeatureWallPlant(generation, BlockRegistry.songrongWallPlant.get().getDefaultState(), 6, 5);
         }
         if (category.equals(Biome.Category.ICY)) { //冰原
             addFeaturePlainFlower(generation, BlockRegistry.bingwuhuaHuaduoPlant.get().getDefaultState(), 1, 1);
@@ -126,10 +120,10 @@ public class WorldPlantGen {
 
     /**
      * 高山生成
-     * @param builder
-     * @param state
-     * @param maxSize
-     * @param genCount
+     * @param builder bu
+     * @param state 要生成的方块
+     * @param maxSize 最大生成数量
+     * @param genCount 次数
      */
     private static void addFeatureMountain(BiomeGenerationSettingsBuilder builder, BlockState state, int maxSize, int genCount) {
         builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
@@ -139,20 +133,12 @@ public class WorldPlantGen {
 
     }
 
-    //墙上植物生成
-    private static void addFeatureWallPlant(BiomeGenerationSettingsBuilder builder, BlockState state, int maxSize, int genCount) {
-        builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
-                FeatureInit.WALL_PLANT.get().withConfiguration(new PlantConfig(state))
-                        .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).count(genCount)); //生成次数
-
-    }
-
     /**
      * 海洋生成
-     * @param builder
-     * @param state
+     * @param builder b
+     * @param state s
      * @param probability 概率
-     * @param genCount
+     * @param genCount c
      */
     private static void addFeatureOcean(BiomeGenerationSettingsBuilder builder, BlockState state, float probability, int genCount) {
         builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
@@ -162,10 +148,10 @@ public class WorldPlantGen {
 
     /**
      * 下界生成
-     * @param builder
-     * @param state
-     * @param down
-     * @param genCount
+     * @param builder b
+     * @param state s
+     * @param down d
+     * @param genCount c
      */
     private static void addFeatureNether(BiomeGenerationSettingsBuilder builder, BlockState state, BlockState down, int genCount) {
         builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION,
@@ -184,9 +170,9 @@ public class WorldPlantGen {
 
     /**
      * 岩浆边生成
-     * @param builder
-     * @param state
-     * @param genCount
+     * @param builder b
+     * @param state s
+     * @param genCount c
      */
     private static void addFeatureLava(BiomeGenerationSettingsBuilder builder, BlockState state, int genCount) {
         builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION,

@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -44,6 +45,7 @@ public class PaiMeng {
         FeatureInit.FEATURES.register(modEventBus);
         EffectRegistry.EFFECTS.register(modEventBus);
         EntityTypeRegister.ENTITY_TYPE.register(modEventBus);
+        ClientRegistry.registerKeyBinding(ClientProxy.KEY_OPEN_RELICS); //快捷键注册
         PROXY.init();
 //        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, WorldOreGen::generateOres); //注册矿物生成
     }

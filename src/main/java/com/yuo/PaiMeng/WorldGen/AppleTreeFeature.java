@@ -53,7 +53,7 @@ public class AppleTreeFeature extends Feature<NoFeatureConfig> {
         BlockPos down = pos.down();
         BlockState state = reader.getBlockState(down);
         ITag<Block> blockITag = BlockTags.getCollection().get(ModTags.APPLE_TREE_GROW);
-        if (blockITag != null && !state.getBlock().isIn(blockITag)){ //某些方块上生成
+        if (blockITag == null || !state.getBlock().isIn(blockITag) || !state.isSolid()){ //某些方块上生成
             return false;
         }
         // 树干
@@ -80,8 +80,8 @@ public class AppleTreeFeature extends Feature<NoFeatureConfig> {
 
                         if (reader.isAirBlock(blockpos)) {
                             reader.setBlockState(blockpos, LEAVES.with(LeavesBlock.DISTANCE, Math.max(Math.min(Math.abs(xOffset + zOffset - 1), 7), 1)), 3);
-                            //果实 30%概率生成
-                            if (reader.isAirBlock(blockpos.down()) && rand.nextInt(100) > 70){
+                            //果实 20%概率生成
+                            if (reader.isAirBlock(blockpos.down()) && rand.nextInt(100) > 80){
                                 reader.setBlockState(new BlockPos(x, y - 1, z), CROP, 3);
                             }
                         }

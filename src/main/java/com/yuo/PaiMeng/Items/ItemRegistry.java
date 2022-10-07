@@ -478,6 +478,8 @@ public class ItemRegistry {
 	//树
 	public static RegistryObject<BlockItem> appleLog = ITEMS.register("apple_log",
 			() -> new BlockItem(BlockRegistry.appleLog.get(), GROUP));
+	public static RegistryObject<BlockItem> witheredLog = ITEMS.register("withered_log",
+			() -> new BlockItem(BlockRegistry.witheredLog.get(), GROUP));
 	public static RegistryObject<BlockItem> applePlank = ITEMS.register("apple_plank",
 			() -> new BlockItem(BlockRegistry.applePlank.get(), GROUP));
 	public static RegistryObject<BlockItem> appleLeaf = ITEMS.register("apple_leaf",

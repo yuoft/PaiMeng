@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.PotRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -26,7 +26,7 @@ public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
 
     public PotRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 4,4,168,76); //绘制背景
-        this.icon = helper.createDrawableIngredient(new ItemStack(ItemRegistry.cookingPot.get())); //绘制合成方块
+        this.icon = helper.createDrawableIngredient(new ItemStack(PMItems.cookingPot.get())); //绘制合成方块
         this.fire = helper.createDrawable(TEXTURE, 176, 0, 14,15);
     }
 
@@ -42,7 +42,7 @@ public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
 
     @Override
     public String getTitle() {
-        return ItemRegistry.cookingPot.get().getName().getString();
+        return PMItems.cookingPot.get().getName().getString();
     }
 
     @Override

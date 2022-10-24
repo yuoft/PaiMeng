@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Container;
 
 import com.yuo.PaiMeng.Items.EvolutionDust;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Recipes.SynPlatRecipe;
 import com.yuo.PaiMeng.Tiles.SynPlatTile;
@@ -104,8 +104,8 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
         ItemStack slot2 = inventory.getStackInSlot(2);
         ItemStack slot3 = inventory.getStackInSlot(3); //转呗催化剂
         return isPotionEqual(slot0, slot1) && slot0.getItem() instanceof PotionItem
-                && slot2.getItem() == ItemRegistry.drugBottle.get() && slot1.getItem() instanceof PotionItem
-                && slot3.getItem() == ItemRegistry.shanbianzhichen.get();
+                && slot2.getItem() == PMItems.drugBottle.get() && slot1.getItem() instanceof PotionItem
+                && slot3.getItem() == PMItems.shanbianzhichen.get();
     }
 
     /**
@@ -138,9 +138,9 @@ public class SynPlatContainer extends RecipeBookContainer<CraftingInventory> {
     private ItemStack getDrug(SynPlatInventory inventory){
         ItemStack slot0 = inventory.getStackInSlot(0);
         if (slot0.getOrCreateTag().contains("Potion")){
-            return PotionUtils.addPotionToItemStack(new ItemStack(ItemRegistry.drug.get()), PotionUtils.getPotionFromItem(slot0));
+            return PotionUtils.addPotionToItemStack(new ItemStack(PMItems.drug.get()), PotionUtils.getPotionFromItem(slot0));
         }else if (slot0.getOrCreateTag().contains("CustomPotionEffects")){
-            return PotionUtils.appendEffects(new ItemStack(ItemRegistry.drug.get()), PotionUtils.getEffectsFromStack(slot0));
+            return PotionUtils.appendEffects(new ItemStack(PMItems.drug.get()), PotionUtils.getEffectsFromStack(slot0));
         }else return ItemStack.EMPTY;
     }
 

@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.WorldGen;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -24,40 +24,40 @@ public class WorldOreGen {
         //主世界
         if (!(event.getCategory().equals(Biome.Category.THEEND) || event.getCategory().equals(Biome.Category.NETHER))){
             if (event.getCategory().equals(Biome.Category.ICY)){ //冰原
-                addFeatureOverWorld(generation, BlockRegistry.xingyinOre.get().getDefaultState(),
+                addFeatureOverWorld(generation, PMBlocks.xingyinOre.get().getDefaultState(),
                         8, 8, 32, 6);
             }
             if (event.getCategory().equals(Biome.Category.DESERT)){ //沙漠
-                addFeatureOverWorld(generation, BlockRegistry.shipoOre.get().getDefaultState(),
+                addFeatureOverWorld(generation, PMBlocks.shipoOre.get().getDefaultState(),
                         4, 16, 64, 4);
             }
             if (event.getCategory().equals(Biome.Category.OCEAN)){ //海洋
-                addFeatureOverWorld(generation, BlockRegistry.dianqiShuijingOre.get().getDefaultState(),
+                addFeatureOverWorld(generation, PMBlocks.dianqiShuijingOre.get().getDefaultState(),
                         4, 8, 48, 4);
             }
             if (event.getCategory().equals(Biome.Category.MESA)){ //平顶山
-                addFeatureOverWorld(generation, BlockRegistry.jinghuaGusuiOre.get().getDefaultState(),
+                addFeatureOverWorld(generation, PMBlocks.jinghuaGusuiOre.get().getDefaultState(),
                         4, 16, 48, 4);
-                addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
+                addFeatureOverWorld(generation, PMBlocks.shuijingOre.get().getDefaultState(),
                         4, 0, 16, 6);
             }
-            addFeatureOverWorld(generation, BlockRegistry.shuijingOre.get().getDefaultState(),
+            addFeatureOverWorld(generation, PMBlocks.shuijingOre.get().getDefaultState(),
                     4, 8, 32, 4);
-            addFeatureOverWorld(generation, BlockRegistry.baitieOre.get().getDefaultState(),
+            addFeatureOverWorld(generation, PMBlocks.baitieOre.get().getDefaultState(),
                     8, 0, 32, 6);
-            addFeatureOverWorld(generation, BlockRegistry.heitieOre.get().getDefaultState(),
+            addFeatureOverWorld(generation, PMBlocks.heitieOre.get().getDefaultState(),
                     10, 0, 96, 8);
         }
         //下届
         if (event.getCategory().equals(Biome.Category.NETHER)){
-            addFeatureNether(generation, BlockRegistry.mojingOre.get().getDefaultState(),
+            addFeatureNether(generation, PMBlocks.mojingOre.get().getDefaultState(),
                     5, 8, 32, 16);
-            addFeatureNether(generation, BlockRegistry.zijingOre.get().getDefaultState(),
+            addFeatureNether(generation, PMBlocks.zijingOre.get().getDefaultState(),
                     5, 96, 128, 16);
         }
         //末地
         if (event.getCategory().equals(Biome.Category.THEEND)){
-            addFeatureTheend(generation, BlockRegistry.yeboshiOre.get().getDefaultState(),
+            addFeatureTheend(generation, PMBlocks.yeboshiOre.get().getDefaultState(),
                     4, 32, 48, 4);
         }
     }

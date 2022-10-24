@@ -1,17 +1,10 @@
 package com.yuo.PaiMeng.Event;
 
-import com.yuo.PaiMeng.Gui.PotScreen;
-import com.yuo.PaiMeng.Gui.RelicsButton;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -26,7 +19,7 @@ public class ClientEventHandler {
 //            if (item instanceof Drug){
 //            }
 //        }
-        event.getItemColors().register((stack, color) -> color > 0 ? -1 : PotionUtils.getColor(stack), ItemRegistry.drug.get());
+        event.getItemColors().register((stack, color) -> color > 0 ? -1 : PotionUtils.getColor(stack), PMItems.drug.get());
     }
 
 

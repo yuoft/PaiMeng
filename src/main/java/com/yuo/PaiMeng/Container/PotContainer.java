@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Container;
 
-import com.yuo.PaiMeng.Items.OrdinaryFoods;
+import com.yuo.PaiMeng.Items.PMFoods;
 import com.yuo.PaiMeng.NetWork.CookingPacket;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Tiles.PotTile;
@@ -110,7 +110,7 @@ public class PotContainer extends Container {
             ItemStack itemStack1 = slot.getStack();
             itemstack = itemStack1.copy();
             if (index > 4){
-                if (itemStack1.getItem() instanceof OrdinaryFoods)
+                if (itemStack1.getItem() instanceof PMFoods)
                     if (!this.mergeItemStack(itemStack1, 0, 4, false)) return ItemStack.EMPTY;
                 if (index < 32) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;

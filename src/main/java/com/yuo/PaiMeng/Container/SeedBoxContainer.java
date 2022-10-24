@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Container;
 
-import com.yuo.PaiMeng.Items.OrdinaryFoods;
+import com.yuo.PaiMeng.Items.PMFoods;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Recipes.SeedBoxRecipe;
 import net.minecraft.entity.player.PlayerEntity;
@@ -95,7 +95,7 @@ public class SeedBoxContainer extends RecipeBookContainer<CraftingInventory> {
                 slot.onSlotChange(itemStack1, itemstack);
             }
             else if (index > 1){
-                if (itemStack1.getItem() instanceof OrdinaryFoods) //包含在配方中
+                if (itemStack1.getItem() instanceof PMFoods) //包含在配方中
                     if (!this.mergeItemStack(itemStack1, 0, 1, false)) return ItemStack.EMPTY;
                 if (index < 29) { //从物品栏到快捷栏
                     if (!this.mergeItemStack(itemStack1, 30, 38, false)) return ItemStack.EMPTY;

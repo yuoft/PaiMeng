@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.WorldGen;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
@@ -30,81 +30,81 @@ public class WorldPlantGen {
         RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
         //获取生物群系列表
         if (key.equals(Biomes.BAMBOO_JUNGLE) || key.equals(Biomes.BAMBOO_JUNGLE_HILLS)) { //竹林
-            addFeaturePlainFlower(generation, BlockRegistry.zhusunPlant.get().getDefaultState(), 6, 2);
+            addFeaturePlainFlower(generation, PMBlocks.zhusunPlant.get().getDefaultState(), 6, 2);
         }
         if (key.equals(Biomes.CRIMSON_FOREST)) { //绯红森林
-            addFeatureNether(generation, BlockRegistry.lieyanhuaHuaruiPlant.get().getDefaultState(), Blocks.CRIMSON_NYLIUM.getDefaultState(), 1);
+            addFeatureNether(generation, PMBlocks.lieyanhuaHuaruiPlant.get().getDefaultState(), Blocks.CRIMSON_NYLIUM.getDefaultState(), 1);
         }
         if (key.equals(Biomes.WARPED_FOREST)){ //诡异森林
-            addFeatureNether(generation, BlockRegistry.youdengxunPlant.get().getDefaultState(), Blocks.WARPED_NYLIUM.getDefaultState(), 1);
+            addFeatureNether(generation, PMBlocks.youdengxunPlant.get().getDefaultState(), Blocks.WARPED_NYLIUM.getDefaultState(), 1);
         }
         if (key.equals(Biomes.DARK_FOREST) || key.equals(Biomes.DARK_FOREST_HILLS)){ //黑森林
-            addFeaturePlainFlower(generation, BlockRegistry.xiaodengcaoPlant.get().getDefaultState(), 16, 3);
+            addFeaturePlainFlower(generation, PMBlocks.xiaodengcaoPlant.get().getDefaultState(), 16, 3);
         }
         if (key.equals(Biomes.BIRCH_FOREST) || key.equals(Biomes.BIRCH_FOREST_HILLS) || key.equals(Biomes.TALL_BIRCH_FOREST)
                 || key.equals(Biomes.TALL_BIRCH_HILLS)){ //白桦林
-            addFeaturePlainFlower(generation, BlockRegistry.gougouguoPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.gougouguoPlant.get().getDefaultState(), 3, 1);
         }
         if (key.equals(Biomes.FOREST)){ //森林
-            addFeaturePlainFlower(generation, BlockRegistry.luoluomeiPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.luoluomeiPlant.get().getDefaultState(), 3, 1);
         }
         if (key.equals(Biomes.END_BARRENS) || key.equals(Biomes.END_MIDLANDS)){ //末地荒岛 中型末地岛屿
-            addFeaturePlainFlower(generation, BlockRegistry.tianyunCaoshiPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.tianyunCaoshiPlant.get().getDefaultState(), 1, 1);
         }
         if (key.equals(Biomes.SMALL_END_ISLANDS)){ //小型末地岛屿
-            addFeaturePlainFlower(generation, BlockRegistry.mingcaoPlant.get().getDefaultState(), 1, 3);
+            addFeaturePlainFlower(generation, PMBlocks.mingcaoPlant.get().getDefaultState(), 1, 3);
         }
         if (key.equals(Biomes.FLOWER_FOREST)){ //繁花森林
-            addFeaturePlainFlower(generation, BlockRegistry.liuliBaihePlant.get().getDefaultState(), 3, 1);
-            addFeaturePlainFlower(generation, BlockRegistry.nichanghuaPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.liuliBaihePlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.nichanghuaPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.JUNGLE)) { //丛林
-            addFeaturePlainFlower(generation, BlockRegistry.moguPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.moguPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.TAIGA)) { //针叶林
-            addFeaturePlainFlower(generation, BlockRegistry.songrongPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.songrongPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.ICY)) { //冰原
-            addFeaturePlainFlower(generation, BlockRegistry.bingwuhuaHuaduoPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.bingwuhuaHuaduoPlant.get().getDefaultState(), 1, 1);
         }
         if (category.equals(Biome.Category.DESERT)) { //沙漠
-            addFeaturePlainFlower(generation, BlockRegistry.jueyunJiaojiaoPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.jueyunJiaojiaoPlant.get().getDefaultState(), 1, 1);
         }
         if (category.equals(Biome.Category.OCEAN)) { //海洋
-            addFeatureOcean(generation, BlockRegistry.haicaoPlant.get().getDefaultState(), 0.4f, 16);
-            addFeatureOcean(generation, BlockRegistry.hailingzhiPlant.get().getDefaultState(), 0.05f, 8);
+            addFeatureOcean(generation, PMBlocks.haicaoPlant.get().getDefaultState(), 0.4f, 16);
+            addFeatureOcean(generation, PMBlocks.hailingzhiPlant.get().getDefaultState(), 0.05f, 8);
         }
         if (category.equals(Biome.Category.MESA)) { //平顶山
-            addFeaturePlainFlower(generation, BlockRegistry.xuekuiPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.xuekuiPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.SWAMP)) { //沼泽
-            addFeatureRiver(generation, BlockRegistry.maweiPlant.get().getDefaultState(),  1);
+            addFeatureRiver(generation, PMBlocks.maweiPlant.get().getDefaultState(),  1);
         }
         if (category.equals(Biome.Category.MUSHROOM)) { //蘑菇岛
-            addFeaturePlainFlower(generation, BlockRegistry.mufengMoguPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.mufengMoguPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.PLAINS)) { //平原
-            addFeaturePlainFlower(generation, BlockRegistry.fengchejuPlant.get().getDefaultState(), 1, 1);
-            addFeaturePlainFlower(generation, BlockRegistry.pugongyingPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.fengchejuPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.pugongyingPlant.get().getDefaultState(), 1, 1);
         }
         if (category.equals(Biome.Category.BEACH)) { //海滩
-            addFeatureRiver(generation, BlockRegistry.dudulianPlant.get().getDefaultState(),  4);
-            addFeatureOcean(generation, BlockRegistry.haicaoPlant.get().getDefaultState(), 0.4f, 8);
+            addFeatureRiver(generation, PMBlocks.dudulianPlant.get().getDefaultState(),  4);
+            addFeatureOcean(generation, PMBlocks.haicaoPlant.get().getDefaultState(), 0.4f, 8);
         }
         //岩浆湖
-        addFeatureLava(generation, BlockRegistry.lieyanhuaHuaruiPlant.get().getDefaultState(), 8);
+        addFeatureLava(generation, PMBlocks.lieyanhuaHuaruiPlant.get().getDefaultState(), 8);
         //河流
-        addFeatureRiver(generation, BlockRegistry.lianpengPlant.get().getDefaultState(),  4);
-        addFeatureRiver(generation, BlockRegistry.maweiPlant.get().getDefaultState(),  4);
-        addFeatureRiver(generation, BlockRegistry.jinyucaoPlant.get().getDefaultState(), 4);
+        addFeatureRiver(generation, PMBlocks.lianpengPlant.get().getDefaultState(),  4);
+        addFeatureRiver(generation, PMBlocks.maweiPlant.get().getDefaultState(),  4);
+        addFeatureRiver(generation, PMBlocks.jinyucaoPlant.get().getDefaultState(), 4);
         //高山
-        addFeatureMountain(generation, BlockRegistry.ceciliaHuaPlant.get().getDefaultState(), 1, 1);
-        addFeatureMountain(generation, BlockRegistry.liuliDaiPlant.get().getDefaultState(), 1, 1);
-        addFeatureMountain(generation, BlockRegistry.qingxinPlant.get().getDefaultState(), 1, 1);
+        addFeatureMountain(generation, PMBlocks.ceciliaHuaPlant.get().getDefaultState(), 1, 1);
+        addFeatureMountain(generation, PMBlocks.liuliDaiPlant.get().getDefaultState(), 1, 1);
+        addFeatureMountain(generation, PMBlocks.qingxinPlant.get().getDefaultState(), 1, 1);
 
-        addFeaturePlainFlower(generation, BlockRegistry.bohePlant.get().getDefaultState(), 1, 1);
-        addFeaturePlainFlower(generation, BlockRegistry.tiantianhuaPlant.get().getDefaultState(), 1, 1);
-        addFeaturePlainFlower(generation, BlockRegistry.shumeiPlant.get().getDefaultState(), 1, 1);
+        addFeaturePlainFlower(generation, PMBlocks.bohePlant.get().getDefaultState(), 1, 1);
+        addFeaturePlainFlower(generation, PMBlocks.tiantianhuaPlant.get().getDefaultState(), 1, 1);
+        addFeaturePlainFlower(generation, PMBlocks.shumeiPlant.get().getDefaultState(), 1, 1);
     }
 
     /**

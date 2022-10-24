@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,11 +26,11 @@ public class EvolutionDust extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        if (stack.getItem() == ItemRegistry.shanbianzhichen.get()){
+        if (stack.getItem() == PMItems.shanbianzhichen.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen1"));
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.shanbianzhichen2"));
         }
-        if (stack.getItem() == ItemRegistry.yimengrongmei.get()){
+        if (stack.getItem() == PMItems.yimengrongmei.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.yimengrongemi"));
         }
     }
@@ -42,17 +42,17 @@ public class EvolutionDust extends Item {
         BlockState state = world.getBlockState(pos);
         ItemStack stack = context.getItem();
         if (state.getBlock() == Blocks.FARMLAND && world.isAirBlock(pos.up())){ //是耕地 上方是空气
-            world.setBlockState(pos, BlockRegistry.commonFarmland.get().getDefaultState(), 2);
+            world.setBlockState(pos, PMBlocks.commonFarmland.get().getDefaultState(), 2);
             stack.shrink(1);
             return ActionResultType.SUCCESS;
         }
         if (state.getBlock() == Blocks.FARMLAND && world.hasWater(pos.up())){ //上方是水
-            world.setBlockState(pos, BlockRegistry.aquaticFarmland.get().getDefaultState(), 2);
+            world.setBlockState(pos, PMBlocks.aquaticFarmland.get().getDefaultState(), 2);
             stack.shrink(2);
             return ActionResultType.SUCCESS;
         }
-        if (state.getBlock() == BlockRegistry.commonFarmland.get()){ //是玄此玉田
-            world.setBlockState(pos, BlockRegistry.fertileFarmland.get().getDefaultState(), 2);
+        if (state.getBlock() == PMBlocks.commonFarmland.get()){ //是玄此玉田
+            world.setBlockState(pos, PMBlocks.fertileFarmland.get().getDefaultState(), 2);
             stack.shrink(2);
             return ActionResultType.SUCCESS;
         }

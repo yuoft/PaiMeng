@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.tab;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -22,7 +22,7 @@ public class ModGroup{
 		//图标
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.xiantiaoqiang.get());
+			return new ItemStack(PMItems.xiantiaoqiang.get());
 		}
 
 	}
@@ -33,7 +33,7 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.longya1.get());
+			return new ItemStack(PMItems.longya1.get());
 		}
 
 	}
@@ -44,7 +44,7 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.shourou.get());
+			return new ItemStack(PMItems.shourou.get());
 		}
 
 	}
@@ -55,7 +55,7 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.sunAppleSapling.get());
+			return new ItemStack(PMItems.sunAppleSapling.get());
 		}
 
 	}
@@ -66,7 +66,7 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.juedoushiRelics.get());
+			return new ItemStack(PMItems.juedoushiRelics.get());
 		}
 
 	}
@@ -78,7 +78,7 @@ public class ModGroup{
 		}
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.drugBottle.get());
+			return new ItemStack(PMItems.drugBottle.get());
 		}
 
 	}
@@ -90,7 +90,7 @@ public class ModGroup{
 
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ItemRegistry.cookingBench.get());
+			return new ItemStack(PMItems.cookingBench.get());
 		}
 	}
 }

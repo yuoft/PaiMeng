@@ -23,11 +23,11 @@ import java.util.List;
 public class RelicsBox extends Item {
     private int level;
 
-    private final static List<Item> RELICS_FIVE = Arrays.asList(ItemRegistry.juedoushiRelics.get(), ItemRegistry.yuetuanRelics.get());
-    private final static List<Item> RELICS_FOUR = Arrays.asList(ItemRegistry.yongshiRelics.get(), ItemRegistry.liufangzheRelics.get(),
-            ItemRegistry.jiaoguanRelics.get());
-    private final static List<Item> RELICS_THREE = Arrays.asList(ItemRegistry.xingyunerRelics.get(), ItemRegistry.youyiRelics.get(),
-            ItemRegistry.maoxianjiaRelics.get());
+    private final static List<Item> RELICS_FIVE = Arrays.asList(PMItems.juedoushiRelics.get(), PMItems.yuetuanRelics.get());
+    private final static List<Item> RELICS_FOUR = Arrays.asList(PMItems.yongshiRelics.get(), PMItems.liufangzheRelics.get(),
+            PMItems.jiaoguanRelics.get());
+    private final static List<Item> RELICS_THREE = Arrays.asList(PMItems.xingyunerRelics.get(), PMItems.youyiRelics.get(),
+            PMItems.maoxianjiaRelics.get());
 
     public RelicsBox(int level) {
         super(new Properties().group(ModGroup.PaiMengRelics).isImmuneToFire());

@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
+import com.yuo.PaiMeng.Items.PMItems;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ExperienceOrbEntity;
@@ -105,18 +105,18 @@ public class AppleCrop extends CropsBlock{
 
     //生长时年龄增长随机数
     protected int getAgeIncrease(World worldIn, BlockState state) {
-        return state.getBlock() == BlockRegistry.sunAppleCrop.get() ?
+        return state.getBlock() == PMBlocks.sunAppleCrop.get() ?
                 MathHelper.nextInt(worldIn.rand, 0, 3) : MathHelper.nextInt(worldIn.rand, 1, 4);
     }
 
     //是否能放置
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        if (state.getBlock() == BlockRegistry.appleLeaf.get()){
+        if (state.getBlock() == PMBlocks.appleLeaf.get()){
             return true;
         }
         BlockState blockState = worldIn.getBlockState(pos.up());
-        if (blockState.getBlock() == BlockRegistry.appleLeaf.get()){
+        if (blockState.getBlock() == PMBlocks.appleLeaf.get()){
             return true;
         }
         return super.isValidPosition(state, worldIn, pos);
@@ -125,7 +125,7 @@ public class AppleCrop extends CropsBlock{
     //苹果能使用骨粉催熟
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-        return state.getBlock() == BlockRegistry.appleCrop.get();
+        return state.getBlock() == PMBlocks.appleCrop.get();
     }
 
     @Override
@@ -162,14 +162,14 @@ public class AppleCrop extends CropsBlock{
     private void spawnDrop(World world, BlockPos pos, Random random, BlockState state, boolean flag){
         ItemStack stack = ItemStack.EMPTY;
         int exp = 0;
-        if (state.getBlock() == BlockRegistry.appleCrop.get()){
-            stack = new ItemStack(ItemRegistry.pingguo.get());
+        if (state.getBlock() == PMBlocks.appleCrop.get()){
+            stack = new ItemStack(PMItems.pingguo.get());
             exp = random.nextInt(2) + 1;
-        }else if (state.getBlock() == BlockRegistry.sunAppleCrop.get()){
-            stack = new ItemStack(ItemRegistry.riluoguo.get());
+        }else if (state.getBlock() == PMBlocks.sunAppleCrop.get()){
+            stack = new ItemStack(PMItems.riluoguo.get());
             exp = random.nextInt(4) + 1;
-        }else if (state.getBlock() == BlockRegistry.purpleAppleCrop.get()){
-            stack = new ItemStack(ItemRegistry.jingua.get());
+        }else if (state.getBlock() == PMBlocks.purpleAppleCrop.get()){
+            stack = new ItemStack(PMItems.jingua.get());
             exp = random.nextInt(3) + 1;
         }
         world.addEntity(new ItemEntity(world, pos.getX() + random.nextDouble(), pos.getY(), pos.getZ() + random.nextDouble(), stack));

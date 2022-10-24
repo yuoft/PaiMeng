@@ -17,17 +17,17 @@ public class OrdinaryOre extends OreBlock {
 
     @Override
     protected int getExperience(Random rand) {
-        if (this == BlockRegistry.jinghuaGusuiOre.get()){
+        if (this == PMBlocks.jinghuaGusuiOre.get()){
             return MathHelper.nextInt(rand, 3, 7);
-        }else if (this == BlockRegistry.mojingOre.get()){
+        }else if (this == PMBlocks.mojingOre.get()){
             return MathHelper.nextInt(rand, 3, 6);
-        }else if (this == BlockRegistry.shipoOre.get()){
+        }else if (this == PMBlocks.shipoOre.get()){
             return MathHelper.nextInt(rand, 2, 5);
-        }else if (this == BlockRegistry.shuijingOre.get()){
+        }else if (this == PMBlocks.shuijingOre.get()){
             return MathHelper.nextInt(rand, 5, 10);
-        }else if (this == BlockRegistry.yeboshiOre.get()){
+        }else if (this == PMBlocks.yeboshiOre.get()){
             return MathHelper.nextInt(rand, 3, 6);
-        }else if (this == BlockRegistry.zijingOre.get()){
+        }else if (this == PMBlocks.zijingOre.get()){
             return MathHelper.nextInt(rand, 2, 6);
         }
         return 0;

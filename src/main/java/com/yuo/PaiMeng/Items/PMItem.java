@@ -11,16 +11,16 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class OrdinaryItem extends Item {
-    public OrdinaryItem() {
+public class PMItem extends Item {
+    public PMItem() {
         super(new Properties().group(ModGroup.PaiMengMaterial));
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         Item item = stack.getItem();
-        if (item == ItemRegistry.danshoujian.get() || item == ItemRegistry.shuangshoujian.get() || item == ItemRegistry.changqiang.get()
-                || item == ItemRegistry.gong.get() || item == ItemRegistry.faqi.get()){
+        if (item == PMItems.danshoujian.get() || item == PMItems.shuangshoujian.get() || item == PMItems.changqiang.get()
+                || item == PMItems.gong.get() || item == PMItems.faqi.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.star4"));
         }
     }

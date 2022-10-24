@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import com.yuo.PaiMeng.Recipes.CookingRecipe;
@@ -85,10 +85,10 @@ public class JeiPlugin implements IModPlugin {
     //注册机器合成
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingPot.get()), PotRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingBench.get()), BenchRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.cookingBench.get()), CookingRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.syntheticPlatform.get()), SynPlatRecipeCategory.UID);
-        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.huazhongxia.get()), SeedBoxRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.cookingPot.get()), PotRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.cookingBench.get()), BenchRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.cookingBench.get()), CookingRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.syntheticPlatform.get()), SynPlatRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.huazhongxia.get()), SeedBoxRecipeCategory.UID);
     }
 }

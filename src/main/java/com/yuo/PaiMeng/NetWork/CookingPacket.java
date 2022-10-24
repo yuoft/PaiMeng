@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.NetWork;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Tiles.BenchTile;
 import com.yuo.PaiMeng.Tiles.PotTile;
@@ -125,11 +125,11 @@ public class CookingPacket {
     public static void spawnFood(World world, TileEntity tile){
         Random rand = world.rand;
         if (count > 0 && rand.nextDouble() > 0.99 - (star - 1) * 0.01d){ //1% + 每级星级增加1%概率产生 派蒙
-            world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(),pos.getZ(), new ItemStack(ItemRegistry.paimengFood.get())));
+            world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(),pos.getZ(), new ItemStack(PMItems.paimengFood.get())));
         }
         //烹饪失败
         if (count == 0 && rand.nextDouble() > 0.97 - (star - 1) * 0.01d){ //3% + 每级星级增加1%概率产生 裁决之时
-            ItemStack stack = new ItemStack(ItemRegistry.bugFood.get());
+            ItemStack stack = new ItemStack(PMItems.bugFood.get());
             if (tile instanceof PotTile){
                 ItemStack itemStack = ((PotTile) tile).getStackInSlot(4);
                 if (itemStack.isEmpty()){

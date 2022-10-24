@@ -22,11 +22,11 @@ public class RelicsExp extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         Item item = stack.getItem();
-        if (item == ItemRegistry.relicsExpBig.get()){
+        if (item == PMItems.relicsExpBig.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_exp_big0"));
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_exp_big1"));
         }
-        if (item == ItemRegistry.relicsExpSmall.get()){
+        if (item == PMItems.relicsExpSmall.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_exp_small0"));
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.relics_exp_small1"));
         }

@@ -3,7 +3,7 @@ package com.yuo.PaiMeng.Event;
 import com.yuo.PaiMeng.Capability.IBlowCapability;
 import com.yuo.PaiMeng.Capability.ModCapability;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Items.RelicsHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -252,10 +252,10 @@ public class EventHelper {
     }
 
     //兽肉
-    public static LootEntry.Builder<?> shourouEntry = ItemLootEntry.builder(ItemRegistry.shourou.get()).acceptFunction(SetCount.builder(new RandomValueRange(0, 2)))
+    public static LootEntry.Builder<?> shourouEntry = ItemLootEntry.builder(PMItems.shourou.get()).acceptFunction(SetCount.builder(new RandomValueRange(0, 2)))
             .acceptFunction(LootingEnchantBonus.builder(new RandomValueRange(0, 3)));
     //松果
-    public static LootEntry.Builder<?> songguoEntry = ItemLootEntry.builder(ItemRegistry.songguo.get()).acceptFunction(SetCount.builder(new RandomValueRange(1, 2)))
+    public static LootEntry.Builder<?> songguoEntry = ItemLootEntry.builder(PMItems.songguo.get()).acceptFunction(SetCount.builder(new RandomValueRange(1, 2)))
             .acceptFunction(ExplosionDecay.builder())
             .acceptCondition(TableBonus.builder(Enchantments.FORTUNE, 0.05f, 0.073f, 0.105f, 0.125f, 0.15f));
 

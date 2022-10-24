@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.WorldGen;
 
 import com.mojang.serialization.Codec;
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -25,11 +25,11 @@ public class OceanFeature extends Feature<OceanProbabilityConfig> {
             BlockState blockstate = config.getState();
             BlockState state = reader.getBlockState(pos.down());
             if ((state.matchesBlock(Blocks.SAND) || state.matchesBlock(Blocks.GRAVEL)) && flag){ //下面是沙子或沙砾
-                if (blockstate.matchesBlock(BlockRegistry.haicaoPlant.get()) && k + 6 >= 63){ //海草 距海平面小于6格
+                if (blockstate.matchesBlock(PMBlocks.haicaoPlant.get()) && k + 6 >= 63){ //海草 距海平面小于6格
                     reader.setBlockState(pos, blockstate, 3);
                     return true;
                 }
-                if (blockstate.matchesBlock(BlockRegistry.hailingzhiPlant.get()) && k + 15 <= 63){ //海灵芝 大于15格
+                if (blockstate.matchesBlock(PMBlocks.hailingzhiPlant.get()) && k + 15 <= 63){ //海灵芝 大于15格
                     reader.setBlockState(pos, blockstate, 3);
                     return true;
                 }

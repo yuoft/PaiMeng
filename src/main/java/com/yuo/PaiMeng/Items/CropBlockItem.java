@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Blocks.Crop.WallXCrop;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -9,13 +9,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
@@ -24,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -64,15 +60,15 @@ public class CropBlockItem extends BlockNamedItem {
         BlockState blockGrow = world.getBlockState(pos);//可种植方块
         switch (useBlockEnum) {
             case COMMON:
-                if (blockGrow.matchesBlock(BlockRegistry.commonFarmland.get()))
+                if (blockGrow.matchesBlock(PMBlocks.commonFarmland.get()))
                     return resultType(context);
                 else return funb(world, player);
             case FERTILE:
-                if (blockGrow.matchesBlock(BlockRegistry.fertileFarmland.get()))
+                if (blockGrow.matchesBlock(PMBlocks.fertileFarmland.get()))
                     return resultType(context);
                 else return funb(world, player);
             case AQUATIC:
-                if (blockGrow.matchesBlock(BlockRegistry.aquaticFarmland.get()))
+                if (blockGrow.matchesBlock(PMBlocks.aquaticFarmland.get()))
                     return resultType(context);
                 else return funb(world, player);
             case LOGS:
@@ -156,14 +152,14 @@ public class CropBlockItem extends BlockNamedItem {
      * @return 作物方块
      */
     private Block getWallCrop(Item seed) {
-        if (seed == ItemRegistry.moguSeed.get()){
-            return BlockRegistry.moguWallCrop.get();
-        }else if (seed == ItemRegistry.mufengMoguSeed.get()){
-            return BlockRegistry.mufengMoguWallCrop.get();
-        }else if (seed == ItemRegistry.songrongSeed.get()){
-            return BlockRegistry.songrongWallCrop.get();
-        }else if (seed == ItemRegistry.youdengxunSeed.get()){
-            return BlockRegistry.youdengxunWallCrop.get();
+        if (seed == PMItems.moguSeed.get()){
+            return PMBlocks.moguWallCrop.get();
+        }else if (seed == PMItems.mufengMoguSeed.get()){
+            return PMBlocks.mufengMoguWallCrop.get();
+        }else if (seed == PMItems.songrongSeed.get()){
+            return PMBlocks.songrongWallCrop.get();
+        }else if (seed == PMItems.youdengxunSeed.get()){
+            return PMBlocks.youdengxunWallCrop.get();
         }
         return Blocks.AIR;
     }

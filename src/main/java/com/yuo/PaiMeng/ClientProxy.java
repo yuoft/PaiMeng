@@ -1,12 +1,12 @@
 package com.yuo.PaiMeng;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Container.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Entity.EntityTypeRegister;
 import com.yuo.PaiMeng.Entity.Render.BoarRender;
 import com.yuo.PaiMeng.Entity.Render.CraneRender;
 import com.yuo.PaiMeng.Gui.*;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsHelper;
 import com.yuo.PaiMeng.Render.BenchTileTER;
@@ -50,9 +50,9 @@ public class ClientProxy extends CommonProxy{
 
     private  void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            RenderTypeLookup.setRenderLayer(BlockRegistry.cookingPot.get(), RenderType.getCutoutMipped()); //不完整方块渲染
-            RenderTypeLookup.setRenderLayer(BlockRegistry.cookingBench.get(), RenderType.getCutout());
-            RenderTypeLookup.setRenderLayer(BlockRegistry.zhusunCrop.get(), RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(PMBlocks.cookingPot.get(), RenderType.getCutoutMipped()); //不完整方块渲染
+            RenderTypeLookup.setRenderLayer(PMBlocks.cookingBench.get(), RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(PMBlocks.zhusunCrop.get(), RenderType.getCutout());
             ClientRegistry.bindTileEntityRenderer(TileTypeRegistry.BENCH_TILE.get(), BenchTileTER::new); //特殊ter渲染
         });
         //实体渲染
@@ -68,14 +68,14 @@ public class ClientProxy extends CommonProxy{
             ScreenManager.registerFactory(ContainerTypeRegistry.strengthenTableContainer.get(), StrengthenTableScreen::new);
         });
         //透明方块的渲染
-        for (RegistryObject<Block> r : BlockRegistry.BLOCKS.getEntries()){
+        for (RegistryObject<Block> r : PMBlocks.BLOCKS.getEntries()){
             if (r.get() instanceof BushBlock){
                 RenderTypeLookup.setRenderLayer(r.get(), RenderType.getCutout());
             }
         }
         //圣遗物
         event.enqueueWork( () ->{
-            for (RegistryObject<Item> entry : ItemRegistry.ITEMS.getEntries()) {
+            for (RegistryObject<Item> entry : PMItems.ITEMS.getEntries()) {
                 if (entry.get() instanceof Relics)
                     setRelicsProperty(entry.get());
             }

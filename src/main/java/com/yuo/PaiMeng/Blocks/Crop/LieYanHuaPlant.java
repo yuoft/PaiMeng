@@ -1,7 +1,6 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
-import com.yuo.PaiMeng.Tiles.AbsLieYanHuaTile;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Tiles.LieYanHauPlantTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -47,7 +46,7 @@ public class LieYanHuaPlant extends BushBlock {
 
     @Override
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        return new ItemStack(ItemRegistry.lieyanhua_huarui.get());
+        return new ItemStack(PMItems.lieyanhua_huarui.get());
     }
 
     @Override

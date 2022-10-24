@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Blocks.Tree;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.WorldGen.TreeSpawner;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
@@ -21,7 +21,7 @@ public class AppleSapling extends SaplingBlock implements IGrowable {
     }
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-        return state.getBlock() != BlockRegistry.sunAppleSapling.get();
+        return state.getBlock() != PMBlocks.sunAppleSapling.get();
     }
 
     public void placeTree(ServerWorld world, BlockPos pos, BlockState state, Random rand) {

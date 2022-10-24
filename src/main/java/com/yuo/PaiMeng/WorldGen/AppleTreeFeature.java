@@ -1,8 +1,8 @@
 package com.yuo.PaiMeng.WorldGen;
 
 import com.mojang.serialization.Codec;
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
-import com.yuo.PaiMeng.Items.ModTags;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
+import com.yuo.PaiMeng.Items.PMTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
@@ -20,8 +20,8 @@ import java.util.Random;
 
 //树结构生成规则
 public class AppleTreeFeature extends Feature<NoFeatureConfig> {
-    private final BlockState LOG = BlockRegistry.appleLog.get().getDefaultState();
-    private final BlockState LEAVES = BlockRegistry.appleLeaf.get().getDefaultState();
+    private final BlockState LOG = PMBlocks.appleLog.get().getDefaultState();
+    private final BlockState LEAVES = PMBlocks.appleLeaf.get().getDefaultState();
     private BlockState CROP;
 
     public AppleTreeFeature(Codec<NoFeatureConfig> codec) {
@@ -40,11 +40,11 @@ public class AppleTreeFeature extends Feature<NoFeatureConfig> {
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         if (this == FeatureInit.APPLE_TREE.get()){
-            this.CROP = BlockRegistry.appleCrop.get().getDefaultState();
+            this.CROP = PMBlocks.appleCrop.get().getDefaultState();
         }else if (this == FeatureInit.SUN_APPLE_TREE.get()){
-            this.CROP = BlockRegistry.sunAppleCrop.get().getDefaultState();
+            this.CROP = PMBlocks.sunAppleCrop.get().getDefaultState();
         }else if (this == FeatureInit.PURPLE_APPLE_TREE.get()){
-            this.CROP = BlockRegistry.purpleAppleCrop.get().getDefaultState();
+            this.CROP = PMBlocks.purpleAppleCrop.get().getDefaultState();
         }
         if (CROP == null) return false;
         while (pos.getY() > 1 && isAirOrLeaves(reader, pos)) { //合适的生成位置
@@ -52,7 +52,7 @@ public class AppleTreeFeature extends Feature<NoFeatureConfig> {
         }
         BlockPos down = pos.down();
         BlockState state = reader.getBlockState(down);
-        ITag<Block> blockITag = BlockTags.getCollection().get(ModTags.APPLE_TREE_GROW);
+        ITag<Block> blockITag = BlockTags.getCollection().get(PMTags.APPLE_TREE_GROW);
         if (blockITag == null || !state.getBlock().isIn(blockITag) || !state.isSolid()){ //某些方块上生成
             return false;
         }

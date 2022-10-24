@@ -77,11 +77,11 @@ public class Drug extends Item {
 
         if (playerentity == null || !playerentity.abilities.isCreativeMode) {
             if (stack.isEmpty()) {
-                return new ItemStack(ItemRegistry.drugBottle.get());
+                return new ItemStack(PMItems.drugBottle.get());
             }
 
             if (playerentity != null && stack.getDamage() == stack.getMaxDamage()) { //给予空药剂瓶
-                playerentity.inventory.addItemStackToInventory(new ItemStack(ItemRegistry.drugBottle.get()));
+                playerentity.inventory.addItemStackToInventory(new ItemStack(PMItems.drugBottle.get()));
             }
         }
 

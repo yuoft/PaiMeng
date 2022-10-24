@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -26,7 +26,7 @@ public class BenchRecipeCategory implements IRecipeCategory<BenchRecipe> {
 
     public BenchRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 4,4,168,76); //绘制背景
-        this.icon = helper.createDrawableIngredient(new ItemStack(ItemRegistry.cookingBench.get())); //绘制合成方块
+        this.icon = helper.createDrawableIngredient(new ItemStack(PMItems.cookingBench.get())); //绘制合成方块
         this.fire = helper.createDrawable(TEXTURE, 176, 0, 14,15);
     }
 
@@ -42,7 +42,7 @@ public class BenchRecipeCategory implements IRecipeCategory<BenchRecipe> {
 
     @Override
     public String getTitle() {
-        return ItemRegistry.cookingBench.get().getName().getString();
+        return PMItems.cookingBench.get().getName().getString();
     }
 
     @Override

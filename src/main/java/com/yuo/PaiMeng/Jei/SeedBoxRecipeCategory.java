@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.SeedBoxRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -23,7 +23,7 @@ public class SeedBoxRecipeCategory implements IRecipeCategory<SeedBoxRecipe> {
 
     public SeedBoxRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 38,24,100,38); //绘制背景
-        this.icon = helper.createDrawableIngredient(new ItemStack(ItemRegistry.huazhongxia.get())); //绘制合成方块
+        this.icon = helper.createDrawableIngredient(new ItemStack(PMItems.huazhongxia.get())); //绘制合成方块
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SeedBoxRecipeCategory implements IRecipeCategory<SeedBoxRecipe> {
 
     @Override
     public String getTitle() {
-        return ItemRegistry.huazhongxia.get().getName().getString();
+        return PMItems.huazhongxia.get().getName().getString();
     }
 
     @Override

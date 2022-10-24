@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Items.CropUseBlockEnum;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -74,7 +74,7 @@ public class WaterXCropBlock extends CropsBlock implements ILiquidContainer{
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
         BlockState blockState = worldIn.getBlockState(pos.down());
-        return blockState.matchesBlock(BlockRegistry.aquaticFarmland.get());
+        return blockState.matchesBlock(PMBlocks.aquaticFarmland.get());
     }
 
     //部分不能使用骨粉催熟

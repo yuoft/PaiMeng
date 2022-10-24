@@ -1,15 +1,13 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
+import com.yuo.PaiMeng.Items.PMItems;
 import net.minecraft.block.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-
-import java.util.function.ToIntFunction;
 
 public class ModPlant extends BushBlock {
 
@@ -20,23 +18,23 @@ public class ModPlant extends BushBlock {
     //可存在什么方块上面？
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        if (this == BlockRegistry.liuliDaiPlant.get() || this == BlockRegistry.qingxinPlant.get() || this == BlockRegistry.ceciliaHuaPlant.get()){
+        if (this == PMBlocks.liuliDaiPlant.get() || this == PMBlocks.qingxinPlant.get() || this == PMBlocks.ceciliaHuaPlant.get()){
            return state.matchesBlock(Blocks.STONE) || state.matchesBlock(Blocks.SNOW_BLOCK);
         }
-        if (this == BlockRegistry.dudulianPlant.get() || this == BlockRegistry.lianpengPlant.get() || this == BlockRegistry.maweiPlant.get()
-            || this == BlockRegistry.jinyucaoPlant.get())   {
+        if (this == PMBlocks.dudulianPlant.get() || this == PMBlocks.lianpengPlant.get() || this == PMBlocks.maweiPlant.get()
+            || this == PMBlocks.jinyucaoPlant.get())   {
             return super.isValidGround(state, worldIn, pos) || state.matchesBlock(Blocks.SAND);
         }
-        if (this == BlockRegistry.mingcaoPlant.get() || this == BlockRegistry.tianyunCaoshiPlant.get()){
+        if (this == PMBlocks.mingcaoPlant.get() || this == PMBlocks.tianyunCaoshiPlant.get()){
             return state.matchesBlock(Blocks.END_STONE);
         }
-        if (this == BlockRegistry.mufengMoguPlant.get()){
+        if (this == PMBlocks.mufengMoguPlant.get()){
             return state.matchesBlock(Blocks.MYCELIUM);
         }
-        if (this == BlockRegistry.youdengxunPlant.get()){
+        if (this == PMBlocks.youdengxunPlant.get()){
             return state.matchesBlock(Blocks.WARPED_NYLIUM);
         }
-        if (this == BlockRegistry.jueyunJiaojiaoPlant.get()){
+        if (this == PMBlocks.jueyunJiaojiaoPlant.get()){
             return state.matchesBlock(Blocks.SAND);
         }
         return super.isValidGround(state, worldIn, pos);
@@ -45,62 +43,62 @@ public class ModPlant extends BushBlock {
     @Override
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
         Item item = Items.AIR;
-        if (this == BlockRegistry.bohePlant.get()){
-            item = ItemRegistry.bohe.get();
-        }else if (this == BlockRegistry.ceciliaHuaPlant.get()){
-            item = ItemRegistry.ceciliaHua.get();
-        }else if (this == BlockRegistry.dudulianPlant.get()){
-            item = ItemRegistry.dudulian.get();
-        }else if (this == BlockRegistry.fengchejuPlant.get()){
-            item = ItemRegistry.fengcheju.get();
-        }else if (this == BlockRegistry.gougouguoPlant.get()){
-            item = ItemRegistry.gougouguo.get();
-        }else if (this == BlockRegistry.haicaoPlant.get()){
-            item = ItemRegistry.haicao.get();
-        }else if (this == BlockRegistry.hailingzhiPlant.get()){
-            item = ItemRegistry.hailingzhi.get();
-        }else if (this == BlockRegistry.jinyucaoPlant.get()){
-            item = ItemRegistry.jinyucao.get();
-        }else if (this == BlockRegistry.jueyunJiaojiaoPlant.get()){
-            item = ItemRegistry.jueyunJiaojiao.get();
-        }else if (this == BlockRegistry.lianpengPlant.get()){
-            item = ItemRegistry.lianpeng.get();
-        }else if (this == BlockRegistry.liuliDaiPlant.get()){
-            item = ItemRegistry.liuliDai.get();
-        }else if (this == BlockRegistry.liuliBaihePlant.get()){
-            item = ItemRegistry.liuliBaihe.get();
-        }else if (this == BlockRegistry.luoluomeiPlant.get()){
-            item = ItemRegistry.luoluomei.get();
-        }else if (this == BlockRegistry.maweiPlant.get()){
-            item = ItemRegistry.mawei.get();
-        }else if (this == BlockRegistry.mingcaoPlant.get()){
-            item = ItemRegistry.mingcao.get();
-        }else if (this == BlockRegistry.moguPlant.get() || this == BlockRegistry.moguWallPlant.get()){
-            item = ItemRegistry.mogu.get();
-        }else if (this == BlockRegistry.mufengMoguPlant.get() || this == BlockRegistry.mufengMoguWallPlant.get()){
-            item = ItemRegistry.mufeng_mogu.get();
-        }else if (this == BlockRegistry.nichanghuaPlant.get()){
-            item = ItemRegistry.nichanghua.get();
-        }else if (this == BlockRegistry.pugongyingPlant.get()){
-            item = ItemRegistry.pugongying_zhongzi.get();
-        }else if (this == BlockRegistry.qingxinPlant.get()){
-            item = ItemRegistry.qingxin.get();
-        }else if (this == BlockRegistry.shumeiPlant.get()){
-            item = ItemRegistry.shumei.get();
-        }else if (this == BlockRegistry.songrongPlant.get() || this == BlockRegistry.songrongWallPlant.get()){
-            item = ItemRegistry.songrong.get();
-        }else if (this == BlockRegistry.tiantianhuaPlant.get()){
-            item = ItemRegistry.tiantianhua.get();
-        }else if (this == BlockRegistry.tianyunCaoshiPlant.get()){
-            item = ItemRegistry.tianyun_caoshi.get();
-        }else if (this == BlockRegistry.xiaodengcaoPlant.get()){
-            item = ItemRegistry.xiaodengcao.get();
-        }else if (this == BlockRegistry.xuekuiPlant.get()){
-            item = ItemRegistry.xuekui.get();
-        }else if (this == BlockRegistry.youdengxunPlant.get() || this == BlockRegistry.youdengxunWallPlant.get()){
-            item = ItemRegistry.youdengxun.get();
-        }else if (this == BlockRegistry.zhusunPlant.get()){
-            item = ItemRegistry.zhusun.get();
+        if (this == PMBlocks.bohePlant.get()){
+            item = PMItems.bohe.get();
+        }else if (this == PMBlocks.ceciliaHuaPlant.get()){
+            item = PMItems.ceciliaHua.get();
+        }else if (this == PMBlocks.dudulianPlant.get()){
+            item = PMItems.dudulian.get();
+        }else if (this == PMBlocks.fengchejuPlant.get()){
+            item = PMItems.fengcheju.get();
+        }else if (this == PMBlocks.gougouguoPlant.get()){
+            item = PMItems.gougouguo.get();
+        }else if (this == PMBlocks.haicaoPlant.get()){
+            item = PMItems.haicao.get();
+        }else if (this == PMBlocks.hailingzhiPlant.get()){
+            item = PMItems.hailingzhi.get();
+        }else if (this == PMBlocks.jinyucaoPlant.get()){
+            item = PMItems.jinyucao.get();
+        }else if (this == PMBlocks.jueyunJiaojiaoPlant.get()){
+            item = PMItems.jueyunJiaojiao.get();
+        }else if (this == PMBlocks.lianpengPlant.get()){
+            item = PMItems.lianpeng.get();
+        }else if (this == PMBlocks.liuliDaiPlant.get()){
+            item = PMItems.liuliDai.get();
+        }else if (this == PMBlocks.liuliBaihePlant.get()){
+            item = PMItems.liuliBaihe.get();
+        }else if (this == PMBlocks.luoluomeiPlant.get()){
+            item = PMItems.luoluomei.get();
+        }else if (this == PMBlocks.maweiPlant.get()){
+            item = PMItems.mawei.get();
+        }else if (this == PMBlocks.mingcaoPlant.get()){
+            item = PMItems.mingcao.get();
+        }else if (this == PMBlocks.moguPlant.get() || this == PMBlocks.moguWallPlant.get()){
+            item = PMItems.mogu.get();
+        }else if (this == PMBlocks.mufengMoguPlant.get() || this == PMBlocks.mufengMoguWallPlant.get()){
+            item = PMItems.mufeng_mogu.get();
+        }else if (this == PMBlocks.nichanghuaPlant.get()){
+            item = PMItems.nichanghua.get();
+        }else if (this == PMBlocks.pugongyingPlant.get()){
+            item = PMItems.pugongying_zhongzi.get();
+        }else if (this == PMBlocks.qingxinPlant.get()){
+            item = PMItems.qingxin.get();
+        }else if (this == PMBlocks.shumeiPlant.get()){
+            item = PMItems.shumei.get();
+        }else if (this == PMBlocks.songrongPlant.get() || this == PMBlocks.songrongWallPlant.get()){
+            item = PMItems.songrong.get();
+        }else if (this == PMBlocks.tiantianhuaPlant.get()){
+            item = PMItems.tiantianhua.get();
+        }else if (this == PMBlocks.tianyunCaoshiPlant.get()){
+            item = PMItems.tianyun_caoshi.get();
+        }else if (this == PMBlocks.xiaodengcaoPlant.get()){
+            item = PMItems.xiaodengcao.get();
+        }else if (this == PMBlocks.xuekuiPlant.get()){
+            item = PMItems.xuekui.get();
+        }else if (this == PMBlocks.youdengxunPlant.get() || this == PMBlocks.youdengxunWallPlant.get()){
+            item = PMItems.youdengxun.get();
+        }else if (this == PMBlocks.zhusunPlant.get()){
+            item = PMItems.zhusun.get();
         }
         if (item != Items.AIR){
             return new ItemStack(item);

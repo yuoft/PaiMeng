@@ -10,10 +10,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class OrdinaryFoods extends Item{
+public class PMMaterial extends Item{
 
-	public OrdinaryFoods() {
-		super(new Properties().group(ModGroup.PaiMengFoods).isImmuneToFire());
+	public PMMaterial() {
+		super(new Properties().group(ModGroup.PaiMengMaterial));
 	}
 
 	@Override

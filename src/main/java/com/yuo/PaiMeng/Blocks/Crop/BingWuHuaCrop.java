@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Blocks.Crop;
 
 import com.yuo.PaiMeng.Items.CropUseBlockEnum;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Tiles.BingWuHuaCropTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class BingWuHuaCrop extends XCropBlock {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemRegistry.bingwuhuaHuaduoSeed.get();
+        return PMItems.bingwuhuaHuaduoSeed.get();
     }
 
     @Override

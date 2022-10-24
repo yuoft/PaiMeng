@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Jei;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.SynPlatRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -23,7 +23,7 @@ public class SynPlatRecipeCategory implements IRecipeCategory<SynPlatRecipe> {
 
     public SynPlatRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 4,20,168,50); //绘制背景
-        this.icon = helper.createDrawableIngredient(new ItemStack(ItemRegistry.syntheticPlatform.get())); //绘制合成方块
+        this.icon = helper.createDrawableIngredient(new ItemStack(PMItems.syntheticPlatform.get())); //绘制合成方块
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SynPlatRecipeCategory implements IRecipeCategory<SynPlatRecipe> {
 
     @Override
     public String getTitle() {
-        return ItemRegistry.syntheticPlatform.get().getName().getString();
+        return PMItems.syntheticPlatform.get().getName().getString();
     }
 
     @Override

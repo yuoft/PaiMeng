@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items.Food;
 
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
@@ -33,11 +33,11 @@ public class PaiMengFood extends Item {
         }
         tooltip.add(new StringTextComponent(new TranslationTextComponent("paimeng.text.itemInfo.type").getString()
                 + new TranslationTextComponent("paimeng.text.itemInfo.type" + TYPE).getString()));
-        if (stack.getItem() == ItemRegistry.bugFood.get()){
+        if (stack.getItem() == PMItems.bugFood.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.bug_food"));
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.bug_food1"));
         }
-        if (stack.getItem() == ItemRegistry.paimengFood.get()){
+        if (stack.getItem() == PMItems.paimengFood.get()){
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.good_food"));
         }
     }

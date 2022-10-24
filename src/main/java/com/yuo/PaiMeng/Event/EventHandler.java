@@ -7,7 +7,7 @@ import com.yuo.PaiMeng.Effects.EffectRegistry;
 import com.yuo.PaiMeng.Effects.ReviveEffect;
 import com.yuo.PaiMeng.Gui.RelicsButton;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
-import com.yuo.PaiMeng.Items.ItemRegistry;
+import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsBox;
 import com.yuo.PaiMeng.Items.RelicsHelper;
@@ -278,7 +278,7 @@ public class EventHandler {
             ItemStack mainhand = player.getHeldItemMainhand();
             int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, mainhand);
             if (random.nextInt(100) < level * 5 + 5){
-                ItemEntity item = new ItemEntity((World) world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.songguo.get(),
+                ItemEntity item = new ItemEntity((World) world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(PMItems.songguo.get(),
                         random.nextInt(2 + level)));
                 world.addEntity(item);
             }
@@ -318,31 +318,31 @@ public class EventHandler {
             int unLuck = EventHelper.getEffectLevel(player, Effects.UNLUCK);
             int looting = event.getLootingLevel();
             if (entityLiving instanceof EnderDragonEntity || entityLiving instanceof WitherEntity){ //是boss
-                ItemStack stack = new ItemStack(ItemRegistry.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
+                ItemStack stack = new ItemStack(PMItems.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
                 ((RelicsBox) stack.getItem()).setLevel(1);
                 EventHelper.addEntityDrops(event, stack, entityLiving);
-                ItemStack stack1 = new ItemStack(ItemRegistry.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
+                ItemStack stack1 = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
                 ((RelicsBox) stack1.getItem()).setLevel(2);
                 EventHelper.addEntityDrops(event, stack1, entityLiving);
-                ItemStack stack2 = new ItemStack(ItemRegistry.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
+                ItemStack stack2 = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
                 ((RelicsBox) stack2.getItem()).setLevel(3);
                 EventHelper.addEntityDrops(event, stack2, entityLiving);
             }else {
                 //0.01%掉落一等圣物匣
                 if (random.nextDouble() < (0.0001 + 0.0002 * (luck - unLuck) + 0.0003 * looting)){
-                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
+                    ItemStack stack = new ItemStack(PMItems.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
                     ((RelicsBox) stack.getItem()).setLevel(1);
                     EventHelper.addEntityDrops(event, stack, entityLiving);
                 }
                 //0.1%掉落二等圣物匣
                 if (random.nextDouble() < (0.001 + 0.002 * (luck - unLuck) + 0.003 * looting)){
-                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
+                    ItemStack stack = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
                     ((RelicsBox) stack.getItem()).setLevel(2);
                     EventHelper.addEntityDrops(event, stack, entityLiving);
                 }
                 //1%掉落三等圣物匣
                 if (random.nextDouble() < (0.01 + 0.02 * (luck - unLuck) + 0.03 * looting)){
-                    ItemStack stack = new ItemStack(ItemRegistry.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
+                    ItemStack stack = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
                     ((RelicsBox) stack.getItem()).setLevel(3);
                     EventHelper.addEntityDrops(event, stack, entityLiving);
                 }

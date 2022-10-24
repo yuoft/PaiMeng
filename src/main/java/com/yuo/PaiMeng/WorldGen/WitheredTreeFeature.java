@@ -1,13 +1,12 @@
 package com.yuo.PaiMeng.WorldGen;
 
 import com.mojang.serialization.Codec;
-import com.yuo.PaiMeng.Blocks.BlockRegistry;
+import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Blocks.Crop.WallPlant;
 import com.yuo.PaiMeng.Items.CropBlockItem;
-import com.yuo.PaiMeng.Items.ModTags;
+import com.yuo.PaiMeng.Items.PMTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
@@ -15,7 +14,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.feature.Feature;
@@ -25,17 +23,17 @@ import java.util.Random;
 
 //树结构生成规则
 public class WitheredTreeFeature extends Feature<NoFeatureConfig> {
-    private final BlockState LOG = BlockRegistry.witheredLog.get().getDefaultState();
+    private final BlockState LOG = PMBlocks.witheredLog.get().getDefaultState();
     private final BlockState[] PLANTS = new BlockState[]{
-            BlockRegistry.moguWallPlant.get().getDefaultState(),
-            BlockRegistry.mufengMoguWallPlant.get().getDefaultState(),
-            BlockRegistry.songrongWallPlant.get().getDefaultState(),
-            BlockRegistry.youdengxunWallPlant.get().getDefaultState()};
+            PMBlocks.moguWallPlant.get().getDefaultState(),
+            PMBlocks.mufengMoguWallPlant.get().getDefaultState(),
+            PMBlocks.songrongWallPlant.get().getDefaultState(),
+            PMBlocks.youdengxunWallPlant.get().getDefaultState()};
     private final BlockState[] UP_PLANTS = new BlockState[]{
-            BlockRegistry.moguPlant.get().getDefaultState(),
-            BlockRegistry.mufengMoguPlant.get().getDefaultState(),
-            BlockRegistry.songrongPlant.get().getDefaultState(),
-            BlockRegistry.youdengxunPlant.get().getDefaultState()};
+            PMBlocks.moguPlant.get().getDefaultState(),
+            PMBlocks.mufengMoguPlant.get().getDefaultState(),
+            PMBlocks.songrongPlant.get().getDefaultState(),
+            PMBlocks.youdengxunPlant.get().getDefaultState()};
     public WitheredTreeFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
@@ -56,7 +54,7 @@ public class WitheredTreeFeature extends Feature<NoFeatureConfig> {
         }
         BlockPos down = pos.down();
         BlockState state = reader.getBlockState(down);
-        ITag<Block> blockITag = BlockTags.getCollection().get(ModTags.APPLE_TREE_GROW);
+        ITag<Block> blockITag = BlockTags.getCollection().get(PMTags.APPLE_TREE_GROW);
         if (blockITag == null || !state.getBlock().isIn(blockITag) || !state.isSolid()){ //某些方块上生成 不能生成在非固体方块上
             return false;
         }

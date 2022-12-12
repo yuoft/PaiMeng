@@ -1,20 +1,28 @@
 package com.yuo.PaiMeng.Jei;
 
 import com.yuo.PaiMeng.Items.PMItems;
+import com.yuo.PaiMeng.Items.Relics;
+import com.yuo.PaiMeng.Items.RelicsHelper;
+import com.yuo.PaiMeng.Items.RelicsType;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import com.yuo.PaiMeng.Recipes.CookingRecipe;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.Recipes.PotRecipe;
 import mezz.jei.api.IModPlugin;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +98,32 @@ public class JeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(PMItems.cookingBench.get()), CookingRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(PMItems.syntheticPlatform.get()), SynPlatRecipeCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(PMItems.huazhongxia.get()), SeedBoxRecipeCategory.UID);
+    }
+
+    //注册物品不同nbt 使用nbt来在jei中显示
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        IModPlugin.super.registerItemSubtypes(registration);
+        //药剂
+        registration.registerSubtypeInterpreter(PMItems.drug.get(), (e, u) -> {
+            List<EffectInstance> list = PotionUtils.getEffectsFromStack(e);
+            if (list.size() > 0) {
+                StringBuilder s = new StringBuilder();
+                for (EffectInstance instance : list) {
+                    s.append(instance.getEffectName());
+                    s.append(instance.getAmplifier());
+                    s.append(instance.getDuration());
+                }
+                return s.toString();
+            }
+            return "";
+        });
+        //圣遗物
+//        for (RegistryObject<Item> entry : PMItems.ITEMS.getEntries()) {
+//            if (entry.get() instanceof Relics) {
+//                registration.registerSubtypeInterpreter(entry.get(), (e, u) -> RelicsHelper.getTypeForStack(e).getName() + RelicsHelper.getStarFormStack(e));
+//            }
+//        }
+//        registration.registerSubtypeInterpreter(PMItems.maoxianjiaRelics.get(), (e, u) -> RelicsHelper.getTypeForStack(e).getName());
     }
 }

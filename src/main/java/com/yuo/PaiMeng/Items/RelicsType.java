@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Items;
 
 //圣遗物部位枚举
 public enum RelicsType {
-    EMPTY(-1, "emtyp"), //空
+    EMPTY(-1, "empty"), //空
     HEAD(0, "head"),
     CUP(1,"cup"),
     CLOCK(2,"clock"),

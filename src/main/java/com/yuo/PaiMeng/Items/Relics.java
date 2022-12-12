@@ -132,7 +132,7 @@ public class Relics extends Item {
     //根据物品星级确定颜色名称
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
-        TranslationTextComponent component = new TranslationTextComponent(getRelicsName(this.getTranslationKey(), stack));
+        TranslationTextComponent component = new TranslationTextComponent(getTranslationKey(stack));
         switch (RelicsHelper.getStarFormStack(stack)){
             case 1: return component.mergeStyle(TextFormatting.WHITE);
             case 2: return component.mergeStyle(TextFormatting.GREEN);
@@ -141,6 +141,11 @@ public class Relics extends Item {
             case 5: return component.mergeStyle(TextFormatting.GOLD);
             default: return component;
         }
+    }
+
+    @Override
+    public String getTranslationKey(ItemStack stack) {
+        return getRelicsName(getTranslationKey(), stack);
     }
 
     //获取新的名字
@@ -153,7 +158,7 @@ public class Relics extends Item {
             case 3: name = "feather";break;
             case 4: name = "flower";break;
             default:
-                throw new IllegalStateException("Unexpected value: " + getType().getId());
+                return "null_relics";
         }
         return str.replaceAll("relics", name);
     }

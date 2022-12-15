@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PMFoods extends Item{
+public class PMFoodItem extends Item{
 
-	public PMFoods() {
+	public PMFoodItem() {
 		super(new Properties().group(ModGroup.PaiMengFoods).isImmuneToFire());
 	}
 

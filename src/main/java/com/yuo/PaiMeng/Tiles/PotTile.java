@@ -5,7 +5,7 @@ import com.yuo.PaiMeng.Container.FoodRecipesIntArray;
 import com.yuo.PaiMeng.Container.PotContainer;
 import com.yuo.PaiMeng.Container.CookingIntArray;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
-import com.yuo.PaiMeng.Items.PMFoods;
+import com.yuo.PaiMeng.Items.PMFoodItem;
 import com.yuo.PaiMeng.Recipes.ModRecipeType;
 import com.yuo.PaiMeng.WorldData.FoodLevelWorldSaveData;
 import net.minecraft.block.BlockState;
@@ -236,7 +236,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity, 
 
     @Override
     public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return direction != Direction.DOWN && index < 4 && itemStackIn.getItem() instanceof PMFoods;
+        return direction != Direction.DOWN && index < 4 && itemStackIn.getItem() instanceof PMFoodItem;
     }
 
     @Override

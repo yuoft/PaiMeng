@@ -1,0 +1,6 @@
+{
+    "parent": "paimeng:block/wall_cross",
+    "textures": {
+		"cross": "paimeng:block/crop/shuwang_shengtigu_crop"
+    }
+}

@@ -82,6 +82,14 @@ public class PMBlocks {
     public static RegistryObject<Block> youdengxunCrop = BLOCKS.register("youdengxun_crop", () -> new XCropBlock(LOGS, CROP.setLightLevel(e -> 6)));
     public static RegistryObject<Block> zhusunCrop = BLOCKS.register("zhusun_crop", () -> new XCropBlock(FERTILE, CROP));
 
+    //3.0~
+    public static RegistryObject<Block> dunduntaoCrop = BLOCKS.register("dunduntao_crop", () -> new XCropBlock(FERTILE, CROP));
+    public static RegistryObject<Block> padishalanCrop = BLOCKS.register("padishalan_crop", () -> new XCropBlock(COMMON, CROP));
+    public static RegistryObject<Block> piboyeCrop = BLOCKS.register("piboye_crop", () -> new XCropBlock(COMMON, CROP));
+    public static RegistryObject<Block> shuwangShengtiguCrop = BLOCKS.register("shuwang_shengtigu_crop", () -> new XCropBlock(LOGS, CROP));
+    public static RegistryObject<Block> xiangxinguoCrop = BLOCKS.register("xiangxinguo_crop", () -> new XCropBlock(FERTILE, CROP));
+    public static RegistryObject<Block> xumiQiangweiCrop = BLOCKS.register("xumi_qiangwei_crop", () -> new XCropBlock(FERTILE, CROP));
+
     //植物
     public static RegistryObject<Block> bingwuhuaHuaduoPlant = BLOCKS.register("bingwuhua_huaduo_plant", () -> new BingWuHuaPlant(PLANT));
     public static RegistryObject<Block> bohePlant = BLOCKS.register("bohe_plant", () -> new ModPlant(PLANT));
@@ -113,6 +121,14 @@ public class PMBlocks {
     public static RegistryObject<Block> xuekuiPlant = BLOCKS.register("xuekui_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> youdengxunPlant = BLOCKS.register("youdengxun_plant", () -> new ModPlant(Block.Properties.from(Blocks.GRASS).setLightLevel(e -> 6)));
     public static RegistryObject<Block> zhusunPlant = BLOCKS.register("zhusun_plant", () -> new ModPlant(PLANT));
+
+    public static RegistryObject<Block> dunduntaoPlant = BLOCKS.register("dunduntao_plant", () -> new ModPlant(PLANT));
+    public static RegistryObject<Block> padishalanPlant = BLOCKS.register("padishalan_plant", () -> new ModPlant(PLANT));
+    public static RegistryObject<Block> piboyePlant = BLOCKS.register("piboye_plant", () -> new ModPlant(PLANT));
+    public static RegistryObject<Block> shuwangShengtiguPlant = BLOCKS.register("shuwang_shengtigu_plant", () -> new ModPlant(PLANT));
+    public static RegistryObject<Block> xiangxinguoPlant = BLOCKS.register("xiangxinguo_plant", () -> new ModPlant(PLANT));
+    public static RegistryObject<Block> xumiQiangweiPlant = BLOCKS.register("xumi_qiangwei_plant", () -> new ModPlant(PLANT));
+
     //墙上植物
     public static RegistryObject<Block> moguWallPlant = BLOCKS.register("mogu_wall_plant", () -> new WallPlant(PLANT));
     public static RegistryObject<Block> mufengMoguWallPlant = BLOCKS.register("mufeng_mogu_wall_plant", () -> new WallPlant(PLANT));
@@ -122,6 +138,9 @@ public class PMBlocks {
     public static RegistryObject<Block> mufengMoguWallCrop = BLOCKS.register("mufeng_mogu_wall_crop", () -> new WallXCrop(LOGS, CROP));
     public static RegistryObject<Block> songrongWallCrop = BLOCKS.register("songrong_wall_crop", () -> new WallXCrop(LOGS, CROP));
     public static RegistryObject<Block> youdengxunWallCrop = BLOCKS.register("youdengxun_wall_crop", () -> new WallXCrop(LOGS, CROP));
+
+    public static RegistryObject<Block> shuwangShengtiguWallPlant = BLOCKS.register("shuwang_shengtigu_wall_plant", () -> new WallPlant(PLANT));
+    public static RegistryObject<Block> shuwangShengtiguWallCrop = BLOCKS.register("shuwang_shengtigu_wall_crop", () -> new WallXCrop(LOGS, CROP));
 
     //耕地
     public static RegistryObject<Block> commonFarmland = BLOCKS.register("common_farmland", CommonFarmland::new);
@@ -136,7 +155,9 @@ public class PMBlocks {
     public static RegistryObject<Block> appleSapling = BLOCKS.register("apple_sapling", () -> new AppleSapling(TreeInit.APPLE_TREE, SAPLING));
     public static RegistryObject<Block> sunAppleSapling = BLOCKS.register("sun_apple_sapling", () -> new AppleSapling(TreeInit.SUN_APPLE_TREE, SAPLING));
     public static RegistryObject<Block> purpleAppleSapling = BLOCKS.register("purple_apple_sapling", () -> new AppleSapling(TreeInit.PURPLE_APPLE_TREE, SAPLING));
+    public static RegistryObject<Block> zaoyeSapling = BLOCKS.register("zaoye_sapling", () -> new AppleSapling(TreeInit.ZAOYE_TREE, SAPLING));
     public static RegistryObject<Block> appleCrop = BLOCKS.register("apple_crop", AppleCrop::new);
     public static RegistryObject<Block> sunAppleCrop = BLOCKS.register("sun_apple_crop", AppleCrop::new);
     public static RegistryObject<Block> purpleAppleCrop = BLOCKS.register("purple_apple_crop", AppleCrop::new);
+    public static RegistryObject<Block> zaoyeCrop = BLOCKS.register("zaoye_crop", AppleCrop::new);
 }

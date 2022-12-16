@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:riluoguo",
+      "count": 3
+    },
+    {
+      "item": "paimeng:shumei",
+      "count": 3
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:riluo_meimeicha"
+  }
+}

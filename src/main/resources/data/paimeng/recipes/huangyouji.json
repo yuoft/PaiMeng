@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:fanqie",
+      "count": 3
+    },
+    {
+      "item": "paimeng:huangyou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xiangxinliao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:huangyouji"
+  }
+}

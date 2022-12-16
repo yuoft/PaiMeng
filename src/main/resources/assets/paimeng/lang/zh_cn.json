@@ -128,7 +128,7 @@
     "item.paimeng.dunduntao":"墩墩桃",
     "item.paimeng.padishalan":"帕蒂沙兰",
     "item.paimeng.piboye":"毗波耶",
-    "item.paimeng.shuwnag_shengtigu":"树王圣体菇",
+    "item.paimeng.shuwang_shengtigu":"树王圣体菇",
     "item.paimeng.tutudou":"秃秃豆",
     "item.paimeng.xiangxinguo":"香辛果",
     "item.paimeng.xiangxinliao":"香辛料",
@@ -313,7 +313,14 @@
     "item.paimeng.yangcong_seed":"洋葱种子",
     "item.paimeng.youdengxun_seed":"幽灯蕈种子",
     "item.paimeng.zhusun_seed":"竹笋种子",
-    
+
+    "item.paimeng.dunduntao_seed":"墩墩桃种子",
+    "item.paimeng.padishalan_seed":"帕蒂莎兰种子",
+    "item.paimeng.piboye_seed":"毗波椰种子",
+    "item.paimeng.shuwang_shengtigu_seed":"树王圣体菇种子",
+    "item.paimeng.xiangxinguo_seed":"香辛果种子",
+    "item.paimeng.xumi_qiangwei_seed":"须弥蔷薇种子",
+
     "item.paimeng.null_relics":"未知圣遗物",
     "item.paimeng.xingyuner_head":"幸运儿银冠",
     "item.paimeng.xingyuner_cup":"幸运儿之杯",
@@ -373,6 +380,7 @@
     "block.paimeng.apple_sapling":"苹果树苗",
     "block.paimeng.sun_apple_sapling":"日落果树苗",
     "block.paimeng.purple_apple_sapling":"堇瓜树苗",
+    "block.paimeng.zaoye_sapling":"枣椰树苗",
     "block.paimeng.common_farmland":"玄此玉田",
     "block.paimeng.fertile_farmland":"嶷此芝田",
     "block.paimeng.aquatic_farmland":"楚此渚田",
@@ -418,7 +426,14 @@
     "block.paimeng.xuekui_plant":"血魁",
     "block.paimeng.youdengxun_plant":"幽灯蕈",
     "block.paimeng.zhusun_plant":"竹笋",
-    
+
+    "block.paimeng.dunduntao_plant":"墩墩桃",
+    "block.paimeng.padishalan_plant":"帕蒂莎兰",
+    "block.paimeng.piboye_plant":"毗波椰",
+    "block.paimeng.shuwang_shengtigu_plant":"树王圣体菇",
+    "block.paimeng.xiangxinguo_plant":"香辛果",
+    "block.paimeng.xumi_qiangwei_plant":"须弥蔷薇",
+
     "block.paimeng.bailuobo_crop":"白萝卜作物",
     "block.paimeng.hailingzhi_crop":"海灵芝作物",
     "block.paimeng.huluobo_crop":"胡萝卜作物",
@@ -456,10 +471,18 @@
     "block.paimeng.xuekui_crop":"血魁作物",
     "block.paimeng.yangcong_crop":"洋葱作物",
 
+    "block.paimeng.dunduntao_crop":"墩墩桃作物",
+    "block.paimeng.padishalan_crop":"帕蒂莎兰作物",
+    "block.paimeng.piboye_crop":"毗波椰作物",
+    "block.paimeng.shuwang_shengtigu_crop":"树王圣体菇作物",
+    "block.paimeng.xiangxinguo_crop":"香辛果作物",
+    "block.paimeng.xumi_qiangwei_crop":"须弥蔷薇作物",
+
     "block.paimeng.apple_crop":"苹果",
     "block.paimeng.sun_apple_crop":"日落果",
     "block.paimeng.purple_apple_crop":"堇瓜",
-    
+    "block.paimeng.zaoye_crop":"枣椰",
+
     "effect.paimeng.critical_rate":"§6暴击率",
     "effect.paimeng.critical_damage":"§c暴击伤害",
     "effect.paimeng.revive":"§e复活",

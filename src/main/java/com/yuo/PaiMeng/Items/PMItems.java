@@ -9,6 +9,7 @@ import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -127,7 +128,7 @@ public class PMItems {
 	public static RegistryObject<Item> dunduntao = ITEMS.register("dunduntao", PMFoodItem::new);
 	public static RegistryObject<Item> padishalan = ITEMS.register("padishalan", PMFoodItem::new);
 	public static RegistryObject<Item> piboye = ITEMS.register("piboye", PMFoodItem::new);
-	public static RegistryObject<Item> shuwnagShengtigu = ITEMS.register("shuwnag_shengtigu", PMFoodItem::new);
+	public static RegistryObject<Item> shuwangShengtigu = ITEMS.register("shuwang_shengtigu", PMFoodItem::new);
 	public static RegistryObject<Item> tutudou = ITEMS.register("tutudou", PMFoodItem::new);
 	public static RegistryObject<Item> xiangxinguo = ITEMS.register("xiangxinguo", PMFoodItem::new);
 	public static RegistryObject<Item> xiangxinliao = ITEMS.register("xiangxinliao", PMFoodItem::new);
@@ -554,6 +555,19 @@ public class PMItems {
 			() -> new CropBlockItem(PMBlocks.youdengxunCrop.get(), LOGS));
 	public static RegistryObject<BlockItem> zhusunSeed = ITEMS.register("zhusun_seed",
 			() -> new CropBlockItem(PMBlocks.zhusunCrop.get(), FERTILE));
+	//3.0~
+	public static RegistryObject<BlockItem> dunduntaoSeed = ITEMS.register("dunduntao_seed",
+			() -> new CropBlockItem(PMBlocks.dunduntaoCrop.get(), FERTILE));
+	public static RegistryObject<BlockItem> padishalanSeed = ITEMS.register("padishalan_seed",
+			() -> new CropBlockItem(PMBlocks.padishalanCrop.get(), COMMON));
+	public static RegistryObject<BlockItem> piboyeSeed = ITEMS.register("piboye_seed",
+			() -> new CropBlockItem(PMBlocks.piboyeCrop.get(), COMMON));
+	public static RegistryObject<BlockItem> shuwangShengtiguSeed = ITEMS.register("shuwang_shengtigu_seed",
+			() -> new CropBlockItem(PMBlocks.shuwangShengtiguCrop.get(), LOGS));
+	public static RegistryObject<BlockItem> xiangxinguoSeed = ITEMS.register("xiangxinguo_seed",
+			() -> new CropBlockItem(PMBlocks.xiangxinguoCrop.get(), FERTILE));
+	public static RegistryObject<BlockItem> xumiQiangweiSeed = ITEMS.register("xumi_qiangwei_seed",
+			() -> new CropBlockItem(PMBlocks.xumiQiangweiCrop.get(), FERTILE));
 
 
 	//树
@@ -571,4 +585,6 @@ public class PMItems {
 			() -> new BlockItem(PMBlocks.sunAppleSapling.get(), GROUP));
 	public static RegistryObject<BlockItem> purpleAppleSapling = ITEMS.register("purple_apple_sapling",
 			() -> new BlockItem(PMBlocks.purpleAppleSapling.get(), GROUP));
+	public static RegistryObject<BlockItem> zaoyeSapling = ITEMS.register("zaoye_sapling",
+			() -> new BlockItem(PMBlocks.zaoyeSapling.get(), GROUP));
 }

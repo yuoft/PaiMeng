@@ -1,0 +1,6 @@
+{
+    "parent": "paimeng:block/cross",
+    "textures": {
+		"cross": "paimeng:block/crop/dunduntao_crop"
+    }
+}

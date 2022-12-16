@@ -128,7 +128,7 @@
     "item.paimeng.dunduntao":"dunduntao",
     "item.paimeng.padishalan":"padishalan",
     "item.paimeng.piboye":"piboye",
-    "item.paimeng.shuwnag_shengtigu":"shuwnag_shengtigu",
+    "item.paimeng.shuwang_shengtigu":"shuwang_shengtigu",
     "item.paimeng.tutudou":"tutudou",
     "item.paimeng.xiangxinguo":"xiangxinguo",
     "item.paimeng.xiangxinliao":"xiangxinliao",
@@ -314,6 +314,13 @@
     "item.paimeng.youdengxun_seed":"youdengxun Seed",
     "item.paimeng.zhusun_seed":"zhusun Seed",
 
+    "item.paimeng.dunduntao_seed":"dunduntao Seed",
+    "item.paimeng.padishalan_seed":"padishalan Seed",
+    "item.paimeng.piboye_seed":"piboye Seed",
+    "item.paimeng.shuwang_shengtigu_seed":"shuwang_shengtigu Seed",
+    "item.paimeng.xiangxinguo_seed":"xiangxinguo Seed",
+    "item.paimeng.xumi_qiangwei_seed":"xumi_qiangwei Seed",
+
     "item.paimeng.null_relics":"UnKnown Relics",
     "item.paimeng.xingyuner_head":"xingyuner Head",
     "item.paimeng.xingyuner_cup":"xingyuner Cup",
@@ -373,6 +380,7 @@
     "block.paimeng.apple_sapling":"Apple sapling",
     "block.paimeng.sun_apple_sapling":"Sunset fruit sapling",
     "block.paimeng.purple_apple_sapling":"Viola melon sapling",
+    "block.paimeng.zaoye_sapling":"zaoye sapling",
     "block.paimeng.common_farmland":"Xuanjiyutian",
     "block.paimeng.fertile_farmland":"Koichida",
     "block.paimeng.aquatic_farmland":"Chu Zhutian",
@@ -418,6 +426,13 @@
     "block.paimeng.xuekui_plant":"xuekui Plant",
     "block.paimeng.youdengxun_plant":"youdengxun Plant",
     "block.paimeng.zhusun_plant":"zhusun Plant",
+
+    "block.paimeng.dunduntao_plant":"dunduntao Plant",
+    "block.paimeng.padishalan_plant":"padishalan Plant",
+    "block.paimeng.piboye_plant":"piboye Plant",
+    "block.paimeng.shuwang_shengtigu_plant":"shuwang_shengtigu Plant",
+    "block.paimeng.xiangxinguo_plant":"xiangxinguo Plant",
+    "block.paimeng.xumi_qiangwei_plant":"xumi_qiangwei Plant",
     
     "block.paimeng.bailuobo_crop":"bailuobo Crop",
     "block.paimeng.hailingzhi_crop":"hailingzhi Crop",
@@ -456,10 +471,18 @@
     "block.paimeng.xuekui_crop":"xuekui Crop",
     "block.paimeng.yangcong_crop":"yangcong Crop",
 
+    "block.paimeng.dunduntao_crop":"dunduntao Crop",
+    "block.paimeng.padishalan_crop":"padishalan Crop",
+    "block.paimeng.piboye_crop":"piboye Crop",
+    "block.paimeng.shuwang_shengtigu_crop":"shuwang_shengtigu Crop",
+    "block.paimeng.xiangxinguo_crop":"xiangxinguo Crop",
+    "block.paimeng.xumi_qiangwei_crop":"xumi_qiangwei Crop",
+
     "block.paimeng.apple_crop":"Apple",
     "block.paimeng.sun_apple_crop":"Sunset fruit",
     "block.paimeng.purple_apple_crop":"Viola melon",
-    
+    "block.paimeng.zaoye_crop":"zaoye",
+
     "effect.paimeng.critical_rate":"§6Critical hit rate",
     "effect.paimeng.critical_damage":"§cCritical damage",
     "effect.paimeng.revive":"§eRevive",

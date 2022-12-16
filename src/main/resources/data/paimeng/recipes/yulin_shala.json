@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:dunduntao",
+      "count": 2
+    },
+    {
+      "item": "paimeng:bohe",
+      "count": 2
+    },
+    {
+      "item": "paimeng:xumi_qiangwei",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:yulin_shala"
+  }
+}

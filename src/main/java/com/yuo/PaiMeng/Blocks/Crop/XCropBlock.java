@@ -146,8 +146,20 @@ public class XCropBlock extends CropsBlock{
             return PMItems.yangcongSeed.get();
         }else if (this == PMBlocks.youdengxunCrop.get() || this == PMBlocks.youdengxunWallCrop.get()){
             return PMItems.youdengxunSeed.get();
+        }else if (this == PMBlocks.shuwangShengtiguCrop.get() || this == PMBlocks.shuwangShengtiguWallCrop.get()){
+            return PMItems.shuwangShengtiguSeed.get();
         }else if (this == PMBlocks.zhusunCrop.get()){
             return PMItems.zhusunSeed.get();
+        }else if (this == PMBlocks.dunduntaoCrop.get()){
+            return PMItems.dunduntaoSeed.get();
+        }else if (this == PMBlocks.padishalanCrop.get()){
+            return PMItems.padishalanSeed.get();
+        }else if (this == PMBlocks.piboyeCrop.get()){
+            return PMItems.piboyeSeed.get();
+        }else if (this == PMBlocks.xiangxinguoCrop.get()){
+            return PMItems.xiangxinguoSeed.get();
+        }else if (this == PMBlocks.xumiQiangweiCrop.get()){
+            return PMItems.xumiQiangweiSeed.get();
         }
         return super.getSeedsItem();
     }

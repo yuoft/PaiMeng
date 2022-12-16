@@ -97,8 +97,20 @@ public class ModPlant extends BushBlock {
             item = PMItems.xuekui.get();
         }else if (this == PMBlocks.youdengxunPlant.get() || this == PMBlocks.youdengxunWallPlant.get()){
             item = PMItems.youdengxun.get();
+        }else if (this == PMBlocks.shuwangShengtiguPlant.get() || this == PMBlocks.shuwangShengtiguWallPlant.get()){
+            item = PMItems.shuwangShengtigu.get();
         }else if (this == PMBlocks.zhusunPlant.get()){
             item = PMItems.zhusun.get();
+        }else if (this == PMBlocks.dunduntaoPlant.get()){
+            item = PMItems.dunduntao.get();
+        }else if (this == PMBlocks.padishalanPlant.get()){
+            item = PMItems.padishalan.get();
+        }else if (this == PMBlocks.piboyePlant.get()){
+            item = PMItems.piboye.get();
+        }else if (this == PMBlocks.xiangxinguoPlant.get()){
+            item = PMItems.xiangxinguo.get();
+        }else if (this == PMBlocks.xumiQiangweiPlant.get()){
+            item = PMItems.xumiQiangwei.get();
         }
         if (item != Items.AIR){
             return new ItemStack(item);

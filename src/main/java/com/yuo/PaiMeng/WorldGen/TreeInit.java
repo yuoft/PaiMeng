@@ -24,4 +24,10 @@ public class TreeInit {
             return FeatureInit.PURPLE_APPLE_TREE.get();
         }
     };
+    public static final TreeSpawner ZAOYE_TREE = new TreeSpawner() {
+        @Override
+        protected Feature getFeature(Random random) {
+            return FeatureInit.ZAOYE_TREE.get();
+        }
+    };
 }

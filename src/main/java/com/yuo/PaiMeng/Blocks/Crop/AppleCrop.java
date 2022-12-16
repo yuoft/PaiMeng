@@ -171,6 +171,9 @@ public class AppleCrop extends CropsBlock{
         }else if (state.getBlock() == PMBlocks.purpleAppleCrop.get()){
             stack = new ItemStack(PMItems.jingua.get());
             exp = random.nextInt(3) + 1;
+        }else if (state.getBlock() == PMBlocks.zaoyeCrop.get()){
+            stack = new ItemStack(PMItems.zaoye.get());
+            exp = random.nextInt(2) + 1;
         }
         world.addEntity(new ItemEntity(world, pos.getX() + random.nextDouble(), pos.getY(), pos.getZ() + random.nextDouble(), stack));
         if (random.nextInt(100) > 90 && flag) { //概率产出经验

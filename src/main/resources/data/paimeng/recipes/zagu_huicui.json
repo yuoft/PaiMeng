@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shuwang_shengtigu",
+      "count": 1
+    },
+    {
+      "item": "paimeng:mogu",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xingxun",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:zagu_huicui"
+  }
+}

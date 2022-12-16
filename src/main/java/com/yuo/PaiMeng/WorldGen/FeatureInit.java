@@ -17,6 +17,8 @@ public class FeatureInit {
             () -> new AppleTreeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<AppleTreeFeature> PURPLE_APPLE_TREE = FEATURES.register("purple_apple_tree",
             () -> new AppleTreeFeature(NoFeatureConfig.CODEC));
+    public static final RegistryObject<AppleTreeFeature> ZAOYE_TREE = FEATURES.register("zaoye_tree",
+            () -> new AppleTreeFeature(NoFeatureConfig.CODEC));
     public static final RegistryObject<WitheredTreeFeature> WITHERED_TREE = FEATURES.register("withered_tree",
             () -> new WitheredTreeFeature(NoFeatureConfig.CODEC));
 

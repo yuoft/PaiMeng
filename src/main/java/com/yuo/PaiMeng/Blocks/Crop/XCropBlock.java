@@ -25,10 +25,10 @@ public class XCropBlock extends CropsBlock{
         this.useBlockEnum = blockEnum;
     }
 
-    @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(AGE) >= 7 ? super.getLightValue(state, world, pos) : 0;
-    }
+//    @Override
+//    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+//        return state.get(AGE) >= 7 ? super.getLightValue(state, world, pos) : 0;
+//    }
 
     //生长时间更长
     @Override

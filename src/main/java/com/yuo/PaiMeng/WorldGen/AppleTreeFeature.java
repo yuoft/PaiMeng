@@ -45,6 +45,8 @@ public class AppleTreeFeature extends Feature<NoFeatureConfig> {
             this.CROP = PMBlocks.sunAppleCrop.get().getDefaultState();
         }else if (this == FeatureInit.PURPLE_APPLE_TREE.get()){
             this.CROP = PMBlocks.purpleAppleCrop.get().getDefaultState();
+        }else if (this == FeatureInit.ZAOYE_TREE.get()){
+            this.CROP = PMBlocks.zaoyeCrop.get().getDefaultState();
         }
         if (CROP == null) return false;
         while (pos.getY() > 1 && isAirOrLeaves(reader, pos)) { //合适的生成位置

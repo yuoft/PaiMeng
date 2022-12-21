@@ -4,6 +4,7 @@
     "minecraft:grass_block",
     "minecraft:dirt",
     "minecraft:coarse_dirt",
+    "minecraft:sand",
     "minecraft:podzol"
   ]
 }

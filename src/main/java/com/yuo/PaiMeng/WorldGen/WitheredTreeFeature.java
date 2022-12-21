@@ -28,11 +28,13 @@ public class WitheredTreeFeature extends Feature<NoFeatureConfig> {
             PMBlocks.moguWallPlant.get().getDefaultState(),
             PMBlocks.mufengMoguWallPlant.get().getDefaultState(),
             PMBlocks.songrongWallPlant.get().getDefaultState(),
+            PMBlocks.shuwangShengtiguWallPlant.get().getDefaultState(),
             PMBlocks.youdengxunWallPlant.get().getDefaultState()};
     private final BlockState[] UP_PLANTS = new BlockState[]{
             PMBlocks.moguPlant.get().getDefaultState(),
             PMBlocks.mufengMoguPlant.get().getDefaultState(),
             PMBlocks.songrongPlant.get().getDefaultState(),
+            PMBlocks.shuwangShengtiguPlant.get().getDefaultState(),
             PMBlocks.youdengxunPlant.get().getDefaultState()};
     public WitheredTreeFeature(Codec<NoFeatureConfig> codec) {
         super(codec);

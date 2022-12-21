@@ -83,12 +83,12 @@ public class PMBlocks {
     public static RegistryObject<Block> zhusunCrop = BLOCKS.register("zhusun_crop", () -> new XCropBlock(FERTILE, CROP));
 
     //3.0~
-    public static RegistryObject<Block> dunduntaoCrop = BLOCKS.register("dunduntao_crop", () -> new XCropBlock(FERTILE, CROP));
-    public static RegistryObject<Block> padishalanCrop = BLOCKS.register("padishalan_crop", () -> new XCropBlock(COMMON, CROP));
-    public static RegistryObject<Block> piboyeCrop = BLOCKS.register("piboye_crop", () -> new XCropBlock(COMMON, CROP));
+    public static RegistryObject<Block> dunduntaoCrop = BLOCKS.register("dunduntao_crop", () -> new XCropBlock(COMMON, CROP));
+    public static RegistryObject<Block> padishalanCrop = BLOCKS.register("padishalan_crop", () -> new XCropBlock(FERTILE, CROP));
+    public static RegistryObject<Block> piboyeCrop = BLOCKS.register("piboye_crop", () -> new XCropBlock(FERTILE, CROP));
     public static RegistryObject<Block> shuwangShengtiguCrop = BLOCKS.register("shuwang_shengtigu_crop", () -> new XCropBlock(LOGS, CROP));
-    public static RegistryObject<Block> xiangxinguoCrop = BLOCKS.register("xiangxinguo_crop", () -> new XCropBlock(FERTILE, CROP));
-    public static RegistryObject<Block> xumiQiangweiCrop = BLOCKS.register("xumi_qiangwei_crop", () -> new XCropBlock(FERTILE, CROP));
+    public static RegistryObject<Block> xiangxinguoCrop = BLOCKS.register("xiangxinguo_crop", () -> new XCropBlock(COMMON, CROP));
+    public static RegistryObject<Block> xumiQiangweiCrop = BLOCKS.register("xumi_qiangwei_crop", () -> new XCropBlock(COMMON, CROP));
 
     //植物
     public static RegistryObject<Block> bingwuhuaHuaduoPlant = BLOCKS.register("bingwuhua_huaduo_plant", () -> new BingWuHuaPlant(PLANT));

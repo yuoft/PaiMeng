@@ -557,17 +557,17 @@ public class PMItems {
 			() -> new CropBlockItem(PMBlocks.zhusunCrop.get(), FERTILE));
 	//3.0~
 	public static RegistryObject<BlockItem> dunduntaoSeed = ITEMS.register("dunduntao_seed",
-			() -> new CropBlockItem(PMBlocks.dunduntaoCrop.get(), FERTILE));
+			() -> new CropBlockItem(PMBlocks.dunduntaoCrop.get(), COMMON));
 	public static RegistryObject<BlockItem> padishalanSeed = ITEMS.register("padishalan_seed",
-			() -> new CropBlockItem(PMBlocks.padishalanCrop.get(), COMMON));
+			() -> new CropBlockItem(PMBlocks.padishalanCrop.get(), FERTILE));
 	public static RegistryObject<BlockItem> piboyeSeed = ITEMS.register("piboye_seed",
-			() -> new CropBlockItem(PMBlocks.piboyeCrop.get(), COMMON));
+			() -> new CropBlockItem(PMBlocks.piboyeCrop.get(), FERTILE));
 	public static RegistryObject<BlockItem> shuwangShengtiguSeed = ITEMS.register("shuwang_shengtigu_seed",
 			() -> new CropBlockItem(PMBlocks.shuwangShengtiguCrop.get(), LOGS));
 	public static RegistryObject<BlockItem> xiangxinguoSeed = ITEMS.register("xiangxinguo_seed",
-			() -> new CropBlockItem(PMBlocks.xiangxinguoCrop.get(), FERTILE));
+			() -> new CropBlockItem(PMBlocks.xiangxinguoCrop.get(), COMMON));
 	public static RegistryObject<BlockItem> xumiQiangweiSeed = ITEMS.register("xumi_qiangwei_seed",
-			() -> new CropBlockItem(PMBlocks.xumiQiangweiCrop.get(), FERTILE));
+			() -> new CropBlockItem(PMBlocks.xumiQiangweiCrop.get(), COMMON));
 
 
 	//树

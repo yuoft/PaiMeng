@@ -47,6 +47,8 @@ public class WorldPlantGen {
         }
         if (key.equals(Biomes.FOREST)){ //森林
             addFeaturePlainFlower(generation, PMBlocks.luoluomeiPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.dunduntaoPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.xiangxinguoPlant.get().getDefaultState(), 3, 1);
         }
         if (key.equals(Biomes.END_BARRENS) || key.equals(Biomes.END_MIDLANDS)){ //末地荒岛 中型末地岛屿
             addFeaturePlainFlower(generation, PMBlocks.tianyunCaoshiPlant.get().getDefaultState(), 1, 1);
@@ -57,9 +59,12 @@ public class WorldPlantGen {
         if (key.equals(Biomes.FLOWER_FOREST)){ //繁花森林
             addFeaturePlainFlower(generation, PMBlocks.liuliBaihePlant.get().getDefaultState(), 3, 1);
             addFeaturePlainFlower(generation, PMBlocks.nichanghuaPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.piboyePlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.padishalanPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.JUNGLE)) { //丛林
             addFeaturePlainFlower(generation, PMBlocks.moguPlant.get().getDefaultState(), 3, 1);
+            addFeaturePlainFlower(generation, PMBlocks.shuwangShengtiguPlant.get().getDefaultState(), 3, 1);
         }
         if (category.equals(Biome.Category.TAIGA)) { //针叶林
             addFeaturePlainFlower(generation, PMBlocks.songrongPlant.get().getDefaultState(), 3, 1);
@@ -86,6 +91,7 @@ public class WorldPlantGen {
         if (category.equals(Biome.Category.PLAINS)) { //平原
             addFeaturePlainFlower(generation, PMBlocks.fengchejuPlant.get().getDefaultState(), 1, 1);
             addFeaturePlainFlower(generation, PMBlocks.pugongyingPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.xumiQiangweiPlant.get().getDefaultState(), 1, 1);
         }
         if (category.equals(Biome.Category.BEACH)) { //海滩
             addFeatureRiver(generation, PMBlocks.dudulianPlant.get().getDefaultState(),  4);

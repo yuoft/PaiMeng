@@ -3,7 +3,7 @@ loaderVersion="[36,)"
 license="All rights reserved"
 [[mods]] #mandatory
 modId="paimeng"
-version="1.16.5-1.1.9"
+version="1.16.5-1.2.0"
 displayName="PaiMeng"
 authors="yuo" 
 description='''

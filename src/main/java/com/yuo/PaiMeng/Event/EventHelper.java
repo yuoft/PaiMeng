@@ -222,7 +222,7 @@ public class EventHelper {
         if (effectInstance != null){
             return effectInstance.getAmplifier();
         }
-        return 0;
+        return -1;
     }
 
     /**

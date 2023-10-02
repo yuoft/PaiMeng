@@ -45,6 +45,18 @@ public class WorldEventHandler {
                     .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
                             new AtSurfaceWithExtraConfig(0, 0.01f, 1) //生成次数 额外生成机会 额外生成次数
                     )));
+            features.add(() -> FeatureInit.PURPLE_APPLE_TREE.get().withConfiguration(NoFeatureConfig.INSTANCE)
+                    .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
+                            new AtSurfaceWithExtraConfig(0, 0.01f, 1) //生成次数 额外生成机会 额外生成次数
+                    )));
+            features.add(() -> FeatureInit.ZAOYE_TREE.get().withConfiguration(NoFeatureConfig.INSTANCE)
+                    .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
+                            new AtSurfaceWithExtraConfig(0, 0.01f, 1) //生成次数 额外生成机会 额外生成次数
+                    )));
+            features.add(() -> FeatureInit.PAOPAOJU_TREE.get().withConfiguration(NoFeatureConfig.INSTANCE)
+                    .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
+                            new AtSurfaceWithExtraConfig(0, 0.01f, 1) //生成次数 额外生成机会 额外生成次数
+                    )));
             features.add(() -> FeatureInit.WITHERED_TREE.get().withConfiguration(NoFeatureConfig.INSTANCE)
                     .withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(
                             new AtSurfaceWithExtraConfig(1, 0.005f, 1) //生成次数 额外生成机会 额外生成次数

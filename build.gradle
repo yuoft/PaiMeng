@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-1.2.0'
+version = '1.16.5-1.2.1'
 group = 'com.github.yuoft' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'PaiMeng'
 
@@ -84,7 +84,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.34'
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.152") //引入mod API
-    runtimeOnly fg.deobf("curse.maven:jei-238222:3681294") //引入mod
+    runtimeOnly fg.deobf("curse.maven:jei-238222:3681294") //引入mod jei
+    runtimeOnly fg.deobf("curse.maven:just-enough-resources-jer-240630:4526612") //引入mod jeri
+    runtimeOnly fg.deobf("curse.maven:jer-integration-506948:3604406") //引入mod jer
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

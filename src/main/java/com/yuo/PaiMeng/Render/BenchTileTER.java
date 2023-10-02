@@ -37,7 +37,7 @@ public class BenchTileTER extends TileEntityRenderer<BenchTile> {
         matrixStackIn.scale(0.25f,0.25f,0.25f); //缩放
         matrixStackIn.rotate(new Quaternion(90,0,0, true)); //旋转
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack stack = new ItemStack(tileEntityIn.items.get(5).getItem()); //渲染物品
+        ItemStack stack = new ItemStack(tileEntityIn.items.get(6).getItem()); //渲染物品
         IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(stack, tileEntityIn.getWorld(), null); //获取模型
         //原版渲染方式
         itemRenderer.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);

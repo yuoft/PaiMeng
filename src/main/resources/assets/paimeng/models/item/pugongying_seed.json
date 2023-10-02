@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "paimeng:item/pugongying_zhongzi"
+        "layer0": "paimeng:item/fooding/pugongying_zhongzi"
     }
 }

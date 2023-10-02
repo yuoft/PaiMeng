@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "minecraft:totem_of_undying",
+      "item": "paimeng:baocai",
       "count": 1
     },
     {
@@ -15,6 +15,10 @@
     },
     {
       "item": "paimeng:xiehuang",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
       "count": 1
     }
   ],

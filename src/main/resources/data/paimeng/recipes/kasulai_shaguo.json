@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:xiangchang",
+      "count": 2
+    },
+    {
+      "item": "paimeng:qinrou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tutudou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:mojiecao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:kasulai_shaguo"
+  }
+}

@@ -124,6 +124,10 @@ public class RelicsHelper {
 
     public static Random random = new Random();
 
+    public static int getMaxStar(ItemStack stack){
+        return stack.getOrCreateTag().getInt("maxStar");
+    }
+
     /**
      * 判断物品是否含有等级
      * @param stack 物品
@@ -278,6 +282,22 @@ public class RelicsHelper {
         if (star > 1)
             setViceAttr(nbt, nbt.getInt(NBT_ATTR_TYPE), star);
         orCreateTag.put(NBT_RELICS, nbt);
+    }
+
+    /**
+     * 为物品初始化属性
+     * @param crafting 物品
+     */
+    public static void addRelicsBaseAttr0(ItemStack crafting) {
+        Relics relics = (Relics) crafting.getItem();
+        CompoundNBT tag = crafting.getOrCreateTag();
+        CompoundNBT nbt = tag.getCompound(NBT_RELICS);
+        int star = nbt.getInt(NBT_STAR);
+        setMainAttr(nbt, star, RelicsType.getTypeForId(nbt.getInt(NBT_TYPE)));
+        nbt.putInt(NBT_LEVEL, 0);
+        nbt.putInt(NBT_EXP, 0);
+        if (star > 1)
+            setViceAttr(nbt, nbt.getInt(NBT_ATTR_TYPE), star);
     }
 
     /**

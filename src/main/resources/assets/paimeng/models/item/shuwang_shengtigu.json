@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paimeng:item/shuwang_shengtigu"
+    "layer0": "paimeng:item/fooding/shuwang_shengtigu"
   }
 }

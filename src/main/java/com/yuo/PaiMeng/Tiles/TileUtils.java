@@ -102,7 +102,7 @@ public class TileUtils {
     public static ItemStack getTileStack(World world, IRecipeType recipeType,IInventory inventory, int count, int star){
         ItemStack output = getRecipeOutput(world, recipeType, inventory);
         if (output.isEmpty()) return ItemStack.EMPTY;
-        ItemStack stack = inventory.getStackInSlot(4);
+        ItemStack stack = inventory.getStackInSlot(5);
         output.setCount(count);
         if (stack.isEmpty()) return output;
         stack.grow(output.getCount());

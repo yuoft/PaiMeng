@@ -21,44 +21,6 @@ public abstract class CookingRecipe implements IRecipe<IInventory> {
         this.result = resultIn;
     }
 
-//    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ICookingRecipe>{
-//
-//        @Override
-//        public ICookingRecipe read(ResourceLocation recipeId, JsonObject json) { //从json中获取信息
-//            NonNullList<ItemStack> inputs = NonNullList.create();
-//            for (JsonElement inputJson : JSONUtils.getJsonArray(json, "inputs")) {
-//                ItemStack stack = ShapedRecipe.deserializeItem((JsonObject) inputJson);
-//                if (!stack.isEmpty()) inputs.add(stack);
-//            }
-//            ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-//            if (inputs.isEmpty() || inputs.size() > 4){
-//                throw new IllegalStateException("Recipe is not Error");
-//            }
-//            return new ICookingRecipe(recipeId, inputs, result);
-//        }
-//
-//        @Nullable
-//        @Override
-//        public ICookingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-//            int i = buffer.readVarInt();
-//            NonNullList<ItemStack> list = NonNullList.create();
-//            for(int j = 0; j < i; ++j) {
-//                list.add(j, buffer.readItemStack());
-//            }
-//            ItemStack result = buffer.readItemStack();
-//            return new ICookingRecipe(recipeId, list, result);
-//        }
-//
-//        @Override
-//        public void write(PacketBuffer buffer, ICookingRecipe recipe) {
-//            buffer.writeVarInt(recipe.inputs.size());
-//            for(ItemStack stack : recipe.inputs) {
-//                buffer.writeItemStack(stack);
-//            }
-//            buffer.writeItemStack(recipe.result);
-//        }
-//    }
-
     @Override
     public boolean matches(IInventory inv, World worldIn) {
         if (inv instanceof BenchTile){

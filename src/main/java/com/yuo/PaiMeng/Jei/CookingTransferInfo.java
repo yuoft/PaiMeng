@@ -27,7 +27,7 @@ public class CookingTransferInfo implements IRecipeTransferInfo<BenchContainer> 
     @Override
     public List<Slot> getRecipeSlots(BenchContainer container) {
         List<Slot> slots = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 5; i++){
             slots.add(container.getSlot(i));
         }
         return slots;

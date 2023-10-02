@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:paopaoju",
+      "count": 2
+    },
+    {
+      "item": "paimeng:naiyou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:guojiang",
+      "count": 1
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:juju_bobing"
+  }
+}

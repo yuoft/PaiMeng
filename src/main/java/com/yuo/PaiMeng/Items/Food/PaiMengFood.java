@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Items.Food;
 
 import com.yuo.PaiMeng.Items.PMItems;
+import com.yuo.PaiMeng.Items.RelicsHelper;
 import com.yuo.PaiMeng.tab.ModGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -41,6 +43,21 @@ public class PaiMengFood extends Item {
             tooltip.add(new TranslationTextComponent("paimeng.text.itemInfo.good_food"));
         }
     }
+
+    //根据物品星级确定颜色名称
+    @Override
+    public ITextComponent getDisplayName(ItemStack stack) {
+        TranslationTextComponent component = new TranslationTextComponent(getTranslationKey(stack));
+        switch (LEVEL){
+            case 1: return component.mergeStyle(TextFormatting.WHITE);
+            case 2: return component.mergeStyle(TextFormatting.GREEN);
+            case 3: return component.mergeStyle(TextFormatting.BLUE);
+            case 4: return component.mergeStyle(TextFormatting.DARK_PURPLE);
+            case 5: return component.mergeStyle(TextFormatting.GOLD);
+            default: return component;
+        }
+    }
+
 
     public int getLEVEL() {
         return LEVEL;

@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:piboye",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:piboye_seed"
+  }
+}

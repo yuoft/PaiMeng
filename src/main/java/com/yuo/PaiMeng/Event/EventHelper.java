@@ -22,10 +22,7 @@ import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -166,12 +163,13 @@ public class EventHelper {
      * @param stacks 圣遗物数据
      * @param stack 当前使用圣遗物
      */
-    public static void wearRelics(PlayerEntity player, World world, int index, NonNullList<ItemStack> stacks, ItemStack stack){
+    public static void wearRelics(PlayerEntity player, Hand hand, World world, int index, NonNullList<ItemStack> stacks, ItemStack stack){
         if (stacks.get(index).isEmpty()){
             stacks.set(index, stack.copy());
             if (!player.isCreative())
                 stack.shrink(1);
-           world.playSound(player, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, SoundCategory.PLAYERS, 1.0f, 3.0f);
+            player.swingArm(hand);
+            world.playSound(player, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, SoundCategory.PLAYERS, 1.0f, 3.0f);
         }
     }
 
@@ -247,7 +245,7 @@ public class EventHelper {
      * @return 含有5个项的奖池
      */
     public static LootPool getPool(LootEntry.Builder<?> entry){
-        LootPool.Builder builder = new LootPool.Builder().addEntry(entry).bonusRolls(0, 2);
+        LootPool.Builder builder = new LootPool.Builder().addEntry(entry).addEntry(entry).addEntry(entry).bonusRolls(0, 2);
         return builder.build();
     }
 

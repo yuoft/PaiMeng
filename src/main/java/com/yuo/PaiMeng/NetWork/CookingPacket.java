@@ -54,12 +54,12 @@ public class CookingPacket {
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile instanceof PotTile){
                     PotTile potTile = (PotTile) tile;
-                    potTile.setInventorySlotContents(4, TileUtils.getTileStack(world, ModRecipeType.POT, potTile, count, star));
+                    potTile.setInventorySlotContents(5, TileUtils.getTileStack(world, ModRecipeType.POT, potTile, count, star));
                     TileUtils.shirkItem(potTile, TileUtils.getRecipeInputs(world, ModRecipeType.POT, potTile), count);
                 }
                 if (tile instanceof BenchTile){
                     BenchTile benchTile = (BenchTile) tile;
-                    benchTile.setInventorySlotContents(4, TileUtils.getTileStack(world, ModRecipeType.BENCH, benchTile, count, star));
+                    benchTile.setInventorySlotContents(5, TileUtils.getTileStack(world, ModRecipeType.BENCH, benchTile, count, star));
                     TileUtils.shirkItem(benchTile, TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, benchTile), count);
                 }
                 spawnFood(world, tile);
@@ -114,7 +114,7 @@ public class CookingPacket {
 
     //经验计算
     public static int getUpExp(int level){
-        return (level + 1) * 30 + (int) Math.pow(level + 1,  2) * 10; //升级经验
+        return (level * 2 + 1) * 100 + (int) Math.pow(2,  level) * 100; //升级经验
     }
 
     /**
@@ -131,16 +131,16 @@ public class CookingPacket {
         if (count == 0 && rand.nextDouble() > 0.97 - (star - 1) * 0.01d){ //3% + 每级星级增加1%概率产生 裁决之时
             ItemStack stack = new ItemStack(PMItems.bugFood.get());
             if (tile instanceof PotTile){
-                ItemStack itemStack = ((PotTile) tile).getStackInSlot(4);
+                ItemStack itemStack = ((PotTile) tile).getStackInSlot(5);
                 if (itemStack.isEmpty()){
-                    ((PotTile) tile).setInventorySlotContents(4, stack);
+                    ((PotTile) tile).setInventorySlotContents(5, stack);
                     return;
                 }
             }
             if (tile instanceof BenchTile){
-                ItemStack itemStack = ((BenchTile) tile).getStackInSlot(4);
+                ItemStack itemStack = ((BenchTile) tile).getStackInSlot(5);
                 if (itemStack.isEmpty()){
-                    ((BenchTile) tile).setInventorySlotContents(4, stack);
+                    ((BenchTile) tile).setInventorySlotContents(5, stack);
                     return;
                 }
             }

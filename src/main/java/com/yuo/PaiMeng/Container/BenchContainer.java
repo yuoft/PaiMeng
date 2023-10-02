@@ -40,8 +40,9 @@ public class BenchContainer extends Container {
                 this.addSlot(new CookingSlot(benchTile, n + m * 2, 8 + n * 30, 22 + m * 27));
             }
         }
+        this.addSlot(new CookingSlot(benchTile,4, 91, 16));
         //食品槽
-        this.addSlot(new ModOutputSlot(benchTile, 4, 132, 33));
+        this.addSlot(new ModOutputSlot(benchTile, 5, 132, 33));
         //添加玩家物品栏
         for(int i = 0; i < 3; ++i) {
             for(int j = 0; j < 9; ++j) {
@@ -111,15 +112,15 @@ public class BenchContainer extends Container {
         if (slot != null && slot.getHasStack()) {
             ItemStack itemStack1 = slot.getStack();
             itemstack = itemStack1.copy();
-            if (index > 4){
+            if (index > 5){
                 if (itemStack1.getItem() instanceof PMFoodItem)
-                    if (!this.mergeItemStack(itemStack1, 0, 4, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemStack1, 0, 5, false)) return ItemStack.EMPTY;
                 if (index < 32) { //从物品栏到快捷栏
-                    if (!this.mergeItemStack(itemStack1, 33, 41, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemStack1, 34, 42, false)) return ItemStack.EMPTY;
                 } else if (index < 41) {
-                    if (!this.mergeItemStack(itemStack1, 5, 32, false)) return ItemStack.EMPTY;
+                    if (!this.mergeItemStack(itemStack1, 6, 33, false)) return ItemStack.EMPTY;
                 }
-            }else if (!this.mergeItemStack(itemStack1, 5, 41, false)) return ItemStack.EMPTY; //取出来
+            }else if (!this.mergeItemStack(itemStack1, 6, 42, false)) return ItemStack.EMPTY; //取出来
 
             if (itemStack1.isEmpty()) slot.putStack(ItemStack.EMPTY);
             else slot.onSlotChanged();

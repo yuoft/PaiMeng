@@ -92,6 +92,7 @@ public class WorldPlantGen {
             addFeaturePlainFlower(generation, PMBlocks.fengchejuPlant.get().getDefaultState(), 1, 1);
             addFeaturePlainFlower(generation, PMBlocks.pugongyingPlant.get().getDefaultState(), 1, 1);
             addFeaturePlainFlower(generation, PMBlocks.xumiQiangweiPlant.get().getDefaultState(), 1, 1);
+            addFeaturePlainFlower(generation, PMBlocks.mojiecaoPlant.get().getDefaultState(), 1, 1);
         }
         if (category.equals(Biome.Category.BEACH)) { //海滩
             addFeatureRiver(generation, PMBlocks.dudulianPlant.get().getDefaultState(),  4);

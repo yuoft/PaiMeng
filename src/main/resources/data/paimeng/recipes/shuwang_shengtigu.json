@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:shuwang_shengtigu",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:shuwang_shengtigu_seed"
+  }
+}

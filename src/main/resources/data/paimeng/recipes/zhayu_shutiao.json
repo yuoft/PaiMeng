@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:zhayu_shutiao"
+  }
+}

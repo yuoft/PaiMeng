@@ -82,9 +82,26 @@ public class CookingScreen extends Screen {
     }
 
     //设置指针速度
-    private void setLEVEL_GROW(int lv){
-        if (lv <= 2) LEVEL_GROW += 1;
-        else if (lv <= 4) LEVEL_GROW += 1.5d;
-        else LEVEL_GROW += 2;
+    private void setLEVEL_GROW(int lv) {
+        switch (lv) {
+            case 1:
+                LEVEL_GROW += 0.4d;
+                break;
+            case 2:
+                LEVEL_GROW += 0.6d;
+                break;
+            case 3:
+                LEVEL_GROW += 0.9d;
+                break;
+            case 4:
+                LEVEL_GROW += 1.2d;
+                break;
+            case 5:
+                LEVEL_GROW += 1.5d;
+                break;
+            default:
+                LEVEL_GROW += 1d;
+                break;
+        }
     }
 }

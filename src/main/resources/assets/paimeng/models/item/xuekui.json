@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paimeng:item/xuekui"
+    "layer0": "paimeng:item/fooding/xuekui"
   }
 }

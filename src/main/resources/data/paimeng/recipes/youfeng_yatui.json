@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tudou",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:youfeng_yatui"
+  }
+}

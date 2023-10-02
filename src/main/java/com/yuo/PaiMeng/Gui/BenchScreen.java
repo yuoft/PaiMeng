@@ -47,8 +47,8 @@ public class BenchScreen extends ContainerScreen<BenchContainer> {
         if (burnTime > 0) {
             blit(matrixStack, i + 65, j + 36 + 14 - burnTime, 176, 14 - burnTime, 14, burnTime);
         }
-        if (!container.canRecipe()){ //叉号
-            blit(matrixStack, i + 90,j + 35,190,0,22,15);
+        if (!container.canRecipe()) { //叉号
+            blit(matrixStack, i + 90, j + 35, 190, 0, 22, 15);
         }
         blit(matrixStack, i + 105, j + 9, 176, 15, 51, 5);
         int exp = container.getExp();
@@ -67,7 +67,7 @@ public class BenchScreen extends ContainerScreen<BenchContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.button.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.buttonCount.render(matrixStack,mouseX,mouseY,partialTicks);
+        this.buttonCount.render(matrixStack, mouseX, mouseY, partialTicks);
         //切换按钮可用状态
         this.button.active = container.canRecipe();
         this.buttonCount.active = container.canRecipe() && container.getFoodRecipesLevel() >= container.getFoodLevel() && container.getItemMaxCount() > 1;
@@ -75,17 +75,17 @@ public class BenchScreen extends ContainerScreen<BenchContainer> {
     }
 
     //按下按钮后
-    private void button(Button button){
+    private void button(Button button) {
         if (minecraft != null) {
             if (container.canRecipe())
-                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel(),1));
+                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"), this, container.getFoodLevel(), 1));
         }
     }
 
-    private void buttonCount(Button button){
+    private void buttonCount(Button button) {
         if (minecraft != null) {
             if (container.canRecipe())
-                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"),this,container.getFoodLevel(),container.getItemMaxCount()));
+                minecraft.displayGuiScreen(new CookingScreen(new TranslationTextComponent("gui.paimeng.cooking"), this, container.getFoodLevel(), container.getItemMaxCount()));
         }
     }
 

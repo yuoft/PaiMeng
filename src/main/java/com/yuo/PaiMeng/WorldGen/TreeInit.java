@@ -30,4 +30,10 @@ public class TreeInit {
             return FeatureInit.ZAOYE_TREE.get();
         }
     };
+    public static final TreeSpawner PAOPAOJU_TREE = new TreeSpawner() {
+        @Override
+        protected Feature getFeature(Random random) {
+            return FeatureInit.PAOPAOJU_TREE.get();
+        }
+    };
 }

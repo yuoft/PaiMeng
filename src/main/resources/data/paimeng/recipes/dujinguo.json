@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:padishalan",
+      "count": 2
+    },
+    {
+      "item": "paimeng:xiangxinliao",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yangcong",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:dujinguo"
+  }
+}

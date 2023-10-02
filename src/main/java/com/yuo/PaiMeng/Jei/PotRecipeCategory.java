@@ -69,7 +69,8 @@ public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
         recipeLayout.getItemStacks().init(1, true, 33, 17);
         recipeLayout.getItemStacks().init(2, true, 3, 44);
         recipeLayout.getItemStacks().init(3, true, 33, 44);
-        recipeLayout.getItemStacks().init(4, false, 127, 28);
+        recipeLayout.getItemStacks().init(4, true, 86, 11);
+        recipeLayout.getItemStacks().init(5, false, 127, 28);
         recipeLayout.getItemStacks().set(ingredients);
     }
 

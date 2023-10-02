@@ -234,7 +234,7 @@ public class EventHandler {
             //复活buff
             int revive = EventHelper.getEffectLevel(player, EffectRegistry.REVIVE.get());
             if (revive >= 0){
-                ReviveEffect.revive(player, revive);
+                ReviveEffect.revive(player, revive + 1);
                 event.setCanceled(true);
             }
             //重置双爆属性
@@ -298,13 +298,20 @@ public class EventHandler {
     @SubscribeEvent
     public static void wearRelics(PlayerInteractEvent.RightClickItem event){
         PlayerEntity player = event.getPlayer();
-        ItemStack stack = event.getItemStack();
-        if (stack.getItem() instanceof Relics){ //快速装备圣遗物
-            LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
-            capability.ifPresent(e ->{
-                NonNullList<ItemStack> stacks = e.getStacks();
-                EventHelper.wearRelics(player, event.getWorld(), RelicsHelper.getTypeForStack(stack).getId(), stacks, stack);
-            });
+        ItemStack relics = event.getItemStack();
+        if (relics.getItem() instanceof Relics){ //快速装备圣遗物
+            if (player.isSneaking()){
+                // 为没有属性的圣遗物初始化属性
+                if (!RelicsHelper.hasMainAttrNbt(relics)){
+                    RelicsHelper.addRelicsBaseAttr0(relics);
+                }
+            }else {
+                LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
+                capability.ifPresent(e ->{
+                    NonNullList<ItemStack> stacks = e.getStacks();
+                    EventHelper.wearRelics(player, event.getHand() , event.getWorld(), RelicsHelper.getTypeForStack(relics).getId(), stacks, relics);
+                });
+            }
         }
     }
 

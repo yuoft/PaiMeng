@@ -1,0 +1,28 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:tutudou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:niunai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:bohe",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:cuibing_fati"
+  }
+}

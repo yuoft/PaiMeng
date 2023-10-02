@@ -28,7 +28,7 @@ public class PotTransferInfo implements IRecipeTransferInfo<PotContainer> {
     @Override
     public List<Slot> getRecipeSlots(PotContainer container) {
         List<Slot> slots = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 5; i++){
             slots.add(container.getSlot(i));
         }
         return slots;

@@ -30,7 +30,7 @@ public class PotRecipe extends CookingRecipe {
                 if (!stack.isEmpty()) inputs.add(stack);
             }
             ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
-            if (inputs.isEmpty() || inputs.size() > 4){
+            if (inputs.isEmpty() || inputs.size() > 5){
                 throw new IllegalStateException("Recipe is not Error");
             }
 //            Item item = result.getItem();

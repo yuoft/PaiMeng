@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paimeng:item/food/four_ver/shengrou_tata"
+  }
+}

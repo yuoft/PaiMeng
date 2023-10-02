@@ -31,7 +31,7 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import javax.annotation.Nullable;
 
 public class PotTile extends LockableTileEntity implements ITickableTileEntity, ISidedInventory {
-    public NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); //物品栏
+    public NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY); //物品栏
     private final int[] FIRE_TIME = {0, 20 * 90, 20 * 90 * 2, 20 * 90 * 3, 20 * 90 * 4}; //总燃烧时间 每个燃料时间为一分半钟
     private int TIME; //已燃烧时间
     private boolean FLAG; //是否可以合成
@@ -78,7 +78,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity, 
             LEVEL = ((PaiMengFood) output.getItem()).getLEVEL();
             this.data.set(2, LEVEL);
         }
-        if (!output.isEmpty() && LEVEL <= 3 && (this.items.get(4).getItem() == output.getItem() || this.items.get(4).isEmpty())){
+        if (!output.isEmpty() && LEVEL <= 3 && (this.items.get(5).getItem() == output.getItem() || this.items.get(5).isEmpty())){
             //有输出 食物等级<=3 产物栏无物品或物品相同 则能合成
             FLAG = true;
             this.data.set(1, 1);
@@ -169,7 +169,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity, 
     //获取有效输入数量
     public int getInputSize(){
         int i = 0;
-        for (ItemStack item : items.subList(0, 4)) {
+        for (ItemStack item : items.subList(0, 5)) {
             if (!item.isEmpty()) i++;
         }
         return i;
@@ -177,7 +177,7 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity, 
 
     @Override
     public boolean isEmpty() {
-        for (ItemStack stack : this.items.subList(0, 5)) {
+        for (ItemStack stack : this.items.subList(0, 6)) {
             if (!stack.isEmpty()) return false;
         }
         return true;
@@ -236,12 +236,12 @@ public class PotTile extends LockableTileEntity implements ITickableTileEntity, 
 
     @Override
     public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return direction != Direction.DOWN && index < 4 && itemStackIn.getItem() instanceof PMFoodItem;
+        return direction != Direction.DOWN && index < 5 && itemStackIn.getItem() instanceof PMFoodItem;
     }
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-        return direction == Direction.DOWN && index == 4;
+        return direction == Direction.DOWN && index == 5;
     }
 
     @Nullable

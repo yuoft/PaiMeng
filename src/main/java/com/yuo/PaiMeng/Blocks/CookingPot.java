@@ -30,6 +30,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.ScoreTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -78,6 +79,7 @@ public class CookingPot extends Block {
             if (heldItem.isEmpty()){ //空手右键打开gui
                 if (!state.get(FIRE)) {
                     player.sendMessage(new TranslationTextComponent("paimeng.message.pot_open"), UUID.randomUUID());
+                    player.sendMessage(new ScoreTextComponent("123adad", "大豆"), UUID.randomUUID());
                     return ActionResultType.SUCCESS;
                 }
                 TileEntity tileEntity = worldIn.getTileEntity(pos);

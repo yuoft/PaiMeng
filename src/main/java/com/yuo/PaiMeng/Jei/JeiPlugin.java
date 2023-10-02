@@ -118,12 +118,9 @@ public class JeiPlugin implements IModPlugin {
             }
             return "";
         });
-        //圣遗物
-//        for (RegistryObject<Item> entry : PMItems.ITEMS.getEntries()) {
-//            if (entry.get() instanceof Relics) {
-//                registration.registerSubtypeInterpreter(entry.get(), (e, u) -> RelicsHelper.getTypeForStack(e).getName() + RelicsHelper.getStarFormStack(e));
-//            }
-//        }
-//        registration.registerSubtypeInterpreter(PMItems.maoxianjiaRelics.get(), (e, u) -> RelicsHelper.getTypeForStack(e).getName());
+//        //圣遗物
+//        registration.registerSubtypeInterpreter(PMItems.xingyunerRelics.get(), (e, u) -> {
+//            return RelicsHelper.getTypeForStack(e).getName() + RelicsHelper.getMaxStar(e);
+//        });
     }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paimeng:item/lianpeng"
+    "layer0": "paimeng:item/fooding/lianpeng"
   }
 }

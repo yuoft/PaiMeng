@@ -57,7 +57,7 @@ public class WitheredTreeFeature extends Feature<NoFeatureConfig> {
         BlockPos down = pos.down();
         BlockState state = reader.getBlockState(down);
         ITag<Block> blockITag = BlockTags.getCollection().get(PMTags.APPLE_TREE_GROW);
-        if (blockITag == null || !state.getBlock().isIn(blockITag) || !state.isSolid()){ //某些方块上生成 不能生成在非固体方块上
+        if (blockITag == null || !state.getBlock().isIn(blockITag) || !state.isSolid() || state.getMaterial().isLiquid()){ //某些方块上生成 不能生成在非固体方块上
             return false;
         }
         // 树干

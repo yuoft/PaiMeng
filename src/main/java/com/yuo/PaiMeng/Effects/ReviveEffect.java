@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Effects;
 
+import com.yuo.PaiMeng.Items.Food.ModFoodEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -23,7 +24,11 @@ public class ReviveEffect extends Effect {
             CriteriaTriggers.USED_TOTEM.trigger(serverplayerentity, new ItemStack(Items.TOTEM_OF_UNDYING));
         }
         player.setHealth(2 * revive); //血量
+        EffectInstance revive0 = player.getActivePotionEffect(EffectRegistry.REVIVE.get());
         player.clearActivePotions(); //清除buff
+        if (revive > 1 && revive0 != null){
+            player.addPotionEffect(new EffectInstance(EffectRegistry.REVIVE.get(), revive0.getDuration(), revive - 2)); //添加降一级的复活buff
+        }
         player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, (40 + 10 * revive) * 20, 0)); //防火
         player.addPotionEffect(new EffectInstance(Effects.REGENERATION, (45 + 10 * revive) * 20, revive)); //生命恢复
         player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, (5 * revive) * 20, revive)); //伤害吸收

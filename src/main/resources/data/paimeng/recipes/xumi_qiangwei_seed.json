@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:xumi_qiangwei",
+    "count": 5
+  },
+  "result": {
+    "item": "paimeng:xumi_qiangwei_seed"
+  }
+}

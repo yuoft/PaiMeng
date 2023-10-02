@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paimeng:item/cecilia_hua"
+    "layer0": "paimeng:item/fooding/cecilia_hua"
   }
 }

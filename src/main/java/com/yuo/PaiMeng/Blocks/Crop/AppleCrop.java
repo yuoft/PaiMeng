@@ -29,7 +29,7 @@ import java.util.Random;
 
 //苹果果实
 public class AppleCrop extends CropsBlock{
-    private static Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+    private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
             hardnessAndResistance(5.0f, 10.0f).sound(SoundType.CROP); //作物
     public static final IntegerProperty CROP_AGE = BlockStateProperties.NOTE_0_24; // 熟透值
     public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
@@ -125,7 +125,7 @@ public class AppleCrop extends CropsBlock{
     //苹果能使用骨粉催熟
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
-        return state.getBlock() == PMBlocks.appleCrop.get();
+        return state.getBlock() == PMBlocks.appleCrop.get() || state.getBlock() == PMBlocks.paopaojuCrop.get();
     }
 
     @Override
@@ -174,6 +174,9 @@ public class AppleCrop extends CropsBlock{
         }else if (state.getBlock() == PMBlocks.zaoyeCrop.get()){
             stack = new ItemStack(PMItems.zaoye.get());
             exp = random.nextInt(2) + 1;
+        }else if (state.getBlock() == PMBlocks.paopaojuCrop.get()){
+            stack = new ItemStack(PMItems.paopaoju.get());
+            exp = random.nextInt(3) + 1;
         }
         world.addEntity(new ItemEntity(world, pos.getX() + random.nextDouble(), pos.getY(), pos.getZ() + random.nextDouble(), stack));
         if (random.nextInt(100) > 90 && flag) { //概率产出经验

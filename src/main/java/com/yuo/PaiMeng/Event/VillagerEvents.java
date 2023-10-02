@@ -29,8 +29,19 @@ public class VillagerEvents {
     @SubscribeEvent
     public static void registerTrades(VillagerTradesEvent event) {
         VillagerProfession type = event.getType();
+        if (VillagerProfession.WEAPONSMITH.equals(type)) { //武器匠
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.chunjieZhishui.get(), 26, 1,3, 10));
+        }
+        if (VillagerProfession.CLERIC.equals(type)) { //牧师
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.fengda.get(), 22, 1,3, 10));
+        }
         if (VillagerProfession.BUTCHER.equals(type)){ //屠夫
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.shourou.get(), 3, 15, 2));
             trades.get(3).add(new EmeraldForItemsTrade(PMItems.xiangchang.get(), 8, 10, 3));
             trades.get(3).add(new EmeraldForItemsTrade(PMItems.peigen.get(), 8, 9, 3));
             trades.get(4).add(new EmeraldForItemsTrade(PMItems.huotui.get(), 10, 8, 4));
@@ -45,44 +56,58 @@ public class VillagerEvents {
 
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.manrou.get(), 5, 1,8, 2));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.lenxianrou.get(), 6, 1,10, 2));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.xiangchang.get(), 8, 1,4, 4));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.peigen.get(), 9, 1,4, 4));
 
             trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.huotui.get(), 11, 1,3, 4));
-            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.xiangchang.get(), 8, 1,4, 4));
-            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.peigen.get(), 9, 1,4, 4));
+            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.eyuRougan.get(), 22, 1,3, 4));
             trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.yanxunrou.get(), 10, 1,3, 4));
+
+            trades.get(5).add(new ItemsForEmeraldsTrade(PMItems.shenmideRou.get(), 28, 1,3, 6));
         }
         if (VillagerProfession.FISHERMAN.equals(type)){ //渔夫
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.yurou.get(), 3, 13, 2));
+
             trades.get(2).add(new ItemsForEmeraldsAndItemsTrade(Items.COD, 1,4, PMItems.yurou.get(), 2,  11, 2));
             trades.get(2).add(new ItemsForEmeraldsAndItemsTrade(Items.SALMON, 1,5, PMItems.yurou.get(), 2,  12, 2));
             trades.get(2).add(new ItemsForEmeraldsAndItemsTrade(Items.TROPICAL_FISH, 1,5, PMItems.yurou.get(), 2,  12, 2));
 
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.xiaren.get(), 5, 1,12, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.pangxie.get(), 6, 1,10, 3));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.xizao.get(), 4, 1,13, 3));
         }
         if (VillagerProfession.FARMER.equals(type)){ //农民
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
-            trades.get(2).add(new EmeraldForItemsTrade(PMItems.pingguo.get(), 2, 16, 2));
-            trades.get(2).add(new EmeraldForItemsTrade(PMItems.songguo.get(), 2, 16, 2));
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.pingguo.get(), 4, 16, 2));
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.jingua.get(), 4, 15, 2));
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.zaoye.get(), 3, 14, 2));
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.songguo.get(), 3, 16, 2));
 
-            trades.get(3).add(new EmeraldForItemsTrade(PMItems.riluoguo.get(), 3, 12, 3));
-            trades.get(3).add(new EmeraldForItemsTrade(PMItems.jingua.get(), 3, 12, 3));
+            trades.get(3).add(new EmeraldForItemsTrade(PMItems.riluoguo.get(), 2, 10, 3));
+            trades.get(2).add(new EmeraldForItemsTrade(PMItems.paopaoju.get(), 3, 11, 3));
 
-            trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.yan.get(), 6, 1,7, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.hujiao.get(), 5, 1,8, 2));
-            trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.tang.get(), 4, 1,8, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.xiaomai.get(), 4, 1,8, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.bailuobo.get(), 4, 1,16, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.baocai.get(), 4, 1,15, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.fanqie.get(), 5, 1,12, 2));
             trades.get(2).add(new ItemsForEmeraldsTrade(PMItems.yangcong.get(), 5, 1,13, 2));
 
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.tang.get(), 4, 1,8, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.doufu.get(), 6, 1,8, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.xingren.get(), 8, 1,6, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.daomi.get(), 5, 1,7, 3));
-            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.guojiang.get(), 8, 1,6, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.mianfen.get(), 7, 1,8, 3));
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.niunai.get(), 6, 1,8, 3));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.jingua.get(), 6, 1,6, 3));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.tutudou.get(), 6, 1,7, 3));
+            trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.kafeidou.get(), 6, 1,8, 3));
+
+            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.yan.get(), 6, 1,7, 4));
+            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.guojiang.get(), 8, 1,6, 4));
+            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.feiyingXiuqiu.get(), 12, 1,4, 5));
+            trades.get(4).add(new ItemsForEmeraldsTrade(PMItems.fajiaoGuoshizhi.get(), 10, 1,6, 5));
         }
     }
 
@@ -92,34 +117,40 @@ public class VillagerEvents {
         List<VillagerTrades.ITrade> genericTrades = event.getGenericTrades(); //普通交易
         List<VillagerTrades.ITrade> rareTrades = event.getRareTrades(); //稀有交易
 
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.bailuobo.get(), 2, 2, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.baocai.get(), 2, 2, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.daomi.get(), 3, 1, 12, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.doufu.get(), 4, 1, 8, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.fanqie.get(), 3, 2, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.jingua.get(), 5, 1, 8, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.lenxianrou.get(), 8, 1, 4, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.manrou.get(), 6, 1, 6, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.pangxie.get(), 5, 1, 8, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.riluoguo.get(), 3, 1, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.songguo.get(), 3, 1, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.xiaren.get(), 5, 1, 12, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.xingren.get(), 6, 1, 6, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.yangcong.get(), 3, 1, 16, 0));
-        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.shanbianzhichen.get(), 16, 16, 4, 0));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.bailuobo.get(), 2, 2, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.baocai.get(), 2, 2, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.daomi.get(), 3, 1, 12, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.doufu.get(), 4, 1, 8, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.fanqie.get(), 3, 2, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.jingua.get(), 5, 1, 8, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.lenxianrou.get(), 8, 1, 4, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.manrou.get(), 6, 1, 6, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.pangxie.get(), 5, 1, 8, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.riluoguo.get(), 3, 1, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.songguo.get(), 3, 1, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.xiaren.get(), 5, 1, 12, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.xingren.get(), 6, 1, 6, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.yangcong.get(), 3, 1, 16, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.shanbianzhichen.get(), 16, 16, 4, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.tutudou.get(), 4, 1, 8, 2));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.fajiaoGuoshizhi.get(), 8, 1, 4,4));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.kafeidou.get(), 6, 1, 6,4));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.jingua.get(), 9, 1, 3,4));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.zaoye.get(), 10, 1, 3,4));
+        genericTrades.add(new ItemsForEmeraldsTrade(PMItems.paopaoju.get(), 10, 1, 3,4));
 
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.dianqi_shuijing.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.faguangsui.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.feiyingXiuqiu.get(), 24, 1, 5,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.guidouchong.get(), 10, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.jinghe.get(), 32, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.jinghuaGusui.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.longya1.get(), 64, 1, 1,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.qingwa.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.qiuqiu_baoyu.get(), 32, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.shanhu_zhenzhu.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xingluo.get(), 16, 1, 2,0));
-        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xiyi_weiba.get(), 16, 1, 2,0));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.dianqi_shuijing.get(), 9, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.faguangsui.get(), 8, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.feiyingXiuqiu.get(), 12, 1, 5,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.guidouchong.get(), 5, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.jinghe.get(), 16, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.jinghuaGusui.get(), 9, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.longya1.get(), 64, 1, 1,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.qingwa.get(), 8, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.qiuqiu_baoyu.get(), 16, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.shanhu_zhenzhu.get(), 9, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xingluo.get(), 7, 1, 2,4));
+        rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xiyi_weiba.get(), 8, 1, 2,4));
     }
     //物品换绿宝石
     static class EmeraldForItemsTrade implements VillagerTrades.ITrade {

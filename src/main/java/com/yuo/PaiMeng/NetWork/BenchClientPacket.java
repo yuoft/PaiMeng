@@ -16,7 +16,7 @@ public class BenchClientPacket {
             if (world != null){
                 TileEntity tileEntity = world.getTileEntity(msg.getPos());
                 if (tileEntity instanceof BenchTile){
-                    ((BenchTile) tileEntity).items.set(5, msg.getStack());
+                    ((BenchTile) tileEntity).items.set(6, msg.getStack());
                 }
             }
         });

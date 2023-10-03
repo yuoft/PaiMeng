@@ -111,6 +111,8 @@ public class ModPlant extends BushBlock {
             item = PMItems.xiangxinguo.get();
         }else if (this == PMBlocks.xumiQiangweiPlant.get()){
             item = PMItems.xumiQiangwei.get();
+        }else if (this == PMBlocks.mojiecaoPlant.get()){
+            item = PMItems.mojiecao.get();
         }
         if (item != Items.AIR){
             return new ItemStack(item);

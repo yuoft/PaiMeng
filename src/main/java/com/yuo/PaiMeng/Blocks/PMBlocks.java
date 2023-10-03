@@ -22,6 +22,12 @@ public class PMBlocks {
     public static final Block.Properties PLANT = Block.Properties.from(Blocks.GRASS); //植物
     private static final Block.Properties CROP = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
             zeroHardnessAndResistance().sound(SoundType.CROP); //X型作物
+    private static final Block.Properties CROP_15 = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+            zeroHardnessAndResistance().sound(SoundType.CROP).setLightLevel(e -> 15); //X型作物 15亮度
+    private static final Block.Properties CROP_9 = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+            zeroHardnessAndResistance().sound(SoundType.CROP).setLightLevel(e -> 9);
+    private static final Block.Properties CROP_6 = AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().
+            zeroHardnessAndResistance().sound(SoundType.CROP).setLightLevel(e -> 6);
     public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
     public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;
     public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;
@@ -60,7 +66,7 @@ public class PMBlocks {
     public static RegistryObject<Block> jinyucaoCrop = BLOCKS.register("jinyucao_crop", () -> new XCropBlock(COMMON, CROP));
     public static RegistryObject<Block> jueyunJiaojiaoCrop = BLOCKS.register("jueyun_jiaojiao_crop", () -> new XCropBlock(FERTILE, CROP));
     public static RegistryObject<Block> lianpengCrop = BLOCKS.register("lianpeng_crop", () -> new WaterXCropBlock(AQUATIC));
-    public static RegistryObject<Block> lieyanhuaHuaruiCrop = BLOCKS.register("lieyanhua_huarui_crop", () -> new LieYanHuaCrop(FERTILE, CROP.setLightLevel(e -> 15)));
+    public static RegistryObject<Block> lieyanhuaHuaruiCrop = BLOCKS.register("lieyanhua_huarui_crop", () -> new LieYanHuaCrop(FERTILE, CROP_15));
     public static RegistryObject<Block> liuliBaiheCrop = BLOCKS.register("liuli_baihe_crop", () -> new XCropBlock(FERTILE, CROP));
     public static RegistryObject<Block> liuliDaiCrop = BLOCKS.register("liuli_dai_crop", () -> new XCropBlock(FERTILE, CROP));
     public static RegistryObject<Block> luoluomeiCrop = BLOCKS.register("luoluomei_crop", () -> new XCropBlock(COMMON, CROP));
@@ -75,11 +81,11 @@ public class PMBlocks {
     public static RegistryObject<Block> songrongCrop = BLOCKS.register("songrong_crop", () -> new XCropBlock(LOGS, CROP));
     public static RegistryObject<Block> tiantianhuaCrop = BLOCKS.register("tiantianhua_crop", () -> new XCropBlock(COMMON, CROP));
     public static RegistryObject<Block> tianyunCaoshiCrop = BLOCKS.register("tianyun_caoshi_crop", () -> new XCropBlock(FERTILE, CROP));
-    public static RegistryObject<Block> xiaodengcaoCrop = BLOCKS.register("xiaodengcao_crop", () -> new XCropBlock(COMMON, CROP.setLightLevel(e -> 9)));
+    public static RegistryObject<Block> xiaodengcaoCrop = BLOCKS.register("xiaodengcao_crop", () -> new XCropBlock(COMMON, CROP_9));
     public static RegistryObject<Block> xiaomaiCrop = BLOCKS.register("xiaomai_crop", () -> new XCropBlock(COMMON, CROP));
     public static RegistryObject<Block> xuekuiCrop = BLOCKS.register("xuekui_crop", () -> new XCropBlock(FERTILE, CROP));
     public static RegistryObject<Block> yangcongCrop = BLOCKS.register("yangcong_crop", () -> new XCropBlock(COMMON, CROP));
-    public static RegistryObject<Block> youdengxunCrop = BLOCKS.register("youdengxun_crop", () -> new XCropBlock(LOGS, CROP.setLightLevel(e -> 6)));
+    public static RegistryObject<Block> youdengxunCrop = BLOCKS.register("youdengxun_crop", () -> new XCropBlock(LOGS, CROP_6));
     public static RegistryObject<Block> zhusunCrop = BLOCKS.register("zhusun_crop", () -> new XCropBlock(FERTILE, CROP));
 
     //3.0~

@@ -160,6 +160,8 @@ public class XCropBlock extends CropsBlock{
             return PMItems.xiangxinguoSeed.get();
         }else if (this == PMBlocks.xumiQiangweiCrop.get()){
             return PMItems.xumiQiangweiSeed.get();
+        }else if (this == PMBlocks.mojiecaoCrop.get()){
+            return PMItems.mojiecaoSeed.get();
         }
         return super.getSeedsItem();
     }

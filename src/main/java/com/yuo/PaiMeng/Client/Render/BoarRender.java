@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Entity.Render;
+package com.yuo.PaiMeng.Client.Render;
 
 import com.yuo.PaiMeng.Entity.BoarEntity;
 import com.yuo.PaiMeng.PaiMeng;

@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Entity.Model;
+package com.yuo.PaiMeng.Client.Model;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;

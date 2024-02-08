@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Client.Gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -13,6 +13,8 @@ import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class StrengthenButton extends ImageButton {
     public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/strengthen_table.png");

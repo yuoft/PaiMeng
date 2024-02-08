@@ -1,7 +1,7 @@
-package com.yuo.PaiMeng.Entity.Render;
+package com.yuo.PaiMeng.Client.Render;
 
 import com.yuo.PaiMeng.Entity.CraneEntity;
-import com.yuo.PaiMeng.Entity.Model.CraneModel;
+import com.yuo.PaiMeng.Client.Model.CraneModel;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

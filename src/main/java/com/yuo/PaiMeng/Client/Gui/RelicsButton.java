@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Client.Gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -15,6 +15,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class RelicsButton extends ImageButton {
     public static final ResourceLocation RESOURCE_OPEN = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/open.png");

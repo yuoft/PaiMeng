@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Render;
+package com.yuo.PaiMeng.Client.Render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuo.PaiMeng.Blocks.CookingBench;

@@ -1,20 +1,22 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Client.Gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.yuo.PaiMeng.Container.SeedBoxContainer;
+import com.yuo.PaiMeng.Container.SynPlatContainer;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SeedBoxScreen extends ContainerScreen<SeedBoxContainer> {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/seed_box.png");
+public class SynPlatScreen extends ContainerScreen<SynPlatContainer> {
+    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/synthetic_platform.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
 
-    public SeedBoxScreen(SeedBoxContainer potContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public SynPlatScreen(SynPlatContainer potContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(potContainer, inv, titleIn);
         this.xSize = textureWidth;
         this.ySize = textureHeight;

@@ -667,8 +667,9 @@
     "gui.button.strengthen":"强化",
     
     "key.paimeng":"应急食品",
-    "key.category.openRelics":"打开圣遗物界面",
-    
+    "key.paimeng.openRelics":"打开圣遗物界面",
+    "key.paimeng.TEST":"TEST",
+
     "itemGroup.PaiMengFood":"应急食品·食物",
     "itemGroup.PaiMengFoods":"应急食品·食材",
     "itemGroup.PaiMengMaterial":"应急食品·素材",

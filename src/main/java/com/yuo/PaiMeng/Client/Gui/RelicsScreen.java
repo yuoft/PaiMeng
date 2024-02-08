@@ -1,4 +1,4 @@
-package com.yuo.PaiMeng.Gui;
+package com.yuo.PaiMeng.Client.Gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -15,6 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,7 +28,6 @@ public class RelicsScreen extends ContainerScreen<RelicsContainer> {
     private float oldMouseX;
     /** The old y position of the mouse pointer */
     private float oldMouseY;
-    private RelicsButton button; //关闭按钮
 
     public RelicsScreen(RelicsContainer relicsContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(relicsContainer, inv, titleIn);
@@ -38,7 +39,8 @@ public class RelicsScreen extends ContainerScreen<RelicsContainer> {
 
     @Override
     protected void init() {
-        this.button = new RelicsButton(this,(this.width - this.xSize) / 2 + 157, (this.height - this.ySize) / 2 + 63, 16, 16); //回调
+        //关闭按钮
+        RelicsButton button = new RelicsButton(this, (this.width - this.xSize) / 2 + 157, (this.height - this.ySize) / 2 + 63, 16, 16); //回调
         this.addButton(button);
         super.init();
     }

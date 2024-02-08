@@ -3,35 +3,34 @@ package com.yuo.PaiMeng;
 import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Container.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Entity.EntityTypeRegister;
-import com.yuo.PaiMeng.Entity.Render.BoarRender;
-import com.yuo.PaiMeng.Entity.Render.CraneRender;
-import com.yuo.PaiMeng.Gui.*;
+import com.yuo.PaiMeng.Client.Render.BoarRender;
+import com.yuo.PaiMeng.Client.Render.CraneRender;
+import com.yuo.PaiMeng.Client.Gui.*;
 import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsHelper;
-import com.yuo.PaiMeng.Render.BenchTileTER;
+import com.yuo.PaiMeng.Client.Render.BenchTileTER;
 import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.lwjgl.glfw.GLFW;
 
+@OnlyIn(Dist.CLIENT)
 public class ClientProxy extends CommonProxy{
-    public static final KeyBinding KEY_OPEN_RELICS = new KeyBinding("key.paimeng", GLFW.GLFW_KEY_P, "key.category.openRelics");
-
     private TileEntity referencedTE = null;
 
     public TileEntity getRefrencedTE() {
@@ -42,10 +41,12 @@ public class ClientProxy extends CommonProxy{
         referencedTE = tileEntity;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void init() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::clientSetup);
+        PMKeyManager.init();//快捷键注册
     }
 
     private  void clientSetup(final FMLClientSetupEvent event) {

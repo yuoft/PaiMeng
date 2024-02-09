@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ public class RelicsExp extends Item {
     private final int exp;
 
     public RelicsExp(int exp) {
-        super(new Properties().group(ModGroup.PaiMengRelics).maxStackSize(16));
+        super(new Properties().group(PMGroup.PaiMengRelics).maxStackSize(16));
         this.exp = exp;
     }
 

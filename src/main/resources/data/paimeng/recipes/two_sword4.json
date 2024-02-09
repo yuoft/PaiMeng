@@ -1,0 +1,23 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:emerald",
+      "count": 64
+    },
+    {
+      "item": "paimeng:yeboshi",
+      "count": 2
+    },
+    {
+      "item": "paimeng:shuijing",
+      "count": 64
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shuangshoujian"
+  },
+  "result": {
+    "item": "paimeng:two_sword4"
+  }
+}

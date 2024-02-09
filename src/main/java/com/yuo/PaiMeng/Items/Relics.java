@@ -1,24 +1,17 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.Capability.ModCapability;
-import com.yuo.PaiMeng.Capability.RelicsItemHandler;
-import com.yuo.PaiMeng.Event.EventHelper;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,7 +25,7 @@ public class Relics extends Item {
     private int exp = 0; //当前经验 0
 
     public Relics(int minLevel, int maxLevel) {
-        super(new Properties().group(ModGroup.PaiMengRelics).maxStackSize(1).isImmuneToFire());
+        super(new Properties().group(PMGroup.PaiMengRelics).maxStackSize(1).isImmuneToFire());
         this.type = RelicsType.EMPTY;
         this.minStar = minLevel;
         this.maxStar = maxLevel;
@@ -79,7 +72,7 @@ public class Relics extends Item {
     //生成同一圣遗物不同星级
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (group == ModGroup.PaiMengRelics){
+        if (group == PMGroup.PaiMengRelics){
             for (int i = this.minStar; i <= this.maxStar; i++){ //星级
                 for (int j = 0; j < 5 ; j++){ //部位
                     items.add(getItemStack(i, j));

@@ -3,15 +3,17 @@ package com.yuo.PaiMeng.tab;
 import com.yuo.PaiMeng.Items.PMItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 //创造模式物品栏 实例化
-public class ModGroup{
+public class PMGroup {
 	public static ItemGroup PaiMengFood = new GroupFood();
 	public static ItemGroup PaiMengFoods = new GroupFoods();
 	public static ItemGroup PaiMengMaterial = new GroupMaterial();
 	public static ItemGroup PaiMengCrop = new GroupCrop();
 	public static ItemGroup PaiMengRelics = new GroupRelics();
 	public static ItemGroup PaiMengDrug = new GroupDrug();
+	public static ItemGroup PaiMengWeapon = new GroupWeapon();
 	public static ItemGroup PaiMengOther = new GroupOther();
 
 	private static class GroupFood extends ItemGroup{
@@ -91,6 +93,17 @@ public class ModGroup{
 		@Override
 		public ItemStack createIcon() {
 			return new ItemStack(PMItems.cookingBench.get());
+		}
+	}
+
+	private static class GroupWeapon extends ItemGroup {
+		public GroupWeapon() {
+			super(ItemGroup.GROUPS.length, "PaiMengWeapon");
+		}
+
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(PMItems.danshoujian.get());
 		}
 	}
 }

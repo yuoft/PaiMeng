@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -23,7 +23,7 @@ public class ModSpawnEgg extends SpawnEggItem {
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 
     public ModSpawnEgg(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, int primaryColorIn, int secondaryColorIn) {
-        super(null, primaryColorIn, secondaryColorIn, new Properties().group(ModGroup.PaiMengOther));
+        super(null, primaryColorIn, secondaryColorIn, new Properties().group(PMGroup.PaiMengOther));
         this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
         UNADDED_EGGS.add(this);
     }

@@ -1,12 +1,12 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.item.Item;
 
 public class DrugBottle extends Item {
 
     public DrugBottle() {
-        super(new Properties().maxStackSize(64).group(ModGroup.PaiMengDrug));
+        super(new Properties().maxStackSize(64).group(PMGroup.PaiMengDrug));
     }
 
 //    @Override

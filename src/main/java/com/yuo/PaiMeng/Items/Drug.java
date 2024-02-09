@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -29,11 +29,11 @@ import java.util.List;
 public class Drug extends Item {
 
     public Drug() {
-        super(new Properties().maxStackSize(1).group(ModGroup.PaiMengDrug).maxDamage(6));
+        super(new Properties().maxStackSize(1).group(PMGroup.PaiMengDrug).maxDamage(6));
     }
 
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (group == ModGroup.PaiMengDrug) {
+        if (group == PMGroup.PaiMengDrug) {
             for(Potion potion : Registry.POTION) {
                 if (potion != Potions.EMPTY) {
                     items.add(PotionUtils.addPotionToItemStack(new ItemStack(this), potion));

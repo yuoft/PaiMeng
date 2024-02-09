@@ -2,7 +2,11 @@ package com.yuo.PaiMeng.Blocks;
 
 import net.minecraft.block.OreBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import java.util.Random;
@@ -13,6 +17,13 @@ public class OrdinaryOre extends OreBlock {
     public OrdinaryOre(int harvestLevel, float hardness) {
         super(Properties.create(Material.ROCK).harvestLevel(harvestLevel).harvestTool(ToolType.PICKAXE)
                 .hardnessAndResistance(hardness, hardness + 5).setRequiresTool());
+    }
+
+    @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        if (this == PMBlocks.dianqiShuijingOre.get()){
+            entityIn.attackEntityFrom(new DamageSource("Electrical"), 0.5f);
+        }
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Items;
 
 import com.yuo.PaiMeng.Capability.IBlowCapability;
 import com.yuo.PaiMeng.Capability.ModCapability;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class ExampleItem extends Item {
     public ExampleItem() {
-        super(new Properties().group(ModGroup.PaiMengOther));
+        super(new Properties().group(PMGroup.PaiMengOther));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Items;
 
 import com.yuo.PaiMeng.Container.SeedBoxContainer;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -22,7 +22,7 @@ public class SeedBox extends Item {
     private static final ITextComponent CONTAINER_NAME = new TranslationTextComponent("gui.paimeng.seed_box");
 
     public SeedBox() {
-        super(new Properties().group(ModGroup.PaiMengOther).maxStackSize(1));
+        super(new Properties().group(PMGroup.PaiMengOther).maxStackSize(1));
     }
 
     @Override

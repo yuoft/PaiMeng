@@ -1,7 +1,7 @@
 package com.yuo.PaiMeng.Items;
 
 import com.yuo.PaiMeng.Blocks.PMBlocks;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,7 +21,7 @@ import java.util.List;
 public class EvolutionDust extends Item {
 
     public EvolutionDust() {
-        super(new Properties().group(ModGroup.PaiMengOther).maxStackSize(16));
+        super(new Properties().group(PMGroup.PaiMengOther).maxStackSize(16));
     }
 
     @Override

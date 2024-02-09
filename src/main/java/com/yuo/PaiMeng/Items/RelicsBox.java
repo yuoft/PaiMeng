@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +30,7 @@ public class RelicsBox extends Item {
             PMItems.maoxianjiaRelics.get());
 
     public RelicsBox(int level) {
-        super(new Properties().group(ModGroup.PaiMengRelics).isImmuneToFire());
+        super(new Properties().group(PMGroup.PaiMengRelics).isImmuneToFire());
         this.level = level;
     }
 

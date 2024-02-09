@@ -1,0 +1,28 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "paimeng:item/weapon/bow2"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "paimeng:pulling": 1
+      },
+      "model": "paimeng:item/pm_bow_pulling_0"
+    },
+    {
+      "predicate": {
+        "paimeng:pulling": 1,
+        "paimeng:pull": 0.65
+      },
+      "model": "paimeng:item/pm_bow_pulling_1"
+    },
+    {
+      "predicate": {
+        "paimeng:pulling": 1,
+        "paimeng:pull": 0.9
+      },
+      "model": "paimeng:item/pm_bow_pulling_2"
+    }
+  ]
+}

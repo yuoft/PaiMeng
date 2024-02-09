@@ -2,7 +2,7 @@ package com.yuo.PaiMeng.Items;
 
 import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Blocks.Crop.WallXCrop;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,7 +28,7 @@ import java.util.Objects;
 
 //种子
 public class CropBlockItem extends BlockNamedItem {
-    public static final Item.Properties GROUP = new Item.Properties().group(ModGroup.PaiMengCrop);
+    public static final Item.Properties GROUP = new Item.Properties().group(PMGroup.PaiMengCrop);
     private final CropUseBlockEnum useBlockEnum; //种子种植判断依据
 
     public CropBlockItem(Block blockIn, CropUseBlockEnum cropUseBlockEnum) {

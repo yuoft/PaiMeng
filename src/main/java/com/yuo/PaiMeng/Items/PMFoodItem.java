@@ -1,6 +1,6 @@
 package com.yuo.PaiMeng.Items;
 
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PMFoodItem extends Item{
 
 	public PMFoodItem() {
-		super(new Properties().group(ModGroup.PaiMengFoods).isImmuneToFire());
+		super(new Properties().group(PMGroup.PaiMengFoods).isImmuneToFire());
 	}
 
 	@Override

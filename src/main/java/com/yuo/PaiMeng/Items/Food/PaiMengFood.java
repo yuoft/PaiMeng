@@ -1,8 +1,7 @@
 package com.yuo.PaiMeng.Items.Food;
 
 import com.yuo.PaiMeng.Items.PMItems;
-import com.yuo.PaiMeng.Items.RelicsHelper;
-import com.yuo.PaiMeng.tab.ModGroup;
+import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -22,7 +21,7 @@ public class PaiMengFood extends Item {
     private final int TYPE; //食物类型
 
     public PaiMengFood(Food food, int lv, int type) {
-        super(new Properties().food(food).group(ModGroup.PaiMengFood));
+        super(new Properties().food(food).group(PMGroup.PaiMengFood));
         this.LEVEL = lv;
         this.TYPE = type;
     }

@@ -13,9 +13,11 @@ import com.yuo.PaiMeng.Client.Render.BenchTileTER;
 import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BushBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -51,6 +53,11 @@ public class ClientProxy extends CommonProxy{
 
     private  void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            setBowProperty(PMItems.pmBow0.get());
+            setBowProperty(PMItems.pmBow1.get());
+            setBowProperty(PMItems.pmBow2.get());
+            setBowProperty(PMItems.pmBow3.get());
+            setBowProperty(PMItems.pmBow4.get());
             RenderTypeLookup.setRenderLayer(PMBlocks.cookingPot.get(), RenderType.getCutoutMipped()); //不完整方块渲染
             RenderTypeLookup.setRenderLayer(PMBlocks.cookingBench.get(), RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(PMBlocks.zhusunCrop.get(), RenderType.getCutout());
@@ -59,6 +66,7 @@ public class ClientProxy extends CommonProxy{
         //实体渲染
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegister.BOAR.get(), BoarRender::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegister.CRANE.get(), CraneRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegister.PM_BALL.get(), manager -> new SpriteRenderer<>(manager, Minecraft.getInstance().getItemRenderer()));
         //绑定Container和ContainerScreen
         event.enqueueWork(() -> {
             ScreenManager.registerFactory(ContainerTypeRegistry.potContainer.get(), PotScreen::new);
@@ -93,6 +101,20 @@ public class ClientProxy extends CommonProxy{
                 return RelicsHelper.getTypeForStack(itemStack).getId();
             }
         });
+    }
+
+    //设置弓物品的动态属性
+    private void setBowProperty(Item item){
+        ItemModelsProperties.registerProperty(item, new ResourceLocation(PaiMeng.MOD_ID,
+                "pull"), (itemStack, clientWorld, livingEntity) -> {
+            if (livingEntity == null) {
+                return 0.0F;
+            } else {
+                return livingEntity.getActiveItemStack() != itemStack ? 0.0F : (float)(itemStack.getUseDuration() - livingEntity.getItemInUseCount()) / 20.0F;
+            }
+        });
+        ItemModelsProperties.registerProperty(item, new ResourceLocation(PaiMeng.MOD_ID,
+                "pulling"), (itemStack, clientWorld, livingEntity) -> livingEntity != null && livingEntity.isHandActive() && livingEntity.getActiveItemStack() == itemStack ? 1.0F : 0.0F);
     }
 
 }

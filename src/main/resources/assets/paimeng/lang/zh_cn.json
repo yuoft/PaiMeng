@@ -4,6 +4,32 @@
     "item.paimeng.huazhongxia":"§a化种匣",
     "item.paimeng.aaa":"查看器",
 
+    "item.paimeng.one_sword0":"无锋剑",
+    "item.paimeng.one_sword1":"银剑",
+    "item.paimeng.one_sword2":"飞天御剑",
+    "item.paimeng.one_sword3":"试作斩岩",
+    "item.paimeng.one_sword4":"天空之刃",
+    "item.paimeng.two_sword0":"训练大剑",
+    "item.paimeng.two_sword1":"佣兵重剑",
+    "item.paimeng.two_sword2":"白天大剑",
+    "item.paimeng.two_sword3":"试作古华",
+    "item.paimeng.two_sword4":"天空之傲",
+    "item.paimeng.spear0":"新手长枪",
+    "item.paimeng.spear1":"铁尖枪",
+    "item.paimeng.spear2":"黑缨枪",
+    "item.paimeng.spear3":"试作星镰",
+    "item.paimeng.spear4":"天空之脊",
+    "item.paimeng.pm_book0":"学徒笔记",
+    "item.paimeng.pm_book1":"口袋魔导书",
+    "item.paimeng.pm_book2":"讨龙英杰谭",
+    "item.paimeng.pm_book3":"试作金铂",
+    "item.paimeng.pm_book4":"天空之卷",
+    "item.paimeng.pm_bow0":"猎弓",
+    "item.paimeng.pm_bow1":"历练的猎弓",
+    "item.paimeng.pm_bow2":"弹弓",
+    "item.paimeng.pm_bow3":"试作澹月",
+    "item.paimeng.pm_bow4":"天空之翼",
+
     "item.paimeng.drug_bottle":"药剂瓶",
     "item.paimeng.drug":"§6%s药剂",
     "drug.paimeng.empty":"混合",
@@ -668,7 +694,6 @@
     
     "key.paimeng":"应急食品",
     "key.paimeng.openRelics":"打开圣遗物界面",
-    "key.paimeng.TEST":"TEST",
 
     "itemGroup.PaiMengFood":"应急食品·食物",
     "itemGroup.PaiMengFoods":"应急食品·食材",
@@ -676,5 +701,6 @@
     "itemGroup.PaiMengCrop":"应急食品·种植",
     "itemGroup.PaiMengRelics":"应急食品·圣遗物",
     "itemGroup.PaiMengDrug":"应急食品·药剂",
+    "itemGroup.PaiMengWeapon":"应急食品·武器",
     "itemGroup.PaiMengOther":"应急食品·其它"
 }

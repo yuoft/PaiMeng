@@ -1,0 +1,23 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:emerald",
+      "count": 32
+    },
+    {
+      "item": "paimeng:mojing",
+      "count": 16
+    },
+    {
+      "item": "paimeng:zijing",
+      "count": 36
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:changqiang"
+  },
+  "result": {
+    "item": "paimeng:spear3"
+  }
+}

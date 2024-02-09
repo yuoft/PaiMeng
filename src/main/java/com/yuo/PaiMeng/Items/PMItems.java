@@ -4,12 +4,10 @@ import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.Entity.EntityTypeRegister;
 import com.yuo.PaiMeng.Items.Food.ModFoodEffects;
 import com.yuo.PaiMeng.Items.Food.PaiMengFood;
+import com.yuo.PaiMeng.Items.Weapon.*;
 import com.yuo.PaiMeng.PaiMeng;
-import com.yuo.PaiMeng.tab.ModGroup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Foods;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import com.yuo.PaiMeng.tab.PMGroup;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 //物品注册管理器
 public class PMItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PaiMeng.MOD_ID);
-	public static final Item.Properties GROUP = new Item.Properties().group(ModGroup.PaiMengCrop);
+	public static final Item.Properties GROUP = new Item.Properties().group(PMGroup.PaiMengCrop);
 
 	//物品
 	public static RegistryObject<Item> shanbianzhichen = ITEMS.register("shanbianzhichen", EvolutionDust::new);
@@ -31,6 +29,39 @@ public class PMItems {
 			new ModSpawnEgg(EntityTypeRegister.BOAR, 0x112233, 0x332211));
 	public static RegistryObject<ModSpawnEgg> craneSpawnEgg = ITEMS.register("crane_spawn_egg", () ->
 			new ModSpawnEgg(EntityTypeRegister.CRANE, 0x155683, 0x338271));
+
+	//武器
+	public static RegistryObject<Item> danshoujian = ITEMS.register("danshoujian", PMWeaponMaterial::new);
+	public static RegistryObject<Item> shuangshoujian = ITEMS.register("shuangshoujian", PMWeaponMaterial::new);
+	public static RegistryObject<Item> changqiang = ITEMS.register("changqiang", PMWeaponMaterial::new);
+	public static RegistryObject<Item> faqi = ITEMS.register("faqi", PMWeaponMaterial::new);
+	public static RegistryObject<Item> gong = ITEMS.register("gong", PMWeaponMaterial::new);
+
+	public static RegistryObject<Item> oneSword0 = ITEMS.register("one_sword0", () -> new OneSword(PMItemTier.ONE));
+	public static RegistryObject<Item> oneSword1 = ITEMS.register("one_sword1", () -> new OneSword(PMItemTier.TWO));
+	public static RegistryObject<Item> oneSword2 = ITEMS.register("one_sword2", () -> new OneSword(PMItemTier.THREE));
+	public static RegistryObject<Item> oneSword3 = ITEMS.register("one_sword3", () -> new OneSword(PMItemTier.FOUR));
+	public static RegistryObject<Item> oneSword4 = ITEMS.register("one_sword4", () -> new OneSword(PMItemTier.FIVE));
+	public static RegistryObject<Item> twoSword0 = ITEMS.register("two_sword0", () -> new TwoSword(PMItemTier.ONE));
+	public static RegistryObject<Item> twoSword1 = ITEMS.register("two_sword1", () -> new TwoSword(PMItemTier.TWO));
+	public static RegistryObject<Item> twoSword2 = ITEMS.register("two_sword2", () -> new TwoSword(PMItemTier.THREE));
+	public static RegistryObject<Item> twoSword3 = ITEMS.register("two_sword3", () -> new TwoSword(PMItemTier.FOUR));
+	public static RegistryObject<Item> twoSword4 = ITEMS.register("two_sword4", () -> new TwoSword(PMItemTier.FIVE));
+	public static RegistryObject<Item> spear0 = ITEMS.register("spear0", () -> new Spear(PMItemTier.ONE));
+	public static RegistryObject<Item> spear1 = ITEMS.register("spear1", () -> new Spear(PMItemTier.TWO));
+	public static RegistryObject<Item> spear2 = ITEMS.register("spear2", () -> new Spear(PMItemTier.THREE));
+	public static RegistryObject<Item> spear3 = ITEMS.register("spear3", () -> new Spear(PMItemTier.FOUR));
+	public static RegistryObject<Item> spear4 = ITEMS.register("spear4", () -> new Spear(PMItemTier.FIVE));
+	public static RegistryObject<Item> pmBook0 = ITEMS.register("pm_book0", () -> new PMBook(1));
+	public static RegistryObject<Item> pmBook1 = ITEMS.register("pm_book1", () -> new PMBook(2));
+	public static RegistryObject<Item> pmBook2 = ITEMS.register("pm_book2", () -> new PMBook(3));
+	public static RegistryObject<Item> pmBook3 = ITEMS.register("pm_book3", () -> new PMBook(4));
+	public static RegistryObject<Item> pmBook4 = ITEMS.register("pm_book4", () -> new PMBook(5));
+	public static RegistryObject<Item> pmBow0 = ITEMS.register("pm_bow0", () -> new PMBow(1));
+	public static RegistryObject<Item> pmBow1 = ITEMS.register("pm_bow1", () -> new PMBow(2));
+	public static RegistryObject<Item> pmBow2 = ITEMS.register("pm_bow2", () -> new PMBow(3));
+	public static RegistryObject<Item> pmBow3 = ITEMS.register("pm_bow3", () -> new PMBow(4));
+	public static RegistryObject<Item> pmBow4 = ITEMS.register("pm_bow4", () -> new PMBow(5));
 
 	//素材
 	public static RegistryObject<Item> bailuobo = ITEMS.register("bailuobo", PMFoodItem::new);
@@ -104,12 +135,8 @@ public class PMItems {
 
 	public static RegistryObject<Item> baitie = ITEMS.register("baitie", PMMaterial::new);
 	public static RegistryObject<Item> bingwuhua_huaduo = ITEMS.register("bingwuhua_huaduo", PMFoodItem::new);
-	public static RegistryObject<Item> changqiang = ITEMS.register("changqiang", PMMaterial::new);
-	public static RegistryObject<Item> danshoujian = ITEMS.register("danshoujian", PMMaterial::new);
 	public static RegistryObject<Item> dianqi_shuijing = ITEMS.register("dianqi_shuijing", PMMaterial::new);
 	public static RegistryObject<Item> faguangsui = ITEMS.register("faguangsui", PMMaterial::new);
-	public static RegistryObject<Item> faqi = ITEMS.register("faqi", PMMaterial::new);
-	public static RegistryObject<Item> gong = ITEMS.register("gong", PMMaterial::new);
 	public static RegistryObject<Item> heitie = ITEMS.register("heitie", PMMaterial::new);
 	public static RegistryObject<Item> jinghe = ITEMS.register("jinghe", PMMaterial::new);
 	public static RegistryObject<Item> lieyanhua_huarui = ITEMS.register("lieyanhua_huarui", PMFoodItem::new);
@@ -118,7 +145,6 @@ public class PMItems {
 	public static RegistryObject<Item> mojing = ITEMS.register("mojing", PMMaterial::new);
 	public static RegistryObject<Item> qingwa = ITEMS.register("qingwa", PMMaterial::new);
 	public static RegistryObject<Item> qiuqiu_baoyu = ITEMS.register("qiuqiu_baoyu", PMMaterial::new);
-	public static RegistryObject<Item> shuangshoujian = ITEMS.register("shuangshoujian", PMMaterial::new);
 	public static RegistryObject<Item> shuijing = ITEMS.register("shuijing", PMMaterial::new);
 	public static RegistryObject<Item> xingyin = ITEMS.register("xingyin", PMMaterial::new);
 	public static RegistryObject<Item> xiyi_weiba = ITEMS.register("xiyi_weiba", PMMaterial::new);
@@ -534,39 +560,39 @@ public class PMItems {
 
 	//注册方块物品
 	public static RegistryObject<BlockItem> cookingPot = ITEMS.register("cooking_pot",
-			() -> new BlockItem(PMBlocks.cookingPot.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.cookingPot.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> cookingBench = ITEMS.register("cooking_bench",
-			() -> new BlockItem(PMBlocks.cookingBench.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.cookingBench.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> syntheticPlatform = ITEMS.register("synthetic_platform",
-			() -> new BlockItem(PMBlocks.syntheticPlatform.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.syntheticPlatform.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> commonFarmland = ITEMS.register("common_farmland",
-			() -> new BlockItem(PMBlocks.commonFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
+			() -> new BlockItem(PMBlocks.commonFarmland.get(), new Item.Properties().group(PMGroup.PaiMengCrop)));
 	public static RegistryObject<BlockItem> fertileFarmland = ITEMS.register("fertile_farmland",
-			() -> new BlockItem(PMBlocks.fertileFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
+			() -> new BlockItem(PMBlocks.fertileFarmland.get(), new Item.Properties().group(PMGroup.PaiMengCrop)));
 	public static RegistryObject<BlockItem> aquaticFarmland = ITEMS.register("aquatic_farmland",
-			() -> new BlockItem(PMBlocks.aquaticFarmland.get(), new Item.Properties().group(ModGroup.PaiMengCrop)));
+			() -> new BlockItem(PMBlocks.aquaticFarmland.get(), new Item.Properties().group(PMGroup.PaiMengCrop)));
 	public static RegistryObject<BlockItem> baitieOre = ITEMS.register("baitie_ore",
-			() -> new BlockItem(PMBlocks.baitieOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.baitieOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> dianqiShuijingOre = ITEMS.register("dianqi_shuijing_ore",
-			() -> new BlockItem(PMBlocks.dianqiShuijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.dianqiShuijingOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> heitieOre = ITEMS.register("heitie_ore",
-			() -> new BlockItem(PMBlocks.heitieOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.heitieOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> jinghuaGusuiOre = ITEMS.register("jinghua_gusui_ore",
-			() -> new BlockItem(PMBlocks.jinghuaGusuiOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.jinghuaGusuiOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> mojingOre = ITEMS.register("mojing_ore",
-			() -> new BlockItem(PMBlocks.mojingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.mojingOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> shipoOre = ITEMS.register("shipo_ore",
-			() -> new BlockItem(PMBlocks.shipoOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.shipoOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> shuijingOre = ITEMS.register("shuijing_ore",
-			() -> new BlockItem(PMBlocks.shuijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.shuijingOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> xingyinOre = ITEMS.register("xingyin_ore",
-			() -> new BlockItem(PMBlocks.xingyinOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.xingyinOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> yeboshiOre = ITEMS.register("yeboshi_ore",
-			() -> new BlockItem(PMBlocks.yeboshiOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.yeboshiOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> zijingOre = ITEMS.register("zijing_ore",
-			() -> new BlockItem(PMBlocks.zijingOre.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.zijingOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> strengthenTable = ITEMS.register("strengthen_table",
-			() -> new BlockItem(PMBlocks.strengthenTable.get(), new Item.Properties().group(ModGroup.PaiMengOther)));
+			() -> new BlockItem(PMBlocks.strengthenTable.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 
 	public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
 	public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;

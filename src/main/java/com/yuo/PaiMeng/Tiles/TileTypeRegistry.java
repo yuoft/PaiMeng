@@ -28,4 +28,7 @@ public class TileTypeRegistry {
     public static final RegistryObject<TileEntityType<BingWuHuaCropTile>> bingwuhuaCrop = TILE_ENTITIES.register("bingwuhua_crop",
             () -> TileEntityType.Builder.create(BingWuHuaCropTile::new, PMBlocks.bingwuhuaHuaduoCrop.get()).build(null));
 
+    public static final RegistryObject<TileEntityType<SevenGodTile>> SEVEN_GOD = TILE_ENTITIES.register("seven_god",
+            () -> TileEntityType.Builder.create(SevenGodTile::new, PMBlocks.sevenGod.get()).build(null));
+
 }

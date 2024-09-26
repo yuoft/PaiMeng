@@ -11,6 +11,7 @@ import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsBox;
 import com.yuo.PaiMeng.Items.RelicsHelper;
 import com.yuo.PaiMeng.PaiMeng;
+import com.yuo.PaiMeng.Tiles.SevenGodTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
@@ -24,17 +25,22 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.monster.BlazeEntity;
+import net.minecraft.entity.monster.MagmaCubeEntity;
+import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effects;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -48,7 +54,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -220,10 +225,24 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
+            BlockPos pos = player.getPosition();
+            AxisAlignedBB bb = new AxisAlignedBB(pos.add(-16, -8, -16), pos.add(16, 8, 16));
+            World world = player.world;
+            if (!world.isRemote){
+                Iterator<BlockPos> iterator = BlockPos.getAllInBox(bb).iterator();
+                while (iterator.hasNext()){
+                    BlockPos blockPos = iterator.next();
+                    TileEntity tile = world.getTileEntity(blockPos);
+                    if (tile instanceof SevenGodTile){
+                        ReviveEffect.revive(player, 2, false);
+                        event.setCanceled(true);
+                    }
+                }
+            }
             //复活buff
             int revive = EventHelper.getEffectLevel(player, EffectRegistry.REVIVE.get());
             if (revive >= 0){
-                ReviveEffect.revive(player, revive + 1);
+                ReviveEffect.revive(player, revive + 1, true);
                 event.setCanceled(true);
             }
             //重置双爆属性
@@ -346,17 +365,46 @@ public class EventHandler {
         }
     }
 
-    //战利品添加
-//    @SubscribeEvent
-    public static void lootTableAdd(LootTableLoadEvent event){
-        ResourceLocation name = event.getName();
-        for (ResourceLocation r : EventHelper.RS){
-            if (name.equals(r)){
-                LootTable table = event.getTable();
-                table.addPool(EventHelper.getPool(EventHelper.songguoEntry));
-                event.setTable(table);
+    //原版生物额外掉落
+    @SubscribeEvent
+    public static void enderDragonDrops(LivingDropsEvent event){
+        LivingEntity entityLiving = event.getEntityLiving();
+        World world = entityLiving.world;
+        BlockPos pos = entityLiving.getPosition();
+        Random random = new Random();
+        Entity source = event.getSource().getTrueSource();
+        if (!(source instanceof PlayerEntity)) return; //伤害来源于玩家
+        ItemStack stack = ((PlayerEntity) source).getHeldItemMainhand();
+        int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack); //抢夺
+        if (entityLiving instanceof EnderDragonEntity){ //末影龙额外掉落 创世结晶
+            spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
+            spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + level, world, pos, event);
+        }
+        if (entityLiving instanceof WitherEntity){ //凋零 创世结晶
+            spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
+            spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + level, world, pos, event);
+        }
+        //所有非boss生物掉落 原石
+        if (!(entityLiving instanceof EnderDragonEntity) && !(entityLiving instanceof WitherEntity)){
+            int j = random.nextInt(100);
+            if (j > (94 - level * 5)){
+                spawnDrops(PMItems.yuanshi.get(), 1, world, pos, event);
             }
         }
+    }
+
+    /**
+     * 添加额外掉落
+     * @param item 需要掉落的物品
+     * @param count 数量
+     * @param world 世界
+     * @param pos 坐标
+     * @param event 事件
+     */
+    private static void spawnDrops(Item item, int count, World world, BlockPos pos, LivingDropsEvent event){
+        ItemStack stack1 = new ItemStack(item, count);
+        ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack1);
+        event.getDrops().add(itemEntity);
     }
 
 }

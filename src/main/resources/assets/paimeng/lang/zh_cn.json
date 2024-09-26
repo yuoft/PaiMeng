@@ -3,6 +3,8 @@
     "item.paimeng.yimengrongmei":"§a异梦溶媒",
     "item.paimeng.huazhongxia":"§a化种匣",
     "item.paimeng.aaa":"查看器",
+    "item.paimeng.yuanshi": "§5原石",
+    "item.paimeng.jiejing": "§6创世结晶",
 
     "item.paimeng.one_sword0":"无锋剑",
     "item.paimeng.one_sword1":"银剑",
@@ -444,7 +446,8 @@
 
     "item.paimeng.relics_exp_big":"§5祝圣精华",
     "item.paimeng.relics_exp_small":"§b祝圣油膏",
-    
+    "item.paimeng.seven_god":"七天神像",
+
     "block.paimeng.cooking_pot":"烹饪锅",
     "block.paimeng.cooking_bench":"灶台",
     "block.paimeng.synthetic_platform":"炼金合成台",
@@ -561,6 +564,7 @@
     "block.paimeng.purple_apple_crop":"堇瓜",
     "block.paimeng.zaoye_crop":"枣椰",
     "block.paimeng.paopaoju_crop":"泡泡桔",
+    "block.paimeng.seven_god":"七天神像",
 
     "effect.paimeng.critical_rate":"§6暴击率",
     "effect.paimeng.critical_damage":"§c暴击伤害",
@@ -666,7 +670,11 @@
     "paimeng.text.itemInfo.maoxianjia_clock":"常在不见天日的巨渊还是失落的古都流连的冒险家，会经常忘记时间。",
     "paimeng.text.itemInfo.maoxianjia_feather":"异国的奇妙鸟类的羽毛，在这片大陆上非常罕见。",
     "paimeng.text.itemInfo.maoxianjia_flower":"从深邃的古都寻得的绝境求生的小花，被当做骄傲的勋章佩在胸前。",
-    
+
+    "paimeng.text.itemInfo.seven_god":"七天神像",
+    "paimeng.text.itemInfo.yuanshi": "亮晶晶的石头",
+    "paimeng.text.itemInfo.jiejing": "蕴含创世之力的物质",
+
     "paimeng.message.pot_fuel":"没有燃料",
     "paimeng.message.pot_fuel_add":"无法用做燃料",
     "paimeng.message.pot_fuel_add1":"燃料数量不足",

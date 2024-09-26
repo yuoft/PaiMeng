@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng;
 
 import com.yuo.PaiMeng.Blocks.PMBlocks;
+import com.yuo.PaiMeng.Client.Render.SevenGodTileRender;
 import com.yuo.PaiMeng.Container.ContainerTypeRegistry;
 import com.yuo.PaiMeng.Entity.EntityTypeRegister;
 import com.yuo.PaiMeng.Client.Render.BoarRender;
@@ -62,6 +63,7 @@ public class ClientProxy extends CommonProxy{
             RenderTypeLookup.setRenderLayer(PMBlocks.cookingBench.get(), RenderType.getCutout());
             RenderTypeLookup.setRenderLayer(PMBlocks.zhusunCrop.get(), RenderType.getCutout());
             ClientRegistry.bindTileEntityRenderer(TileTypeRegistry.BENCH_TILE.get(), BenchTileTER::new); //特殊ter渲染
+            ClientRegistry.bindTileEntityRenderer(TileTypeRegistry.SEVEN_GOD.get(), SevenGodTileRender::new); //特殊ter渲染
         });
         //实体渲染
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeRegister.BOAR.get(), BoarRender::new);

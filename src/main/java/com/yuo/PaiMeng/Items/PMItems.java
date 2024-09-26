@@ -24,6 +24,8 @@ public class PMItems {
 	public static RegistryObject<Item> aaa = ITEMS.register("aaa", ExampleItem::new);
 	public static RegistryObject<Item> drug = ITEMS.register("drug", Drug::new);
 	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
+	public static RegistryObject<Item> yuanshi = ITEMS.register("yuanshi", OrdinaryItem::new);
+	public static RegistryObject<Item> jiejing = ITEMS.register("jiejing", OrdinaryItem::new);
 
 	public static RegistryObject<ModSpawnEgg> boarSpawnEgg = ITEMS.register("boar_spawn_egg", () ->
 			new ModSpawnEgg(EntityTypeRegister.BOAR, 0x112233, 0x332211));
@@ -593,6 +595,8 @@ public class PMItems {
 			() -> new BlockItem(PMBlocks.zijingOre.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
 	public static RegistryObject<BlockItem> strengthenTable = ITEMS.register("strengthen_table",
 			() -> new BlockItem(PMBlocks.strengthenTable.get(), new Item.Properties().group(PMGroup.PaiMengOther)));
+	public static RegistryObject<BlockItem> sevenGod = ITEMS.register("seven_god",
+			() -> new BlockItem(PMBlocks.sevenGod.get(), new Item.Properties().group(PMGroup.PaiMengOther).rarity(Rarity.RARE)));
 
 	public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
 	public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;

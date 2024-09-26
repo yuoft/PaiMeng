@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xyx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:netherite_block"
+    },
+    "y": {
+      "item": "minecraft:totem_of_undying"
+    }
+  },
+  "result": {
+    "item": "paimeng:seven_god"
+  }
+}

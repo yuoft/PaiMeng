@@ -3,6 +3,8 @@
     "item.paimeng.yimengrongmei":"§aStrange dream solvent",
     "item.paimeng.huazhongxia":"§aSeed box",
     "item.paimeng.aaa":"viewer",
+    "item.paimeng.yuanshi": "§5Yuan Shi",
+    "item.paimeng.jiejing": "§6Chuang Shi Jie Jing",
 
     "item.paimeng.one_sword0":"One Hand Sword0",
     "item.paimeng.one_sword1":"One Hand Sword1",
@@ -444,7 +446,8 @@
 
     "item.paimeng.relics_exp_big":"§5Holy essence",
     "item.paimeng.relics_exp_small":"§bConsecration ointment",
-    
+    "item.paimeng.seven_god":"Seven Heavenly Gods Statue",
+
     "block.paimeng.cooking_pot":"Cooking pot",
     "block.paimeng.cooking_bench":"Cooking bench",
     "block.paimeng.synthetic_platform":"Alchemical synthesis platform",
@@ -561,6 +564,7 @@
     "block.paimeng.purple_apple_crop":"Viola melon",
     "block.paimeng.zaoye_crop":"zaoye",
     "block.paimeng.paopaoju_crop":"paopaoju",
+    "block.paimeng.seven_god":"Seven Heavenly Gods Statue",
 
     "effect.paimeng.critical_rate":"§6Critical hit rate",
     "effect.paimeng.critical_damage":"§cCritical damage",
@@ -666,7 +670,11 @@
     "paimeng.text.itemInfo.maoxianjia_clock":"Adventurers who often linger in the sunless abyss or the lost ancient capital often forget the time.",
     "paimeng.text.itemInfo.maoxianjia_feather":"The feathers of exotic and wonderful birds are very rare on this continent.",
     "paimeng.text.itemInfo.maoxianjia_flower":"The flowers found from the profound ancient capital are worn on the chest as proud medals.",
-    
+
+    "paimeng.text.itemInfo.seven_god":"Seven Heavenly Gods Statue",
+    "paimeng.text.itemInfo.yuanshi": "Shiny stone",
+    "paimeng.text.itemInfo.jiejing": "Material containing the power of creation",
+
     "paimeng.message.pot_fuel":"No fuel",
     "paimeng.message.pot_fuel_add":"Cannot be used as fuel",
     "paimeng.message.pot_fuel_add1":"Insufficient fuel",

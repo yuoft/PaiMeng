@@ -24,7 +24,7 @@ public class ModSpawnEgg extends SpawnEggItem {
 
     public ModSpawnEgg(final RegistryObject<? extends EntityType<?>> entityTypeSupplier, int primaryColorIn, int secondaryColorIn) {
         super(null, primaryColorIn, secondaryColorIn, new Properties().group(PMGroup.PaiMengOther));
-        this.entityTypeSupplier = Lazy.of(entityTypeSupplier::get);
+        this.entityTypeSupplier = Lazy.of(entityTypeSupplier);
         UNADDED_EGGS.add(this);
     }
 

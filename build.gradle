@@ -20,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-1.2.4'
+version = '1.16.5-1.2.5'
 group = 'com.github.yuoft' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'PaiMeng'
 
@@ -84,9 +84,11 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.34'
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.152") //引入mod API
+    compileOnly fg.deobf("curse.maven:spice-of-life-carrot-edition-277616:3420107")
     runtimeOnly fg.deobf("curse.maven:jei-238222:3681294") //引入mod jei
-    runtimeOnly fg.deobf("curse.maven:just-enough-resources-jer-240630:4526612") //引入mod jeri
-    runtimeOnly fg.deobf("curse.maven:jer-integration-506948:3604406") //引入mod jer
+//    runtimeOnly fg.deobf("curse.maven:spice-of-life-carrot-edition-277616:3420107")
+    runtimeOnly fg.deobf("curse.maven:just-enough-resources-jer-240630:4526612")
+    runtimeOnly fg.deobf("curse.maven:jer-integration-506948:3604406")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -95,7 +97,7 @@ jar {
         attributes([
             "Specification-Title": "paimeng",
             "Specification-Vendor": "yuoft",
-            "Specification-Version": "1.2.2", // We are version 1 of ourselves
+            "Specification-Version": "1.2.5", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"yuoft",

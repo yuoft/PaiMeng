@@ -1,5 +1,11 @@
 package com.yuo.PaiMeng.Event;
 
+import com.cazsius.solcarrot.SOLCarrot;
+import com.cazsius.solcarrot.SOLCarrotConfig;
+import com.cazsius.solcarrot.tracking.CapabilityHandler;
+import com.cazsius.solcarrot.tracking.FoodList;
+import com.cazsius.solcarrot.tracking.MaxHealthHandler;
+import com.cazsius.solcarrot.tracking.ProgressInfo;
 import com.google.common.collect.Multimap;
 import com.yuo.PaiMeng.Capability.*;
 import com.yuo.PaiMeng.Effects.EffectRegistry;
@@ -25,30 +31,25 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.BlazeEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent;
@@ -60,6 +61,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
@@ -81,7 +83,7 @@ public class EventHandler {
     public static final double attrAttackPhysics = 2.5; //物理攻击
 
     //不被禁用的原版食物
-    private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.GOLDEN_APPLE, Items.SWEET_BERRIES);
+    private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.GOLDEN_APPLE, Items.SWEET_BERRIES, Items.APPLE);
 
     //在玩家物品栏界面上添加切换到圣遗物界面的按钮
     @SubscribeEvent
@@ -107,6 +109,94 @@ public class EventHandler {
         return false;
     }
 
+    private static void spawnParticles(ServerWorld world, PlayerEntity player, IParticleData type, int count) {
+        // this overload sends a packet to the client
+        world.addParticle(type, player.getPosX(), player.getPosY() + player.getEyeHeight(), player.getPosZ(), count,
+                0.5F, 0.5F
+        );
+    }
+
+    public static IFormattableTextComponent localizedComponent(String domain, String path, Object... args) {
+        return new TranslationTextComponent(keyString(domain, path), args);
+    }
+
+    /** e.g. keyString("tooltip", "eaten_status.not_eaten_1") -> "tooltip.solcarrot.eatenStatus.not_eaten_1") */
+    public static String keyString(String domain, String path) {
+        return domain + "." + SOLCarrot.MOD_ID + "." + path;
+    }
+
+    private static void showChatMessage(PlayerEntity player, TextFormatting color, ITextComponent message) {
+        ITextComponent component = localizedComponent("message", "chat_wrapper", message).mergeStyle(color);
+        player.sendStatusMessage(component, false);
+    }
+
+    public static IFormattableTextComponent localizedQuantityComponent(String domain, String path, int number) {
+        return number == 1
+                ? new TranslationTextComponent(keyString(domain, path + ".singular"))
+                : new TranslationTextComponent(keyString(domain, path + ".plural"), number);
+    }
+
+    /**
+     * 生活调味料 胡萝卜版
+     * @param player 玩家
+     * @param stack  食物
+     */
+    private static void sol(PlayerEntity player, ItemStack stack){
+        if (player.world.isRemote) return;
+        ServerWorld world = (ServerWorld) player.world;
+        ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+        boolean isInSurvival = !serverPlayer.isCreative() && !serverPlayer.isSpectator();
+        if (SOLCarrotConfig.limitProgressionToSurvival() && !isInSurvival) return;
+
+        Item usedItem = stack.getItem();
+        if (!usedItem.isFood()) return;
+
+        FoodList foodList = FoodList.get(player);
+        boolean hasTriedNewFood = foodList.addFood(usedItem);
+
+        // check this before syncing, because the sync entails an hp update
+        boolean newMilestoneReached = MaxHealthHandler.updateFoodHPModifier(player);
+
+        CapabilityHandler.syncFoodList(player);
+        ProgressInfo progressInfo = foodList.getProgressInfo();
+
+        if (newMilestoneReached) {
+            if (SOLCarrotConfig.shouldPlayMilestoneSounds()) {
+                // passing the player makes it not play for some reason
+                world.playSound(
+                        null,
+                        player.getPosition(),
+                        SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS,
+                        1.0F, 1.0F
+                );
+            }
+
+            if (SOLCarrotConfig.shouldSpawnMilestoneParticles()) {
+                spawnParticles(world, player, ParticleTypes.HEART, 12);
+
+                if (progressInfo.hasReachedMax()) {
+                    spawnParticles(world, player, ParticleTypes.HAPPY_VILLAGER, 16);
+                }
+            }
+
+            ITextComponent heartsDescription = localizedQuantityComponent("message", "hearts", SOLCarrotConfig.getHeartsPerMilestone());
+
+            if (SOLCarrotConfig.shouldShowProgressAboveHotbar()) {
+                String messageKey = progressInfo.hasReachedMax() ? "finished.hotbar" : "milestone_achieved";
+                player.sendStatusMessage(localizedComponent("message", messageKey, heartsDescription), true);
+            } else {
+                showChatMessage(player, TextFormatting.DARK_AQUA, localizedComponent("message", "milestone_achieved", heartsDescription));
+                if (progressInfo.hasReachedMax()) {
+                    showChatMessage(player, TextFormatting.GOLD, localizedComponent("message", "finished.chat"));
+                }
+            }
+        } else if (hasTriedNewFood) {
+            if (SOLCarrotConfig.shouldSpawnIntermediateParticles()) {
+                spawnParticles(world, player, ParticleTypes.END_ROD, 12);
+            }
+        }
+    }
+
     //禁用原版食物
     @SubscribeEvent
     public static void eatFood(LivingEntityUseItemEvent.Start event){
@@ -116,19 +206,22 @@ public class EventHandler {
             PlayerEntity player = (PlayerEntity) entityLiving;
             if (item.isFood() && EventHelper.getNameSpace(item).equals("minecraft") && !isExceptionItem(item)){//原版食物
                     player.sendStatusMessage(new TranslationTextComponent("paimeng.message.food"), true);
-                    event.setCanceled(true);
+                if (ModList.get().isLoaded("solcarrot")){ //食物加血兼容
+                    sol(player, item);
+                }
+                event.setCanceled(true);
             }
         }
     }
 
     //吃完食物后
-    @SubscribeEvent
+    @SubscribeEvent()
     public static void eatFoodEnd(LivingEntityUseItemEvent.Finish event){
         ItemStack item = event.getItem();
         LivingEntity entityLiving = event.getEntityLiving();
         if (entityLiving instanceof PlayerEntity){
             PlayerEntity player = (PlayerEntity) entityLiving;
-            if (item.isFood() && item.getItem() instanceof PaiMengFood && !isExceptionItem(item)){
+            if (item.isFood() && item.getItem() instanceof PaiMengFood){
                 PaiMengFood food = (PaiMengFood) item.getItem();
                 int type = food.getTYPE();
                 if (type == 0){

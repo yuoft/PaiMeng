@@ -3,27 +3,14 @@ loaderVersion="[36,)"
 license="All rights reserved"
 [[mods]] #mandatory
 modId="paimeng"
-version="1.16.5-1.2.4"
+version="1.16.5-1.2.5"
 displayName="PaiMeng"
 authors="yuo" 
 description='''
 应急食品。1.16.5。
 部分素材纹理来自《原神》。
 '''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[36,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
-# Here's another dependency
-[[dependencies.examplemod]]
+[[dependencies.paimeng]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.5, 1.17)"

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:bamboo_jungle",
+  "features": "paimeng:plant_zhusun_bamboo_jungle",
+  "step": "vegetal_decoration"
+}

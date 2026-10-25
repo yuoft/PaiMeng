@@ -1,0 +1,6 @@
+{
+    "parent": "paimeng:block/cross",
+    "textures": {
+		"cross": "paimeng:block/crop/jueyun_jiaojiao_crop"
+    }
+}

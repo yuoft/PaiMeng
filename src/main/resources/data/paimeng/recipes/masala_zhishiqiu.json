@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:tudou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:nailao",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xiangxinliao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:masala_zhishiqiu"
+  }
+}

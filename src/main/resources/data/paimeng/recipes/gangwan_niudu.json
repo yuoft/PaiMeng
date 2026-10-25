@@ -1,0 +1,28 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:huluobo",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yangcong",
+      "count": 2
+    },
+    {
+      "item": "paimeng:fajiao_guoshizhi",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:gangwan_niudu"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:gougouguo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:riluoguo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:jiari_guoniang"
+  }
+}

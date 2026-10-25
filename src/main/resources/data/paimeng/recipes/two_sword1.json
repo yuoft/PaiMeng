@@ -1,0 +1,23 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "minecraft:emerald",
+      "count": 8
+    },
+    {
+      "item": "paimeng:shipo",
+      "count": 4
+    },
+    {
+      "item": "paimeng:baitie",
+      "count": 18
+    }
+  ],
+  "catalyzer": {
+    "item": "paimeng:shuangshoujian"
+  },
+  "result": {
+    "item": "paimeng:two_sword1"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:huotui",
+      "count": 1
+    },
+    {
+      "item": "paimeng:peigen",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xiangchang",
+      "count": 1
+    },
+    {
+      "item": "paimeng:bohe",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:lenrou_pinpan"
+  }
+}

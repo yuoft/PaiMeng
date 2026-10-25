@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:fanqie",
+      "count": 3
+    },
+    {
+      "item": "paimeng:peigen",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yangcong",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:nabonei_fanqiegu"
+  }
+}

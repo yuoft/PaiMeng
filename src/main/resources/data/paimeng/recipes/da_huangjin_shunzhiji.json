@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:huangyou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:hujiao",
+      "count": 3
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "paimeng:da_huangjin_shunzhiji"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_ocean",
+  "features": "paimeng:ore_dianqi_ocean",
+  "step": "underground_ores"
+}

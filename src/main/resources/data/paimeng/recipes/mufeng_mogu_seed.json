@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:mufeng_mogu",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:mufeng_mogu_seed"
+  }
+}

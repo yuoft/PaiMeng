@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:tudou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:liuli_dai",
+      "count": 1
+    },
+    {
+      "item": "paimeng:songrong",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:yangang_sanxian"
+  }
+}

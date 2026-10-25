@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:qingxin",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:qingxin_seed"
+  }
+}

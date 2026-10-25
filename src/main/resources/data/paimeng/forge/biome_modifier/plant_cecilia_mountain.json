@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_mountain",
+  "features": "paimeng:plant_cecilia_mountain",
+  "step": "vegetal_decoration"
+}

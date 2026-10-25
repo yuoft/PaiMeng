@@ -1,0 +1,4 @@
+{
+  "type": "paimeng:nether_plant",
+  "config": { "state": {"Name": "paimeng:youdengxun_plant"}, "down": {"Name": "minecraft:warped_nylium"} }
+}

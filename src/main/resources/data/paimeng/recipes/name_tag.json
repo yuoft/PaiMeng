@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "paimeng:yuanshi"
+	},
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:writable_book"
+    }
+  ],
+  "result": {
+    "item": "minecraft:name_tag"
+  }
+}

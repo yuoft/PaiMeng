@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xingren",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:xingren_zunyu"
+  }
+}

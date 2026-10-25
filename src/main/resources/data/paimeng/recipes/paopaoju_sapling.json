@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "xyx",
+    " x "
+  ],
+  "key": {
+    "x": {
+      "item": "paimeng:paopaoju"
+    },
+    "y": {
+      "tag": "minecraft:saplings"
+    }
+  },
+  "result": {
+    "item": "paimeng:paopaoju_sapling"
+  }
+}

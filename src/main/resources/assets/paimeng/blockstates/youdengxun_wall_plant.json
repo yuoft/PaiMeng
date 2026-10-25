@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=west": {
+      "model": "paimeng:block/plant/youdengxun_wall_plant",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "paimeng:block/plant/youdengxun_wall_plant"
+    },
+    "facing=north": {
+      "model": "paimeng:block/plant/youdengxun_wall_plant",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "paimeng:block/plant/youdengxun_wall_plant",
+      "y": 270
+    }
+  }
+}

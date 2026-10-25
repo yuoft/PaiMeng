@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:jueyun_jiaojiao",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    },
+    {
+      "item": "paimeng:liuli_dai",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:shuizhu_heibeilu"
+  }
+}

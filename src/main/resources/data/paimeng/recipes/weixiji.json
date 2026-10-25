@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:shourou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:mojiecao",
+      "count": 3
+    },
+    {
+      "item": "paimeng:fajiao_guoshizhi",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:weixiji"
+  }
+}

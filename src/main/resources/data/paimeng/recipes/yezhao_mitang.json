@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:zaoye",
+      "count": 4
+    },
+    {
+      "item": "paimeng:xingren",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huangyou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:xumi_qiangwei",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:yezhao_mitang"
+  }
+}

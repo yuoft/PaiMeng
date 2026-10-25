@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "paimeng:item/weapon/pm_bow_pulling_1"
+    }
+}

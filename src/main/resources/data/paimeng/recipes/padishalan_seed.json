@@ -1,0 +1,10 @@
+{
+  "type": "paimeng:seed_box",
+  "input": {
+    "item": "paimeng:padishalan",
+    "count": 8
+  },
+  "result": {
+    "item": "paimeng:padishalan_seed"
+  }
+}

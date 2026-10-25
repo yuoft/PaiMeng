@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:pangxie",
+      "count": 3
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 4
+    },
+    {
+      "item": "paimeng:xiaren",
+      "count": 3
+    },
+    {
+      "item": "paimeng:songrong",
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "paimeng:xiantiaoqiang"
+  }
+}

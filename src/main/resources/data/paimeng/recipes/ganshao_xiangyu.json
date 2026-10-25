@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:ganshao_xiangyu"
+  }
+}

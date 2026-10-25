@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "zxz",
+    "yyy"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:beacon"
+    },
+    "y": {
+      "tag": "forge:stone"
+    },
+    "z": {
+      "item": "minecraft:anvil"
+    }
+  },
+  "result": {
+    "item": "paimeng:synthetic_platform"
+  }
+}

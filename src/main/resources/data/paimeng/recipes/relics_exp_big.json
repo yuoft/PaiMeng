@@ -1,0 +1,21 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:mojing"
+    },
+    {
+      "item": "minecraft:prismarine_crystals"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:experience_bottle"
+  },
+  "result": {
+    "item": "paimeng:relics_exp_big",
+    "count": 5
+  }
+}

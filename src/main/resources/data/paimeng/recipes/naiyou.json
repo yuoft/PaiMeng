@@ -1,0 +1,14 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:niunai"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:bowl"
+  },
+  "result": {
+    "item": "paimeng:naiyou"
+  }
+}

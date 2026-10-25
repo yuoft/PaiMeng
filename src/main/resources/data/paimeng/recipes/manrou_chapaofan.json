@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:manrou",
+      "count": 4
+    },
+    {
+      "item": "paimeng:daomi",
+      "count": 3
+    },
+    {
+      "item": "paimeng:haicao",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:manrou_chapaofan"
+  }
+}

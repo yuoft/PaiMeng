@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": ["minecraft:snowy_plains", "minecraft:ice_spikes", "minecraft:snowy_taiga", "minecraft:snowy_beach", "minecraft:frozen_ocean", "minecraft:frozen_river", "minecraft:snowy_slopes", "minecraft:grove", "minecraft:frozen_peaks"],
+  "features": "paimeng:ore_xingyin_icy",
+  "step": "underground_ores"
+}

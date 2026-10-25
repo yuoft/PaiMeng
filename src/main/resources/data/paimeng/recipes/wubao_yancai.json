@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:bailuobo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huluobo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:jingua",
+      "count": 2
+    },
+    {
+      "item": "paimeng:haicao",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:wubao_yancai"
+  }
+}

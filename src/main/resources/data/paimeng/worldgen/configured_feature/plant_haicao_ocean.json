@@ -1,0 +1,4 @@
+{
+  "type": "paimeng:ocean_plant",
+  "config": { "probability": 0.4, "state": {"Name": "paimeng:haicao_plant"} }
+}

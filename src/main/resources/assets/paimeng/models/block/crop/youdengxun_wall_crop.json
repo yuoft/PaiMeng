@@ -1,0 +1,6 @@
+{
+    "parent": "paimeng:block/coral_wall_fan",
+    "textures": {
+		"fan": "paimeng:block/crop/youdengxun_crop"
+    }
+}

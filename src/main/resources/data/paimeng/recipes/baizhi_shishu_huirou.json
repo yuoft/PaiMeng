@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:naiyou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:shourou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:jinyucao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:baizhi_shishu_huirou"
+  }
+}

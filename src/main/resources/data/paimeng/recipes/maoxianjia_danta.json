@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niaodan",
+      "count": 4
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:maoxianjia_danta"
+  }
+}

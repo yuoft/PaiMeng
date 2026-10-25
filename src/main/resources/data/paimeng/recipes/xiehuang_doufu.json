@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:xiehuang",
+      "count": 1
+    },
+    {
+      "item": "paimeng:doufu",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:xiehuang_doufu"
+  }
+}

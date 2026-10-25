@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mogu",
+      "count": 3
+    },
+    {
+      "item": "paimeng:shourou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:shanzhen_relumian"
+  }
+}

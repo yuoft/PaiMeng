@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:warped_forest",
+  "features": "paimeng:plant_youdengxun_warped_forest",
+  "step": "vegetal_decoration"
+}

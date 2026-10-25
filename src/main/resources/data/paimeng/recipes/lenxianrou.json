@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    "xyx",
+    " x "
+  ],
+  "key": {
+    "y": {
+      "item": "paimeng:shourou"
+    },
+    "x": {
+      "item": "minecraft:ice"
+    }
+  },
+  "result": {
+    "item": "paimeng:lenxianrou"
+  }
+}

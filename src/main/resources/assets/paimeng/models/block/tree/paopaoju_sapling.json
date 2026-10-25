@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "paimeng:block/tree/paopaoju_sapling"
+  }
+}

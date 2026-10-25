@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:qinrou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:shuwang_shengtigu",
+      "count": 2
+    },
+    {
+      "item": "paimeng:padishalan",
+      "count": 1
+    },
+    {
+      "item": "paimeng:xiangxinliao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:tangduer_shaoji"
+  }
+}

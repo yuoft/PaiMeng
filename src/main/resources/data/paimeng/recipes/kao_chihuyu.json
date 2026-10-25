@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yurou",
+      "count": 1
+    },
+    {
+      "item": "paimeng:hujiao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:kao_chihuyu"
+  }
+}

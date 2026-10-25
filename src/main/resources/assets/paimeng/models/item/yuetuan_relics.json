@@ -1,0 +1,38 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "paimeng:item/relics/unknown"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "paimeng:type": 0
+      },
+      "model": "paimeng:item/yuetuan_head"
+    },
+    {
+      "predicate": {
+        "paimeng:type": 1
+      },
+      "model": "paimeng:item/yuetuan_cup"
+    },
+    {
+      "predicate": {
+        "paimeng:type": 2
+      },
+      "model": "paimeng:item/yuetuan_clock"
+    },
+    {
+      "predicate": {
+        "paimeng:type": 3
+      },
+      "model": "paimeng:item/yuetuan_feather"
+    },
+    {
+      "predicate": {
+        "paimeng:type": 4
+      },
+      "model": "paimeng:item/yuetuan_flower"
+    }
+  ]
+}

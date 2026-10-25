@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:riluoguo",
+      "count": 1
+    },
+    {
+      "item": "paimeng:guojiang",
+      "count": 1
+    },
+    {
+      "item": "paimeng:qingxin",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:shuangguo_qinglu"
+  }
+}

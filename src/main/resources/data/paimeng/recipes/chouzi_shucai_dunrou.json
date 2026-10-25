@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:lenxianrou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huluobo",
+      "count": 2
+    },
+    {
+      "item": "paimeng:fanqie",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:chouzi_shucai_dunrou"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niaodan",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:tiwate_jiandan"
+  }
+}

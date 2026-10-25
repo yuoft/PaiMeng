@@ -1,0 +1,28 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shumei",
+      "count": 3
+    },
+    {
+      "item": "paimeng:niunai",
+      "count": 3
+    },
+    {
+      "item": "paimeng:qingxin",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:guoguo_xianlao"
+  }
+}

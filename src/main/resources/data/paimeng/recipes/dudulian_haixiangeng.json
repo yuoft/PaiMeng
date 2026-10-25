@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:pangxie",
+      "count": 4
+    },
+    {
+      "item": "paimeng:dudulian",
+      "count": 1
+    },
+    {
+      "item": "paimeng:bohe",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:dudulian_haixiangeng"
+  }
+}

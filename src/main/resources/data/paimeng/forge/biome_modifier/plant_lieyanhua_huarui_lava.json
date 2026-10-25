@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "paimeng:plant_lieyanhua_huarui_lava",
+  "step": "vegetal_decoration"
+}

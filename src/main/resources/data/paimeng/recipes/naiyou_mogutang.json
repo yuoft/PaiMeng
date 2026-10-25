@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mogu",
+      "count": 3
+    },
+    {
+      "item": "paimeng:naiyou",
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "paimeng:naiyou_mogutang"
+  }
+}

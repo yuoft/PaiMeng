@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+		"cross": "paimeng:block/tree/purple_apple_crop0"
+    }
+}

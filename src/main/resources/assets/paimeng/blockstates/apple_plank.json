@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "paimeng:block/tree/apple_plank",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "paimeng:block/tree/apple_plank"
+    },
+    "axis=z": {
+      "model": "paimeng:block/tree/apple_plank",
+      "x": 90
+    }
+  }
+}

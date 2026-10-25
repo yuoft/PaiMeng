@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_taiga",
+  "features": "paimeng:plant_songrong_taiga",
+  "step": "vegetal_decoration"
+}

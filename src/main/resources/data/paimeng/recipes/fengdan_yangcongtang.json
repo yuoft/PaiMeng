@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:yangcong",
+      "count": 3
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 2
+    },
+    {
+      "item": "paimeng:nailao",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:fengdan_yangcongtang"
+  }
+}

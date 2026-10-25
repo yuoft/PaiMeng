@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:forest",
+  "features": "paimeng:plant_luoluomei_forest",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "paimeng:item/weapon/two_sword2"
+  }
+}

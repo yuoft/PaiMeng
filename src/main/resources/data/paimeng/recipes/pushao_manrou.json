@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:manrou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:pushao_manrou"
+  }
+}

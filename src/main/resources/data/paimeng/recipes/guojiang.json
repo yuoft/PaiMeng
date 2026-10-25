@@ -1,0 +1,22 @@
+{
+  "type": "paimeng:syn_plat",
+  "inputs": [
+    {
+      "item": "paimeng:riluoguo",
+      "count": 3
+    },
+    {
+      "item": "paimeng:shumei",
+      "count": 2
+    },
+    {
+      "item": "paimeng:tang"
+    }
+  ],
+  "catalyzer": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "paimeng:guojiang"
+  }
+}

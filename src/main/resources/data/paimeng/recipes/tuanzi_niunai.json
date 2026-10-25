@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mianfen",
+      "count": 1
+    },
+    {
+      "item": "paimeng:niunai",
+      "count": 1
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:tuanzi_niunai"
+  }
+}

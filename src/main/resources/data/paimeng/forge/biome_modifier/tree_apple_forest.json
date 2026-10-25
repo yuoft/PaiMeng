@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_forest",
+  "features": "paimeng:tree_apple_forest",
+  "step": "vegetal_decoration"
+}

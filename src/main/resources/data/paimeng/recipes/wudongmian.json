@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:haicao",
+      "count": 1
+    },
+    {
+      "item": "paimeng:yurou",
+      "count": 1
+    },
+    {
+      "item": "minecraft:totem_of_undying",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:wudongmian"
+  }
+}

@@ -1,0 +1,12 @@
+{
+	"gaping_void": {
+		"category": "hostile",
+		"subtitle": "sound.paimeng.gaping_void",
+		"sounds": [
+			{
+				"name":"paimeng:gaping_void",
+				"stream": true
+			}
+		]
+	}
+}

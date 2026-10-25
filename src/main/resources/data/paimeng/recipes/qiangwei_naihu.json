@@ -1,0 +1,20 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:niunai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:xumi_qiangwei",
+      "count": 2
+    },
+    {
+      "item": "paimeng:tang",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:qiangwei_naihu"
+  }
+}

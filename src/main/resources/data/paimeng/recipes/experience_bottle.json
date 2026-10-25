@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+		"item": "paimeng:yuanshi"
+	},
+    {
+      "item": "minecraft:potion"
+    },
+    {
+      "item": "minecraft:enchanted_book"
+    }
+  ],
+  "result": {
+    "item": "minecraft:experience_bottle"
+  }
+}

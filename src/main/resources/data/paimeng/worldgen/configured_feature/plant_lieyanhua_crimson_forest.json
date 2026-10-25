@@ -1,0 +1,4 @@
+{
+  "type": "paimeng:nether_plant",
+  "config": { "state": {"Name": "paimeng:lieyanhua_huarui_plant"}, "down": {"Name": "minecraft:crimson_nylium"} }
+}

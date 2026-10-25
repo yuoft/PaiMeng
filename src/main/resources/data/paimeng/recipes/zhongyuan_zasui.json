@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yurou",
+      "count": 3
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 3
+    },
+    {
+      "item": "paimeng:yan",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:zhongyuan_zasui"
+  }
+}

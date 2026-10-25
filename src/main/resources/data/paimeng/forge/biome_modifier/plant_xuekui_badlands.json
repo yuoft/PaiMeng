@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_badlands",
+  "features": "paimeng:plant_xuekui_badlands",
+  "step": "vegetal_decoration"
+}

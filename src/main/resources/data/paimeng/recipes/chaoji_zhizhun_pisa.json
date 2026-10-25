@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:shourou",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 2
+    },
+    {
+      "item": "paimeng:mianfen",
+      "count": 2
+    },
+    {
+      "item": "paimeng:nailao",
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "paimeng:chaoji_zhizhun_pisa"
+  }
+}

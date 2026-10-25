@@ -1,0 +1,24 @@
+{
+  "type": "paimeng:bench",
+  "inputs": [
+    {
+      "item": "paimeng:lianpeng",
+      "count": 3
+    },
+    {
+      "item": "paimeng:jueyun_jiaojiao",
+      "count": 2
+    },
+    {
+      "item": "paimeng:baocai",
+      "count": 2
+    },
+    {
+      "item": "paimeng:huotui",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:feiyu_shijindai"
+  }
+}

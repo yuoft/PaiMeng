@@ -1,0 +1,16 @@
+{
+  "type": "paimeng:pot",
+  "inputs": [
+    {
+      "item": "paimeng:tang",
+      "count": 2
+    },
+    {
+      "item": "paimeng:niaodan",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "paimeng:fulu_baishuang"
+  }
+}

@@ -1,0 +1,22 @@
+# Blender 4.2.0 MTL File: 'god.blend'
+# www.blender.org
+
+newmtl 1.003
+Ns 1000.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.600000 0.600000 0.600000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+map_Kd paimeng:block/god
+
+newmtl 2.003
+Ns 999.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.600000 0.600000 0.600000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+map_Kd paimeng:block/god

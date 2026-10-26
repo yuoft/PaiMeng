@@ -23,28 +23,6 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
-/port-tools/add-missing-loot.ps1
-/port-tools/audit-lang.ps1
-/port-tools/build.log
-/port-tools/check.ps1
-/port-tools/classpath.txt
-/port-tools/client.log
-/port-tools/client2.log
-/port-tools/client3.log
-/port-tools/compile.log
-/port-tools/fix-i18n.ps1
-/port-tools/fix-lang.ps1
-/port-tools/fix-packages.ps1
-/port-tools/fix-props.ps1
-/port-tools/gen-biome-modifiers.ps1
-/port-tools/gen-worldgen.ps1
-/port-tools/rename-imports.ps1
-/port-tools/scan-bom.ps1
-/port-tools/scan-boxes.ps1
-/port-tools/scan-legacy.ps1
-/port-tools/server.log
-/port-tools/server2.log
-/port-tools/validate-resources.ps1
-/port-tools/verify.ps1
 /src/generated/
 /run-data/
+/port-tools/

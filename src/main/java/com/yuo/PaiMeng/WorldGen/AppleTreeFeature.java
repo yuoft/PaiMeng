@@ -84,8 +84,8 @@ public class AppleTreeFeature extends Feature<NoneFeatureConfiguration> {
         // 树叶
         for (int y = pos.getY() + 2 + rand.nextInt(2); y <= pos.getY() + height + 1; ++y) {
             int restHeight = y - (pos.getY() + height + 1); //与树干顶端距离
-            int xzSize = 3 - Math.abs(restHeight) / 2;
-            if (xzSize < 1) xzSize = 1; // 确保最底层和最顶层至少有十字形树叶
+            int xzSize = 1 - restHeight / 2;
+            if (xzSize < 1) xzSize = 1;
             for (int x = pos.getX() - xzSize; x <= pos.getX() + xzSize; ++x) {
                 int xOffset = x - pos.getX();
                 for (int z = pos.getZ() - xzSize; z <= pos.getZ() + xzSize; ++z) {

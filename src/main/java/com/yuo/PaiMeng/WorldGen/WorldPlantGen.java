@@ -2,6 +2,7 @@ package com.yuo.PaiMeng.WorldGen;
 
 import com.yuo.PaiMeng.Blocks.PMBlocks;
 import com.yuo.PaiMeng.PaiMeng;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -13,13 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -152,9 +151,21 @@ public class WorldPlantGen {
 
     //原版花：RANDOM_PATCH + SIMPLE_BLOCK
     private static void flower(RegisterEvent event, ResourceKey<PlacedFeature> key, BlockState state, int tries, int count) {
+        SimpleBlockConfiguration simpleConfig = new SimpleBlockConfiguration(BlockStateProvider.simple(state));
+
+        // 🔴 核心修改 1：使用 BlockPredicateFilter 代替 onlyWhenEmpty
+        // 要求：目标位置是空气，且下方是草方块或泥土（可自行添加沙子、雪等）
         Holder<PlacedFeature> nested = Holder.direct(new PlacedFeature(
-                Holder.direct(new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(state)))),
-                List.of()));
+                Holder.direct(new ConfiguredFeature<>(Feature.SIMPLE_BLOCK, simpleConfig)),
+                List.of(
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                                BlockPredicate.ONLY_IN_AIR_PREDICATE, // 目标位置必须是空气
+                                BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(),
+                                        Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.PODZOL, Blocks.COARSE_DIRT, Blocks.SAND, Blocks.SNOW_BLOCK) // 下方必须是这些方块
+                        ))
+                )
+        ));
+
         event.register(Registries.PLACED_FEATURE, key.location(), () -> new PlacedFeature(
                 Holder.direct(new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(tries, 7, 3, nested))),
                 List.of(
@@ -180,7 +191,7 @@ public class WorldPlantGen {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static ConfiguredFeature<?, ?> configured(RegistryObject<? extends Feature<?>> feature, Object config) {
-        return new ConfiguredFeature((Feature) feature.get(), (net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration) config);
+        return new ConfiguredFeature((Feature) feature.get(), (FeatureConfiguration) config);
     }
 
     //海洋植物

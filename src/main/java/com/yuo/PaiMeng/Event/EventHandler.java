@@ -10,6 +10,7 @@ import com.yuo.PaiMeng.Items.PMItems;
 import com.yuo.PaiMeng.Items.Relics;
 import com.yuo.PaiMeng.Items.RelicsBox;
 import com.yuo.PaiMeng.Items.RelicsHelper;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Tiles.SevenGodTile;
 import net.minecraft.core.BlockPos;
@@ -131,8 +132,8 @@ public class EventHandler {
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof Player) {
-            event.addCapability(new ResourceLocation(PaiMeng.MOD_ID, "blow"), new BlowCapabilityProvider());
-            event.addCapability(new ResourceLocation(PaiMeng.MOD_ID, "relics"), new RelicsItemCapabilityProvider());
+            event.addCapability(ModUtils.fa("blow"), new BlowCapabilityProvider());
+            event.addCapability(ModUtils.fa("relics"), new RelicsItemCapabilityProvider());
         }
     }
 

@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Client.Gui;
 
 import com.yuo.PaiMeng.Container.SynPlatContainer;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SynPlatScreen extends AbstractContainerScreen<SynPlatContainer> {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/synthetic_platform.png");
+    private final ResourceLocation RESOURCE = ModUtils.fa( "textures/gui/synthetic_platform.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
 

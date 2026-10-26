@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.WorldGen;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public class TreeInit {
 
     private static ResourceKey<ConfiguredFeature<?, ?>> key(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(PaiMeng.MOD_ID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ModUtils.fa( name));
     }
 
     public static final TreeSpawner APPLE_TREE = new TreeSpawner(key("apple_tree"));

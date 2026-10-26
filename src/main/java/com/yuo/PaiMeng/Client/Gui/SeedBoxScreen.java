@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Client.Gui;
 
 import com.yuo.PaiMeng.Container.SeedBoxContainer;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class SeedBoxScreen extends AbstractContainerScreen<SeedBoxContainer> {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/seed_box.png");
+    private final ResourceLocation RESOURCE = ModUtils.fa("textures/gui/seed_box.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
 

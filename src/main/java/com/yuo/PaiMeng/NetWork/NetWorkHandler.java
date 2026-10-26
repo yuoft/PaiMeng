@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.NetWork;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
@@ -17,7 +18,7 @@ public class NetWorkHandler {
 
     public static void registerMessage() {
         INSTANCE = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation(PaiMeng.MOD_ID, "network"), //标识符
+                ModUtils.fa("network"), //标识符
                 () -> VERSION, //数据包版本
                 (version) -> version.equals(VERSION), //客户端和服务端可以接收的版本号
                 (version) -> version.equals(VERSION)

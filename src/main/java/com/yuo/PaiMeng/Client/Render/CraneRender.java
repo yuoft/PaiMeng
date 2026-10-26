@@ -2,6 +2,7 @@ package com.yuo.PaiMeng.Client.Render;
 
 import com.yuo.PaiMeng.Client.Model.CraneModel;
 import com.yuo.PaiMeng.Entity.CraneEntity;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -12,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CraneRender extends MobRenderer<CraneEntity, CraneModel<CraneEntity>> {
-    private final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/entity/crane.png");
+    private final ResourceLocation TEXTURE = ModUtils.fa("textures/entity/crane.png");
 
     public CraneRender(EntityRendererProvider.Context context) {
         super(context, new CraneModel<>(context.bakeLayer(CraneModel.LAYER)), 0.3f); //阴影大小

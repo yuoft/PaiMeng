@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.datagen;
 
+import com.yuo.PaiMeng.ModUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -44,7 +45,7 @@ public final class PMBiomeModifiers {
             }
             Holder<PlacedFeature> feature = placedGetter.getOrThrow(PMWorldGenData.placedKey(def.id()));
             context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS,
-                            new ResourceLocation(com.yuo.PaiMeng.PaiMeng.MOD_ID, def.id())),
+                            ModUtils.fa( def.id())),
                     new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes, HolderSet.direct(feature), def.step()));
         }
     }

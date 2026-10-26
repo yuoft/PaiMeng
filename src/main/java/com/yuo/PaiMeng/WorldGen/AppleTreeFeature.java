@@ -82,7 +82,7 @@ public class AppleTreeFeature extends Feature<NoneFeatureConfiguration> {
             return false;
         }
         // 树叶
-        for (int y = pos.getY() + 2 + rand.nextInt(2); y <= pos.getY() + height + 1; ++y) {
+        for (int y = pos.getY() + 3 + rand.nextInt(2); y <= pos.getY() + height + 1; ++y) {
             int restHeight = y - (pos.getY() + height + 1); //与树干顶端距离
             int xzSize = 1 - restHeight / 2;
             if (xzSize < 1) xzSize = 1;
@@ -90,16 +90,21 @@ public class AppleTreeFeature extends Feature<NoneFeatureConfiguration> {
                 int xOffset = x - pos.getX();
                 for (int z = pos.getZ() - xzSize; z <= pos.getZ() + xzSize; ++z) {
                     int zOffset = z - pos.getZ();
-                    if (Math.abs(xOffset) != xzSize || Math.abs(zOffset) != xzSize // 不在边缘4个点 随机生成
-                            || rand.nextInt(2) != 0 && restHeight != 0) {
-                        BlockPos blockpos = new BlockPos(x, y, z);
 
-                        if (reader.isEmptyBlock(blockpos)) {
-                            reader.setBlock(blockpos, leaves().setValue(LeavesBlock.DISTANCE,1), 3);
-                            //果实 20%概率生成
-                            if (reader.isEmptyBlock(blockpos.below()) && rand.nextInt(100) > 80) {
-                                reader.setBlock(new BlockPos(x, y - 1, z), CROP, 3);
-                            }
+                    if (xzSize > 3) {
+                        // 半径3时，额外剔除宽出边界的地方，使它变成类似十字/圆形
+                        if (Math.abs(xOffset) + Math.abs(zOffset) > 4) continue;
+                    } else if (Math.abs(xOffset) == xzSize && Math.abs(zOffset) == xzSize) {
+                        continue;
+                    }
+
+                    BlockPos blockpos = new BlockPos(x, y, z);
+
+                    if (reader.isEmptyBlock(blockpos)) {
+                        reader.setBlock(blockpos, leaves().setValue(LeavesBlock.DISTANCE,1), 3);
+                        //果实 20%概率生成
+                        if (reader.isEmptyBlock(blockpos.below()) && rand.nextDouble() > 0.8) {
+                            reader.setBlock(new BlockPos(x, y - 1, z), CROP, 3);
                         }
                     }
                 }

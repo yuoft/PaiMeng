@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Jei;
 
 import com.yuo.PaiMeng.Items.PMItems;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.PotRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -25,9 +26,9 @@ import java.util.Arrays;
 
 public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(PaiMeng.MOD_ID, "pot");
+    public static final ResourceLocation UID = ModUtils.fa("pot");
     //合成配方背景
-    public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/pot.png");
+    public static final ResourceLocation TEXTURE = ModUtils.fa( "textures/gui/pot.png");
     //JEI 15 用 RecipeType 取代 1.16 的配方类别 UID 字符串
     public static final RecipeType<PotRecipe> RECIPE_TYPE = RecipeType.create(PaiMeng.MOD_ID, "pot", PotRecipe.class);
 

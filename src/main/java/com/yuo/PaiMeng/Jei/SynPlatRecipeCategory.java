@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Jei;
 
 import com.yuo.PaiMeng.Items.PMItems;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.SynPlatRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -20,9 +21,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class SynPlatRecipeCategory implements IRecipeCategory<SynPlatRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(PaiMeng.MOD_ID, "syn_plat");
+    public static final ResourceLocation UID = ModUtils.fa( "syn_plat");
     //合成配方背景
-    public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/synthetic_platform.png");
+    public static final ResourceLocation TEXTURE = ModUtils.fa( "textures/gui/synthetic_platform.png");
     //JEI 15 用 RecipeType 取代 1.16 的配方类别 UID 字符串
     public static final RecipeType<SynPlatRecipe> RECIPE_TYPE = RecipeType.create(PaiMeng.MOD_ID, "syn_plat", SynPlatRecipe.class);
 

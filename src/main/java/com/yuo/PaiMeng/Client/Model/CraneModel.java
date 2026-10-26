@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.yuo.PaiMeng.Entity.CraneEntity;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -21,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class CraneModel<C extends CraneEntity> extends EntityModel<C> {
     /** 模型层，主控需要在 ClientProxy 中通过 LayerDefinitions.register(CraneModel.LAYER, CraneModel::createBodyLayer) 注册 */
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(PaiMeng.MOD_ID, "crane"), "main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ModUtils.fa("crane"), "main");
 
     private final ModelPart body;
     private final ModelPart tail;

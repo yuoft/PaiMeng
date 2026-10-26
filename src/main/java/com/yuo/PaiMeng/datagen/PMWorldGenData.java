@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.datagen;
 
 import com.yuo.PaiMeng.Blocks.PMBlocks;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.WorldGen.FeatureInit;
 import com.yuo.PaiMeng.WorldGen.NetherConfig;
@@ -59,19 +60,15 @@ public final class PMWorldGenData {
     // ---------------------------------------------------------------- keys
 
     public static ResourceKey<ConfiguredFeature<?, ?>> cfgKey(String id) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, id(id));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, ModUtils.fa(id));
     }
 
     public static ResourceKey<PlacedFeature> placedKey(String id) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, id(id));
+        return ResourceKey.create(Registries.PLACED_FEATURE, ModUtils.fa(id));
     }
 
     public static ResourceKey<Biome> biomeKey(String id) {
-        return ResourceKey.create(Registries.BIOME, new ResourceLocation(id));
-    }
-
-    private static ResourceLocation id(String path) {
-        return new ResourceLocation(PaiMeng.MOD_ID, path);
+        return ResourceKey.create(Registries.BIOME, ModUtils.def(id));
     }
 
     // ---------------------------------------------------------------- records
@@ -177,6 +174,7 @@ public final class PMWorldGenData {
         return new CfgDef(id, FeatureInit.LAVA_PLANT.get(), new PlantConfig(plant.defaultBlockState()));
     }
 
+    @SafeVarargs
     private static PfDef pf(String id, String configuredId, List<PlacementModifier> modifiers,
                             GenerationStep.Decoration step, @Nullable TagKey<Biome> tag, ResourceKey<Biome>... biomes) {
         return new PfDef(id, configuredId, modifiers, tag, List.of(biomes), step);
@@ -343,6 +341,7 @@ public final class PMWorldGenData {
         list.add(pf("plant_bohe", "plant_bohe", patch(1), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
         list.add(pf("plant_tiantianhua", "plant_tiantianhua", patch(1), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
         list.add(pf("plant_shumei", "plant_shumei", patch(1), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD));
+
         list.add(pf("plant_lianpeng_river", "plant_lianpeng_river", patch(4), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER));
         list.add(pf("plant_mawei_river", "plant_mawei_river", patch(4), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER));
         list.add(pf("plant_jinyucao_river", "plant_jinyucao_river", patch(4), GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_RIVER));

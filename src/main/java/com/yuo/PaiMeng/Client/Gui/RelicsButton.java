@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Client.Gui;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.NetWork.RelicsGuiPacket;
 import com.yuo.PaiMeng.PaiMeng;
@@ -18,8 +19,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RelicsButton extends ImageButton {
-    public static final ResourceLocation RESOURCE_OPEN = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/open.png");
-    public static final ResourceLocation RESOURCE_CLOSE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/close.png");
+    public static final ResourceLocation RESOURCE_OPEN = ModUtils.fa( "textures/gui/open.png");
+    public static final ResourceLocation RESOURCE_CLOSE = ModUtils.fa( "textures/gui/close.png");
     private final AbstractContainerScreen<?> playerScreen;
     private static final int ZERO = 0;
     private static final int textureX = 16;

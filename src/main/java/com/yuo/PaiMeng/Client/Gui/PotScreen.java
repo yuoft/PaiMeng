@@ -1,6 +1,7 @@
 package com.yuo.PaiMeng.Client.Gui;
 
 import com.yuo.PaiMeng.Container.PotContainer;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -13,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PotScreen extends AbstractContainerScreen<PotContainer> {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/pot.png");
+    private final ResourceLocation RESOURCE = ModUtils.fa("textures/gui/pot.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private Button button; //按钮

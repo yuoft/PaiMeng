@@ -110,7 +110,7 @@ public class ClientProxy extends CommonProxy{
 
     //设置圣遗物的动态属性 根据不同部位更改贴图
     private void setRelicsProperty(Item item){
-        ItemProperties.register(item, new ResourceLocation(PaiMeng.MOD_ID,
+        ItemProperties.register(item, ModUtils.fa(
                 "type"), (itemStack, clientWorld, livingEntity, seed) -> {
             if (livingEntity == null) {
                 return 0.0F;
@@ -122,7 +122,7 @@ public class ClientProxy extends CommonProxy{
 
     //设置弓物品的动态属性
     private void setBowProperty(Item item){
-        ItemProperties.register(item, new ResourceLocation(PaiMeng.MOD_ID,
+        ItemProperties.register(item, ModUtils.fa(
                 "pull"), (itemStack, clientWorld, livingEntity, seed) -> {
             if (livingEntity == null) {
                 return 0.0F;
@@ -130,7 +130,7 @@ public class ClientProxy extends CommonProxy{
                 return livingEntity.getUseItem() != itemStack ? 0.0F : (float)(itemStack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / 20.0F;
             }
         });
-        ItemProperties.register(item, new ResourceLocation(PaiMeng.MOD_ID,
+        ItemProperties.register(item, ModUtils.fa(
                 "pulling"), (itemStack, clientWorld, livingEntity, seed) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == itemStack ? 1.0F : 0.0F);
     }
 

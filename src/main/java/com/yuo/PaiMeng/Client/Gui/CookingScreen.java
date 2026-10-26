@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Client.Gui;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Tiles.TileUtils;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,7 +17,7 @@ import java.util.Random;
 //烹饪界面
 @OnlyIn(Dist.CLIENT)
 public class CookingScreen extends Screen {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/cooking.png");
+    private final ResourceLocation RESOURCE = ModUtils.fa( "textures/gui/cooking.png");
     private Button button;
     private final int textureWidth = 202;
     private final int textureHeight = 12;

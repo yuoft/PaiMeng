@@ -2,6 +2,7 @@ package com.yuo.PaiMeng.Client.Gui;
 
 import com.yuo.PaiMeng.Container.RelicsContainer;
 import com.yuo.PaiMeng.Items.RelicsHelper;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,7 +20,7 @@ import java.math.RoundingMode;
 
 @OnlyIn(Dist.CLIENT)
 public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
-    private final ResourceLocation RESOURCE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/relics.png");
+    private final ResourceLocation RESOURCE = ModUtils.fa( "textures/gui/relics.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private float oldMouseX;

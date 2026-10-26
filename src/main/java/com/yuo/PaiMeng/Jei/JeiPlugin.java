@@ -5,6 +5,7 @@ import com.yuo.PaiMeng.Container.PotContainer;
 import com.yuo.PaiMeng.Container.SeedBoxContainer;
 import com.yuo.PaiMeng.Container.SynPlatContainer;
 import com.yuo.PaiMeng.Items.PMItems;
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import com.yuo.PaiMeng.Recipes.BenchRecipe;
 import com.yuo.PaiMeng.Recipes.CookingRecipe;
@@ -36,7 +37,7 @@ public class JeiPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(PaiMeng.MOD_ID, "jei_plugin");
+        return ModUtils.fa("jei_plugin");
     }
 
     //配方类别

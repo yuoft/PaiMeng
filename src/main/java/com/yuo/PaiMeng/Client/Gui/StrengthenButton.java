@@ -1,5 +1,6 @@
 package com.yuo.PaiMeng.Client.Gui;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.NetWork.NetWorkHandler;
 import com.yuo.PaiMeng.NetWork.StrengthenPacket;
 import com.yuo.PaiMeng.PaiMeng;
@@ -17,7 +18,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class StrengthenButton extends ImageButton {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(PaiMeng.MOD_ID, "textures/gui/strengthen_table.png");
+    public static final ResourceLocation TEXTURE = ModUtils.fa("textures/gui/strengthen_table.png");
     private final StrengthenTableScreen screen;
     private static final int ZERO = 0;
     private static final int textureSize = 256;

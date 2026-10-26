@@ -1,9 +1,10 @@
 package com.yuo.PaiMeng.Items;
 
+import com.yuo.PaiMeng.ModUtils;
 import com.yuo.PaiMeng.PaiMeng;
 import net.minecraft.resources.ResourceLocation;
 
 //模组标签定义
 public class PMTags {
-    public static final ResourceLocation APPLE_TREE_GROW = new ResourceLocation(PaiMeng.MOD_ID, "apple_tree_grow");
+    public static final ResourceLocation APPLE_TREE_GROW = ModUtils.fa("apple_tree_grow");
 }

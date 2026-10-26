@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_beach",
-  "features": "paimeng:plant_haicao_beach",
-  "step": "vegetal_decoration"
-}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:mushroom_fields",
-  "features": "paimeng:plant_mufeng_mushroom_fields",
-  "step": "vegetal_decoration"
-}

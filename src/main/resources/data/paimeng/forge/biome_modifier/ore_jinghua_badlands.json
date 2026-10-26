@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_badlands",
-  "features": "paimeng:ore_jinghua_badlands",
-  "step": "underground_ores"
-}

@@ -1,9 +1,0 @@
-{
-  "feature": "paimeng:plant_mingcao_small_end_islands",
-  "placement": [
-    { "type": "minecraft:count", "count": 3 },
-    { "type": "minecraft:in_square" },
-    { "type": "minecraft:heightmap", "heightmap": "WORLD_SURFACE_WG" },
-    { "type": "minecraft:biome" }
-  ]
-}

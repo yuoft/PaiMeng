@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:desert",
-  "features": "paimeng:ore_shipo_desert",
-  "step": "underground_ores"
-}

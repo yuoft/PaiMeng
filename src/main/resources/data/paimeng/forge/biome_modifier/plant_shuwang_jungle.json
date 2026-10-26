@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_jungle",
-  "features": "paimeng:plant_shuwang_jungle",
-  "step": "vegetal_decoration"
-}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": ["minecraft:end_barrens", "minecraft:end_midlands"],
-  "features": "paimeng:plant_tianyun_end_barrens",
-  "step": "vegetal_decoration"
-}

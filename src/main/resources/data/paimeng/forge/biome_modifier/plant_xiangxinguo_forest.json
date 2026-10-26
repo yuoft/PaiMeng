@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:forest",
-  "features": "paimeng:plant_xiangxinguo_forest",
-  "step": "vegetal_decoration"
-}

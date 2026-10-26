@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +22,13 @@ public class ModPlant extends BushBlock {
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
         if (this == PMBlocks.liuliDaiPlant.get() || this == PMBlocks.qingxinPlant.get() || this == PMBlocks.ceciliaHuaPlant.get()){
-           return state.is(Blocks.STONE) || state.is(Blocks.SNOW_BLOCK);
+            //1.20.1 的山地地表多为 snow / snow_block / calcite / gravel / 石头，
+            //1.16.5 只判断 STONE/SNOW_BLOCK，导致高山植物在 1.20.1 世界生成里几乎长不出来
+            return state.is(Blocks.STONE) || state.is(Blocks.SNOW_BLOCK) || state.is(Blocks.SNOW)
+                    || state.is(Blocks.POWDER_SNOW) || state.is(Blocks.CALCITE) || state.is(Blocks.GRAVEL)
+                    || state.is(Blocks.ANDESITE) || state.is(Blocks.DIORITE) || state.is(Blocks.GRANITE)
+                    || state.is(Blocks.DEEPSLATE) || state.is(Blocks.TUFF) || state.is(Blocks.PACKED_ICE)
+                    || super.mayPlaceOn(state, level, pos);
         }
         if (this == PMBlocks.dudulianPlant.get() || this == PMBlocks.lianpengPlant.get() || this == PMBlocks.maweiPlant.get()
             || this == PMBlocks.jinyucaoPlant.get())   {

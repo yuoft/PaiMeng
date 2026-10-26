@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:desert",
-  "features": "paimeng:plant_jueyun_desert",
-  "step": "vegetal_decoration"
-}

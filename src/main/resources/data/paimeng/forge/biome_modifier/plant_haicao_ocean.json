@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_ocean",
-  "features": "paimeng:plant_haicao_ocean",
-  "step": "vegetal_decoration"
-}

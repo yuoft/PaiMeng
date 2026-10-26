@@ -12,7 +12,6 @@ import com.yuo.PaiMeng.Recipes.RecipeSerializerRegistry;
 import com.yuo.PaiMeng.Tiles.TileTypeRegistry;
 import com.yuo.PaiMeng.WorldGen.EntityGen;
 import com.yuo.PaiMeng.WorldGen.FeatureInit;
-import com.yuo.PaiMeng.WorldGen.WorldEventHandler;
 import com.yuo.PaiMeng.tab.PMGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -45,10 +44,8 @@ public class PaiMeng {
         FeatureInit.FEATURES.register(modEventBus);
         EffectRegistry.EFFECTS.register(modEventBus);
         EntityTypeRegister.ENTITY_TYPE.register(modEventBus);
-        //1.20.1 世界生成改为数据包 JSON（src/main/resources/data/paimeng/worldgen/**）。
-        //代码注册 ConfiguredFeature/PlacedFeature 会被 Forge 判定为 "Unbound values"，导致 biome_modifier 引用失败，
-        //所以这里不再注册（WorldEventHandler.registerFeatures 保留，便于以后需要时切回代码方式）。
-        // modEventBus.addListener(WorldEventHandler::registerFeatures);
+        //世界生成完全由 datagen 产出（data/paimeng/worldgen/** 与 data/paimeng/forge/biome_modifier/**，
+        //在 src/generated/resources 里，由 runData 生成），运行时不需要再注册 ConfiguredFeature/PlacedFeature。
         //刷怪位置规则（属性在 Event\MobEvent 里注册）
         MinecraftForge.EVENT_BUS.addListener(EntityGen::registerSpawnPlacements);
         PROXY.init();

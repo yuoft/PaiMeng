@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "paimeng:ore_heitie",
-  "step": "underground_ores"
-}

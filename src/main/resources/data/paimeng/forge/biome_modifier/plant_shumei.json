@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "paimeng:plant_shumei",
-  "step": "vegetal_decoration"
-}

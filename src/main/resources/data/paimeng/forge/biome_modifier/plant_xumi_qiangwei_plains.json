@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:plains",
-  "features": "paimeng:plant_xumi_qiangwei_plains",
-  "step": "vegetal_decoration"
-}

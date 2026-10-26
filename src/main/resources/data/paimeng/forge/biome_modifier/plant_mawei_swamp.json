@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
-  "features": "paimeng:plant_mawei_swamp",
-  "step": "vegetal_decoration"
-}

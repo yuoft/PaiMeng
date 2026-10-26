@@ -8,7 +8,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 /**
  * 各树苗对应的 ConfiguredFeature。
- * key 与 WorldEventHandler#registerFeatures 里注册的 ConfiguredFeature 一一对应。
+ * key 与 datagen 产出的 data/paimeng/worldgen/configured_feature/&lt;name&gt;.json 一一对应
+ * （见 {@code com.yuo.PaiMeng.datagen.PMWorldGenData#configured()}）。
  */
 public class TreeInit {
 

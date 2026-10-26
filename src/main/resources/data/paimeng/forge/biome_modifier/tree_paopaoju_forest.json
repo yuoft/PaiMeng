@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_forest",
-  "features": "paimeng:tree_paopaoju_forest",
-  "step": "vegetal_decoration"
-}

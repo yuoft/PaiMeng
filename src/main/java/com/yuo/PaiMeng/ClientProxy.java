@@ -7,6 +7,7 @@ import com.yuo.PaiMeng.Client.Gui.RelicsScreen;
 import com.yuo.PaiMeng.Client.Gui.SeedBoxScreen;
 import com.yuo.PaiMeng.Client.Gui.StrengthenTableScreen;
 import com.yuo.PaiMeng.Client.Gui.SynPlatScreen;
+import com.yuo.PaiMeng.Client.Model.CraneModel;
 import com.yuo.PaiMeng.Client.Render.BenchTileTER;
 import com.yuo.PaiMeng.Client.Render.BoarRender;
 import com.yuo.PaiMeng.Client.Render.CraneRender;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -58,9 +60,7 @@ public class ClientProxy extends CommonProxy{
         modBus.addListener(this::clientSetup);
         modBus.addListener(this::registerKeyMappings);
         //1.20.1 实体模型层必须在 mod 总线注册
-        modBus.addListener((net.minecraftforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) ->
-                event.registerLayerDefinition(com.yuo.PaiMeng.Client.Model.CraneModel.LAYER,
-                        com.yuo.PaiMeng.Client.Model.CraneModel::createBodyLayer));
+        modBus.addListener((EntityRenderersEvent.RegisterLayerDefinitions event) -> event.registerLayerDefinition(CraneModel.LAYER, CraneModel::createBodyLayer));
         PMKeyManager.init();//快捷键注册
     }
 

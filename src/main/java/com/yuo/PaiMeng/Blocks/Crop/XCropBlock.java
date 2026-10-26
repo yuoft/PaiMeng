@@ -51,20 +51,17 @@ public class XCropBlock extends CropBlock {
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
         BlockState blockState = level.getBlockState(pos.below());
-        switch (useBlockEnum){
-            case COMMON: return blockState.is(PMBlocks.commonFarmland.get());
-            case FERTILE: return blockState.is(PMBlocks.fertileFarmland.get());
-            case LOGS: {
-
-                return blockState.is(BlockTags.LOGS);
-            }
-            default: return false;
-        }
+        return switch (useBlockEnum) {
+            case COMMON -> blockState.is(PMBlocks.commonFarmland.get());
+            case FERTILE -> blockState.is(PMBlocks.fertileFarmland.get());
+            case LOGS -> blockState.is(BlockTags.LOGS);
+            default -> false;
+        };
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return this.mayPlaceOn(level.getBlockState(pos.below()), level, pos.below());
+        return this.mayPlaceOn(level.getBlockState(pos.below()), level, pos);
     }
 
     //部分不能使用骨粉催熟

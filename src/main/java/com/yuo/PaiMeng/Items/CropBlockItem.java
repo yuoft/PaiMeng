@@ -74,7 +74,7 @@ public class CropBlockItem extends ItemNameBlockItem {
                     return resultType(context);
                 else return funb(world, player);
             case AQUATIC:
-                if (blockGrow.is(PMBlocks.aquaticFarmland.get()))
+                if (blockGrow.is(PMBlocks.aquaticFarmland.get()) && world.getBlockState(pos.above()).is(Blocks.WATER))
                     return resultType(context);
                 else return funb(world, player);
             case LOGS:

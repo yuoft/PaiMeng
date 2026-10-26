@@ -46,3 +46,5 @@ forge*changelog.txt
 /port-tools/server2.log
 /port-tools/validate-resources.ps1
 /port-tools/verify.ps1
+/src/generated/
+/run-data/

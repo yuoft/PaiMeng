@@ -8,6 +8,7 @@ import com.yuo.PaiMeng.WorldGen.TreeInit;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,15 +22,15 @@ public class PMBlocks {
     public static final BlockBehaviour.Properties PLANK = BlockBehaviour.Properties.copy(Blocks.BIRCH_PLANKS); //树干
     public static final BlockBehaviour.Properties LEAF = BlockBehaviour.Properties.copy(Blocks.BIRCH_LEAVES); //树叶
     public static final BlockBehaviour.Properties SAPLING = BlockBehaviour.Properties.copy(Blocks.BIRCH_SAPLING); //树苗
-    public static final BlockBehaviour.Properties PLANT = BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK); //植物
+    public static final BlockBehaviour.Properties PLANT = BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH); //植物
     private static final BlockBehaviour.Properties CROP = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().
-            instabreak().noOcclusion().sound(SoundType.CROP); //X型作物
+            instabreak().noOcclusion().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY); //X型作物
     private static final BlockBehaviour.Properties CROP_15 = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().
-            instabreak().noOcclusion().sound(SoundType.CROP).lightLevel(e -> 15); //X型作物 15亮度
+            instabreak().noOcclusion().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY).lightLevel(e -> 15); //X型作物 15亮度
     private static final BlockBehaviour.Properties CROP_9 = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().
-            instabreak().noOcclusion().sound(SoundType.CROP).lightLevel(e -> 9);
+            instabreak().noOcclusion().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY).lightLevel(e -> 9);
     private static final BlockBehaviour.Properties CROP_6 = BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().
-            instabreak().noOcclusion().sound(SoundType.CROP).lightLevel(e -> 6);
+            instabreak().noOcclusion().sound(SoundType.CROP).pushReaction(PushReaction.DESTROY).lightLevel(e -> 6);
     public static CropUseBlockEnum COMMON = CropUseBlockEnum.COMMON;
     public static CropUseBlockEnum FERTILE = CropUseBlockEnum.FERTILE;
     public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;
@@ -113,7 +114,7 @@ public class PMBlocks {
     public static RegistryObject<Block> jinyucaoPlant = BLOCKS.register("jinyucao_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> jueyunJiaojiaoPlant = BLOCKS.register("jueyun_jiaojiao_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> lianpengPlant = BLOCKS.register("lianpeng_plant", () -> new ModPlant(PLANT));
-    public static RegistryObject<Block> lieyanhuaHuaruiPlant = BLOCKS.register("lieyanhua_huarui_plant", () -> new LieYanHuaPlant(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).lightLevel(e -> 15)));
+    public static RegistryObject<Block> lieyanhuaHuaruiPlant = BLOCKS.register("lieyanhua_huarui_plant", () -> new LieYanHuaPlant(PLANT.lightLevel(e -> 15)));
     public static RegistryObject<Block> liuliBaihePlant = BLOCKS.register("liuli_baihe_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> liuliDaiPlant = BLOCKS.register("liuli_dai_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> luoluomeiPlant = BLOCKS.register("luoluomei_plant", () -> new ModPlant(PLANT));
@@ -128,9 +129,9 @@ public class PMBlocks {
     public static RegistryObject<Block> songrongPlant = BLOCKS.register("songrong_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> tiantianhuaPlant = BLOCKS.register("tiantianhua_plant", () -> new ModPlant(PLANT));
     public static RegistryObject<Block> tianyunCaoshiPlant = BLOCKS.register("tianyun_caoshi_plant", () -> new ModPlant(PLANT));
-    public static RegistryObject<Block> xiaodengcaoPlant = BLOCKS.register("xiaodengcao_plant", () -> new ModPlant(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).lightLevel(e -> 9)));
+    public static RegistryObject<Block> xiaodengcaoPlant = BLOCKS.register("xiaodengcao_plant", () -> new ModPlant(PLANT.lightLevel(e -> 9)));
     public static RegistryObject<Block> xuekuiPlant = BLOCKS.register("xuekui_plant", () -> new ModPlant(PLANT));
-    public static RegistryObject<Block> youdengxunPlant = BLOCKS.register("youdengxun_plant", () -> new ModPlant(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).lightLevel(e -> 6)));
+    public static RegistryObject<Block> youdengxunPlant = BLOCKS.register("youdengxun_plant", () -> new ModPlant(PLANT.lightLevel(e -> 6)));
     public static RegistryObject<Block> zhusunPlant = BLOCKS.register("zhusun_plant", () -> new ModPlant(PLANT));
 
     public static RegistryObject<Block> dunduntaoPlant = BLOCKS.register("dunduntao_plant", () -> new ModPlant(PLANT));

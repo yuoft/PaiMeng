@@ -84,18 +84,18 @@ public class AppleTreeFeature extends Feature<NoneFeatureConfiguration> {
         // 树叶
         for (int y = pos.getY() + 2 + rand.nextInt(2); y <= pos.getY() + height + 1; ++y) {
             int restHeight = y - (pos.getY() + height + 1); //与树干顶端距离
-            int xzSize = 1 - restHeight / 2; //树叶范围
+            int xzSize = 3 - Math.abs(restHeight) / 2;
+            if (xzSize < 1) xzSize = 1; // 确保最底层和最顶层至少有十字形树叶
             for (int x = pos.getX() - xzSize; x <= pos.getX() + xzSize; ++x) {
                 int xOffset = x - pos.getX();
                 for (int z = pos.getZ() - xzSize; z <= pos.getZ() + xzSize; ++z) {
                     int zOffset = z - pos.getZ();
-                    if (Math.abs(xOffset) != xzSize || Math.abs(zOffset) != xzSize // 不在边缘4个点
+                    if (Math.abs(xOffset) != xzSize || Math.abs(zOffset) != xzSize // 不在边缘4个点 随机生成
                             || rand.nextInt(2) != 0 && restHeight != 0) {
                         BlockPos blockpos = new BlockPos(x, y, z);
 
                         if (reader.isEmptyBlock(blockpos)) {
-                            reader.setBlock(blockpos, leaves().setValue(LeavesBlock.DISTANCE,
-                                    Math.max(Math.min(Math.abs(xOffset + zOffset - 1), 7), 1)), 3);
+                            reader.setBlock(blockpos, leaves().setValue(LeavesBlock.DISTANCE,1), 3);
                             //果实 20%概率生成
                             if (reader.isEmptyBlock(blockpos.below()) && rand.nextInt(100) > 80) {
                                 reader.setBlock(new BlockPos(x, y - 1, z), CROP, 3);

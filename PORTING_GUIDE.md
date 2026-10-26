@@ -11,7 +11,7 @@
 | MC 1.20.1 + Forge 47.4.0 反编译源码（API 权威参照） | `D:\McMod20\_mcref_1201\src\` (包结构：`net\minecraft\...`, `net\minecraftforge\...`) |
 | 同作者已完成的 1.20.1 移植工程（写法参照） | `D:\McMod20\Endless-20\src\main\java\com\yuo\endless\` |
 
-modid = `paimeng`，包名 `com.yuo.PaiMeng`（**大小写保持不变**，不要改包名/类名/公共方法名）。
+modid = `paimeng`，包名 `com.yuo.paimeng`（**大小写保持不变**，不要改包名/类名/公共方法名）。
 Forge 1.20.1-47.4.0，官方映射（official 1.20.1），Java 17，编码 UTF-8。
 
 ## 1. 编译检查工具（每个 agent 必须用）

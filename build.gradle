@@ -71,6 +71,9 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
     implementation fg.deobf("curse.maven:spice-of-life-carrot-edition-277616:${slce_id}")
+    runtimeOnly fg.deobf("curse.maven:avaritia-endless-624491:${ae_id}")
+    runtimeOnly fg.deobf("curse.maven:cloth-config-348521:${cloth_config_id}")
+    runtimeOnly fg.deobf("curse.maven:betterf3-401648:${betterf3_id}")
 }
 
 tasks.named('processResources', ProcessResources).configure {

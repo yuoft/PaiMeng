@@ -1,0 +1,63 @@
+package com.yuo.paimeng.jei;
+
+import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.menu.SeedBoxContainer;
+import com.yuo.paimeng.recipe.SeedBoxRecipe;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class SeedBoxTransferInfo implements IRecipeTransferInfo<SeedBoxContainer, SeedBoxRecipe> {
+
+    @Override
+    public Class<? extends SeedBoxContainer> getContainerClass() {
+        return SeedBoxContainer.class;
+    }
+
+    @Override
+    public Optional<MenuType<SeedBoxContainer>> getMenuType() {
+        return Optional.of(ContainerTypeRegistry.seedBoxContainer.get());
+    }
+
+    @Override
+    public RecipeType<SeedBoxRecipe> getRecipeType() {
+        return SeedBoxRecipeCategory.RECIPE_TYPE;
+    }
+
+    @Override
+    public boolean canHandle(SeedBoxContainer container, SeedBoxRecipe recipe) {
+        return true;
+    }
+
+    @Override
+    public List<Slot> getRecipeSlots(SeedBoxContainer container, SeedBoxRecipe recipe) {
+        List<Slot> slots = new ArrayList<>();
+        for (int i = 0; i < 4; i++){
+            slots.add(container.getSlot(i));
+        }
+        return slots;
+    }
+
+    @Override
+    public List<Slot> getInventorySlots(SeedBoxContainer container, SeedBoxRecipe recipe) {
+        List<Slot> slots = new ArrayList<>();
+        // 36格玩家物品栏
+        int totalSize = container.slots.size();
+        int sideInventoryEnd = totalSize - 36; //初始物品槽位id
+        // 27 添加背包
+        for (int i = sideInventoryEnd; i < totalSize; i++) {
+            slots.add(container.getSlot(i));
+        }
+        // 9 快捷栏
+        for (int i = 10; i < sideInventoryEnd; i++) {
+            slots.add(container.getSlot(i));
+        }
+        return slots;
+    }
+
+}

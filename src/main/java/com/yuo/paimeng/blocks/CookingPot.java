@@ -186,7 +186,7 @@ public class CookingPot extends BaseEntityBlock {
             }
             if (projectile instanceof AbstractArrow arrow){ //火矢
                 if (arrow.getOwner() instanceof Player player) {
-                    int flame = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, player.getMainHandItem());
+                    int flame = player.getMainHandItem().getEnchantmentLevel(Enchantments.FLAMING_ARROWS);
                     if (flame > 0) state.setValue(FIRE, Boolean.TRUE);
                 }
             }
@@ -227,13 +227,10 @@ public class CookingPot extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Direction direction = state.getValue(FACING);
-        VoxelShape shape = Shapes.empty();
-        switch (direction){
-            case WEST:
-            case EAST:
-                shape = makeShapeWE();break;
-            default: shape = makeShapeNS();
-        }
+        VoxelShape shape = switch (direction) {
+            case WEST, EAST -> makeShapeWE();
+            default -> makeShapeNS();
+        };
         return shape;
     }
 

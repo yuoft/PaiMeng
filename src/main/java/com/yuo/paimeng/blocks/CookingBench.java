@@ -59,7 +59,7 @@ public class CookingBench extends BaseEntityBlock {
     }
 
     public static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
-        return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
+        return  (state) -> state.hasProperty(BlockStateProperties.LIT) && state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
     }
 
     @Override
@@ -175,20 +175,12 @@ public class CookingBench extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Direction direction = state.getValue(FACING);
-        VoxelShape shape = Shapes.empty();
-        switch (direction){
-            case DOWN:
-            case UP:
-            case NORTH:
-                shape = makeShapeNorth();break;
-            case SOUTH:
-                shape = makeShapeSouth();break;
-            case WEST:
-                shape = makeShapeWest();break;
-            case EAST:
-                shape = makeShapeEast();break;
-        }
-        return shape;
+        return switch (direction) {
+            case DOWN, UP, NORTH -> makeShapeNorth();
+            case SOUTH -> makeShapeSouth();
+            case WEST -> makeShapeWest();
+            case EAST -> makeShapeEast();
+        };
     }
 
     //灶台碰撞箱

@@ -347,28 +347,14 @@ public class RelicsHelper {
      */
     private static RandomAttrValue setRandomMainAttr(RelicsAttrType[] attrTypes, int star){
         RelicsAttrType attrType = attrTypes[random.nextInt(attrTypes.length)];
-        float baseValue;
-        switch (attrType.getId()){
-            case 2: //攻击和生命值%
-            case 6:
-                baseValue = mainHealthAttackRateBase[star - 1];
-                break;
-            case 4: //防御和物理伤害%
-            case 10:
-                baseValue = mainDefensePhysicsRateBase[star - 1];
-                break;
-            case 7:
-                baseValue = mainCriticalRateBase[star - 1];
-                break;
-            case 8:
-                baseValue = mainCriticalDamageBase[star - 1];
-                break;
-            case 9:
-                baseValue = mainHealRateBase[star - 1];
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + attrType.getId());
-        }
+        float baseValue = switch (attrType.getId()) {
+            case 2, 6 -> mainHealthAttackRateBase[star - 1]; //攻击和生命值%
+            case 4, 10 -> mainDefensePhysicsRateBase[star - 1]; //防御和物理伤害%
+            case 7 -> mainCriticalRateBase[star - 1];
+            case 8 -> mainCriticalDamageBase[star - 1];
+            case 9 -> mainHealRateBase[star - 1];
+            default -> throw new IllegalStateException("Unexpected value: " + attrType.getId());
+        };
         return new RandomAttrValue(baseValue, attrType);
     }
 
@@ -504,148 +490,76 @@ public class RelicsHelper {
         float[] values;
         switch (attrType){
             case HEALTH:
-                switch (star){
-                    case 2:
-                        values = healthTwo;
-                        break;
-                    case 3:
-                        values = healthThree;
-                        break;
-                    case 4:
-                        values = healthFour;
-                        break;
-                    case 5:
-                        values = healthFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> healthTwo;
+                    case 3 -> healthThree;
+                    case 4 -> healthFour;
+                    case 5 -> healthFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case HEALTH_RATE:
-                switch (star){
-                    case 2:
-                        values = healthRateTwo;
-                        break;
-                    case 3:
-                        values = healthRateThree;
-                        break;
-                    case 4:
-                        values = healthRateFour;
-                        break;
-                    case 5:
-                        values = healthRateFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> healthRateTwo;
+                    case 3 -> healthRateThree;
+                    case 4 -> healthRateFour;
+                    case 5 -> healthRateFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case DEFENSE:
-                switch (star){
-                    case 2:
-                        values = defenseTwo;
-                        break;
-                    case 3:
-                        values = defenseThree;
-                        break;
-                    case 4:
-                        values = defenseFour;
-                        break;
-                    case 5:
-                        values = defenseFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> defenseTwo;
+                    case 3 -> defenseThree;
+                    case 4 -> defenseFour;
+                    case 5 -> defenseFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case DEFENSE_RATE:
-                switch (star){
-                    case 2:
-                        values = defenseRateTwo;
-                        break;
-                    case 3:
-                        values = defenseRateThree;
-                        break;
-                    case 4:
-                        values = defenseRateFour;
-                        break;
-                    case 5:
-                        values = defenseRateFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> defenseRateTwo;
+                    case 3 -> defenseRateThree;
+                    case 4 -> defenseRateFour;
+                    case 5 -> defenseRateFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case ATTACK_DAMAGE:
-                switch (star){
-                    case 2:
-                        values = attackDamageTwo;
-                        break;
-                    case 3:
-                        values = attackDamageThree;
-                        break;
-                    case 4:
-                        values = attackDamageFour;
-                        break;
-                    case 5:
-                        values = attackDamageFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> attackDamageTwo;
+                    case 3 -> attackDamageThree;
+                    case 4 -> attackDamageFour;
+                    case 5 -> attackDamageFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case ATTACK_DAMAGE_RATE:
-                switch (star){
-                    case 2:
-                        values = attackDamageRateTwo;
-                        break;
-                    case 3:
-                        values = attackDamageRateThree;
-                        break;
-                    case 4:
-                        values = attackDamageRateFour;
-                        break;
-                    case 5:
-                        values = attackDamageRateFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> attackDamageRateTwo;
+                    case 3 -> attackDamageRateThree;
+                    case 4 -> attackDamageRateFour;
+                    case 5 -> attackDamageRateFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case CRITICAL_RATE:
-                switch (star){
-                    case 2:
-                        values = criticalRateTwo;
-                        break;
-                    case 3:
-                        values = criticalRateThree;
-                        break;
-                    case 4:
-                        values = criticalRateFour;
-                        break;
-                    case 5:
-                        values = criticalRateFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> criticalRateTwo;
+                    case 3 -> criticalRateThree;
+                    case 4 -> criticalRateFour;
+                    case 5 -> criticalRateFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             case CRITICAL_DAMAGE:
-                switch (star){
-                    case 2:
-                        values = criticalDamageTwo;
-                        break;
-                    case 3:
-                        values = criticalDamageThree;
-                        break;
-                    case 4:
-                        values = criticalDamageFour;
-                        break;
-                    case 5:
-                        values = criticalDamageFive;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + star);
-                }
+                values = switch (star) {
+                    case 2 -> criticalDamageTwo;
+                    case 3 -> criticalDamageThree;
+                    case 4 -> criticalDamageFour;
+                    case 5 -> criticalDamageFive;
+                    default -> throw new IllegalStateException("Unexpected value: " + star);
+                };
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + attrType);
@@ -691,7 +605,7 @@ public class RelicsHelper {
                 }
             }
         }
-        if (vice.size() > 0){ //将副列表中未匹配的属性添加到主列表中
+        if (!vice.isEmpty()){ //将副列表中未匹配的属性添加到主列表中
             main.addAll(vice);
         }
     }
@@ -825,8 +739,7 @@ public class RelicsHelper {
                 int relicsExp = getRelicsExp(stack) + getCountExpForLevel(star, level); //圣遗物已有经验值 转化80%
                 int starExp = relicsExpBase[star - 1]; //星级提供的基础经验值
                 exp += (starExp + (int) Math.ceil(relicsExp * 0.8));
-            }else if (stack.getItem() instanceof RelicsExp){
-                RelicsExp relicsExp = (RelicsExp) stack.getItem();
+            }else if (stack.getItem() instanceof RelicsExp relicsExp){
                 exp += relicsExp.getExp() * stack.getCount();
             }
         }
@@ -841,14 +754,14 @@ public class RelicsHelper {
      */
     public static int getUpExpForLevel(int star, int level){
         if (level == star * 4) return 0;
-        switch (star){
-            case 1: return relicsExpOne[level + 1];
-            case 2: return relicsExpTwo[level + 1];
-            case 3: return relicsExpThree[level + 1];
-            case 4: return relicsExpFour[level + 1]; //所需经验
-            case 5: return relicsExpFive[level + 1];
-            default: return 0;
-        }
+        return switch (star) {
+            case 1 -> relicsExpOne[level + 1];
+            case 2 -> relicsExpTwo[level + 1];
+            case 3 -> relicsExpThree[level + 1];
+            case 4 -> relicsExpFour[level + 1]; //所需经验
+            case 5 -> relicsExpFive[level + 1];
+            default -> 0;
+        };
     }
 
     /**
@@ -858,14 +771,14 @@ public class RelicsHelper {
      * @return 经验值
      */
     public static int getCountExpForLevel(int star, int level){
-        switch (star){
-            case 1: return relicsExpCountOne[level];
-            case 2: return relicsExpCountTwo[level];
-            case 3: return relicsExpCountThree[level];
-            case 4: return relicsExpCountFour[level]; //总经验
-            case 5: return relicsExpCountFive[level];
-            default: return 0;
-        }
+        return switch (star) {
+            case 1 -> relicsExpCountOne[level];
+            case 2 -> relicsExpCountTwo[level];
+            case 3 -> relicsExpCountThree[level];
+            case 4 -> relicsExpCountFour[level]; //总经验
+            case 5 -> relicsExpCountFive[level];
+            default -> 0;
+        };
     }
 
     /**
@@ -904,39 +817,37 @@ public class RelicsHelper {
         RelicsAttrType attrType = attrValue.getAttrType();
         float mainAttrValue;
         float mainAttrValueBase = 0;
-        float mainAttrValueMax = 0;
-        switch (attrType){
-            case HEALTH:
+        float mainAttrValueMax = switch (attrType) {
+            case HEALTH -> {
                 mainAttrValueBase = mainHealthBase[star];
-                mainAttrValueMax = mainHealthMAx[star];
-                break;
-            case ATTACK_DAMAGE:
+                yield mainHealthMAx[star];
+            }
+            case ATTACK_DAMAGE -> {
                 mainAttrValueBase = mainAttackDamageBase[star];
-                mainAttrValueMax = mainAttackDamageMAx[star];
-                break;
-            case HEALTH_RATE:
-            case ATTACK_DAMAGE_RATE:
+                yield mainAttackDamageMAx[star];
+            }
+            case HEALTH_RATE, ATTACK_DAMAGE_RATE -> {
                 mainAttrValueBase = mainHealthAttackRateBase[star];
-                mainAttrValueMax = mainHealthAttackRateMAx[star];
-                break;
-            case DEFENSE_RATE:
-            case ATTACK_PHYSICS:
+                yield mainHealthAttackRateMAx[star];
+            }
+            case DEFENSE_RATE, ATTACK_PHYSICS -> {
                 mainAttrValueBase = mainDefensePhysicsRateBase[star];
-                mainAttrValueMax = mainDefensePhysicsRateMAx[star];
-                break;
-            case CRITICAL_RATE:
+                yield mainDefensePhysicsRateMAx[star];
+            }
+            case CRITICAL_RATE -> {
                 mainAttrValueBase = mainCriticalRateBase[star];
-                mainAttrValueMax = mainCriticalRateMAx[star];
-                break;
-            case CRITICAL_DAMAGE:
+                yield mainCriticalRateMAx[star];
+            }
+            case CRITICAL_DAMAGE -> {
                 mainAttrValueBase = mainCriticalDamageBase[star];
-                mainAttrValueMax = mainCriticalDamageMAx[star];
-                break;
-            case HEAL:
+                yield mainCriticalDamageMAx[star];
+            }
+            case HEAL -> {
                 mainAttrValueBase = mainHealRateBase[star];
-                mainAttrValueMax = mainHealRateMAx[star];
-                break;
-        }
+                yield mainHealRateMAx[star];
+            }
+            default -> 0;
+        };
 
         mainAttrValue = mainAttrValueBase + (mainAttrValueMax - mainAttrValueBase) / ((star + 1) * 4) * level;
         return mainAttrValue;

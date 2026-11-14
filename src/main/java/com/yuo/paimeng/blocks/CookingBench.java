@@ -1,8 +1,5 @@
 package com.yuo.paimeng.blocks;
 
-import com.yuo.paimeng.network.BenchPacket;
-import com.yuo.paimeng.network.NetWorkHandler;
-import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.tiles.BenchTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,21 +10,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -43,7 +34,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 import java.util.function.ToIntFunction;
@@ -65,45 +56,50 @@ public class CookingBench extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         ItemStack heldItem = player.getItemInHand(handIn);
-        if (!worldIn.isClientSide){
-            if (heldItem.isEmpty()){ //空手右键打开gui
-                if (!state.getValue(FIRE)) {
-                    player.sendSystemMessage(Component.translatable("paimeng.message.bench_open"));
-                    return InteractionResult.SUCCESS;
-                }
-                BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-                if (tileEntity instanceof BenchTile benchTile && tileEntity instanceof MenuProvider provider){ //打开gui
-                    benchTile.setPlayer(player);
-                    player.openMenu(provider);
-                    player.awardStat(Stats.INTERACT_WITH_FURNACE);
-                }
-                return InteractionResult.SUCCESS;
+
+        if (worldIn.isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
+
+        // 以下全部是服务端逻辑
+        if (heldItem.isEmpty()){ // 空手右键
+            if (!state.getValue(FIRE)) {
+                player.sendSystemMessage(Component.translatable("paimeng.message.bench_open"));
+                return InteractionResult.CONSUME;
             }
+            BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+            if (tileEntity instanceof BenchTile benchTile) {
+                benchTile.setPlayer(player);
+                NetworkHooks.openScreen((ServerPlayer) player, benchTile, pos);
+                player.awardStat(Stats.INTERACT_WITH_FURNACE);
+            }
+            return InteractionResult.SUCCESS;
+        }else {
             int burnTime = ForgeHooks.getBurnTime(heldItem, null);
-            if (burnTime > 0 && !(heldItem.getItem() instanceof BucketItem)){ //手持燃料
+            if (burnTime > 0 && !(heldItem.getItem() instanceof BucketItem)){ // 手持燃料
                 BlockEntity tileEntity = worldIn.getBlockEntity(pos);
                 if (!(tileEntity instanceof BenchTile benchTile)) return InteractionResult.FAIL;
+
                 int i = (int) (Math.ceil(burnTime / 1600d * 60d)); //增加时间
                 i = Math.max(i * 20, 1);
                 int fuleCount = getFuleCount(benchTile, i);
+
                 if (fuleCount > heldItem.getCount()){ //燃料不足
                     benchTile.setBurnTime(heldItem.getCount() * i);
-                    benchTile.setFuelItem(heldItem.getItem());
-                    NetWorkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                            new BenchPacket(pos, heldItem));
+                    benchTile.setFuelItem(heldItem);
                     if (!player.isCreative()) heldItem.setCount(0);
                 }else {
                     benchTile.setBurnTime(fuleCount * i);
-                    benchTile.setFuelItem(heldItem.getItem());
-                    NetWorkHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                            new BenchPacket(pos, heldItem));
+                    benchTile.setFuelItem(heldItem);
                     if (!player.isCreative()) heldItem.shrink(fuleCount);
                 }
+
+                // 播放一点声音反馈
+                worldIn.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, worldIn.getRandom().nextFloat() * 0.4F + 0.8F);
                 return InteractionResult.SUCCESS;
             }
         }
-        else PaiMeng.PROXY.setRefrencedTE(worldIn.getBlockEntity(pos)); //保存当前tile坐标
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     //消耗多个燃料时 所需具体数量
@@ -123,7 +119,7 @@ public class CookingBench extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, blockEntity) -> {
-            if (blockEntity instanceof BenchTile benchTile) benchTile.tick(lvl, pos, st);
+            if (blockEntity instanceof BenchTile benchTile) benchTile.tickInternal(lvl, pos, st);
         };
     }
 
@@ -133,7 +129,7 @@ public class CookingBench extends BaseEntityBlock {
         if (!state.is(newState.getBlock())) {
             BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BenchTile benchTile) {
-                Containers.dropContents(worldIn, pos, benchTile);
+                BenchTile.dropContents(worldIn, pos, benchTile);
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 

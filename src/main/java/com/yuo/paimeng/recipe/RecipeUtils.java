@@ -18,7 +18,6 @@ public class RecipeUtils {
         NonNullList<ItemStack> stacks = NonNullList.create();
         stacks.addAll(inputs);
 
-        //1.20.1: getSizeInventory -> getContainerSize, getStackInSlot -> getItem
         //槽位数取两者较小值，防止容器实际槽位少于配方需要的槽位时越界
         int slots = Math.min(num, inv == null ? 0 : inv.getContainerSize());
         for(int j = 0; j < slots; ++j) {

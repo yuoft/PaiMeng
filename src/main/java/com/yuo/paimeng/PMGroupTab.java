@@ -1,4 +1,4 @@
-package com.yuo.paimeng.tab;
+package com.yuo.paimeng;
 
 import com.yuo.paimeng.blocks.CommonFarmland;
 import com.yuo.paimeng.blocks.tree.AppleSapling;
@@ -18,7 +18,6 @@ import com.yuo.paimeng.items.Weapon.PMBow;
 import com.yuo.paimeng.items.Weapon.PMBook;
 import com.yuo.paimeng.items.Weapon.Spear;
 import com.yuo.paimeng.items.Weapon.TwoSword;
-import com.yuo.paimeng.PaiMeng;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -35,14 +34,10 @@ import java.util.function.Supplier;
 
 /**
  * 创造模式物品栏。
- * 1.20.1 中物品不再自带物品栏（Item.Properties#group 已移除），
- * 物品 -> 物品栏 的归属由 CreativeModeTab#displayItems 决定，这里用类型分类实现，
- * 分类规则与 1.16.5 各物品的 .group(...) 保持一致。
  */
-public class PMGroup {
+public class PMGroupTab {
 
-    public static final DeferredRegister<CreativeModeTab> TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PaiMeng.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PaiMeng.MOD_ID);
 
     // 分类编号
     private static final int FOOD = 0;      // 食物（成品）
@@ -71,8 +66,7 @@ public class PMGroup {
     public static final RegistryObject<CreativeModeTab> PaiMengOther = register("paimeng_other", "itemGroup.PaiMengOther",
             () -> PMItems.cookingBench, OTHER);
 
-    private static RegistryObject<CreativeModeTab> register(String name, String titleKey,
-                                                             Supplier<RegistryObject<? extends Item>> icon, int category) {
+    private static RegistryObject<CreativeModeTab> register(String name, String titleKey, Supplier<RegistryObject<? extends Item>> icon, int category) {
         return TABS.register(name, () -> CreativeModeTab.builder()
                 .title(Component.translatable(titleKey))
                 .icon(() -> new ItemStack(icon.get().get()))

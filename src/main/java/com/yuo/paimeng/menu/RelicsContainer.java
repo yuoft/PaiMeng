@@ -16,7 +16,7 @@ public class RelicsContainer extends AbstractContainerMenu {
     private final Level world;
 
     public RelicsContainer(int id, Inventory playerInventory) {
-        super(ContainerTypeRegistry.relicsContainer.get(), id);
+        super(PMMenuTypes.relicsContainer.get(), id);
         Player player = playerInventory.player;
         this.itemHandler = player.getCapability(ModCapability.RELICS_CAPABILITY).orElseThrow(NullPointerException::new);
         this.world = player.level();

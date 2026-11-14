@@ -26,14 +26,12 @@ public class BenchRecipe extends CookingRecipe {
         public BenchRecipe fromJson(ResourceLocation recipeId, JsonObject json) { //从json中获取信息
             NonNullList<ItemStack> inputs = NonNullList.create();
             for (JsonElement inputJson : GsonHelper.getAsJsonArray(json, "inputs")) {
-                //1.20.1: ShapedRecipe.deserializeItem -> ShapedRecipe.itemStackFromJson（同样支持 count，缺省为 1）
                 ItemStack stack = ShapedRecipe.itemStackFromJson(GsonHelper.convertToJsonObject(inputJson, "input"));
                 if (!stack.isEmpty()) inputs.add(stack);
             }
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             if (inputs.isEmpty() || inputs.size() > 5){
-                //1.20.1 RecipeManager 只捕获 JsonParseException / IllegalArgumentException，这里沿用可被记录的异常类型
-                throw new JsonSyntaxException("Recipe is not Error");
+                throw new JsonSyntaxException("Recipe is has Error");
             }
             return new BenchRecipe(recipeId, inputs, result);
         }
@@ -54,7 +52,7 @@ public class BenchRecipe extends CookingRecipe {
         public void toNetwork(FriendlyByteBuf buffer, BenchRecipe recipe) {
             buffer.writeVarInt(recipe.inputs.size());
             for(ItemStack stack : recipe.inputs) {
-                buffer.writeItem(stack); //1.20.1: writeItemStack -> writeItem
+                buffer.writeItem(stack);
             }
             buffer.writeItem(recipe.result);
         }
@@ -62,7 +60,7 @@ public class BenchRecipe extends CookingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegistry.BENCH.get();
+        return PMRecipeSerializers.BENCH.get();
     }
 
     @Override

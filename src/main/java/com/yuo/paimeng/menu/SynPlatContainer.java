@@ -5,7 +5,7 @@ import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.recipe.ModRecipeType;
 import com.yuo.paimeng.recipe.SynPlatRecipe;
 import com.yuo.paimeng.tiles.SynPlatTile;
-import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -23,13 +23,11 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-//1.20.1: RecipeBookContainer<CraftingInventory> -> RecipeBookMenu<CraftingContainer>
 public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
     private final SynPlatInventory inputInventory;
     private final SynPlatInventoryResult outputInventory;
@@ -37,16 +35,15 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
     private final Level world;
     private final Player player;
 
-    public SynPlatContainer(int id, Inventory playerInventory){
-        //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
-        this(id, playerInventory , new SynPlatTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState()));
+    public SynPlatContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
+        this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public SynPlatContainer(int id, Inventory playerInventory, SynPlatTile tile) {
-        super(ContainerTypeRegistry.synPlatContainer.get(), id);
-        this.synPlatTile = tile;
-        this.inputInventory = new SynPlatInventory(this, tile);
-        this.outputInventory = new SynPlatInventoryResult(tile);
+    public SynPlatContainer(int id, Inventory playerInventory, Container tile) {
+        super(PMMenuTypes.synPlatContainer.get(), id);
+        this.synPlatTile = (SynPlatTile) tile;
+        this.inputInventory = new SynPlatInventory(this, synPlatTile);
+        this.outputInventory = new SynPlatInventoryResult(synPlatTile);
         this.player = playerInventory.player;
         this.world = playerInventory.player.level();
         //物品槽
@@ -86,9 +83,8 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
             Optional<SynPlatRecipe> optional = this.world.getRecipeManager().getRecipeFor(ModRecipeType.SYN_PLAT, matrix, this.world);
             if (optional.isPresent()) {
                 SynPlatRecipe recipe = optional.get();
-                //1.20.1: canUseRecipe -> RecipeHolder#setRecipeUsed(Level, ServerPlayer, Recipe)
                 if (this.outputInventory.setRecipeUsed(this.world, serverPlayer, recipe)) {
-                    itemstack = recipe.getCraftingResult(matrix); //获取配方输出
+                    itemstack = recipe.getResult(); //获取配方输出
                 }
             }
         }

@@ -38,15 +38,13 @@ public class SynPlatRecipe implements Recipe<Container> {
         public SynPlatRecipe fromJson(ResourceLocation recipeId, JsonObject json) { //从json中获取信息
             NonNullList<ItemStack> inputs = NonNullList.create();
             for (JsonElement inputJson : GsonHelper.getAsJsonArray(json, "inputs")) {
-                //1.20.1: ShapedRecipe.deserializeItem -> ShapedRecipe.itemStackFromJson（同样支持 count，缺省为 1）
                 ItemStack stack = ShapedRecipe.itemStackFromJson(GsonHelper.convertToJsonObject(inputJson, "input"));
                 if (!stack.isEmpty()) inputs.add(stack);
             }
             ItemStack catalyzer = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "catalyzer"));
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             if (inputs.isEmpty() || inputs.size() > 4){
-                //1.20.1 RecipeManager 只捕获 JsonParseException / IllegalArgumentException，这里沿用可被记录的异常类型
-                throw new JsonSyntaxException("Recipe is not Error");
+                throw new JsonSyntaxException("Recipe is has Error");
             }
             return new SynPlatRecipe(recipeId, inputs, catalyzer, result);
         }
@@ -57,7 +55,7 @@ public class SynPlatRecipe implements Recipe<Container> {
             int i = buffer.readVarInt();
             NonNullList<ItemStack> list = NonNullList.create();
             for(int j = 0; j < i; ++j) {
-                list.add(j, buffer.readItem()); //1.20.1: readItemStack -> readItem
+                list.add(j, buffer.readItem());
             }
             ItemStack catalyzer = buffer.readItem();
             ItemStack result = buffer.readItem();
@@ -68,7 +66,7 @@ public class SynPlatRecipe implements Recipe<Container> {
         public void toNetwork(FriendlyByteBuf buffer, SynPlatRecipe recipe) {
             buffer.writeVarInt(recipe.inputs.size());
             for(ItemStack stack : recipe.inputs) {
-                buffer.writeItem(stack); //1.20.1: writeItemStack -> writeItem
+                buffer.writeItem(stack);
             }
             buffer.writeItem(recipe.catalyzer);
             buffer.writeItem(recipe.result);
@@ -96,12 +94,9 @@ public class SynPlatRecipe implements Recipe<Container> {
         NonNullList<Ingredient> list = NonNullList.create();
         for (int i = 0; i < 3; i++){
             if (inputs.size() >= i + 1){
-                list.add(Ingredient.of(inputs.get(i))); //1.20.1: Ingredient.fromStacks -> Ingredient.of
+                list.add(Ingredient.of(inputs.get(i)));
             }else list.add(Ingredient.of(ItemStack.EMPTY));
         }
-//        for (ItemStack input : inputs) {
-//            list.add(Ingredient.of(input));
-//        }
         list.add(Ingredient.of(catalyzer));
         return list;
     }
@@ -130,20 +125,6 @@ public class SynPlatRecipe implements Recipe<Container> {
     }
 
     /**
-     * 1.20.1 便捷别名（与 assemble 等价），供 Container / JEI 使用
-     */
-    public ItemStack craft(Container inv, RegistryAccess registryAccess) {
-        return this.assemble(inv, registryAccess);
-    }
-
-    /**
-     * 1.16.5 旧名，保留给 Container 调用
-     */
-    public ItemStack getCraftingResult(Container inv) {
-        return this.result.copy();
-    }
-
-    /**
      * 配方产物（副本，避免外部修改共享栈）
      */
     public ItemStack getResult() {
@@ -153,13 +134,6 @@ public class SynPlatRecipe implements Recipe<Container> {
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.result.copy();
-    }
-
-    /**
-     * 1.16.5 旧名，保留兼容
-     */
-    public ItemStack getRecipeOutput() {
-        return this.result;
     }
 
     @Override
@@ -174,7 +148,7 @@ public class SynPlatRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegistry.SYN_PLAT.get();
+        return PMRecipeSerializers.SYN_PLAT.get();
     }
 
     @Override
@@ -182,7 +156,6 @@ public class SynPlatRecipe implements Recipe<Container> {
         return ModRecipeType.SYN_PLAT;
     }
 
-    //1.16.5 的 isDynamic 在 1.20.1 叫 isSpecial
     @Override
     public boolean isSpecial() {
         return true;

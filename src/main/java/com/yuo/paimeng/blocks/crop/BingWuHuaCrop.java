@@ -71,7 +71,7 @@ public class BingWuHuaCrop extends XCropBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof AbsBingWuHuaTile tile) tile.tick(lvl, pos, st);
+            if (be instanceof AbsBingWuHuaTile tile) AbsBingWuHuaTile.tick(lvl, pos, st, tile);
         };
     }
 }

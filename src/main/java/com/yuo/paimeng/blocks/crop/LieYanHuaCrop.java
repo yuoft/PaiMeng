@@ -67,7 +67,7 @@ public class LieYanHuaCrop extends XCropBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof AbsLieYanHuaTile tile) tile.tick(lvl, pos, st);
+            if (be instanceof AbsLieYanHuaTile tile) AbsLieYanHuaTile.tick(lvl, pos, st, tile);
         };
     }
 }

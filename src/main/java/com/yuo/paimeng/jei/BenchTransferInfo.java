@@ -1,7 +1,7 @@
 package com.yuo.paimeng.jei;
 
 import com.yuo.paimeng.menu.BenchContainer;
-import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.menu.PMMenuTypes;
 import com.yuo.paimeng.recipe.BenchRecipe;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
@@ -21,7 +21,7 @@ public class BenchTransferInfo implements IRecipeTransferInfo<BenchContainer, Be
 
     @Override
     public Optional<MenuType<BenchContainer>> getMenuType() {
-        return Optional.of(ContainerTypeRegistry.benchContainer.get());
+        return Optional.of(PMMenuTypes.benchContainer.get());
     }
 
     @Override

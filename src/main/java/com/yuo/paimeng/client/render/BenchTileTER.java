@@ -22,10 +22,10 @@ public class BenchTileTER implements BlockEntityRenderer<BenchTile> {
     }
 
     @Override
-    public void render(BenchTile tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        if (!tileEntityIn.getBlockState().getValue(CookingBench.FIRE)) return; //未燃烧则不渲染
+    public void render(BenchTile benchTile, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int lightIn, int overlayIn) {
+        if (!benchTile.getBlockState().getValue(CookingBench.FIRE)) return; //未燃烧则不渲染
         matrixStackIn.pushPose();
-        Direction direction = tileEntityIn.getBlockState().getValue(CookingBench.FACING); //移动
+        Direction direction = benchTile.getBlockState().getValue(CookingBench.FACING); //移动
         switch (direction) {
             case EAST:
                 matrixStackIn.translate(0.75, 0.32, 0.5);
@@ -42,10 +42,10 @@ public class BenchTileTER implements BlockEntityRenderer<BenchTile> {
         matrixStackIn.scale(0.25f, 0.25f, 0.25f); //缩放
         matrixStackIn.mulPose(Axis.XP.rotationDegrees(90.0F)); //旋转
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack stack = new ItemStack(tileEntityIn.items.get(6).getItem()); //渲染物品
+        ItemStack stack = benchTile.getItem(6); //渲染物品
         //原版渲染方式
-        itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, combinedOverlayIn,
-                matrixStackIn, bufferIn, tileEntityIn.getLevel(), (int) tileEntityIn.getBlockPos().asLong());
+        itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, lightIn, overlayIn, matrixStackIn, bufferIn,
+                benchTile.getLevel(), (int) benchTile.getBlockPos().asLong());
         matrixStackIn.popPose();
     }
 }

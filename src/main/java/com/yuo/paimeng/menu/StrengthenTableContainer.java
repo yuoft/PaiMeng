@@ -3,28 +3,30 @@ package com.yuo.paimeng.menu;
 import com.yuo.paimeng.items.Relics;
 import com.yuo.paimeng.tiles.StrengthenTableTile;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 public class StrengthenTableContainer extends AbstractContainerMenu {
     private final StrengthenTableTile sTTile; //存储食材
     private final StrengthenIntArray data;
     private final Level world;
+    private final BlockPos pos; // 🔴 新增：保存方块坐标
 
-    public StrengthenTableContainer(int id, Inventory playerInventory){
-        //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
-        this(id, playerInventory , new StrengthenTableTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState()));
+    public StrengthenTableContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
+        this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public StrengthenTableContainer(int id, Inventory playerInventory, StrengthenTableTile tile) {
-        super(ContainerTypeRegistry.strengthenTableContainer.get(), id);
-        this.sTTile = tile;
-        this.data = tile.data;
+    public StrengthenTableContainer(int id, Inventory playerInventory, Container tile) {
+        super(PMMenuTypes.strengthenTableContainer.get(), id);
+        this.sTTile = (StrengthenTableTile) tile;
+        this.pos = sTTile.getBlockPos();
+        this.data = sTTile.data;
         this.world = playerInventory.player.level();
         this.addDataSlots(data); //1.20.1: trackIntArray -> addDataSlots
         //经验槽
@@ -45,6 +47,10 @@ public class StrengthenTableContainer extends AbstractContainerMenu {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
+    }
+
+    public BlockPos getBlockPos() {
+        return this.pos;
     }
 
     /**

@@ -7,6 +7,7 @@ import com.yuo.paimeng.tiles.PotTile;
 import com.yuo.paimeng.tiles.TileUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +16,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +25,20 @@ public class PotContainer extends AbstractContainerMenu {
     private final CookingIntArray data;
     private final FoodRecipesIntArray fooData;
     private final Level world;
+    private final BlockPos pos;
 
-    public PotContainer(int id, Inventory playerInventory){
+    public PotContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
         //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
-        this(id, playerInventory , new PotTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState()));
+        this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public PotContainer(int id, Inventory playerInventory, PotTile tile) {
-        super(ContainerTypeRegistry.potContainer.get(), id);
-        this.potTile = tile;
-        this.fooData = tile.foodData;
+    public PotContainer(int id, Inventory playerInventory, Container tile) {
+        super(PMMenuTypes.potContainer.get(), id);
+        this.potTile = (PotTile) tile;
+        this.pos = potTile.getBlockPos();
+        this.fooData = potTile.foodData;
         this.world = playerInventory.player.level();
-        this.data = tile.data;
+        this.data = potTile.data;
         addDataSlots(data); //同步数据
         addDataSlots(fooData);
         //食材槽
@@ -58,6 +60,14 @@ public class PotContainer extends AbstractContainerMenu {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
+    }
+
+    public BlockPos getPos(){
+        return pos;
+    }
+
+    public PotTile getPotTile() {
+        return this.potTile;
     }
 
     public int getBurnTime(){

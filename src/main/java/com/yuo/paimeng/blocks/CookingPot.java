@@ -1,11 +1,11 @@
 package com.yuo.paimeng.blocks;
 
-import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.tiles.PotTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -15,7 +15,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,23 +22,14 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.FlintAndSteelItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -56,6 +46,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -100,9 +91,9 @@ public class CookingPot extends BaseEntityBlock {
                     return InteractionResult.SUCCESS;
                 }
                 BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-                if (tileEntity instanceof PotTile potTile && tileEntity instanceof MenuProvider provider){ //打开gui
+                if (tileEntity instanceof PotTile potTile) {  //打开gui
                     potTile.setPlayer(player);
-                    player.openMenu(provider);
+                    NetworkHooks.openScreen((ServerPlayer) player, potTile, pos);
                     player.awardStat(Stats.INTERACT_WITH_FURNACE);
                 }
                 return InteractionResult.SUCCESS;
@@ -123,7 +114,6 @@ public class CookingPot extends BaseEntityBlock {
                 return InteractionResult.SUCCESS;
             }
         }
-        else PaiMeng.PROXY.setRefrencedTE(worldIn.getBlockEntity(pos)); //保存当前tile坐标
         return InteractionResult.SUCCESS;
     }
 
@@ -220,7 +210,7 @@ public class CookingPot extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, blockEntity) -> {
-            if (blockEntity instanceof PotTile potTile) potTile.tick(lvl, pos, st);
+            if (blockEntity instanceof PotTile potTile) potTile.tickInternal(lvl, pos, st);
         };
     }
 
@@ -236,9 +226,8 @@ public class CookingPot extends BaseEntityBlock {
 
     /**
      * 计算消耗木材数量 0：不能使用；燃烧时间小于300tick则数量要求上升
-     * 1.20.1 没有 Material，用方块标签判断是否为木质方块
-     * @param stack
-     * @return
+     * @param stack 物品
+     * @return 消耗
      */
     private int damageWoodCount(ItemStack stack){
         Item item = stack.getItem();

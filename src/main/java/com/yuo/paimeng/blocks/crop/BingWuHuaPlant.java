@@ -46,13 +46,12 @@ public class BingWuHuaPlant extends BushBlock implements EntityBlock {
         }
     }
 
-    //可存在什么方块上面？（1.16.5 的 isValidGround）
+    //可存在什么方块上面？
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
         return state.is(BlockTags.ICE) || state.is(Blocks.SNOW_BLOCK);
     }
 
-    //1.16.5 的 getItem -> 1.20.1 的 getCloneItemStack
     @Override
     public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
         return new ItemStack(PMItems.bingwuhua_huaduo.get());
@@ -68,7 +67,7 @@ public class BingWuHuaPlant extends BushBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof AbsBingWuHuaTile tile) tile.tick(lvl, pos, st);
+            if (be instanceof AbsBingWuHuaTile tile) AbsBingWuHuaTile.tick(lvl, pos, st, tile);
         };
     }
 }

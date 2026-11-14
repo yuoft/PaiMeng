@@ -41,7 +41,7 @@ public class LieYanHuaPlant extends BushBlock implements EntityBlock {
         }
     }
 
-    //可存在什么方块上面？ 可以生成在什么方块上面（1.16.5 的 isValidGround）
+    //可存在什么方块上面？
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
         return state.is(Blocks.CRIMSON_NYLIUM) || state.is(Blocks.STONE);
@@ -63,7 +63,7 @@ public class LieYanHuaPlant extends BushBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof AbsLieYanHuaTile tile) tile.tick(lvl, pos, st);
+            if (be instanceof AbsLieYanHuaTile tile) AbsLieYanHuaTile.tick(lvl, pos, st, tile);
         };
     }
 }

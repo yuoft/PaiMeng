@@ -13,8 +13,6 @@ import net.minecraft.world.level.Level;
 
 /**
  * 锅 / 工作台 配方基类
- * 1.20.1: IRecipe&lt;IInventory&gt; -> Recipe&lt;Container&gt;，
- * getCraftingResult -> assemble，getRecipeOutput -> getResultItem，canFit -> canCraftInDimensions，isDynamic -> isSpecial
  */
 public abstract class CookingRecipe implements Recipe<Container> {
     public final NonNullList<ItemStack> inputs; //输入
@@ -46,7 +44,7 @@ public abstract class CookingRecipe implements Recipe<Container> {
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         for (ItemStack input : inputs) {
-            list.add(Ingredient.of(input)); //1.20.1: Ingredient.fromStacks -> Ingredient.of
+            list.add(Ingredient.of(input));
         }
 
         return list;
@@ -62,27 +60,6 @@ public abstract class CookingRecipe implements Recipe<Container> {
     @Override
     public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         return this.result.copy();
-    }
-
-    /**
-     * 1.20.1 便捷别名（与 assemble 等价），供 Container / JEI 使用
-     */
-    public ItemStack craft(Container inv, RegistryAccess registryAccess) {
-        return this.assemble(inv, registryAccess);
-    }
-
-    /**
-     * 1.16.5 旧名，保留给 Container 调用
-     */
-    public ItemStack getCraftingResult(Container inv) {
-        return this.result.copy();
-    }
-
-    /**
-     * 1.16.5 旧名，保留兼容
-     */
-    public ItemStack getRecipeOutput() {
-        return this.result;
     }
 
     /**
@@ -107,7 +84,9 @@ public abstract class CookingRecipe implements Recipe<Container> {
         return this.id;
     }
 
-    //1.16.5 的 isDynamic 在 1.20.1 叫 isSpecial
+    /**
+     * 不在配方书显示，不遵循标准的“JSON定义输入输出”模式时
+     */
     @Override
     public boolean isSpecial() {
         return true;

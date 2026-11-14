@@ -7,13 +7,14 @@ import com.yuo.paimeng.tiles.BenchTile;
 import com.yuo.paimeng.tiles.TileUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +24,20 @@ public class BenchContainer extends AbstractContainerMenu {
     private final CookingIntArray data;
     private final FoodRecipesIntArray fooData;
     private final Level world;
+    private final BlockPos pos;
 
-    public BenchContainer(int id, Inventory playerInventory){
+    public BenchContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
         //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
-        this(id, playerInventory , new BenchTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState()));
+        this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
-    public BenchContainer(int id, Inventory playerInventory, BenchTile tile) {
-        super(ContainerTypeRegistry.benchContainer.get(), id);
-        this.benchTile = tile;
-        this.fooData = tile.foodData;
+    public BenchContainer(int id, Inventory playerInventory, Container tile) {
+        super(PMMenuTypes.benchContainer.get(), id);
+        this.benchTile = (BenchTile) tile;
+        this.pos = benchTile.getBlockPos();
+        this.fooData = benchTile.foodData;
         this.world = playerInventory.player.level();
-        this.data = tile.data;
+        this.data = benchTile.data;
         addDataSlots(data); //同步数据
         addDataSlots(fooData);
         //食材槽
@@ -56,6 +59,14 @@ public class BenchContainer extends AbstractContainerMenu {
         for(int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
+    }
+
+    public BlockPos getPos(){
+        return pos;
+    }
+
+    public BenchTile getBenchTile() {
+        return this.benchTile;
     }
 
     //燃烧时间

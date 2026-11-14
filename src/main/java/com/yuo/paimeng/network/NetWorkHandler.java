@@ -32,11 +32,6 @@ public class NetWorkHandler {
                 TransferPacket::new,
                 TransferPacket::handler);
         INSTANCE.registerMessage(nextID(),
-                BenchPacket.class,
-                BenchPacket::toBytes,
-                BenchPacket::new,
-                BenchPacket::handler);
-        INSTANCE.registerMessage(nextID(),
                 RelicsGuiPacket.class,
                 RelicsGuiPacket::toBytes,
                 RelicsGuiPacket::new,

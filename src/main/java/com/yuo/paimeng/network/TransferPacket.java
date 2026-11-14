@@ -13,12 +13,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * jei配方 传递数据包
+ */
 public class TransferPacket {
     public Map<Integer, CookingTransferHandler.MatchingItem> recipeMap;
     public List<Integer> craftingSlots;
     public List<Integer> inventorySlots;
-    private boolean maxTransfer;
-    private boolean requireCompleteSets;
+    private final boolean maxTransfer;
+    private final boolean requireCompleteSets;
 
     public TransferPacket(Map<Integer, CookingTransferHandler.MatchingItem> recipeMap, List<Integer> craftingSlots, List<Integer> inventorySlots, boolean maxTransfer, boolean requireCompleteSets) {
         this.recipeMap = recipeMap;

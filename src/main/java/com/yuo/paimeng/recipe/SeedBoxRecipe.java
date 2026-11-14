@@ -88,20 +88,6 @@ public class SeedBoxRecipe implements Recipe<Container> {
     }
 
     /**
-     * 1.20.1 便捷别名（与 assemble 等价），供 Container / JEI 使用
-     */
-    public ItemStack craft(Container inv, RegistryAccess registryAccess) {
-        return this.assemble(inv, registryAccess);
-    }
-
-    /**
-     * 1.16.5 旧名，保留给 Container 调用
-     */
-    public ItemStack getCraftingResult(Container inv) {
-        return this.result.copy();
-    }
-
-    /**
      * 配方产物（副本，避免外部修改共享栈）
      */
     public ItemStack getResult() {
@@ -111,13 +97,6 @@ public class SeedBoxRecipe implements Recipe<Container> {
     @Override
     public ItemStack getResultItem(RegistryAccess registryAccess) {
         return this.result.copy();
-    }
-
-    /**
-     * 1.16.5 旧名，保留兼容
-     */
-    public ItemStack getRecipeOutput() {
-        return this.result;
     }
 
     @Override
@@ -132,7 +111,7 @@ public class SeedBoxRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeSerializerRegistry.SEED_BOX.get();
+        return PMRecipeSerializers.SEED_BOX.get();
     }
 
     @Override
@@ -140,7 +119,6 @@ public class SeedBoxRecipe implements Recipe<Container> {
         return ModRecipeType.SEED_BOX;
     }
 
-    //1.16.5 的 isDynamic 在 1.20.1 叫 isSpecial
     @Override
     public boolean isSpecial() {
         return true;

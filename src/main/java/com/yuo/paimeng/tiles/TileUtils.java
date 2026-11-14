@@ -2,8 +2,8 @@ package com.yuo.paimeng.tiles;
 
 import com.yuo.paimeng.network.CookingPacket;
 import com.yuo.paimeng.network.NetWorkHandler;
-import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.recipe.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -107,15 +107,15 @@ public class TileUtils {
     /**
      * 发送数据包给服务端
      */
-    public static void  sendPotPacket(int count, int exp, int satr) {
+    public static void sendPotPacket(int count, int exp, int satr, BlockPos pos) {
+        if (pos == null) return;
+
+        // 原逻辑保留
         exp = count > 1 ? 0 : exp;
         if (count == 0) exp = 0;
-        BlockEntity te = PaiMeng.PROXY.getRefrencedTE();
-        if (te instanceof PotTile)
-            NetWorkHandler.INSTANCE.sendToServer(new CookingPacket(te.getBlockPos(), count, exp, satr));
-        if (te instanceof BenchTile){
-            NetWorkHandler.INSTANCE.sendToServer(new CookingPacket(te.getBlockPos(), count, exp, satr));
-        }
+
+        // 直接通过服务端发包，由服务端通过 pos 获取对应的 Tile
+        NetWorkHandler.INSTANCE.sendToServer(new CookingPacket(pos, count, exp, satr));
     }
 
     //配方类别是否匹配（工作台配方同时接受锅配方）

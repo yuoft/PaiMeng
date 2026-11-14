@@ -1,6 +1,6 @@
 package com.yuo.paimeng.jei;
 
-import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.menu.PMMenuTypes;
 import com.yuo.paimeng.menu.SeedBoxContainer;
 import com.yuo.paimeng.recipe.SeedBoxRecipe;
 import mezz.jei.api.recipe.RecipeType;
@@ -21,7 +21,7 @@ public class SeedBoxTransferInfo implements IRecipeTransferInfo<SeedBoxContainer
 
     @Override
     public Optional<MenuType<SeedBoxContainer>> getMenuType() {
-        return Optional.of(ContainerTypeRegistry.seedBoxContainer.get());
+        return Optional.of(PMMenuTypes.seedBoxContainer.get());
     }
 
     @Override

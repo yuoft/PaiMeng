@@ -50,16 +50,16 @@ public class BenchScreen extends AbstractContainerScreen<BenchContainer> {
         if (!menu.canRecipe()) { //叉号
             graphics.blit(RESOURCE, i + 90, j + 35, 190, 0, 22, 15);
         }
-        graphics.blit(RESOURCE, i + 105, j + 9, 176, 15, 51, 5);
+        graphics.blit(RESOURCE, i + 105, j + 8, 176, 15, 51, 5);
         int exp = menu.getExp();
-        graphics.blit(RESOURCE, i + 105, j + 9, 176, 20, 1 + exp, 5);
+        graphics.blit(RESOURCE, i + 105, j + 8, 176, 20, 1 + exp, 5);
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
     protected void renderLabels(GuiGraphics graphics, int x, int y) {
         graphics.drawString(this.font, Integer.toString(this.menu.getTime()), 65, 25, 0x696969, false);
-        graphics.drawString(this.font, Integer.toString(this.menu.getFoodRecipesLevel()), 98, 8, 0x696969, false);
+        graphics.drawString(this.font, Integer.toString(this.menu.getFoodRecipesLevel()), 98, 6, 0x696969, false);
         super.renderLabels(graphics, x, y);
     }
 

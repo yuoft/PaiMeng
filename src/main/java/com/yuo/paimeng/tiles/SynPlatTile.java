@@ -1,41 +1,34 @@
 package com.yuo.paimeng.tiles;
 
+import com.yuo.paimeng.menu.SynPlatContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
 //存储工作台数据
-public class SynPlatTile extends BlockEntity implements Container, Nameable {
+public class SynPlatTile extends BaseContainerBlockEntity {
 
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY); //存储物品
-    private NonNullList<ItemStack> reslut = NonNullList.withSize(1, ItemStack.EMPTY); //存储合成物品
+    private final NonNullList<ItemStack> reslut = NonNullList.withSize(1, ItemStack.EMPTY); //存储合成物品
 
-    //1.20.1 BlockEntityType.Builder.of(SynPlatTile::new, block) 使用的构造
     public SynPlatTile(BlockPos pos, BlockState state) {
         this(TileTypeRegistry.SYN_PLAT_TILE.get(), pos, state);
     }
 
-    //1.20.1 标准构造
     public SynPlatTile(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-    }
-
-    //旧版无参构造（Container / 客户端预览仍在用）
-    public SynPlatTile() {
-        this(BlockPos.ZERO, Blocks.AIR.defaultBlockState());
     }
 
     @Override
@@ -43,10 +36,6 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
         return 5;
     }
 
-    //1.16.5 旧名（其它类仍在调用）
-    public int getSizeInventory() {
-        return this.getContainerSize();
-    }
 
     @Override
     public boolean isEmpty() {
@@ -55,8 +44,7 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
                 return false;
             }
         }
-        if (!this.reslut.get(0).isEmpty()) return false;
-        return true;
+        return this.reslut.get(0).isEmpty();
     }
 
     @Override
@@ -65,31 +53,16 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
         else return this.items.get(index);
     }
 
-    //1.16.5 旧名
-    public ItemStack getStackInSlot(int index) {
-        return this.getItem(index);
-    }
-
     @Override
     public ItemStack removeItem(int index, int count) {
         if (index == 4) return ContainerHelper.removeItem(reslut, 0, count);
         else return ContainerHelper.removeItem(this.items, index, count);
     }
 
-    //1.16.5 旧名
-    public ItemStack decrStackSize(int index, int count) {
-        return this.removeItem(index, count);
-    }
-
     @Override
     public ItemStack removeItemNoUpdate(int index) {
         if (index == 4) return ContainerHelper.takeItem(reslut, 0);
         return ContainerHelper.takeItem(this.items, index);
-    }
-
-    //1.16.5 旧名
-    public ItemStack removeStackFromSlot(int index) {
-        return this.removeItemNoUpdate(index);
     }
 
     //将给定项目设置为容器中的制定槽位
@@ -110,16 +83,6 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
         }
     }
 
-    //1.16.5 旧名
-    public void setInventorySlotContents(int index, ItemStack stack) {
-        this.setItem(index, stack);
-    }
-
-    //1.16.5 旧名
-    public int getInventoryStackLimit() {
-        return this.getMaxStackSize();
-    }
-
     //可由玩家使用吗
     @Override
     public boolean stillValid(Player player) {
@@ -130,20 +93,10 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
         }
     }
 
-    //1.16.5 旧名
-    public boolean isUsableByPlayer(Player player) {
-        return this.stillValid(player);
-    }
-
     @Override
     public void clearContent() {
         this.items.clear();
         this.reslut.clear();
-    }
-
-    //1.16.5 旧名
-    public void clear() {
-        this.clearContent();
     }
 
     @Override
@@ -180,7 +133,12 @@ public class SynPlatTile extends BlockEntity implements Container, Nameable {
     }
 
     @Override
-    public Component getName() {
+    protected Component getDefaultName() {
         return Component.translatable("gui.paimeng.synthetic_platform");
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
+        return new SynPlatContainer(id, inventory, this);
     }
 }

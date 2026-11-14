@@ -14,17 +14,18 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class RelicsGuiPacket {
-    private static boolean flag; //是打开圣遗物gui还是关闭
+    private final boolean flag; // 🔴 移除 static
+
     public RelicsGuiPacket(FriendlyByteBuf buffer) {
-        flag = buffer.readBoolean();
+        this.flag = buffer.readBoolean();
     }
 
     public RelicsGuiPacket(boolean flag) {
-        RelicsGuiPacket.flag = flag;
+        this.flag = flag;
     }
 
     public void toBytes(FriendlyByteBuf buf) {
-        buf.writeBoolean(RelicsGuiPacket.flag);
+        buf.writeBoolean(this.flag);
     }
 
     public static void handler(RelicsGuiPacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -32,7 +33,7 @@ public class RelicsGuiPacket {
             ServerPlayer player = ctx.get().getSender();
             if (player != null){
                 player.closeContainer(); //关闭gui
-                if (flag){
+                if (msg.flag){ // 🔴 使用 msg.flag 获取数据
                     player.openMenu(new MenuProvider() {
                         @Override
                         public Component getDisplayName() {
@@ -52,5 +53,4 @@ public class RelicsGuiPacket {
         });
         ctx.get().setPacketHandled(true);
     }
-
 }

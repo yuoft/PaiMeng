@@ -22,7 +22,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-//1.20.1: RecipeBookContainer<CraftingInventory> -> RecipeBookMenu<CraftingContainer>
 public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
     private final CraftingContainer inputInventory;
     private final ResultContainer outputInventory;
@@ -30,7 +29,7 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
     private final Player player;
 
     public SeedBoxContainer(int id, Inventory playerInventory) {
-        super(ContainerTypeRegistry.seedBoxContainer.get(), id);
+        super(PMMenuTypes.seedBoxContainer.get(), id);
         this.inputInventory = new TransientCraftingContainer(this,1,1);
         this.outputInventory = new ResultContainer();
         this.player = playerInventory.player;
@@ -65,7 +64,7 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
             SeedBoxRecipe recipe = optional.get();
             //1.20.1: canUseRecipe -> RecipeHolder#setRecipeUsed(Level, ServerPlayer, Recipe)
             if (this.outputInventory.setRecipeUsed(this.world, serverPlayer, recipe)) {
-                itemstack = recipe.getCraftingResult(matrix); //获取配方输出
+                itemstack = recipe.getResult(); //获取配方输出
             }
         }
         this.outputInventory.setItem(1, itemstack); //设置产出

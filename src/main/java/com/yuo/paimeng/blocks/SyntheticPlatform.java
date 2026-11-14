@@ -4,6 +4,7 @@ import com.yuo.paimeng.menu.SynPlatContainer;
 import com.yuo.paimeng.tiles.SynPlatTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -42,12 +44,9 @@ public class SyntheticPlatform extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (!worldIn.isClientSide){
             BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-            if (tileEntity instanceof SynPlatTile){ //打开gui
-                MenuProvider provider = state.getMenuProvider(worldIn, pos);
-                if (provider != null) {
-                    player.openMenu(provider);
-                    player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
-                }
+            if (tileEntity instanceof SynPlatTile synPlatTile){ //打开gui
+                NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) synPlatTile, pos);
+                player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
                 return InteractionResult.CONSUME;
             }
             return InteractionResult.SUCCESS;

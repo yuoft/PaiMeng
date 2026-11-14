@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,11 +21,11 @@ public class CookingScreen extends Screen {
     private Button button;
     private final int textureWidth = 202;
     private final int textureHeight = 12;
-    private AbstractContainerScreen<?> screen; //容器
+    private final AbstractContainerScreen<?> screen; //容器
     private final int LEVEL; //食品等级
     private double LEVEL_GROW = 0; //指针速度
-    private int minValue; //成功区间最小值
-    private int maxValue; //最大值
+    private final int minValue; //成功区间最小值
+    private final int maxValue; //最大值
     private final Random random = new Random();
     private int count;
 
@@ -70,11 +71,14 @@ public class CookingScreen extends Screen {
         if (LEVEL_GROW < minValue || LEVEL_GROW > maxValue) { //成功烹饪
             count = 0;
         }
-        if (screen instanceof PotScreen) {
-            TileUtils.sendPotPacket(count, LEVEL, LEVEL); //发送数据包设置产出
+        if (screen instanceof PotScreen pot) {
+            BlockPos pos = pot.getMenu().getPos();
+            TileUtils.sendPotPacket(count, LEVEL, LEVEL, pos); //发送数据包设置产出
         }
-        if (screen instanceof BenchScreen) {
-            TileUtils.sendPotPacket(count, LEVEL, LEVEL);
+        if (screen instanceof BenchScreen bench) {
+            BlockPos pos = bench.getMenu().getPos();
+
+            TileUtils.sendPotPacket(count, LEVEL, LEVEL, pos);
         }
         if (minecraft != null) {
             minecraft.setScreen(screen);

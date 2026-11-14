@@ -1,6 +1,6 @@
 package com.yuo.paimeng.jei;
 
-import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.menu.PMMenuTypes;
 import com.yuo.paimeng.menu.SynPlatContainer;
 import com.yuo.paimeng.recipe.SynPlatRecipe;
 import mezz.jei.api.recipe.RecipeType;
@@ -21,7 +21,7 @@ public class SynPlatTransferInfo implements IRecipeTransferInfo<SynPlatContainer
 
     @Override
     public Optional<MenuType<SynPlatContainer>> getMenuType() {
-        return Optional.of(ContainerTypeRegistry.synPlatContainer.get());
+        return Optional.of(PMMenuTypes.synPlatContainer.get());
     }
 
     @Override

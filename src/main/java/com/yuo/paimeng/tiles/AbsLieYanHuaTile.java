@@ -23,36 +23,20 @@ public class AbsLieYanHuaTile extends BlockEntity {
         super(type, pos, state);
     }
 
-    /**
-     * 1.20.1 方块侧的 getTicker 调用入口
-     */
-    public void tick(Level level, BlockPos pos, BlockState state) {
-        tickInternal(level, pos);
-    }
-
-    /**
-     * 兼容旧调用
-     */
-    public void tick() {
-        if (this.level == null) return;
-        tickInternal(this.level, this.getBlockPos());
-    }
-
-    private void tickInternal(Level world, BlockPos pos) {
+    public static void tick(Level world, BlockPos pos, BlockState state, AbsLieYanHuaTile tile) {
         if (world.isClientSide) return;
-        tick++;
+        tile.tick++;
 
-        if (tick == PMConfig.SERVER.lieYanHuaTime.get()) {
-            BlockState state = world.getBlockState(pos);
+        if (tile.tick == PMConfig.SERVER.lieYanHuaTime.get()) {
             if (state.getBlock() instanceof LieYanHuaCrop){
                 Integer age = state.getValue(CropBlock.AGE);
-                if (age >= 7) randomFire(world, pos, world.random);
-            } else randomFire(world, pos, world.random);
-            tick = 0;
+                if (age >= 7) tile.randomFire(world, pos, world.random);
+            } else tile.randomFire(world, pos, world.random);
+            tile.tick = 0;
         }
 
-        if (tick % PMConfig.SERVER.lieYanHuaAndBingWUHuaTime.get() == 0){
-            meltIce(world, pos);
+        if (tile.tick % PMConfig.SERVER.lieYanHuaAndBingWUHuaTime.get() == 0){
+            tile.meltIce(world, pos);
         }
     }
 

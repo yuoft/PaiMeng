@@ -1,6 +1,6 @@
 package com.yuo.paimeng.items;
 
-import com.yuo.paimeng.tab.PMGroup;
+import com.yuo.paimeng.PMGroupTab;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -73,7 +73,7 @@ public class Relics extends Item {
     //这里保留一个同义方法（不再是 @Override）供 tab.PMGroup / 其它代码显式调用，
     //同时提供静态的 fillCreativeItems(CreativeModeTab.Output) 方便在物品栏构建时统一收集。
     public void fillItemCategory(CreativeModeTab group, CreativeModeTab.Output items) {
-        if (group == PMGroup.PaiMengRelics.get()){
+        if (group == PMGroupTab.PaiMengRelics.get()){
             for (int i = this.minStar; i <= this.maxStar; i++){ //星级
                 for (int j = 0; j < 5 ; j++){ //部位
                     items.accept(getItemStack(i, j));

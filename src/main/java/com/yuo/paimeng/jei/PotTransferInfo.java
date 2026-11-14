@@ -1,6 +1,6 @@
 package com.yuo.paimeng.jei;
 
-import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.menu.PMMenuTypes;
 import com.yuo.paimeng.menu.PotContainer;
 import com.yuo.paimeng.recipe.PotRecipe;
 import mezz.jei.api.recipe.RecipeType;
@@ -21,7 +21,7 @@ public class PotTransferInfo implements IRecipeTransferInfo<PotContainer, PotRec
 
     @Override
     public Optional<MenuType<PotContainer>> getMenuType() {
-        return Optional.of(ContainerTypeRegistry.potContainer.get());
+        return Optional.of(PMMenuTypes.potContainer.get());
     }
 
     @Override

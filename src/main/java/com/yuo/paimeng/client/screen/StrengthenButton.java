@@ -3,16 +3,14 @@ package com.yuo.paimeng.client.screen;
 import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.network.NetWorkHandler;
 import com.yuo.paimeng.network.StrengthenPacket;
-import com.yuo.paimeng.PaiMeng;
-import com.yuo.paimeng.tiles.StrengthenTableTile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -46,9 +44,10 @@ public class StrengthenButton extends ImageButton {
     public void onPress() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
-        BlockEntity te = PaiMeng.PROXY.getRefrencedTE();
-        if (te instanceof StrengthenTableTile) {
-            NetWorkHandler.INSTANCE.sendToServer(new StrengthenPacket(te.getBlockPos()));
+        // 直接从 Menu 获取坐标
+        BlockPos pos = screen.getMenu().getBlockPos();
+        if (pos != null) {
+            NetWorkHandler.INSTANCE.sendToServer(new StrengthenPacket(pos));
         }
     }
 

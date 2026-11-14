@@ -1,22 +1,19 @@
-package com.yuo.paimeng;
+package com.yuo.paimeng.proxy;
 
+import com.yuo.paimeng.ModUtils;
+import com.yuo.paimeng.PMKeyManager;
 import com.yuo.paimeng.blocks.PMBlocks;
-import com.yuo.paimeng.client.screen.BenchScreen;
-import com.yuo.paimeng.client.screen.PotScreen;
-import com.yuo.paimeng.client.screen.RelicsScreen;
-import com.yuo.paimeng.client.screen.SeedBoxScreen;
-import com.yuo.paimeng.client.screen.StrengthenTableScreen;
-import com.yuo.paimeng.client.screen.SynPlatScreen;
 import com.yuo.paimeng.client.model.CraneModel;
 import com.yuo.paimeng.client.render.BenchTileTER;
 import com.yuo.paimeng.client.render.BoarRender;
 import com.yuo.paimeng.client.render.CraneRender;
 import com.yuo.paimeng.client.render.SevenGodTileRender;
-import com.yuo.paimeng.menu.ContainerTypeRegistry;
+import com.yuo.paimeng.client.screen.*;
 import com.yuo.paimeng.entity.EntityTypeRegister;
 import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.items.Relics;
 import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.menu.PMMenuTypes;
 import com.yuo.paimeng.tiles.TileTypeRegistry;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -28,31 +25,19 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 
 // 注意：这里不能用 @OnlyIn(Dist.CLIENT)，否则专用服务端在 DistExecutor.safeRunForDist 解析方法引用时会因为类被裁剪而崩溃。
 public class ClientProxy extends CommonProxy{
-    private BlockEntity referencedTE = null;
 
-    public BlockEntity getRefrencedTE() {
-        return referencedTE;
-    }
-
-    public void setRefrencedTE(BlockEntity tileEntity) {
-        referencedTE = tileEntity;
-    }
-
-    @SuppressWarnings("removal")
     @Override
-    public void init() {
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public void registerHandlers(IEventBus modBus) {
+        super.registerHandlers(modBus);
         modBus.addListener(this::clientSetup);
         modBus.addListener(this::registerKeyMappings);
         //1.20.1 实体模型层必须在 mod 总线注册
@@ -67,6 +52,7 @@ public class ClientProxy extends CommonProxy{
         }
     }
 
+    @SuppressWarnings("removal")
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             setBowProperty(PMItems.pmBow0.get());
@@ -84,12 +70,12 @@ public class ClientProxy extends CommonProxy{
             EntityRenderers.register(EntityTypeRegister.CRANE.get(), CraneRender::new);
             EntityRenderers.register(EntityTypeRegister.PM_BALL.get(), ThrownItemRenderer::new);
             //绑定Container和ContainerScreen
-            MenuScreens.register(ContainerTypeRegistry.potContainer.get(), PotScreen::new);
-            MenuScreens.register(ContainerTypeRegistry.benchContainer.get(), BenchScreen::new);
-            MenuScreens.register(ContainerTypeRegistry.synPlatContainer.get(), SynPlatScreen::new);
-            MenuScreens.register(ContainerTypeRegistry.seedBoxContainer.get(), SeedBoxScreen::new);
-            MenuScreens.register(ContainerTypeRegistry.relicsContainer.get(), RelicsScreen::new);
-            MenuScreens.register(ContainerTypeRegistry.strengthenTableContainer.get(), StrengthenTableScreen::new);
+            MenuScreens.register(PMMenuTypes.potContainer.get(), PotScreen::new);
+            MenuScreens.register(PMMenuTypes.benchContainer.get(), BenchScreen::new);
+            MenuScreens.register(PMMenuTypes.synPlatContainer.get(), SynPlatScreen::new);
+            MenuScreens.register(PMMenuTypes.seedBoxContainer.get(), SeedBoxScreen::new);
+            MenuScreens.register(PMMenuTypes.relicsContainer.get(), RelicsScreen::new);
+            MenuScreens.register(PMMenuTypes.strengthenTableContainer.get(), StrengthenTableScreen::new);
             //透明方块的渲染
             for (RegistryObject<Block> r : PMBlocks.BLOCKS.getEntries()){
                 if (r.get() instanceof BushBlock){

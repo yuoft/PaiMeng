@@ -6,7 +6,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class RecipeSerializerRegistry {
+public class PMRecipeSerializers {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PaiMeng.MOD_ID);
 
     public static final RegistryObject<RecipeSerializer<PotRecipe>> POT = RECIPE_TYPES.register("pot", PotRecipe.Serializer::new);

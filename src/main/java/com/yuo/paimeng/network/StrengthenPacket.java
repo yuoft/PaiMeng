@@ -15,19 +15,19 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-//强化
 public class StrengthenPacket {
-    private static BlockPos pos; //坐标
+    private final BlockPos pos; // 🔴 移除 static
+
     public StrengthenPacket(FriendlyByteBuf buffer) {
-        pos = buffer.readBlockPos();
+        this.pos = buffer.readBlockPos();
     }
 
     public StrengthenPacket(BlockPos pos) {
-        StrengthenPacket.pos = pos;
+        this.pos = pos;
     }
 
     public void toBytes(FriendlyByteBuf buf) {
-        buf.writeBlockPos(pos);
+        buf.writeBlockPos(this.pos);
     }
 
     public static void handler(StrengthenPacket msg, Supplier<NetworkEvent.Context> ctx) {
@@ -35,21 +35,27 @@ public class StrengthenPacket {
             ServerPlayer player = ctx.get().getSender();
             if (player == null) return;
             Level world = player.level();
-            if (!world.isClientSide && world.isLoaded(pos)){ //检查此坐标区块是否加载
-                BlockEntity tileEntity = world.getBlockEntity(pos);
+            
+            // 🔴 安全校验：玩家必须距离方块 8 格以内
+            if (player.distanceToSqr(msg.pos.getX() + 0.5, msg.pos.getY() + 0.5, msg.pos.getZ() + 0.5) > 64.0) {
+                return;
+            }
+
+            if (!world.isClientSide && world.isLoaded(msg.pos)){ //检查此坐标区块是否加载
+                BlockEntity tileEntity = world.getBlockEntity(msg.pos);
                 if (tileEntity instanceof StrengthenTableTile tile){
                     NonNullList<ItemStack> relicsExpItem = tile.getRelicsExpItem();
                     ItemStack relics = tile.getItem(16);
-                    RelicsHelper.relicsLevelUp(relicsExpItem, relics);
-                    tile.shrinkItem();
-                    world.playSound(null, pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 3.0f, 1.0f);
+                    
+                    // 这里建议再增加一个判断，确认确实有物品可以强化，防止空包刷声音或报错
+                    if (!relics.isEmpty() && !relicsExpItem.isEmpty()) {
+                        RelicsHelper.relicsLevelUp(relicsExpItem, relics);
+                        tile.shrinkItem();
+                        world.playSound(null, msg.pos, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 3.0f, 1.0f);
+                    }
                 }
             }
         });
         ctx.get().setPacketHandled(true);
-    }
-
-    public static BlockPos getPos() {
-        return pos;
     }
 }

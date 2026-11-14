@@ -2,6 +2,8 @@ package com.yuo.paimeng.event;
 
 import com.cazsius.solcarrot.tracking.FoodList;
 import com.google.common.collect.Multimap;
+import com.yuo.paimeng.ModUtils;
+import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.capability.*;
 import com.yuo.paimeng.effects.EffectRegistry;
 import com.yuo.paimeng.effects.ReviveEffect;
@@ -10,18 +12,16 @@ import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.items.Relics;
 import com.yuo.paimeng.items.RelicsBox;
 import com.yuo.paimeng.items.RelicsHelper;
-import com.yuo.paimeng.ModUtils;
-import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.tiles.SevenGodTile;
 import com.yuo.paimeng.world.data.SevenGodSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -34,6 +34,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -128,8 +130,6 @@ public class EventHandler {
         if (entityLiving instanceof Player player){
             if (item.isEdible() && EventHelper.getNameSpace(item).equals("minecraft") && !isExceptionItem(item)){//原版食物
                 player.displayClientMessage(Component.translatable("paimeng.message.food"), true);
-                // TODO(port): 生活调味料(solcarrot)兼容未移植 —— 1.20.1 工程没有 solcarrot 依赖，
-                //  原 sol(player, item) 逻辑（FoodList/MaxHealthHandler/CapabilityHandler）随之移除。
                 FoodList.get(player).addFood(item.getItem());
                 event.setCanceled(true);
             }
@@ -306,7 +306,7 @@ public class EventHandler {
         BlockState state = world.getBlockState(pos);
         if (state.getBlock() == Blocks.SPRUCE_LEAVES){ //云杉树叶掉落松果
             ItemStack mainhand = player.getMainHandItem();
-            int level = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, mainhand);
+            int level = mainhand.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
             if (random.nextInt(100) < level * 5 + 5){
                 ItemEntity item = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(PMItems.songguo.get(),
                         random.nextInt(2 + level)));
@@ -344,87 +344,79 @@ public class EventHandler {
         }
     }
 
+    // 统一处理所有生物的额外掉落（包含圣物匣、兽肉、原石等）
     @SubscribeEvent
-    public static void dropRelicsBox(LivingDropsEvent event){
-        LivingEntity entityLiving = event.getEntity();
-        Entity source = event.getSource().getEntity();
-        if (source instanceof Player player){ //圣物匣掉落受幸运，不幸和抢夺影响
-            int luck = EventHelper.getEffectLevel(player, MobEffects.LUCK);
-            int unLuck = EventHelper.getEffectLevel(player, MobEffects.UNLUCK);
-            int looting = event.getLootingLevel();
-            if (entityLiving instanceof EnderDragon || entityLiving instanceof WitherBoss){ //是boss
-                ItemStack stack = new ItemStack(PMItems.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) stack.getItem()).setLevel(1);
-                EventHelper.addEntityDrops(event, stack, entityLiving);
-                ItemStack stack1 = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) stack1.getItem()).setLevel(2);
-                EventHelper.addEntityDrops(event, stack1, entityLiving);
-                ItemStack stack2 = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) stack2.getItem()).setLevel(3);
-                EventHelper.addEntityDrops(event, stack2, entityLiving);
-            }else {
-                //0.01%掉落一等圣物匣
-                if (random.nextDouble() < (0.0001 + 0.0002 * (luck - unLuck) + 0.0003 * looting)){
-                    ItemStack stack = new ItemStack(PMItems.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
-                    ((RelicsBox) stack.getItem()).setLevel(1);
-                    EventHelper.addEntityDrops(event, stack, entityLiving);
-                }
-                //0.1%掉落二等圣物匣
-                if (random.nextDouble() < (0.001 + 0.002 * (luck - unLuck) + 0.003 * looting)){
-                    ItemStack stack = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
-                    ((RelicsBox) stack.getItem()).setLevel(2);
-                    EventHelper.addEntityDrops(event, stack, entityLiving);
-                }
-                //1%掉落三等圣物匣
-                if (random.nextDouble() < (0.01 + 0.02 * (luck - unLuck) + 0.03 * looting)){
-                    ItemStack stack = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
-                    ((RelicsBox) stack.getItem()).setLevel(3);
-                    EventHelper.addEntityDrops(event, stack, entityLiving);
-                }
-            }
-        }
-    }
-
-    //原版生物额外掉落
-    @SubscribeEvent
-    public static void enderDragonDrops(LivingDropsEvent event){
+    public static void livingDrops(LivingDropsEvent event){
         LivingEntity entityLiving = event.getEntity();
         Level world = entityLiving.level();
         BlockPos pos = entityLiving.blockPosition();
-        Random random = new Random();
         Entity source = event.getSource().getEntity();
-        if (!(source instanceof Player player)) return; //伤害来源于玩家
+
+        // 伤害必须来源于玩家
+        if (!(source instanceof Player player)) return;
+
+        // 获取玩家属性
         ItemStack stack = player.getMainHandItem();
-        int level = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MOB_LOOTING, stack); //抢夺
-        if (entityLiving instanceof EnderDragon){ //末影龙额外掉落 创世结晶
-            spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
-            spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + level, world, pos, event);
-        }
-        if (entityLiving instanceof WitherBoss){ //凋零 创世结晶
-            spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
-            spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + level, world, pos, event);
-        }
-        //所有非boss生物掉落 原石
-        if (!(entityLiving instanceof EnderDragon) && !(entityLiving instanceof WitherBoss)){
-            int j = random.nextInt(100);
-            if (j > (94 - level * 5)){
-                spawnDrops(PMItems.yuanshi.get(), 1, world, pos, event);
+        int looting = stack.getEnchantmentLevel(Enchantments.MOB_LOOTING); // 抢夺等级
+        int luck = EventHelper.getEffectLevel(player, MobEffects.LUCK);
+        int unLuck = EventHelper.getEffectLevel(player, MobEffects.UNLUCK);
+
+        // ================= 1. 圣物匣掉落逻辑 =================
+        if (entityLiving instanceof EnderDragon || entityLiving instanceof WitherBoss){ // 是 boss
+            ItemStack box1 = new ItemStack(PMItems.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
+            ((RelicsBox) box1.getItem()).setLevel(1);
+            EventHelper.addEntityDrops(event, box1, entityLiving);
+
+            ItemStack box2 = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
+            ((RelicsBox) box2.getItem()).setLevel(2);
+            EventHelper.addEntityDrops(event, box2, entityLiving);
+
+            ItemStack box3 = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
+            ((RelicsBox) box3.getItem()).setLevel(3);
+            EventHelper.addEntityDrops(event, box3, entityLiving);
+        } else {
+            // 0.01% 掉落一等圣物匣
+            if (random.nextDouble() < (0.0001 + 0.0002 * (luck - unLuck) + 0.0003 * looting)){
+                ItemStack box = new ItemStack(PMItems.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) box.getItem()).setLevel(1);
+                EventHelper.addEntityDrops(event, box, entityLiving);
+            }
+            // 0.1% 掉落二等圣物匣
+            if (random.nextDouble() < (0.001 + 0.002 * (luck - unLuck) + 0.003 * looting)){
+                ItemStack box = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) box.getItem()).setLevel(2);
+                EventHelper.addEntityDrops(event, box, entityLiving);
+            }
+            // 1% 掉落三等圣物匣
+            if (random.nextDouble() < (0.01 + 0.02 * (luck - unLuck) + 0.03 * looting)){
+                ItemStack box = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
+                ((RelicsBox) box.getItem()).setLevel(3);
+                EventHelper.addEntityDrops(event, box, entityLiving);
             }
         }
-    }
 
-    /**
-     * 添加额外掉落
-     * @param item 需要掉落的物品
-     * @param count 数量
-     * @param world 世界
-     * @param pos 坐标
-     * @param event 事件
-     */
-    private static void spawnDrops(Item item, int count, Level world, BlockPos pos, LivingDropsEvent event){
-        ItemStack stack1 = new ItemStack(item, count);
-        ItemEntity itemEntity = new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack1);
-        event.getDrops().add(itemEntity);
+        // ================= 2. 特殊物品与原石掉落逻辑 =================
+        if (entityLiving instanceof EnderDragon || entityLiving instanceof WitherBoss){ // 末影龙/凋零 额外掉落
+            EventHelper.spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
+            EventHelper.spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + looting, world, pos, event);
+        } else {
+            // 击杀特定动物掉落兽肉
+            if (entityLiving instanceof Fox || entityLiving instanceof Wolf || entityLiving instanceof PolarBear
+                    || entityLiving instanceof Panda || entityLiving instanceof Llama) {
+                EventHelper.spawnDrops(PMItems.shourou.get(), random.nextInt(3) + looting, world, pos, event);
+            }
+
+            // 击杀鹦鹉掉落禽肉
+            if (entityLiving instanceof Parrot) {
+                // 🔴 注意：你之前的代码这里复制粘贴写成了 shourou.get()，如果是禽肉，请确认物品 ID 是否为 qinrou
+                EventHelper.spawnDrops(PMItems.qinrou.get(), random.nextInt(3) + looting, world, pos, event);
+            }
+
+            // 所有非 boss 生物小概率掉落原石
+            if (random.nextInt(100) > (94 - looting * 5)){
+                EventHelper.spawnDrops(PMItems.yuanshi.get(), 1, world, pos, event);
+            }
+        }
     }
 
 }

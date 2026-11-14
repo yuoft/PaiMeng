@@ -5,7 +5,7 @@ import com.yuo.paimeng.recipe.ModRecipeType;
 import com.yuo.paimeng.tiles.BenchTile;
 import com.yuo.paimeng.tiles.PotTile;
 import com.yuo.paimeng.tiles.TileUtils;
-import com.yuo.paimeng.savedata.FoodLevelWorldSaveData;
+import com.yuo.paimeng.world.data.FoodRecipeSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -63,12 +63,11 @@ public class CookingPacket {
                 spawnFood(world, tile);
                 //增加烹饪经验
                 if (exp > 0){
-                    FoodLevelWorldSaveData data = FoodLevelWorldSaveData.get(world);
-                    String playerName = player.getName().getString();
-                    if (!data.hasName(playerName)){ //不存在
-                        data.add(playerName, 0, 0);
+                    FoodRecipeSaveData data = FoodRecipeSaveData.get(world);
+                    if (!data.hasPlayer(player.getUUID())){ //不存在
+                        data.add(player.getUUID(), 0, 0);
                     }
-                    FoodLevelWorldSaveData.PlayerFoodRecipesInfo foodRecipesInfo = data.getInfo(playerName);
+                    FoodRecipeSaveData.PlayerFoodRecipesInfo foodRecipesInfo = data.getInfo(player.getUUID());
                     if (!foodRecipesInfo.isEmpty()){
                         int level = foodRecipesInfo.getLevel();
                         int exp0 = foodRecipesInfo.getExp();

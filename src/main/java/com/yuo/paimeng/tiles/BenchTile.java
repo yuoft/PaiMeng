@@ -7,7 +7,7 @@ import com.yuo.paimeng.menu.FoodRecipesIntArray;
 import com.yuo.paimeng.items.Food.PaiMengFood;
 import com.yuo.paimeng.items.PMFoodItem;
 import com.yuo.paimeng.recipe.ModRecipeType;
-import com.yuo.paimeng.savedata.FoodLevelWorldSaveData;
+import com.yuo.paimeng.world.data.FoodRecipeSaveData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -78,9 +78,9 @@ public class BenchTile extends BaseContainerBlockEntity implements WorldlyContai
         if (world.isClientSide) return;
 
         //同步玩家烹饪经验数据
-        FoodLevelWorldSaveData saveData = FoodLevelWorldSaveData.get(world);
+        FoodRecipeSaveData saveData = FoodRecipeSaveData.get(world);
         if (player != null){
-            FoodLevelWorldSaveData.PlayerFoodRecipesInfo info = saveData.getInfo(player.getName().getString());
+            FoodRecipeSaveData.PlayerFoodRecipesInfo info = saveData.getInfo(player.getUUID());
             if (!info.isEmpty()){
                 this.foodData.set(0, info.getLevel() );
                 this.foodData.set(1, info.getExp());

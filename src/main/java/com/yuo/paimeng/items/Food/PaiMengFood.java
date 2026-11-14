@@ -45,14 +45,14 @@ public class PaiMengFood extends Item {
     @Override
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(this.getDescriptionId(stack));
-        switch (LEVEL){
-            case 1: return component.withStyle(ChatFormatting.WHITE);
-            case 2: return component.withStyle(ChatFormatting.GREEN);
-            case 3: return component.withStyle(ChatFormatting.BLUE);
-            case 4: return component.withStyle(ChatFormatting.DARK_PURPLE);
-            case 5: return component.withStyle(ChatFormatting.GOLD);
-            default: return component;
-        }
+        return switch (LEVEL) {
+            case 1 -> component.withStyle(ChatFormatting.WHITE);
+            case 2 -> component.withStyle(ChatFormatting.GREEN);
+            case 3 -> component.withStyle(ChatFormatting.BLUE);
+            case 4 -> component.withStyle(ChatFormatting.DARK_PURPLE);
+            case 5 -> component.withStyle(ChatFormatting.GOLD);
+            default -> component;
+        };
     }
 
 

@@ -1,7 +1,7 @@
 package com.yuo.paimeng.blocks.tree;
 
 import com.yuo.paimeng.blocks.PMBlocks;
-import com.yuo.paimeng.worldgen.TreeSpawner;
+import com.yuo.paimeng.world.gen.TreeSpawner;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

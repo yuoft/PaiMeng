@@ -13,6 +13,7 @@ import com.yuo.paimeng.items.RelicsHelper;
 import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.tiles.SevenGodTile;
+import com.yuo.paimeng.world.data.SevenGodSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,8 +23,11 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -45,6 +49,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -73,6 +78,35 @@ public class EventHandler {
 
     //不被禁用的原版食物
     private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.GOLDEN_APPLE, Items.SWEET_BERRIES, Items.APPLE);
+
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && event.player instanceof ServerPlayer player) {
+            if (player.tickCount % 100 == 0) {
+                // 从全局数据获取该玩家拥有的所有神像
+                SevenGodSavedData data = SevenGodSavedData.get(player.serverLevel());
+                List<SevenGodSavedData.ShrineData> shrines = data.getPlayerShrines(player.getUUID());
+
+                for (SevenGodSavedData.ShrineData shrine : shrines) {
+                    for (Map.Entry<Item, Integer> entry : shrine.donatedItems.entrySet()) {
+                        int amount = entry.getValue();
+                        MobEffect effect = SevenGodSavedData.getEffectForMaterial(entry.getKey());
+
+                        if (effect != null) {
+                            // 🔴 使用 getMaxLevel 限制最大等级
+                            int maxLevel = SevenGodSavedData.getMaxLevel(effect);
+                            int level = Math.min(amount / 64, maxLevel);
+
+                            if (level > 0) {
+                                player.addEffect(new MobEffectInstance(effect, 120, level - 1, false, true));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     /**
      * 判断食物是否在例外列表中
@@ -246,10 +280,13 @@ public class EventHandler {
             LazyOptional<IBlowCapability> capability = player.getCapability(ModCapability.BLOW_CAPABILITY);
             capability.ifPresent(IBlowCapability::resetCritical);
         }
-        //发送消息
-        player.sendSystemMessage(Component.translatable("paimeng.message.login")
-                .setStyle(Style.EMPTY.withHoverEvent(HoverEvent.Action.SHOW_TEXT.deserializeFromLegacy(Component.translatable("paimeng.message.login0")))
-                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://space.bilibili.com/21854371"))));
+        if (!player.getPersistentData().getBoolean("paimeng:login")){
+            player.getPersistentData().putBoolean("paimeng:login", true);
+            //发送消息
+            player.sendSystemMessage(Component.translatable("paimeng.message.login")
+                    .setStyle(Style.EMPTY.withHoverEvent(HoverEvent.Action.SHOW_TEXT.deserializeFromLegacy(Component.translatable("paimeng.message.login0")))
+                            .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://space.bilibili.com/21854371"))));
+        }
     }
 
     @SubscribeEvent

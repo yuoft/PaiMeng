@@ -675,6 +675,16 @@
     "paimeng.text.itemInfo.yuanshi": "Shiny stone",
     "paimeng.text.itemInfo.jiejing": "Material containing the power of creation",
 
+    "paimeng.message.shrine.status_title": "§eStatue of The Seven (Offer materials for global buffs)",
+    "paimeng.message.shrine.status_effect": "§7- Material: %s (§bEffect: %s§7)  Level: %s (Offered: %s) %s",
+    "paimeng.message.shrine.max_level": "§6[Max Level]",
+    "paimeng.message.shrine.status_footer": "§8(Every 64 items offered increases the buff level by 1, max level 10)",
+    "paimeng.message.shrine.already_exists": "§cYou can only place one Statue of The Seven!",
+
+    "paimeng.message.shrine.donate_success": "§aSuccessfully offered materials!",
+    "paimeng.message.shrine.donate_fail": "§cThis item cannot be offered.",
+    "paimeng.message.shrine.not_owner": "§cYou are not the owner of this statue!",
+
     "paimeng.message.pot_fuel":"No fuel",
     "paimeng.message.pot_fuel_add":"Cannot be used as fuel",
     "paimeng.message.pot_fuel_add1":"Insufficient fuel",

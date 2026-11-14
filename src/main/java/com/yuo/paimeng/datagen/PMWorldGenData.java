@@ -2,10 +2,10 @@ package com.yuo.paimeng.datagen;
 
 import com.yuo.paimeng.blocks.PMBlocks;
 import com.yuo.paimeng.ModUtils;
-import com.yuo.paimeng.worldgen.FeatureInit;
-import com.yuo.paimeng.worldgen.NetherConfig;
-import com.yuo.paimeng.worldgen.OceanProbabilityConfig;
-import com.yuo.paimeng.worldgen.PlantConfig;
+import com.yuo.paimeng.world.gen.FeatureInit;
+import com.yuo.paimeng.world.gen.NetherConfig;
+import com.yuo.paimeng.world.gen.OceanProbabilityConfig;
+import com.yuo.paimeng.world.gen.PlantConfig;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;

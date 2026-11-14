@@ -1,4 +1,4 @@
-package com.yuo.paimeng.worldgen;
+package com.yuo.paimeng.world.gen;
 
 import com.yuo.paimeng.PaiMeng;
 import net.minecraft.world.level.levelgen.feature.Feature;

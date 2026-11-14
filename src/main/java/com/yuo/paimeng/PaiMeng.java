@@ -10,8 +10,8 @@ import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.network.NetWorkHandler;
 import com.yuo.paimeng.recipe.RecipeSerializerRegistry;
 import com.yuo.paimeng.tiles.TileTypeRegistry;
-import com.yuo.paimeng.worldgen.EntityGen;
-import com.yuo.paimeng.worldgen.FeatureInit;
+import com.yuo.paimeng.world.gen.EntityGen;
+import com.yuo.paimeng.world.gen.FeatureInit;
 import com.yuo.paimeng.tab.PMGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -49,6 +49,11 @@ public class PaiMeng {
         //刷怪位置规则（属性在 Event\MobEvent 里注册）
         MinecraftForge.EVENT_BUS.addListener(EntityGen::registerSpawnPlacements);
         PROXY.init();
+
+        /*
+         * 神之心全图BUFF
+         * 第6个圣遗物栏位设计。
+         */
     }
 
 

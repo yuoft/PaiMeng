@@ -1,4 +1,4 @@
-package com.yuo.paimeng.worldgen;
+package com.yuo.paimeng.world.gen;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;

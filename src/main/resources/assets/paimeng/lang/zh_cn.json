@@ -675,6 +675,16 @@
     "paimeng.text.itemInfo.yuanshi": "亮晶晶的石头",
     "paimeng.text.itemInfo.jiejing": "蕴含创世之力的物质",
 
+    "paimeng.message.shrine.status_title": "§e七天神像 (供奉对应材料以获取全局增益)",
+    "paimeng.message.shrine.status_effect": "§7- 材料: %s (§b效果: %s§7)  等级: %s (已投入: %s) %s",
+    "paimeng.message.shrine.max_level": "§6[已满级]",
+    "paimeng.message.shrine.status_footer": "§8(每投入 64 个物品，对应增益提升 1 级，最高 10 级)",
+    "paimeng.message.shrine.already_exists": "§c你只能放置一个七天神像！",
+
+    "paimeng.message.shrine.donate_success": "§a成功供奉材料！",
+    "paimeng.message.shrine.donate_fail": "§c这个物品不能用来供奉。",
+    "paimeng.message.shrine.not_owner": "§c你不是这座神像的主人！",
+
     "paimeng.message.pot_fuel":"没有燃料",
     "paimeng.message.pot_fuel_add":"无法用做燃料",
     "paimeng.message.pot_fuel_add1":"燃料数量不足",

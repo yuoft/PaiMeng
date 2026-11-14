@@ -1,4 +1,4 @@
-package com.yuo.paimeng.worldgen;
+package com.yuo.paimeng.world.gen;
 
 import com.yuo.paimeng.entity.BoarEntity;
 import com.yuo.paimeng.entity.CraneEntity;

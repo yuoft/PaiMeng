@@ -1,4 +1,4 @@
-package com.yuo.paimeng.worldgen;
+package com.yuo.paimeng.world.gen;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;

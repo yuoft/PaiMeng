@@ -4,7 +4,7 @@ import com.yuo.paimeng.blocks.crop.*;
 import com.yuo.paimeng.blocks.tree.AppleSapling;
 import com.yuo.paimeng.items.CropUseBlockEnum;
 import com.yuo.paimeng.PaiMeng;
-import com.yuo.paimeng.worldgen.TreeInit;
+import com.yuo.paimeng.world.gen.TreeInit;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;

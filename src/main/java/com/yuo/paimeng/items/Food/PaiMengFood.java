@@ -1,7 +1,7 @@
 package com.yuo.paimeng.items.Food;
 
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.items.PMItems;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.food.FoodProperties;
@@ -15,23 +15,23 @@ import java.util.List;
 
 //食物物品
 public class PaiMengFood extends Item {
-    private final int LEVEL; //食物星级
-    private final int TYPE; //食物类型
+    private final int FOOD_LEVEL; //食物星级
+    private final int FOOD_TYPE; //食物类型
 
     public PaiMengFood(FoodProperties food, int lv, int type) {
         super(new Properties().food(food));
-        this.LEVEL = lv;
-        this.TYPE = type;
+        this.FOOD_LEVEL = lv;
+        this.FOOD_TYPE = type;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        if (LEVEL != 0 && LEVEL <= 6){ //星级信息
+        if (FOOD_LEVEL != 0 && FOOD_LEVEL <= 6){ //星级信息
             tooltip.add(Component.literal(Component.translatable("paimeng.text.itemInfo.star").getString()
-                    + Component.translatable("paimeng.text.itemInfo.star" + LEVEL).getString()));
+                    + Component.translatable("paimeng.text.itemInfo.star" + FOOD_LEVEL).getString()));
         }
         tooltip.add(Component.literal(Component.translatable("paimeng.text.itemInfo.type").getString()
-                + Component.translatable("paimeng.text.itemInfo.type" + TYPE).getString()));
+                + Component.translatable("paimeng.text.itemInfo.type" + FOOD_TYPE).getString()));
         if (stack.getItem() == PMItems.bugFood.get()){
             tooltip.add(Component.translatable("paimeng.text.itemInfo.bug_food"));
             tooltip.add(Component.translatable("paimeng.text.itemInfo.bug_food1"));
@@ -41,27 +41,20 @@ public class PaiMengFood extends Item {
         }
     }
 
-    //根据物品星级确定颜色名称（1.16.5 的 getDisplayName 在 1.20.1 中叫 getName）
+    //根据物品星级确定颜色名称
     @Override
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(this.getDescriptionId(stack));
-        return switch (LEVEL) {
-            case 1 -> component.withStyle(ChatFormatting.WHITE);
-            case 2 -> component.withStyle(ChatFormatting.GREEN);
-            case 3 -> component.withStyle(ChatFormatting.BLUE);
-            case 4 -> component.withStyle(ChatFormatting.DARK_PURPLE);
-            case 5 -> component.withStyle(ChatFormatting.GOLD);
-            default -> component;
-        };
+        return ModUtils.getTierName(FOOD_LEVEL, component);
     }
 
 
-    public int getLEVEL() {
-        return LEVEL;
+    public int getFOOD_LEVEL() {
+        return FOOD_LEVEL;
     }
 
-    public int getTYPE() {
-        return TYPE;
+    public int getFOOD_TYPE() {
+        return FOOD_TYPE;
     }
 
 }

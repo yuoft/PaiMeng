@@ -43,7 +43,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -143,9 +142,9 @@ public class EventHandler {
         LivingEntity entityLiving = event.getEntity();
         if (entityLiving instanceof Player player){
             if (item.isEdible() && item.getItem() instanceof PaiMengFood food){
-                int type = food.getTYPE();
+                int type = food.getFOOD_TYPE();
                 if (type == 0){
-                    player.heal(food.getLEVEL() * 2);
+                    player.heal(food.getFOOD_LEVEL() * 2);
                 }
             }
         }
@@ -364,33 +363,33 @@ public class EventHandler {
         // ================= 1. 圣物匣掉落逻辑 =================
         if (entityLiving instanceof EnderDragon || entityLiving instanceof WitherBoss){ // 是 boss
             ItemStack box1 = new ItemStack(PMItems.relicsBoxOne.get(), (random.nextInt(2) + 1 + (luck - unLuck)) * (looting + 1));
-            ((RelicsBox) box1.getItem()).setLevel(1);
+            ((RelicsBox) box1.getItem()).setBox_level(1);
             EventHelper.addEntityDrops(event, box1, entityLiving);
 
             ItemStack box2 = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(3) + 1 + (luck - unLuck)) * (looting + 1));
-            ((RelicsBox) box2.getItem()).setLevel(2);
+            ((RelicsBox) box2.getItem()).setBox_level(2);
             EventHelper.addEntityDrops(event, box2, entityLiving);
 
             ItemStack box3 = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(4) + 1 + (luck - unLuck)) * (looting + 1));
-            ((RelicsBox) box3.getItem()).setLevel(3);
+            ((RelicsBox) box3.getItem()).setBox_level(3);
             EventHelper.addEntityDrops(event, box3, entityLiving);
         } else {
             // 0.01% 掉落一等圣物匣
             if (random.nextDouble() < (0.0001 + 0.0002 * (luck - unLuck) + 0.0003 * looting)){
                 ItemStack box = new ItemStack(PMItems.relicsBoxOne.get(), (1 + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) box.getItem()).setLevel(1);
+                ((RelicsBox) box.getItem()).setBox_level(1);
                 EventHelper.addEntityDrops(event, box, entityLiving);
             }
             // 0.1% 掉落二等圣物匣
             if (random.nextDouble() < (0.001 + 0.002 * (luck - unLuck) + 0.003 * looting)){
                 ItemStack box = new ItemStack(PMItems.relicsBoxTwo.get(), (random.nextInt(2) + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) box.getItem()).setLevel(2);
+                ((RelicsBox) box.getItem()).setBox_level(2);
                 EventHelper.addEntityDrops(event, box, entityLiving);
             }
             // 1% 掉落三等圣物匣
             if (random.nextDouble() < (0.01 + 0.02 * (luck - unLuck) + 0.03 * looting)){
                 ItemStack box = new ItemStack(PMItems.relicsBoxThree.get(), (random.nextInt(3) + (luck - unLuck)) * (looting + 1));
-                ((RelicsBox) box.getItem()).setLevel(3);
+                ((RelicsBox) box.getItem()).setBox_level(3);
                 EventHelper.addEntityDrops(event, box, entityLiving);
             }
         }

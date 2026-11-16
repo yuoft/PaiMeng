@@ -139,18 +139,13 @@ public class CropBlockItem extends ItemNameBlockItem {
      * @return 反转后方向
      */
     public static Direction rotate(Direction direction) {
-        switch(direction) {
-            case NORTH:
-                return Direction.SOUTH;
-            case SOUTH:
-                return Direction.NORTH;
-            case WEST:
-                return Direction.EAST;
-            case EAST:
-                return Direction.WEST;
-            default:
-                throw new IllegalStateException("Unable to get rotated facing of " + direction);
-        }
+        return switch (direction) {
+            case NORTH -> Direction.SOUTH;
+            case SOUTH -> Direction.NORTH;
+            case WEST -> Direction.EAST;
+            case EAST -> Direction.WEST;
+            default -> throw new IllegalStateException("Unable to get rotated facing of " + direction);
+        };
     }
 
     /**

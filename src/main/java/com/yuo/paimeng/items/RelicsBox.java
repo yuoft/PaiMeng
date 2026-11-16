@@ -19,7 +19,7 @@ import java.util.List;
 
 //圣遗物匣
 public class RelicsBox extends Item {
-    private int level;
+    private int box_level;
 
     private final static List<Item> RELICS_FIVE = Arrays.asList(PMItems.juedoushiRelics.get(), PMItems.yuetuanRelics.get());
     private final static List<Item> RELICS_FOUR = Arrays.asList(PMItems.yongshiRelics.get(), PMItems.liufangzheRelics.get(),
@@ -29,20 +29,19 @@ public class RelicsBox extends Item {
 
     public RelicsBox(int level) {
         super(new Properties().fireResistant());
-        this.level = level;
+        this.box_level = level;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(Component.translatable("paimeng.text.itemInfo.relics_box" + level));
+        tooltip.add(Component.translatable("paimeng.text.itemInfo.relics_box" + box_level));
     }
 
-    //1.16.5 的 onItemRightClick(World, PlayerEntity, Hand) -> 1.20.1 的 use(Level, Player, InteractionHand)
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack heldItem = playerIn.getItemInHand(handIn);
         if (!worldIn.isClientSide){
-            switch (getLevel()){
+            switch (getBox_level()){
                 case 1:
                     ItemStack relics = getOneRelics(RELICS_FIVE);
                     addRelics(relics, playerIn, worldIn, heldItem);
@@ -56,7 +55,7 @@ public class RelicsBox extends Item {
                     addRelics(relics2, playerIn, worldIn, heldItem);
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + getLevel());
+                    throw new IllegalStateException("Unexpected value: " + getBox_level());
             }
         }
         return InteractionResultHolder.success(heldItem);
@@ -89,23 +88,23 @@ public class RelicsBox extends Item {
             heldItem.shrink(1);
     }
 
-    public int getLevel() {
-        return level;
+    public int getBox_level() {
+        return box_level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setBox_level(int box_level) {
+        this.box_level = box_level;
     }
 
     //1.16.5 的 getDisplayName(ItemStack) -> 1.20.1 的 getName(ItemStack)
     @Override
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(this.getDescriptionId());
-        switch (level){
-            case 1: return component.withStyle(ChatFormatting.GOLD);
-            case 2: return component.withStyle(ChatFormatting.DARK_PURPLE);
-            case 3: return component.withStyle(ChatFormatting.BLUE);
-            default: return component;
-        }
+        return switch (box_level) {
+            case 1 -> component.withStyle(ChatFormatting.GOLD);
+            case 2 -> component.withStyle(ChatFormatting.DARK_PURPLE);
+            case 3 -> component.withStyle(ChatFormatting.BLUE);
+            default -> component;
+        };
     }
 }

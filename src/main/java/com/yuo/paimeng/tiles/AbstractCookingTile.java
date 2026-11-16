@@ -76,7 +76,7 @@ public abstract class AbstractCookingTile extends BaseContainerBlockEntity imple
     protected void checkRecipe(Level world) {
         ItemStack output = TileUtils.getRecipeOutput(world, getRecipeType(), this);
         if (!output.isEmpty() && output.getItem() instanceof PaiMengFood food) {
-            LEVEL = food.getLEVEL();
+            LEVEL = food.getFOOD_LEVEL();
             this.data.set(2, LEVEL);
         }
         

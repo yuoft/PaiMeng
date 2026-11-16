@@ -17,13 +17,16 @@ public class OneSword extends SwordItem {
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(this.getDescriptionId(stack));
         PMItemTier tier = (PMItemTier) getTier();
-        switch (tier) {
-            case ONE: return component.withStyle(ChatFormatting.WHITE);
-            case TWO: return component.withStyle(ChatFormatting.GREEN);
-            case THREE: return component.withStyle(ChatFormatting.BLUE);
-            case FOUR: return component.withStyle(ChatFormatting.DARK_PURPLE);
-            case FIVE: return component.withStyle(ChatFormatting.GOLD);
-            default: return component;
-        }
+        return getTierName(tier, component);
+    }
+
+    protected static Component getTierName(PMItemTier tier, MutableComponent component) {
+        return switch (tier) {
+            case ONE -> component.withStyle(ChatFormatting.WHITE);
+            case TWO -> component.withStyle(ChatFormatting.GREEN);
+            case THREE -> component.withStyle(ChatFormatting.BLUE);
+            case FOUR -> component.withStyle(ChatFormatting.DARK_PURPLE);
+            case FIVE -> component.withStyle(ChatFormatting.GOLD);
+        };
     }
 }

@@ -1,8 +1,8 @@
 package com.yuo.paimeng.items.Weapon;
 
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.entity.EntityTypeRegister;
 import com.yuo.paimeng.entity.PMBookBallEntity;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,9 +24,7 @@ public class PMBook extends Item {
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         if (!worldIn.isClientSide){
             PMBookBallEntity ball = new PMBookBallEntity(EntityTypeRegister.PM_BALL.get(), playerIn, worldIn, getBallDamage());
-            //1.16.5 的 ProjectileItemEntity#setDirectionAndMovement == 1.20.1 的 Projectile#shootFromRotation
-            ball.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(),
-                    0, 1.0f, 1.0f);
+            ball.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0, 1.0f, 1.0f);
             worldIn.addFreshEntity(ball);
             playerIn.playSound(SoundEvents.SNOWBALL_THROW, 1.0f, 3.0f);
             ItemStack heldItem = playerIn.getItemInHand(handIn);
@@ -50,17 +48,9 @@ public class PMBook extends Item {
         return damage;
     }
 
-    //1.16.5 的 getDisplayName 在 1.20.1 中叫 getName
     @Override
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(this.getDescriptionId(stack));
-        switch (tier) {
-            case 1: return component.withStyle(ChatFormatting.WHITE);
-            case 2: return component.withStyle(ChatFormatting.GREEN);
-            case 3: return component.withStyle(ChatFormatting.BLUE);
-            case 4: return component.withStyle(ChatFormatting.DARK_PURPLE);
-            case 5: return component.withStyle(ChatFormatting.GOLD);
-            default: return component;
-        }
+        return ModUtils.getTierName(this.tier, component);
     }
 }

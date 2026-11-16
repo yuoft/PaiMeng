@@ -40,7 +40,6 @@ public enum PMItemTier implements Tier {
         this.repairMaterial = Lazy.of(repairMaterialIn);
     }
 
-    //1.20.1 的 Tier（原 IItemTier）方法名
     @Override
     public int getUses() {
         return this.maxUses;
@@ -69,30 +68,5 @@ public enum PMItemTier implements Tier {
     @Override
     public Ingredient getRepairIngredient() {
         return this.repairMaterial.get();
-    }
-
-    //保留 1.16.5 的旧方法名，避免其它代码/外部调用失效
-    public int getMaxUses() {
-        return getUses();
-    }
-
-    public float getEfficiency() {
-        return getSpeed();
-    }
-
-    public float getAttackDamage() {
-        return getAttackDamageBonus();
-    }
-
-    public int getHarvestLevel() {
-        return getLevel();
-    }
-
-    public int getEnchantability() {
-        return getEnchantmentValue();
-    }
-
-    public Ingredient getRepairMaterial() {
-        return getRepairIngredient();
     }
 }

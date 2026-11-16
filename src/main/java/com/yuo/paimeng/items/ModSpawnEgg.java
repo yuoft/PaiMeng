@@ -28,13 +28,4 @@ public class ModSpawnEgg extends ForgeSpawnEggItem {
     private static Supplier<? extends EntityType<? extends Mob>> asMobSupplier(RegistryObject<? extends EntityType<?>> supplier) {
         return () -> (EntityType<? extends Mob>) supplier.get();
     }
-
-    /**
-     * 1.16.5 需要反射往 SpawnEggItem 的 EGG_MAP 里塞入刷怪蛋并手动注册发射器行为；
-     * 1.20.1 的 ForgeSpawnEggItem 已在 FMLCommonSetupEvent 中自动完成这两件事，
-     * 这里保留同名入口只是为了兼容旧的调用点（MobEvent#onRegisterEntities）。
-     */
-    public static void initSpawnEggs() {
-        UNADDED_EGGS.clear();
-    }
 }

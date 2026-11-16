@@ -1,5 +1,6 @@
 package com.yuo.paimeng.items;
 
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.PMGroupTab;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -150,21 +151,12 @@ public class Relics extends Item {
     }
 
     //根据物品星级确定颜色名称
-    //1.16.5 的 getDisplayName(ItemStack) -> 1.20.1 的 getName(ItemStack)
     @Override
     public Component getName(ItemStack stack) {
         MutableComponent component = Component.translatable(getDescriptionId(stack));
-        switch (RelicsHelper.getStarFormStack(stack)){
-            case 1: return component.withStyle(ChatFormatting.WHITE);
-            case 2: return component.withStyle(ChatFormatting.GREEN);
-            case 3: return component.withStyle(ChatFormatting.BLUE);
-            case 4: return component.withStyle(ChatFormatting.DARK_PURPLE);
-            case 5: return component.withStyle(ChatFormatting.GOLD);
-            default: return component;
-        }
+        return ModUtils.getTierName(RelicsHelper.getStarFormStack(stack), component);
     }
 
-    //1.16.5 的 getTranslationKey(ItemStack) -> 1.20.1 的 getDescriptionId(ItemStack)
     @Override
     public String getDescriptionId(ItemStack stack) {
         return getRelicsName(getDescriptionId(), stack);

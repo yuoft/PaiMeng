@@ -27,9 +27,6 @@ public class Drug extends Item {
         super(new Properties().stacksTo(1).durability(6));
     }
 
-    // TODO(port): 1.20.1 删除了 Item#fillItemGroup / fillItemCategory，创造栏内容改由 CreativeModeTab#displayItems 决定。
-    // 药剂的多药水变体现在由 PMGroup 的 DRUG 分类（displayItems）负责，见 Report 中的资源/协调项。
-
     //获取默认实例
     @Override
     public ItemStack getDefaultInstance() {
@@ -92,7 +89,7 @@ public class Drug extends Item {
         return ItemUtils.startUsingInstantly(worldIn, playerIn, handIn);
     }
 
-    //名称随药水类型变化（1.16.5 的 getDisplayName 在 1.20.1 中叫 getName）
+    //名称随药水类型变化
     @Override
     public Component getName(ItemStack stack) {
         return Component.translatable(this.getDescriptionId(),

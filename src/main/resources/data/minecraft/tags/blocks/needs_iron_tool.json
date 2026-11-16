@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "paimeng:dianqi_shuijing_ore",
+    "paimeng:mojing_ore",
+    "paimeng:shipo_ore",
+    "paimeng:yeboshi_ore",
+    "paimeng:zijing_ore"
+  ]
+}

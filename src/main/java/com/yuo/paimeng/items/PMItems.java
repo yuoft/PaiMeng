@@ -21,7 +21,6 @@ public class PMItems {
 	public static RegistryObject<Item> shanbianzhichen = ITEMS.register("shanbianzhichen", EvolutionDust::new);
 	public static RegistryObject<Item> yimengrongmei = ITEMS.register("yimengrongmei", EvolutionDust::new);
 	public static RegistryObject<Item> huazhongxia = ITEMS.register("huazhongxia", SeedBox::new);
-	public static RegistryObject<Item> aaa = ITEMS.register("aaa", ExampleItem::new);
 	public static RegistryObject<Item> drug = ITEMS.register("drug", Drug::new);
 	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
 	public static RegistryObject<Item> yuanshi = ITEMS.register("yuanshi", OrdinaryItem::new);

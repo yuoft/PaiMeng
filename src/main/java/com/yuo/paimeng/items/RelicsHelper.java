@@ -2,25 +2,22 @@ package com.yuo.paimeng.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.capability.IBlowCapability;
 import com.yuo.paimeng.capability.ModCapability;
 import com.yuo.paimeng.capability.RelicsItemHandler;
 import com.yuo.paimeng.event.EventHandler;
-import com.yuo.paimeng.PaiMeng;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.NonNullList;
 import net.minecraftforge.common.util.LazyOptional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 //圣遗物操作类
 public class RelicsHelper {
@@ -586,6 +583,9 @@ public class RelicsHelper {
                 }
             }
         }
+
+        // 🔴 新增：按照 RelicsAttrType 的顺序（枚举定义顺序或 ID 顺序）排序
+        list.sort(Comparator.comparingInt(v -> v.getAttrType().ordinal()));
         return list;
     }
 

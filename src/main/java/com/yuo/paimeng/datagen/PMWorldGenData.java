@@ -212,6 +212,7 @@ public final class PMWorldGenData {
         RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest netherrack = new TagMatchTest(BlockTags.BASE_STONE_NETHER);
         RuleTest endStone = new BlockMatchTest(Blocks.END_STONE);
+        RuleTest deepStone = new BlockMatchTest(Blocks.DEEPSLATE);
 
         List<CfgDef> list = new ArrayList<>();
 
@@ -235,6 +236,11 @@ public final class PMWorldGenData {
         list.add(oreFeature("ore_mojing_nether", block(PMBlocks.mojingOre), 5, netherrack));
         list.add(oreFeature("ore_zijing_nether", block(PMBlocks.zijingOre), 5, netherrack));
         list.add(oreFeature("ore_yeboshi_end", block(PMBlocks.yeboshiOre), 4, endStone));
+        list.add(oreFeature("ore_deep_baitie", block(PMBlocks.deepBaitieOre), 10, deepStone));
+        list.add(oreFeature("ore_deep_heitie", block(PMBlocks.deepHeitieOre), 12, deepStone));
+        list.add(oreFeature("ore_deep_shuijing_badlands", block(PMBlocks.deepShuijingOre), 6, deepStone));
+        list.add(oreFeature("ore_deep_shuijing", block(PMBlocks.deepShuijingOre), 6, deepStone));
+        list.add(oreFeature("ore_deep_xingyin_icy", block(PMBlocks.deepXingyinOre), 10, deepStone));
 
         // 花/普通植物（原版随机斑块，只在空气格生成）
         list.add(patchFeature("plant_zhusun_bamboo_jungle", block(PMBlocks.zhusunPlant), 6));
@@ -309,13 +315,18 @@ public final class PMWorldGenData {
 
         // 矿物
         list.add(pf("ore_xingyin_icy", "ore_xingyin_icy", ore(6, 8, 32), GenerationStep.Decoration.UNDERGROUND_ORES, null, ICY));
+        list.add(pf("ore_deep_xingyin_icy", "ore_deep_xingyin_icy", ore(6, -32, 0), GenerationStep.Decoration.UNDERGROUND_ORES, null, ICY));
         list.add(pf("ore_shipo_desert", "ore_shipo_desert", ore(4, 16, 64), GenerationStep.Decoration.UNDERGROUND_ORES, null, DESERT));
         list.add(pf("ore_dianqi_ocean", "ore_dianqi_ocean", ore(4, 8, 48), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OCEAN));
         list.add(pf("ore_jinghua_badlands", "ore_jinghua_badlands", ore(4, 16, 48), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_BADLANDS));
         list.add(pf("ore_shuijing_badlands", "ore_shuijing_badlands", ore(6, 0, 16), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_BADLANDS));
+        list.add(pf("ore_deep_shuijing_badlands", "ore_deep_shuijing_badlands", ore(6, -60, -32), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_BADLANDS));
         list.add(pf("ore_shuijing", "ore_shuijing", ore(4, 8, 32), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
+        list.add(pf("ore_deep_shuijing", "ore_deep_shuijing", ore(4, -32, -8), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
         list.add(pf("ore_baitie", "ore_baitie", ore(6, 0, 32), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
+        list.add(pf("ore_deep_baitie", "ore_deep_baitie", ore(6, -32, 0), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
         list.add(pf("ore_heitie", "ore_heitie", ore(8, 0, 96), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
+        list.add(pf("ore_deep_heitie", "ore_heitie", ore(8, -64, 0), GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD));
         list.add(pf("ore_mojing_nether", "ore_mojing_nether", ore(16, 8, 32), GenerationStep.Decoration.UNDERGROUND_DECORATION, BiomeTags.IS_NETHER));
         list.add(pf("ore_zijing_nether", "ore_zijing_nether", ore(16, 96, 128), GenerationStep.Decoration.UNDERGROUND_DECORATION, BiomeTags.IS_NETHER));
         list.add(pf("ore_yeboshi_end", "ore_yeboshi_end", ore(4, 32, 48), GenerationStep.Decoration.UNDERGROUND_DECORATION, BiomeTags.IS_END));

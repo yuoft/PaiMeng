@@ -593,6 +593,14 @@ public class PMItems {
 			() -> new BlockItem(PMBlocks.yeboshiOre.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> zijingOre = ITEMS.register("zijing_ore",
 			() -> new BlockItem(PMBlocks.zijingOre.get(), new Item.Properties()));
+	public static RegistryObject<BlockItem> deepBaitieOre = ITEMS.register("deep_baitie_ore",
+			() -> new BlockItem(PMBlocks.deepBaitieOre.get(), new Item.Properties()));
+	public static RegistryObject<BlockItem> deepHeitieOre = ITEMS.register("deep_heitie_ore",
+			() -> new BlockItem(PMBlocks.deepHeitieOre.get(), new Item.Properties()));
+	public static RegistryObject<BlockItem> deepShuijingOre = ITEMS.register("deep_shuijing_ore",
+			() -> new BlockItem(PMBlocks.deepShuijingOre.get(), new Item.Properties()));
+	public static RegistryObject<BlockItem> deepXingyinOre = ITEMS.register("deep_xingyin_ore",
+			() -> new BlockItem(PMBlocks.deepXingyinOre.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> strengthenTable = ITEMS.register("strengthen_table",
 			() -> new BlockItem(PMBlocks.strengthenTable.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> sevenGod = ITEMS.register("seven_god",

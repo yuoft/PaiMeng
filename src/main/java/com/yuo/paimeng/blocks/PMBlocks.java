@@ -5,6 +5,7 @@ import com.yuo.paimeng.blocks.tree.AppleSapling;
 import com.yuo.paimeng.items.CropUseBlockEnum;
 import com.yuo.paimeng.PaiMeng;
 import com.yuo.paimeng.world.gen.TreeInit;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -45,16 +46,34 @@ public class PMBlocks {
     public static RegistryObject<Block> sevenGod = BLOCKS.register("seven_god", SevenGodBlock::new);
 
     //矿物
-    public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> dianqiShuijingOre = BLOCKS.register("dianqi_shuijing_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> heitieOre = BLOCKS.register("heitie_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> jinghuaGusuiOre = BLOCKS.register("jinghua_gusui_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> mojingOre = BLOCKS.register("mojing_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> shipoOre = BLOCKS.register("shipo_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> shuijingOre = BLOCKS.register("shuijing_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> xingyinOre = BLOCKS.register("xingyin_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> yeboshiOre = BLOCKS.register("yeboshi_ore", () -> new OrdinaryOre(5));
-    public static RegistryObject<Block> zijingOre = BLOCKS.register("zijing_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore",
+            () -> new PMOreBlock(5, UniformInt.of(1,4)));
+    public static RegistryObject<Block> dianqiShuijingOre = BLOCKS.register("dianqi_shuijing_ore",
+            () -> new PMOreBlock(5, UniformInt.of(0,0)));
+    public static RegistryObject<Block> heitieOre = BLOCKS.register("heitie_ore",
+            () -> new PMOreBlock(5, UniformInt.of(0,2)));
+    public static RegistryObject<Block> jinghuaGusuiOre = BLOCKS.register("jinghua_gusui_ore",
+            () -> new PMOreBlock(5, UniformInt.of(3,7)));
+    public static RegistryObject<Block> mojingOre = BLOCKS.register("mojing_ore",
+            () -> new PMOreBlock(5, UniformInt.of(3,6)));
+    public static RegistryObject<Block> shipoOre = BLOCKS.register("shipo_ore",
+            () -> new PMOreBlock(5, UniformInt.of(2,5)));
+    public static RegistryObject<Block> shuijingOre = BLOCKS.register("shuijing_ore",
+            () -> new PMOreBlock(5, UniformInt.of(5,10)));
+    public static RegistryObject<Block> xingyinOre = BLOCKS.register("xingyin_ore",
+            () -> new PMOreBlock(5, UniformInt.of(3,6)));
+    public static RegistryObject<Block> yeboshiOre = BLOCKS.register("yeboshi_ore",
+            () -> new PMOreBlock(5, UniformInt.of(3,6)));
+    public static RegistryObject<Block> zijingOre = BLOCKS.register("zijing_ore",
+            () -> new PMOreBlock(5, UniformInt.of(2,6)));
+    public static RegistryObject<Block> deepBaitieOre = BLOCKS.register("deep_baitie_ore",
+            () -> new PMOreBlock(10, UniformInt.of(2,5)));
+    public static RegistryObject<Block> deepHeitieOre = BLOCKS.register("deep_heitie_ore",
+            () -> new PMOreBlock(10, UniformInt.of(1,3)));
+    public static RegistryObject<Block> deepShuijingOre = BLOCKS.register("deep_shuijing_ore",
+            () -> new PMOreBlock(10, UniformInt.of(6,11)));
+    public static RegistryObject<Block> deepXingyinOre = BLOCKS.register("deep_xingyin_ore",
+            () -> new PMOreBlock(10, UniformInt.of(4,7)));
 
     //X型作物
     public static RegistryObject<Block> bailuoboCrop = BLOCKS.register("bailuobo_crop", () -> new XCropBlock(COMMON, CROP));

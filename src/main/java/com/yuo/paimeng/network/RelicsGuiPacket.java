@@ -32,8 +32,8 @@ public class RelicsGuiPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player != null){
-                player.closeContainer(); //关闭gui
                 if (msg.flag){ // 🔴 使用 msg.flag 获取数据
+                    player.closeContainer(); //关闭gui
                     player.openMenu(new MenuProvider() {
                         @Override
                         public Component getDisplayName() {
@@ -48,6 +48,8 @@ public class RelicsGuiPacket {
                     });
                 } else {
                     player.containerMenu = player.inventoryMenu;
+                    // 让服务端同步一下玩家的背包状态
+                    player.inventoryMenu.broadcastChanges();
                 }
             }
         });

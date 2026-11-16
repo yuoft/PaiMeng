@@ -27,7 +27,6 @@ public class BenchContainer extends AbstractContainerMenu {
     private final BlockPos pos;
 
     public BenchContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
-        //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
         this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
@@ -40,14 +39,14 @@ public class BenchContainer extends AbstractContainerMenu {
         this.data = benchTile.data;
         addDataSlots(data); //同步数据
         addDataSlots(fooData);
-        //食材槽
+        //食材栏
         for (int m = 0; m < 2; m++){
             for (int n = 0; n < 2; n++){
                 this.addSlot(new CookingSlot(benchTile, n + m * 2, 8 + n * 30, 22 + m * 27));
             }
         }
         this.addSlot(new CookingSlot(benchTile,4, 91, 16));
-        //食品槽
+        //食品栏
         this.addSlot(new ModOutputSlot(benchTile, 5, 132, 33));
         //添加玩家物品栏
         for(int i = 0; i < 3; ++i) {
@@ -65,10 +64,6 @@ public class BenchContainer extends AbstractContainerMenu {
         return pos;
     }
 
-    public BenchTile getBenchTile() {
-        return this.benchTile;
-    }
-
     //燃烧时间
     public int getTime(){
         return (int) Math.ceil(this.data.get(0) / 20d);
@@ -76,7 +71,7 @@ public class BenchContainer extends AbstractContainerMenu {
 
     /**
      * 获取当前容器内食材 能够烹饪的最大食物数量
-     * @return 数量
+     * @return 数量 最大64
      */
     public int getItemMaxCount(){
         NonNullList<ItemStack> inputs = TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, this.benchTile);
@@ -113,7 +108,6 @@ public class BenchContainer extends AbstractContainerMenu {
         return  (int) Math.floor(this.fooData.get(1) / (double) CookingPacket.getUpExp(getFoodRecipesLevel()) * 49);
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return this.benchTile.stillValid(playerIn);
@@ -124,7 +118,7 @@ public class BenchContainer extends AbstractContainerMenu {
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index > 5){

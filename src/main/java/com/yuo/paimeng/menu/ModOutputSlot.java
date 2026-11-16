@@ -9,13 +9,13 @@ public class ModOutputSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    //能否放入物品 1.20.1: isItemValid -> mayPlace
+    //能否放入物品
     @Override
     public boolean mayPlace(ItemStack stack) {
         return false;
     }
 
-    //最大数量 1.20.1: getSlotStackLimit -> getMaxStackSize
+    //最大数量
     @Override
     public int getMaxStackSize() {
         return this.getItem().getMaxStackSize();

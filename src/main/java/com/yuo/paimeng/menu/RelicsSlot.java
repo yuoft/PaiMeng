@@ -15,30 +15,22 @@ public class RelicsSlot extends SlotItemHandler {
         super(itemHandler, index, xPosition, yPosition);
     }
 
-    //1.20.1: isItemValid -> mayPlace
     @Override
     public boolean mayPlace(@Nonnull ItemStack stack) {
         if (stack.getItem() instanceof Relics){ //只能放入对应部位圣遗物
             RelicsType relicsType = RelicsHelper.getTypeForStack(stack);
-            switch (relicsType){
-                case HEAD:
-                    return this.getSlotIndex() == 0;
-                case CUP:
-                    return this.getSlotIndex() == 1;
-                case CLOCK:
-                    return this.getSlotIndex() == 2;
-                case FEATHER:
-                    return this.getSlotIndex() == 3;
-                case FLOWER:
-                    return this.getSlotIndex() == 4;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + relicsType);
-            }
+            return switch (relicsType) {
+                case HEAD -> this.getSlotIndex() == 0;
+                case CUP -> this.getSlotIndex() == 1;
+                case CLOCK -> this.getSlotIndex() == 2;
+                case FEATHER -> this.getSlotIndex() == 3;
+                case FLOWER -> this.getSlotIndex() == 4;
+                default -> throw new IllegalStateException("Unexpected value: " + relicsType);
+            };
         }
         return false;
     }
 
-    //1.20.1: getItemStackLimit(stack) -> getMaxStackSize(stack)
     @Override
     public int getMaxStackSize(@Nonnull ItemStack stack) {
         return 1;

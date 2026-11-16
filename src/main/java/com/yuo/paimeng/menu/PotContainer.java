@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,7 +27,6 @@ public class PotContainer extends AbstractContainerMenu {
     private final BlockPos pos;
 
     public PotContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
-        //1.20.1 的方块实体没有无参构造，这里创建一个只用于客户端的空容器
         this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
@@ -66,14 +64,14 @@ public class PotContainer extends AbstractContainerMenu {
         return pos;
     }
 
-    public PotTile getPotTile() {
-        return this.potTile;
-    }
-
+    /**
+     * 燃烧进度
+     */
     public int getBurnTime(){
         return (int) Math.ceil((this.data.get(0) / (20 * 60 * 8.0)) * 14.0);
     }
 
+    /** 燃烧时间 s*/
     public int getTime(){ return (int) Math.ceil(this.data.get(0) / 20.0);}
 
     /**
@@ -102,27 +100,26 @@ public class PotContainer extends AbstractContainerMenu {
         return min;
     }
 
-    //获取玩家食品熟练度
+    /** 烹饪等级*/
     public int getFoodRecipesLevel(){
         return this.fooData.get(0);
     }
 
+    /** 烹饪经验*/
     public int getExp(){
         return  (int) Math.floor(this.fooData.get(1) / (double)CookingPacket.getUpExp(getFoodRecipesLevel()) * 49);
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return this.potTile.stillValid(playerIn);
     }
 
-    //玩家shift行为 1.20.1: transferStackInSlot -> quickMoveStack
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index > 5){
@@ -143,11 +140,6 @@ public class PotContainer extends AbstractContainerMenu {
         }
 
         return itemstack;
-    }
-
-    protected boolean hasRecipe(ItemStack stack) {
-        Container inventory = new SimpleContainer(stack);
-        return this.world.getRecipeManager().getRecipeFor(ModRecipeType.POT, inventory, this.world).isPresent();
     }
 
     public boolean canRecipe(){

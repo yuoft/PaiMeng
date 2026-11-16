@@ -86,11 +86,6 @@ public class CraneEntity extends Parrot implements NeutralMob {
                 .add(Attributes.FLYING_SPEED, 0.45D);
     }
 
-    //旧名保留（1.16.5 的 setCustomAttributes）
-    public static AttributeSupplier.Builder setCustomAttributes() {
-        return createAttributes();
-    }
-
     //刷怪位置规则（EntityGen 用）
     public static boolean checkCraneSpawnRules(EntityType<CraneEntity> type, net.minecraft.world.level.ServerLevelAccessor level,
                                                net.minecraft.world.entity.MobSpawnType spawnType, net.minecraft.core.BlockPos pos,
@@ -164,23 +159,5 @@ public class CraneEntity extends Parrot implements NeutralMob {
     @Override
     public void startPersistentAngerTimer() {
         this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.getRandom()));
-    }
-
-    //旧名兼容
-    public int getAngerTime() {
-        return getRemainingPersistentAngerTime();
-    }
-
-    public void setAngerTime(int time) {
-        setRemainingPersistentAngerTime(time);
-    }
-
-    @Nullable
-    public UUID getAngerTarget() {
-        return getPersistentAngerTarget();
-    }
-
-    public void setAngerTarget(@Nullable UUID target) {
-        setPersistentAngerTarget(target);
     }
 }

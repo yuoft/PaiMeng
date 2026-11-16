@@ -706,10 +706,13 @@
     "gui.paimeng.change":"切换",
     "gui.paimeng.strengthen_table":"强化台",
     "gui.paimeng.relics":"圣遗物总属性",
-    "gui.button.relics_open":"圣遗物",
-    "gui.button.relics_close":"背包",
-    "gui.button.strengthen":"强化",
-    
+    "gui.relics.button.relics_open":"圣遗物",
+    "gui.relics.button.relics_close":"背包",
+    "gui.strengthen.button":"强化",
+    "gui.strengthen.exp":"经验: %s/%s",
+    "gui.strengthen.max_lv":"最高等级!",
+    "gui.strengthen.up_lv":"等级提升: %s",
+
     "key.paimeng":"应急食品",
     "key.paimeng.openRelics":"打开圣遗物界面",
 

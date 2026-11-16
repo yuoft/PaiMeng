@@ -6,7 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.NonNullList;
 import net.minecraftforge.common.util.INBTSerializable;
 
-//圣遗物数据保存
+/** 圣遗物数据保存 */
 public class RelicsItemCapability implements INBTSerializable<CompoundTag> {
     private final int SLOT_SIZE = 6;
     private NonNullList<ItemStack> itemStacks = NonNullList.withSize(SLOT_SIZE, ItemStack.EMPTY);

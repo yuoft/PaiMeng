@@ -55,7 +55,7 @@ public class CookingPacket {
             Level world = player.level();
             
             // 🔴 安全校验：玩家必须距离方块 8 格以内，防止远程作弊发包
-            if (player.distanceToSqr(msg.pos.getX() + 0.5, msg.pos.getY() + 0.5, msg.pos.getZ() + 0.5) < 64.0) {
+            if (player.distanceToSqr(msg.pos.getX() + 0.5, msg.pos.getY() + 0.5, msg.pos.getZ() + 0.5) > 64.0) {
                 return;
             }
 
@@ -87,7 +87,7 @@ public class CookingPacket {
                 }
                 
                 // 额外产出判定
-                spawnFood(world, tile, msg.pos, msg.count, msg.star);
+                spawnOtherFood(world, tile, msg.pos, msg.count, msg.star);
                 
                 // 增加烹饪经验
                 if (msg.exp > 0) {
@@ -97,17 +97,17 @@ public class CookingPacket {
                     }
                     FoodRecipeSaveData.PlayerFoodRecipesInfo foodRecipesInfo = data.getInfo(player.getUUID());
                     if (!foodRecipesInfo.isEmpty()) {
-                        int level = foodRecipesInfo.getLevel();
-                        int exp0 = foodRecipesInfo.getExp();
-                        if (level == 5) {
+                        int foodRecipLv = foodRecipesInfo.getLevel();
+                        int foodRecipeExp = foodRecipesInfo.getExp();
+                        if (foodRecipLv == 5) {
                             foodRecipesInfo.setExp(0);
                         } else {
-                            int levelUpExp = getLevelUpExp(level, exp0, msg.exp);
-                            if (levelUpExp > 0) {
-                                foodRecipesInfo.setLevel(++level);
-                                foodRecipesInfo.setExp(levelUpExp);
+                            int foodRecipeUpExp = getLvUpExp(foodRecipLv, foodRecipeExp, msg.exp);
+                            if (foodRecipeUpExp > 0) {
+                                foodRecipesInfo.setLevel(++foodRecipLv);
+                                foodRecipesInfo.setExp(foodRecipeUpExp);
                             } else {
-                                foodRecipesInfo.setExp(exp0 + msg.exp);
+                                foodRecipesInfo.setExp(foodRecipeExp + msg.exp);
                             }
                         }
                     }
@@ -121,7 +121,7 @@ public class CookingPacket {
     /**
      * 获取升级后的剩余经验 为0则不可升级
      */
-    public static int getLevelUpExp(int level, int exp, int upExp) {
+    public static int getLvUpExp(int level, int exp, int upExp) {
         if (level == 5) return 0;
         int expAll = exp + upExp;
         int expDown = getUpExp(level);
@@ -139,7 +139,7 @@ public class CookingPacket {
     /**
      * 生成额外产出食物
      */
-    public static void spawnFood(Level world, BlockEntity tile, BlockPos pos, int count, int star) {
+    public static void spawnOtherFood(Level world, BlockEntity tile, BlockPos pos, int count, int star) {
         RandomSource rand = world.random;
         // 1% + 每级星级增加1%概率产生 派蒙
         if (count > 0 && rand.nextDouble() > 0.99 - (star - 1) * 0.01d) { 

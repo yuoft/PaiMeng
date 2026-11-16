@@ -20,7 +20,7 @@ public class MobEvent {
     @SubscribeEvent
     public static void onRegisterEntitiesAttr(EntityAttributeCreationEvent event) {
         //1.20.1: AttributeSupplier.Builder#create() -> build()
-        event.put(EntityTypeRegister.BOAR.get(), BoarEntity.setCustomAttributes().build());
-        event.put(EntityTypeRegister.CRANE.get(), CraneEntity.setCustomAttributes().build());
+        event.put(EntityTypeRegister.BOAR.get(), BoarEntity.createAttributes().build());
+        event.put(EntityTypeRegister.CRANE.get(), CraneEntity.createAttributes().build());
     }
 }

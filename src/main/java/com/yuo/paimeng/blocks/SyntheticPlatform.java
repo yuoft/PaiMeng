@@ -30,7 +30,6 @@ import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-// 1.20.1：ContainerBlock 已删除，改用 BaseEntityBlock
 public class SyntheticPlatform extends BaseEntityBlock {
     // GUI 标题（保留常量名；1.20.1 由方块实体作为 MenuProvider 提供标题）
     private static final Component CONTAINER_NAME = Component.translatable("gui.paimeng.synthetic_platform");
@@ -54,7 +53,6 @@ public class SyntheticPlatform extends BaseEntityBlock {
         return InteractionResult.SUCCESS;
     }
 
-    //1.16 的 getContainer(...) → 1.20.1 的 getMenuProvider(...)
     @Nullable
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {

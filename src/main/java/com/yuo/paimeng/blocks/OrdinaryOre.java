@@ -12,19 +12,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 
 //矿物
-// 1.20.1：OreBlock 已删除，改用 DropExperienceBlock
 public class OrdinaryOre extends DropExperienceBlock {
 
-    private final int harvestLevel; //1.16 的挖掘等级概念在 1.20.1 由标签决定，这里仅保留构造参数
-
-    public OrdinaryOre(int harvestLevel, float hardness) {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)
-                .strength(hardness, hardness + 5).requiresCorrectToolForDrops());
-        this.harvestLevel = harvestLevel;
-    }
-
-    public int getHarvestLevel() {
-        return harvestLevel;
+    public OrdinaryOre(float hardness) {
+        super(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(hardness, hardness + 5).requiresCorrectToolForDrops());
     }
 
     @Override

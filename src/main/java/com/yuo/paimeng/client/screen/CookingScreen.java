@@ -19,23 +19,23 @@ import java.util.Random;
 public class CookingScreen extends Screen {
     private final ResourceLocation RESOURCE = ModUtils.fa( "textures/gui/cooking.png");
     private Button button;
-    private final int textureWidth = 202;
-    private final int textureHeight = 12;
+    private static final int textureWidth = 202;
+    private static final int textureHeight = 12;
     private final AbstractContainerScreen<?> screen; //容器
-    private final int LEVEL; //食品等级
-    private double LEVEL_GROW = 0; //指针速度
+    private final int FOOD_RECIPE_LEVEL; //食品等级
+    private double FOOD_RECEIPTING_GROW = 0; //指针速度
     private final int minValue; //成功区间最小值
     private final int maxValue; //最大值
-    private final Random random = new Random();
-    private int count;
+    private int count; //烹饪数量
 
     protected CookingScreen(Component titleIn, AbstractContainerScreen<?> screen, int lv, int count) {
         super(titleIn);
-        this.LEVEL = lv;
+        this.FOOD_RECIPE_LEVEL = lv;
         this.count = count;
         this.screen = screen;
-        this.minValue = random.nextInt(80 + LEVEL * 20);
-        this.maxValue = this.minValue + (120 - LEVEL * 20);
+        Random random = new Random();
+        this.minValue = random.nextInt(80 + FOOD_RECIPE_LEVEL * 20);
+        this.maxValue = this.minValue + (120 - FOOD_RECIPE_LEVEL * 20);
     }
 
     @Override
@@ -55,30 +55,30 @@ public class CookingScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics graphics) {
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); //确保颜色正常
-        int i = (this.width - this.textureWidth) / 2;
-        int j = (this.height - this.textureHeight) / 2;
+        int i = (this.width - textureWidth) / 2;
+        int j = (this.height - textureHeight) / 2;
         graphics.blit(RESOURCE, i, j, 0, 0, textureWidth, textureHeight);
-        graphics.blit(RESOURCE, i + minValue, j + 1, 0, 12, 120 - LEVEL * 20, 10); //成功区间
-        if (LEVEL_GROW <= 200) {
-            setLEVEL_GROW(LEVEL); //模拟指针移动
-            graphics.blit(RESOURCE, i + (int) Math.floor(LEVEL_GROW), j - 5, 0, 22, 10, 18); //指针
+        graphics.blit(RESOURCE, i + minValue, j + 1, 0, 12, 120 - FOOD_RECIPE_LEVEL * 20, 10); //成功区间
+        if (FOOD_RECEIPTING_GROW <= 200) {
+            setFOOD_RECEIPTING_GROW(FOOD_RECIPE_LEVEL); //模拟指针移动
+            graphics.blit(RESOURCE, i + (int) Math.floor(FOOD_RECEIPTING_GROW), j - 5, 0, 22, 10, 18); //指针
         }
-        if (LEVEL_GROW > 200) this.button.onClick(0, 0);
+        if (FOOD_RECEIPTING_GROW > 200) this.button.onClick(0, 0);
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     private void button(Button button) {
-        if (LEVEL_GROW < minValue || LEVEL_GROW > maxValue) { //成功烹饪
+        if (FOOD_RECEIPTING_GROW < minValue || FOOD_RECEIPTING_GROW > maxValue) { //成功烹饪
             count = 0;
         }
         if (screen instanceof PotScreen pot) {
             BlockPos pos = pot.getMenu().getPos();
-            TileUtils.sendPotPacket(count, LEVEL, LEVEL, pos); //发送数据包设置产出
+            TileUtils.sendPotPacket(count, FOOD_RECIPE_LEVEL, FOOD_RECIPE_LEVEL, pos); //发送数据包设置产出
         }
         if (screen instanceof BenchScreen bench) {
             BlockPos pos = bench.getMenu().getPos();
 
-            TileUtils.sendPotPacket(count, LEVEL, LEVEL, pos);
+            TileUtils.sendPotPacket(count, FOOD_RECIPE_LEVEL, FOOD_RECIPE_LEVEL, pos);
         }
         if (minecraft != null) {
             minecraft.setScreen(screen);
@@ -86,25 +86,25 @@ public class CookingScreen extends Screen {
     }
 
     //设置指针速度
-    private void setLEVEL_GROW(int lv) {
+    private void setFOOD_RECEIPTING_GROW(int lv) {
         switch (lv) {
             case 1:
-                LEVEL_GROW += 0.4d;
+                FOOD_RECEIPTING_GROW += 0.4d;
                 break;
             case 2:
-                LEVEL_GROW += 0.6d;
+                FOOD_RECEIPTING_GROW += 0.6d;
                 break;
             case 3:
-                LEVEL_GROW += 0.9d;
+                FOOD_RECEIPTING_GROW += 0.9d;
                 break;
             case 4:
-                LEVEL_GROW += 1.2d;
+                FOOD_RECEIPTING_GROW += 1.2d;
                 break;
             case 5:
-                LEVEL_GROW += 1.5d;
+                FOOD_RECEIPTING_GROW += 1.5d;
                 break;
             default:
-                LEVEL_GROW += 1d;
+                FOOD_RECEIPTING_GROW += 1d;
                 break;
         }
     }

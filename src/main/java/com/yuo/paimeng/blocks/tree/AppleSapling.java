@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Random;
+
 public class AppleSapling extends SaplingBlock {
 
     private TreeSpawner tree;
@@ -23,7 +25,6 @@ public class AppleSapling extends SaplingBlock {
         this.tree = treeIn;
     }
 
-    //1.20.1 的 IGrowable → BonemealableBlock：canUseBonemeal → isBonemealSuccess
     @Override
     public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
         return this.canUseBonemeal(worldIn, rand, pos, state);
@@ -34,7 +35,6 @@ public class AppleSapling extends SaplingBlock {
         return state.getBlock() != PMBlocks.sunAppleSapling.get();
     }
 
-    //1.20.1：isValidGround → mayPlaceOn
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
         return this.isValidGround(state, worldIn, pos);
@@ -47,7 +47,6 @@ public class AppleSapling extends SaplingBlock {
         return super.mayPlaceOn(state, worldIn, pos);
     }
 
-    //1.20.1 的 SaplingBlock 用 advanceTree 取代了 1.16 的 placeTree
     @Override
     public void advanceTree(ServerLevel world, BlockPos pos, BlockState state, RandomSource rand) {
         this.placeTree(world, pos, state, rand);
@@ -57,9 +56,7 @@ public class AppleSapling extends SaplingBlock {
         if (state.getValue(STAGE) == 0) {
             world.setBlock(pos, state.cycle(STAGE), 4);
         } else {
-            // TODO(port): TreeSpawner.spawn 目前还是 1.16 的 java.util.Random 参数（WorldGen 侧未移植），
-            //  等那边把签名改成 RandomSource 后，这里直接传 rand 即可，去掉临时转换。
-            tree.spawn(world, world.getChunkSource().getGenerator(), pos, state, new java.util.Random(rand.nextLong()));
+            tree.spawn(world, world.getChunkSource().getGenerator(), pos, state, rand);
         }
     }
 }

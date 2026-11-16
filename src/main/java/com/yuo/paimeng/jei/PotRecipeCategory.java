@@ -88,7 +88,6 @@ public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
     static void addIngredient(IRecipeSlotBuilder slot, NonNullList<Ingredient> ingredients, int index) {
         if (index < 0 || index >= ingredients.size()) return;
         Ingredient ingredient = ingredients.get(index);
-        if (ingredient == null) return;
         ItemStack[] items = ingredient.getItems();
         if (items.length > 0) slot.addItemStacks(Arrays.asList(items));
     }

@@ -11,13 +11,11 @@ public class CookingSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    //1.20.1: isItemValid -> mayPlace
     @Override
     public boolean mayPlace(ItemStack stack) {
         return stack.getItem() instanceof PMFoodItem || stack.getItem() == Items.TOTEM_OF_UNDYING; //食材
     }
 
-    //1.20.1: getItemStackLimit(stack) -> getMaxStackSize()
     @Override
     public int getMaxStackSize() {
         return 64;

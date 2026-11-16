@@ -52,7 +52,6 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         slotsChanged(inputInventory);
     }
 
-    //输入改变时设置输出 1.20.1: onCraftMatrixChanged -> slotsChanged
     @Override
     public void slotsChanged(Container matrix) {
         if (this.world.isClientSide) return;
@@ -62,7 +61,6 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         Optional<SeedBoxRecipe> optional = this.world.getRecipeManager().getRecipeFor(ModRecipeType.SEED_BOX, matrix, this.world);
         if (optional.isPresent()) {
             SeedBoxRecipe recipe = optional.get();
-            //1.20.1: canUseRecipe -> RecipeHolder#setRecipeUsed(Level, ServerPlayer, Recipe)
             if (this.outputInventory.setRecipeUsed(this.world, serverPlayer, recipe)) {
                 itemstack = recipe.getResult(); //获取配方输出
             }
@@ -73,7 +71,6 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         serverPlayer.connection.send(new ClientboundContainerSetSlotPacket(this.containerId, this.incrementStateId(), 1, itemstack));
     }
 
-    //在打开gui时不能选中容器物品 1.20.1: slotClick -> clicked（返回 void）
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
         if(slotId == (this.slots.size() - 1) - (8 - player.getInventory().selected)) {
@@ -82,23 +79,21 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         super.clicked(slotId, dragType, clickTypeIn, player);
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return this.inputInventory.stillValid(playerIn);
     }
 
-    //玩家shift行为 1.20.1: transferStackInSlot -> quickMoveStack
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index == 1){
                 if (!this.moveItemStackTo(itemStack1, 2, 38, true)) return ItemStack.EMPTY;
-                slot.onQuickCraft(itemStack1, itemstack); //1.20.1: onSlotChange -> onQuickCraft
+                slot.onQuickCraft(itemStack1, itemstack);
             }
             else if (index > 1){
                 if (itemStack1.getItem() instanceof PMFoodItem) //包含在配方中
@@ -120,38 +115,32 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         return itemstack;
     }
 
-    //1.20.1: fillStackedContents -> fillCraftSlotsStackedContents
     @Override
     public void fillCraftSlotsStackedContents(StackedContents itemHelperIn) {
         this.inputInventory.fillStackedContents(itemHelperIn);
     }
 
-    //1.20.1: clear -> clearCraftingContent
     @Override
     public void clearCraftingContent() {
         this.inputInventory.clearContent();
         this.outputInventory.clearContent();
     }
 
-    //1.20.1: matches -> recipeMatches
     @Override
     public boolean recipeMatches(Recipe<? super CraftingContainer> recipeIn) {
         return recipeIn.matches(this.inputInventory, this.player.level());
     }
 
-    //1.20.1: getOutputSlot -> getResultSlotIndex
     @Override
     public int getResultSlotIndex() {
         return 1;
     }
 
-    //1.20.1: getWidth -> getGridWidth
     @Override
     public int getGridWidth() {
         return 1;
     }
 
-    //1.20.1: getHeight -> getGridHeight
     @Override
     public int getGridHeight() {
         return 1;
@@ -162,7 +151,6 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         return 2;
     }
 
-    //1.20.1: func_241850_m -> getRecipeBookType
     @Override
     public RecipeBookType getRecipeBookType() {
         return null;
@@ -173,7 +161,6 @@ public class SeedBoxContainer extends RecipeBookMenu<CraftingContainer> {
         return index != this.getResultSlotIndex();
     }
 
-    //1.20.1: onContainerClosed -> removed
     @Override
     public void removed(Player playerIn) {
         ItemStack stack = this.inputInventory.getItem(0);

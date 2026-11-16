@@ -87,23 +87,9 @@ public class CraneModel<C extends CraneEntity> extends EntityModel<C> {
         this.setRotationAngles(getParrotState(entityIn), entityIn.tickCount, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
 
-    public void setRotationAngles(CraneEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.setRotationAngles(getParrotState(entityIn), entityIn.tickCount, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-    }
-
     @Override
     public void prepareMobModel(C entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
         this.setLivingAnimations(getParrotState(entityIn));
-    }
-
-    public void setLivingAnimations(CraneEntity entityIn, float limbSwing, float limbSwingAmount, float partialTick) {
-        this.setLivingAnimations(getParrotState(entityIn));
-    }
-
-    public void renderOnShoulder(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float p_228284_5_, float p_228284_6_, float p_228284_7_, float p_228284_8_, int p_228284_9_) {
-        this.setLivingAnimations(CraneModel.State.ON_SHOULDER);
-        this.setRotationAngles(CraneModel.State.ON_SHOULDER, p_228284_9_, p_228284_5_, p_228284_6_, 0.0F, p_228284_7_, p_228284_8_);
-        this.getParts().forEach((part) -> part.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn));
     }
 
     private void setRotationAngles(CraneModel.State state, int ticksExisted, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
@@ -217,7 +203,7 @@ public class CraneModel<C extends CraneEntity> extends EntityModel<C> {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static enum State {
+    public enum State {
         FLYING,
         STANDING,
         SITTING,

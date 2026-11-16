@@ -1,7 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "paimeng:item/food/xiantiaoqiang",
-    "layer1": "paimeng:item/star5"
+    "layer0": "paimeng:item/food/xiantiaoqiang"
   }
 }

@@ -45,13 +45,14 @@ public class StrengthenTableScreen extends AbstractContainerScreen<StrengthenTab
     @Override
     protected void renderLabels(GuiGraphics graphics, int x, int y) {
         if (menu.hasRightItem()) {
-            graphics.drawString(this.font, "Exp:" + menu.getLeftExp() + "/" + menu.getRightExp(), 87, 15, 0x8B008B, false);
+            graphics.drawString(this.font, Component.translatable("gui.strengthen.exp", menu.getLeftExp(), menu.getRightExp()),
+                    87, 15, 0x8B008B, false);
         }
         if (menu.hasItem()) {
-            int level = menu.getLevelUp();
-            if (level < 0) {
-                graphics.drawString(this.font, "Level:+ Max", 87, 60, 0xff0000, false);
-            } else graphics.drawString(this.font, "Level:+ " + level, 87, 60, 0xffffff, false);
+            int relicsLv = menu.getLevelUp();
+            if (relicsLv < 0) {
+                graphics.drawString(this.font, Component.translatable("gui.strengthen.max_lv"), 87, 60, 0xff0000, false);
+            } else graphics.drawString(this.font, Component.translatable("gui.strengthen.up_lv", relicsLv), 87, 60, 0xffffff, false);
         }
         super.renderLabels(graphics, x, y);
     }

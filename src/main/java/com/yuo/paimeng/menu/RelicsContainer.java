@@ -9,17 +9,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 public class RelicsContainer extends AbstractContainerMenu {
     private final RelicsItemHandler itemHandler; //存储食材
-    private final Level world;
 
     public RelicsContainer(int id, Inventory playerInventory) {
         super(PMMenuTypes.relicsContainer.get(), id);
         Player player = playerInventory.player;
         this.itemHandler = player.getCapability(ModCapability.RELICS_CAPABILITY).orElseThrow(NullPointerException::new);
-        this.world = player.level();
         //圣遗物槽
         for (int m = 0; m < 2; ++m){
             for (int n = 0; n < 3; ++n){
@@ -38,18 +35,16 @@ public class RelicsContainer extends AbstractContainerMenu {
         }
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return true;
     }
 
-    //玩家shift行为 1.20.1: transferStackInSlot -> quickMoveStack
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index > 6){

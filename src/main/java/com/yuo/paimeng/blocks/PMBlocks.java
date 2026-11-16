@@ -15,9 +15,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 //方块注册
 public class PMBlocks {
-
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, PaiMeng.MOD_ID);
-    // 1.20.1：Block.Properties 已删除，统一使用 BlockBehaviour.Properties（1.16 的 Properties.from → copy）
+
     public static final BlockBehaviour.Properties LOG = BlockBehaviour.Properties.copy(Blocks.BIRCH_LOG); //树干
     public static final BlockBehaviour.Properties PLANK = BlockBehaviour.Properties.copy(Blocks.BIRCH_PLANKS); //树干
     public static final BlockBehaviour.Properties LEAF = BlockBehaviour.Properties.copy(Blocks.BIRCH_LEAVES); //树叶
@@ -46,16 +45,16 @@ public class PMBlocks {
     public static RegistryObject<Block> sevenGod = BLOCKS.register("seven_god", SevenGodBlock::new);
 
     //矿物
-    public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> dianqiShuijingOre = BLOCKS.register("dianqi_shuijing_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> heitieOre = BLOCKS.register("heitie_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> jinghuaGusuiOre = BLOCKS.register("jinghua_gusui_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> mojingOre = BLOCKS.register("mojing_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> shipoOre = BLOCKS.register("shipo_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> shuijingOre = BLOCKS.register("shuijing_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> xingyinOre = BLOCKS.register("xingyin_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> yeboshiOre = BLOCKS.register("yeboshi_ore", () -> new OrdinaryOre(1,  5));
-    public static RegistryObject<Block> zijingOre = BLOCKS.register("zijing_ore", () -> new OrdinaryOre(1,  5));
+    public static RegistryObject<Block> baitieOre = BLOCKS.register("baitie_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> dianqiShuijingOre = BLOCKS.register("dianqi_shuijing_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> heitieOre = BLOCKS.register("heitie_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> jinghuaGusuiOre = BLOCKS.register("jinghua_gusui_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> mojingOre = BLOCKS.register("mojing_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> shipoOre = BLOCKS.register("shipo_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> shuijingOre = BLOCKS.register("shuijing_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> xingyinOre = BLOCKS.register("xingyin_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> yeboshiOre = BLOCKS.register("yeboshi_ore", () -> new OrdinaryOre(5));
+    public static RegistryObject<Block> zijingOre = BLOCKS.register("zijing_ore", () -> new OrdinaryOre(5));
 
     //X型作物
     public static RegistryObject<Block> bailuoboCrop = BLOCKS.register("bailuobo_crop", () -> new XCropBlock(COMMON, CROP));

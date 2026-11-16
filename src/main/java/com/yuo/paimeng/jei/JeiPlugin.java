@@ -124,7 +124,7 @@ public class JeiPlugin implements IModPlugin {
         //药剂
         registration.registerSubtypeInterpreter(PMItems.drug.get(), (stack, context) -> {
             List<MobEffectInstance> list = PotionUtils.getMobEffects(stack);
-            if (list.size() > 0) {
+            if (!list.isEmpty()) {
                 StringBuilder s = new StringBuilder();
                 for (MobEffectInstance instance : list) {
                     s.append(instance.getDescriptionId());

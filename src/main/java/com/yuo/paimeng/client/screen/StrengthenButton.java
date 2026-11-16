@@ -54,6 +54,6 @@ public class StrengthenButton extends ImageButton {
     //绘制按钮提示文字
     public void renderToolTip(GuiGraphics graphics, int mouseX, int mouseY) {
         Font fontRenderer = Minecraft.getInstance().font;
-        graphics.drawString(fontRenderer, Component.translatable("gui.button.strengthen").getString(), this.getX() + 2, this.getY() - 10, 0x696969, false);
+        graphics.drawString(fontRenderer, Component.translatable("gui.strengthen.button").getString(), this.getX() + 2, this.getY() - 10, 0x696969, false);
     }
 }

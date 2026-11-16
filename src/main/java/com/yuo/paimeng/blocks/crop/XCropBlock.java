@@ -26,11 +26,6 @@ public class XCropBlock extends CropBlock {
         this.useBlockEnum = blockEnum;
     }
 
-//    @Override
-//    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-//        return state.get(AGE) >= 7 ? super.getLightValue(state, world, pos) : 0;
-//    }
-
     //生长时间更长
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {

@@ -3,7 +3,7 @@ package com.yuo.paimeng.capability;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 
-//能力
+/** 暴击能力 */
 public class BlowCapability implements IBlowCapability{
     private double criticalRate; //暴击率
     private double criticalDamage; //暴击伤害

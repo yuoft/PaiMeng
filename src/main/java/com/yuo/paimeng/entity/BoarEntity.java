@@ -109,11 +109,6 @@ public class BoarEntity extends Animal implements NeutralMob {
                 .add(Attributes.ARMOR, 2.0d);
     }
 
-    //旧名保留（1.16.5 的 setCustomAttributes）
-    public static AttributeSupplier.Builder setCustomAttributes() {
-        return createAttributes();
-    }
-
     //刷怪位置规则（EntityGen 用）
     public static boolean checkBoarSpawnRules(EntityType<BoarEntity> type, net.minecraft.world.level.ServerLevelAccessor level,
                                               net.minecraft.world.entity.MobSpawnType spawnType, net.minecraft.core.BlockPos pos,
@@ -194,23 +189,5 @@ public class BoarEntity extends Animal implements NeutralMob {
     @Override
     public void startPersistentAngerTimer() {
         this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.getRandom()));
-    }
-
-    //旧名兼容（1.16.5 的 getAngerTime / setAngerTime / getAngerTarget / setAngerTarget / func_230258_H__）
-    public int getAngerTime() {
-        return getRemainingPersistentAngerTime();
-    }
-
-    public void setAngerTime(int time) {
-        setRemainingPersistentAngerTime(time);
-    }
-
-    @Nullable
-    public UUID getAngerTarget() {
-        return getPersistentAngerTarget();
-    }
-
-    public void setAngerTarget(@Nullable UUID target) {
-        setPersistentAngerTarget(target);
     }
 }

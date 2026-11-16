@@ -24,9 +24,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
     private final SynPlatInventory inputInventory;
@@ -68,7 +66,6 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
         slotsChanged(inputInventory);
     }
 
-    //输入改变时设置输出 1.20.1: onCraftMatrixChanged -> slotsChanged
     @Override
     public void slotsChanged(Container matrix) {
         if (this.world.isClientSide) return;
@@ -99,37 +96,14 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
      * @param inventory 输入物品栏
      * @return 是 true
      */
-    private boolean isPotionAndCheng(SynPlatInventory inventory){
+    public boolean isPotionAndCheng(SynPlatInventory inventory){
         if(inventory.isEmpty()) return false;
-        ItemStack slot0 = inventory.getItem(0);
-        ItemStack slot1 = inventory.getItem(1);
-        ItemStack slot2 = inventory.getItem(2);
-        ItemStack slot3 = inventory.getItem(3); //转呗催化剂
-        return isPotionEqual(slot0, slot1) && slot0.getItem() instanceof PotionItem
-                && slot2.getItem() == PMItems.drugBottle.get() && slot1.getItem() instanceof PotionItem
-                && slot3.getItem() == PMItems.shanbianzhichen.get();
-    }
-
-    /**
-     * 判断物品是否相同 药水类型是否相同
-     * @param stack 物品0
-     * @param stack1 物品1
-     * @return 相同 true
-     */
-    private boolean isPotionEqual(ItemStack stack, ItemStack stack1){
-        if (ItemStack.isSameItem(stack, stack1)){ //物品相同（1.20.1: isItemEqual -> isSameItem）
-            if (stack.getOrCreateTag().contains("Potion")){ //酿造药水
-                Potion potion0 = PotionUtils.getPotion(stack);
-                Potion potion1 = PotionUtils.getPotion(stack1);
-                return potion0 == potion1;
-            }else if (stack.getOrCreateTag().contains("CustomPotionEffects")){
-                List<MobEffectInstance> effects0 = PotionUtils.getCustomEffects(stack);
-                List<MobEffectInstance> effects1 = PotionUtils.getCustomEffects(stack1);
-                if (effects0.size() != effects1.size()) return false;
-                else return effects0.containsAll(effects1);
-            }
-        }
-        return false;
+        ItemStack slot0 = inventory.getItem(0); //药水
+        ItemStack slot1 = inventory.getItem(1); //药水
+        ItemStack slot2 = inventory.getItem(2); //瓶子
+        ItemStack slot3 = inventory.getItem(3); //转变催化剂
+        return slot0.getItem() instanceof PotionItem && slot1.getItem() instanceof PotionItem
+                && slot2.getItem() == PMItems.drugBottle.get() && slot3.getItem() == PMItems.shanbianzhichen.get();
     }
 
     /**
@@ -139,13 +113,39 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
      */
     private ItemStack getDrug(SynPlatInventory inventory){
         ItemStack slot0 = inventory.getItem(0);
-        if (slot0.getOrCreateTag().contains("Potion")){
-            //1.20.1: addPotionToItemStack -> setPotion
-            return PotionUtils.setPotion(new ItemStack(PMItems.drug.get()), PotionUtils.getPotion(slot0));
-        }else if (slot0.getOrCreateTag().contains("CustomPotionEffects")){
-            //1.20.1: appendEffects -> setCustomEffects
-            return PotionUtils.setCustomEffects(new ItemStack(PMItems.drug.get()), PotionUtils.getCustomEffects(slot0));
-        }else return ItemStack.EMPTY;
+        ItemStack slot1 = inventory.getItem(1);
+        ItemStack result = new ItemStack(PMItems.drug.get());
+
+        // 获取两个药水的所有效果
+        List<MobEffectInstance> effects0 = PotionUtils.getCustomEffects(slot0);
+        if (effects0.isEmpty() && slot0.getOrCreateTag().contains("Potion")) {
+            // 如果是基础药水，需要转换一下
+            effects0 = new ArrayList<>(PotionUtils.getPotion(slot0).getEffects());
+        }
+
+        List<MobEffectInstance> effects1 = PotionUtils.getCustomEffects(slot1);
+        if (effects1.isEmpty() && slot1.getOrCreateTag().contains("Potion")) {
+            effects1 = new ArrayList<>(PotionUtils.getPotion(slot1).getEffects());
+        }
+
+        // 将效果1合并到效果0中（保留强度高的）
+        if (!effects0.isEmpty() && !effects1.isEmpty()) {
+            // 注意：这里为了不破坏原 List，最好复制一份
+            List<MobEffectInstance> mergedList = new ArrayList<>(effects0);
+            appendList(mergedList, new ArrayList<>(effects1));
+
+            // 将合并后的效果设置给结果物品
+            PotionUtils.setCustomEffects(result, mergedList);
+            return result;
+        } else if (!effects0.isEmpty()) {
+            PotionUtils.setCustomEffects(result, effects0);
+            return result;
+        } else if (!effects1.isEmpty()) {
+            PotionUtils.setCustomEffects(result, effects1);
+            return result;
+        }
+
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -158,8 +158,8 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
             Iterator<MobEffectInstance> iterator1 = list.iterator();
             while (iterator1.hasNext()) {
                 MobEffectInstance next1 = iterator1.next();
-                if (next.getEffect() == next1.getEffect()) { //1.20.1: getPotion -> getEffect
-                    next.update(next1); //保留值高者（1.20.1: combine -> update）
+                if (next.getEffect() == next1.getEffect()) {
+                    next.update(next1); //保留值高者
                     iterator1.remove(); //去除以转移值
                 }
             }
@@ -167,18 +167,16 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
         mainList.addAll(list); //讲不重复的
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return this.synPlatTile.stillValid(playerIn);
     }
 
-    //玩家shift行为 1.20.1: transferStackInSlot -> quickMoveStack
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index == 4){
@@ -206,38 +204,32 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
         return itemstack;
     }
 
-    //1.20.1: fillStackedContents -> fillCraftSlotsStackedContents
     @Override
     public void fillCraftSlotsStackedContents(StackedContents itemHelperIn) {
         this.inputInventory.fillStackedContents(itemHelperIn);
     }
 
-    //1.20.1: clear -> clearCraftingContent
     @Override
     public void clearCraftingContent() {
         this.inputInventory.clearContent();
         this.outputInventory.setItem(4, ItemStack.EMPTY);
     }
 
-    //1.20.1: matches -> recipeMatches
     @Override
     public boolean recipeMatches(Recipe<? super CraftingContainer> recipeIn) {
         return recipeIn.matches(this.inputInventory, this.player.level());
     }
 
-    //1.20.1: getOutputSlot -> getResultSlotIndex
     @Override
     public int getResultSlotIndex() {
         return 4;
     }
 
-    //1.20.1: getWidth -> getGridWidth
     @Override
     public int getGridWidth() {
         return 4;
     }
 
-    //1.20.1: getHeight -> getGridHeight
     @Override
     public int getGridHeight() {
         return 1;
@@ -248,7 +240,6 @@ public class SynPlatContainer extends RecipeBookMenu<CraftingContainer> {
         return 5;
     }
 
-    //1.20.1: func_241850_m -> getRecipeBookType
     @Override
     public RecipeBookType getRecipeBookType() {
         return null;

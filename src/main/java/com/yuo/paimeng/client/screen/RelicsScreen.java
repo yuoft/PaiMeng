@@ -23,7 +23,6 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private float oldMouseX;
-    /** The old y position of the mouse pointer */
     private float oldMouseY;
 
     public RelicsScreen(RelicsContainer relicsContainer, Inventory inv, Component titleIn) {
@@ -44,7 +43,7 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTicks, int x, int y) {
-        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); //确保颜色正常
+        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F); 
         int i = this.leftPos;
         int j = this.topPos;
         graphics.blit(RESOURCE, i, j, 0, 0, imageWidth, imageHeight);
@@ -55,12 +54,25 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
     @Override
     protected void renderLabels(GuiGraphics graphics, int x, int y) {
         if (this.minecraft != null && this.minecraft.player != null) {
-//            graphics.drawString(this.font, "玩家：" + this.minecraft.player.getName().getString(), 110, 12, 0x696969);
-            //显示圣遗物属性
             int i = 0;
             for (RelicsHelper.RandomAttrValue value : RelicsHelper.getRelicsData(this.minecraft.player)) {
                 if (!value.isEmpty()) {
-                    graphics.drawString(this.font, value.getAttrType().getAttrName() + getMath(value.getBaseValue()), 110, 12 + i * 8, 0x696969, false);
+                    int startX = 110;
+                    int startY = 12 + i * 8; // 稍微增加了行距，从 8 改为 10，看起来不那么拥挤
+
+                    String nameText =value.getAttrType().getAttrName() + ": ";
+                    graphics.drawString(this.font, nameText, startX, startY, 0x696969, false);
+                    int nameWidth = this.font.width(nameText);
+                    float scale = 0.85f; // 缩放比例：0.8f 为原大小的 80%
+                    
+                    graphics.pose().pushPose(); // 保存当前坐标系
+                    // 平移坐标系到属性名右侧 (+1.5f 是为了微调垂直对齐)
+                    graphics.pose().translate(startX + nameWidth, startY + 1.5f, 0);
+                    graphics.pose().scale(scale, scale, 1.0f);
+                    
+                    String valueText = getMath(value.getBaseValue());
+                    graphics.drawString(this.font, valueText, 0, 0, 0x8B008B, false);
+                    graphics.pose().popPose();
                     i++;
                 }
             }
@@ -71,7 +83,7 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
     private String getMath(double a) {
         if (a < 1) {
             BigDecimal bd = new BigDecimal(a * 100).setScale(2, RoundingMode.HALF_EVEN);
-            return bd.toString() + "%";
+            return bd + "%";
         }
         return new BigDecimal(a).setScale(2, RoundingMode.HALF_EVEN).toString();
     }
@@ -85,13 +97,6 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
         this.oldMouseY = (float) mouseY;
     }
 
-    //渲染玩家
-    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
-        drawEntityOnScreen(new GuiGraphics(Minecraft.getInstance(), Minecraft.getInstance().renderBuffers().bufferSource()),
-                posX, posY, scale, mouseX, mouseY, livingEntity);
-    }
-
-    //渲染玩家（1.20.1 图形上下文版本）
     public static void drawEntityOnScreen(GuiGraphics graphics, int posX, int posY, int scale, float mouseX, float mouseY, LivingEntity livingEntity) {
         InventoryScreen.renderEntityInInventoryFollowsMouse(graphics, posX, posY, scale, mouseX, mouseY, livingEntity);
     }
@@ -102,5 +107,4 @@ public class RelicsScreen extends AbstractContainerScreen<RelicsContainer> {
             super.onClose();
         }
     }
-
 }

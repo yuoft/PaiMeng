@@ -2,7 +2,7 @@ package com.yuo.paimeng.menu;
 
 import net.minecraft.world.inventory.ContainerData;
 
-//1.20.1: IIntArray -> ContainerData（size() -> getCount()）
+/** 强化桌数据*/
 public class StrengthenIntArray implements ContainerData {
     private int left; //左边是否有物品 0：false
     private int right; //右边
@@ -12,20 +12,14 @@ public class StrengthenIntArray implements ContainerData {
 
     @Override
     public int get(int index) {
-        switch(index) {
-            case 0:
-                return left;
-            case 1:
-                return right;
-            case 2:
-                return LeftExp;
-            case 3:
-                return rightExp;
-            case 4:
-                return levelUp;
-            default:
-                return 0;
-        }
+        return switch (index) {
+            case 0 -> left;
+            case 1 -> right;
+            case 2 -> LeftExp;
+            case 3 -> rightExp;
+            case 4 -> levelUp;
+            default -> 0;
+        };
     }
 
     @Override
@@ -52,13 +46,5 @@ public class StrengthenIntArray implements ContainerData {
     @Override
     public int getCount() {
         return 5;
-    }
-
-    /**
-     * 1.16.5 旧名称，保留以便其它代码继续使用
-     * @return 数据长度
-     */
-    public int size() {
-        return this.getCount();
     }
 }

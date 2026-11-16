@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 public class StrengthenTableContainer extends AbstractContainerMenu {
     private final StrengthenTableTile sTTile; //存储食材
     private final StrengthenIntArray data;
-    private final Level world;
     private final BlockPos pos; // 🔴 新增：保存方块坐标
 
     public StrengthenTableContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
@@ -27,7 +26,6 @@ public class StrengthenTableContainer extends AbstractContainerMenu {
         this.sTTile = (StrengthenTableTile) tile;
         this.pos = sTTile.getBlockPos();
         this.data = sTTile.data;
-        this.world = playerInventory.player.level();
         this.addDataSlots(data); //1.20.1: trackIntArray -> addDataSlots
         //经验槽
         for (int m = 0; m < 4; m++){
@@ -82,18 +80,16 @@ public class StrengthenTableContainer extends AbstractContainerMenu {
         return data.get(4);
     }
 
-    //1.20.1: canInteractWith -> stillValid
     @Override
     public boolean stillValid(Player playerIn) {
         return this.sTTile.stillValid(playerIn);
     }
 
-    //玩家shift行为 1.20.1: transferStackInSlot -> quickMoveStack
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
             if (index > 16){

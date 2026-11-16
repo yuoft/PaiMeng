@@ -134,7 +134,7 @@ public class CookingTransferHandler<C extends AbstractContainerMenu, R> implemen
         MatchingItemsResult matchingItemsResult =
                 getMatchingItems(stackHelper, availableItemStacks, ingredientsMap, getContainerClass());
 
-        if (matchingItemsResult.missingItems.size() > 0) {
+        if (!matchingItemsResult.missingItems.isEmpty()) {
             Component message = Component.translatable("jei.tooltip.error.recipe.transfer.missing");
             List<IRecipeSlotView> missingSlots = new ArrayList<>();
             for (Integer key : matchingItemsResult.missingItems) {

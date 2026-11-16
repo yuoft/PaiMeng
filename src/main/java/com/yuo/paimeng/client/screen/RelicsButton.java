@@ -77,9 +77,9 @@ public class RelicsButton extends ImageButton {
     public void renderToolTip(GuiGraphics graphics, int mouseX, int mouseY) {
         Font fontRenderer = Minecraft.getInstance().font;
         if (playerScreen instanceof InventoryScreen) {
-            graphics.drawString(fontRenderer, Component.translatable("gui.button.relics_open").getString(), this.getX(), this.getY() - 8, 0xffffff, false);
+            graphics.drawString(fontRenderer, Component.translatable("gui.relics.button.relics_open").getString(), this.getX(), this.getY() - 8, 0xffffff, false);
         } else
-            graphics.drawString(fontRenderer, Component.translatable("gui.button.relics_close").getString(), this.getX(), this.getY() - 8, 0x696969, false);
+            graphics.drawString(fontRenderer, Component.translatable("gui.relics.button.relics_close").getString(), this.getX(), this.getY() - 8, 0x696969, false);
     }
 
     //切换回玩家背包

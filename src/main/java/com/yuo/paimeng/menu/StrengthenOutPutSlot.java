@@ -10,13 +10,11 @@ public class StrengthenOutPutSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    //1.20.1: isItemValid -> mayPlace
     @Override
     public boolean mayPlace(ItemStack stack) {
         return stack.getItem() instanceof Relics;
     }
 
-    //1.20.1: getItemStackLimit(stack) -> getMaxStackSize(stack)
     @Override
     public int getMaxStackSize(ItemStack stack) {
         return 1;

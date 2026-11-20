@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:food_xumi_qiangwei",
+      "item": "paimeng:stuff_xumi_qiangwei",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:lanbade_yujuan"
+    "item": "paimeng:food_lanbade_yujuan"
   }
 }

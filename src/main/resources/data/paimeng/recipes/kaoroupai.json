@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 2
     },
     {
@@ -11,6 +11,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:kaoroupai"
+    "item": "paimeng:food_kaoroupai"
   }
 }

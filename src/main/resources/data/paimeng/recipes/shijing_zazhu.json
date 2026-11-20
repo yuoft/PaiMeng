@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_xiangchang",
+      "item": "paimeng:stuff_xiangchang",
       "count": 2
     },
     {
-      "item": "paimeng:food_doufu",
+      "item": "paimeng:stuff_doufu",
       "count": 1
     },
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:food_jingua",
+      "item": "paimeng:stuff_jingua",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:shijing_zazhu"
+    "item": "paimeng:food_shijing_zazhu"
   }
 }

@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 3
     },
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 3
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 3
     },
     {
-      "item": "paimeng:food_yan",
+      "item": "paimeng:stuff_yan",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:zhongyuan_zasui"
+    "item": "paimeng:food_zhongyuan_zasui"
   }
 }

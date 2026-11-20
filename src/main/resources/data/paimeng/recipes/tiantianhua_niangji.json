@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_qinrou",
+      "item": "paimeng:stuff_qinrou",
       "count": 2
     },
     {
-      "item": "paimeng:food_tiantianhua",
+      "item": "paimeng:stuff_tiantianhua",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:tiantianhua_niangji"
+    "item": "paimeng:food_tiantianhua_niangji"
   }
 }

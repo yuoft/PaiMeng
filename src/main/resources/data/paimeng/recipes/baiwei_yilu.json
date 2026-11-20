@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_qinrou",
+      "item": "paimeng:stuff_qinrou",
       "count": 3
     },
     {
-      "item": "paimeng:food_niaodan",
+      "item": "paimeng:stuff_niaodan",
       "count": 3
     },
     {
-      "item": "paimeng:food_huluobo",
+      "item": "paimeng:stuff_huluobo",
       "count": 2
     },
     {
-      "item": "paimeng:food_mojiecao",
+      "item": "paimeng:stuff_mojiecao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:baiwei_yilu"
+    "item": "paimeng:food_baiwei_yilu"
   }
 }

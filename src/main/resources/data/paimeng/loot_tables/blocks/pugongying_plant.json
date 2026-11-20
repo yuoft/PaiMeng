@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_pugongying_zhongzi"
+          "name": "paimeng:stuff_pugongying_zhongzi"
         }
       ],
       "conditions": [

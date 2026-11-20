@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_huluobo",
+      "item": "paimeng:stuff_huluobo",
       "count": 4
     },
     {
-      "item": "paimeng:food_tudou",
+      "item": "paimeng:stuff_tudou",
       "count": 4
     },
     {
-      "item": "paimeng:food_yangcong",
+      "item": "paimeng:stuff_yangcong",
       "count": 4
     }
   ],
   "result": {
-    "item": "paimeng:fengshen_zahuicai"
+    "item": "paimeng:food_fengshen_zahuicai"
   }
 }

@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_huotui",
+      "item": "paimeng:stuff_huotui",
       "count": 1
     },
     {
-      "item": "paimeng:food_peigen",
+      "item": "paimeng:stuff_peigen",
       "count": 1
     },
     {
-      "item": "paimeng:food_xiangchang",
+      "item": "paimeng:stuff_xiangchang",
       "count": 1
     },
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:lenrou_pinpan"
+    "item": "paimeng:food_lenrou_pinpan"
   }
 }

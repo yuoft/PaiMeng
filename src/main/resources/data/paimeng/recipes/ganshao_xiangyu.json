@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:food_yan",
+      "item": "paimeng:stuff_yan",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:ganshao_xiangyu"
+    "item": "paimeng:food_ganshao_xiangyu"
   }
 }

@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 3
     },
     {
-      "item": "paimeng:food_huluobo",
+      "item": "paimeng:stuff_huluobo",
       "count": 3
     },
     {
-      "item": "paimeng:food_yangcong",
+      "item": "paimeng:stuff_yangcong",
       "count": 2
     },
     {
-      "item": "paimeng:food_fajiao_guoshizhi",
+      "item": "paimeng:stuff_fajiao_guoshizhi",
       "count": 1
     },
     {
@@ -23,6 +23,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:gangwan_niudu"
+    "item": "paimeng:food_gangwan_niudu"
   }
 }

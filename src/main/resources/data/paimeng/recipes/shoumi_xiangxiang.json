@@ -2,23 +2,23 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:food_daomi",
+      "item": "paimeng:stuff_daomi",
       "count": 4
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 3
     },
     {
-      "item": "paimeng:food_xiangxinliao",
+      "item": "paimeng:stuff_xiangxinliao",
       "count": 2
     },
     {
-      "item": "paimeng:food_padishalan",
+      "item": "paimeng:stuff_padishalan",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:shoumi_xiangxiang"
+    "item": "paimeng:food_shoumi_xiangxiang"
   }
 }

@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_zhusun",
+      "item": "paimeng:stuff_zhusun",
       "count": 3
     },
     {
-      "item": "paimeng:food_haicao",
+      "item": "paimeng:stuff_haicao",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:ruozhuzhu"
+    "item": "paimeng:food_ruozhuzhu"
   }
 }

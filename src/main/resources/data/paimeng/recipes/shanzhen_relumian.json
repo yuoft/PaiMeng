@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_mogu",
+      "item": "paimeng:stuff_mogu",
       "count": 3
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 2
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:shanzhen_relumian"
+    "item": "paimeng:food_shanzhen_relumian"
   }
 }

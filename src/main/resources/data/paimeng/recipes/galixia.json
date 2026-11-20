@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_xiaren",
+      "item": "paimeng:stuff_xiaren",
       "count": 3
     },
     {
-      "item": "paimeng:food_yangcong",
+      "item": "paimeng:stuff_yangcong",
       "count": 2
     },
     {
-      "item": "paimeng:food_xiangxinliao",
+      "item": "paimeng:stuff_xiangxinliao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:galixia"
+    "item": "paimeng:food_galixia"
   }
 }

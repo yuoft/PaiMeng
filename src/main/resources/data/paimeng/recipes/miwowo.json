@@ -2,13 +2,13 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_mawei"
+      "item": "paimeng:stuff_mawei"
     },
     {
-      "item": "paimeng:food_daomi"
+      "item": "paimeng:stuff_daomi"
     }
   ],
   "result": {
-    "item": "paimeng:miwowo"
+    "item": "paimeng:food_miwowo"
   }
 }

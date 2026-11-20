@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_xiaren",
+      "item": "paimeng:stuff_xiaren",
       "count": 5
     },
     {
-      "item": "paimeng:food_tudou",
+      "item": "paimeng:stuff_tudou",
       "count": 4
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 3
     },
     {
@@ -19,6 +19,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:jinsi_xiaqiu"
+    "item": "paimeng:food_jinsi_xiaqiu"
   }
 }

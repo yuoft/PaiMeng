@@ -2,21 +2,21 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:riluoguo",
+      "item": "paimeng:food_riluoguo",
       "count": 3
     },
     {
-      "item": "paimeng:food_shumei",
+      "item": "paimeng:stuff_shumei",
       "count": 2
     },
     {
-      "item": "paimeng:food_tang"
+      "item": "paimeng:stuff_tang"
     }
   ],
   "catalyzer": {
     "item": "minecraft:glass_bottle"
   },
   "result": {
-    "item": "paimeng:food_guojiang"
+    "item": "paimeng:stuff_guojiang"
   }
 }

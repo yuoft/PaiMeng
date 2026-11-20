@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_jueyun_jiaojiao",
+    "item": "paimeng:stuff_jueyun_jiaojiao",
     "count": 8
   },
   "result": {

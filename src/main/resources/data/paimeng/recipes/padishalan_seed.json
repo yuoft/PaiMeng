@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_padishalan",
+    "item": "paimeng:stuff_padishalan",
     "count": 8
   },
   "result": {

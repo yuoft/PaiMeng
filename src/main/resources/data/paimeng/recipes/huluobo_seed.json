@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_huluobo",
+    "item": "paimeng:stuff_huluobo",
     "count": 5
   },
   "result": {

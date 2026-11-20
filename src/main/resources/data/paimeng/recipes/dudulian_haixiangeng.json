@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_pangxie",
+      "item": "paimeng:stuff_pangxie",
       "count": 4
     },
     {
-      "item": "paimeng:food_dudulian",
+      "item": "paimeng:stuff_dudulian",
       "count": 1
     },
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:dudulian_haixiangeng"
+    "item": "paimeng:food_dudulian_haixiangeng"
   }
 }

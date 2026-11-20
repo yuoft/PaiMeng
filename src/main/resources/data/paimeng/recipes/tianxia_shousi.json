@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_xiaren",
+      "item": "paimeng:stuff_xiaren",
       "count": 2
     },
     {
-      "item": "paimeng:food_daomi",
+      "item": "paimeng:stuff_daomi",
       "count": 1
     },
     {
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:tianxia_shousi"
+    "item": "paimeng:food_tianxia_shousi"
   }
 }

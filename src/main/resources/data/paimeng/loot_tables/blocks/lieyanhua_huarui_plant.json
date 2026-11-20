@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_lieyanhua_huarui"
+          "name": "paimeng:stuff_lieyanhua_huarui"
         }
       ],
       "conditions": [

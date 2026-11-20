@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_pangxie",
+      "item": "paimeng:stuff_pangxie",
       "count": 1
     },
     {
-      "item": "paimeng:food_xiehuang",
+      "item": "paimeng:stuff_xiehuang",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:xiehuang_kekeshao"
+    "item": "paimeng:food_xiehuang_kekeshao"
   }
 }

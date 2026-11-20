@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:pingguo",
+      "item": "paimeng:food_pingguo",
       "count": 2
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 1
     },
     {
-      "item": "paimeng:food_huangyou",
+      "item": "paimeng:stuff_huangyou",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:pingguo_heibuding"
+    "item": "paimeng:food_pingguo_heibuding"
   }
 }

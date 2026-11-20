@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_tudou",
+      "item": "paimeng:stuff_tudou",
       "count": 2
     },
     {
-      "item": "paimeng:food_nailao",
+      "item": "paimeng:stuff_nailao",
       "count": 1
     },
     {
-      "item": "paimeng:food_xiangxinliao",
+      "item": "paimeng:stuff_xiangxinliao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:masala_zhishiqiu"
+    "item": "paimeng:food_masala_zhishiqiu"
   }
 }

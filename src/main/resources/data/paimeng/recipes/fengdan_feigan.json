@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_qinrou",
+      "item": "paimeng:stuff_qinrou",
       "count": 2
     },
     {
-      "item": "paimeng:food_guojiang",
+      "item": "paimeng:stuff_guojiang",
       "count": 1
     },
     {
-      "item": "paimeng:food_mojiecao",
+      "item": "paimeng:stuff_mojiecao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:fengdan_feigan"
+    "item": "paimeng:food_fengdan_feigan"
   }
 }

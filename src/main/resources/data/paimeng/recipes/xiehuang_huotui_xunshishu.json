@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_baocai",
+      "item": "paimeng:stuff_baocai",
       "count": 1
     },
     {
-      "item": "paimeng:food_huotui",
+      "item": "paimeng:stuff_huotui",
       "count": 1
     },
     {
-      "item": "paimeng:food_naiyou",
+      "item": "paimeng:stuff_naiyou",
       "count": 1
     },
     {
-      "item": "paimeng:food_xiehuang",
+      "item": "paimeng:stuff_xiehuang",
       "count": 1
     },
     {
@@ -23,6 +23,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:xiehuang_huotui_xunshishu"
+    "item": "paimeng:food_xiehuang_huotui_xunshishu"
   }
 }

@@ -2,20 +2,20 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:food_pangxie",
+      "item": "paimeng:stuff_pangxie",
       "count": 2
     },
     {
-      "item": "paimeng:food_pangxie"
+      "item": "paimeng:stuff_pangxie"
     },
     {
-      "item": "paimeng:food_pangxie"
+      "item": "paimeng:stuff_pangxie"
     }
   ],
   "catalyzer": {
     "item": "minecraft:glass_bottle"
   },
   "result": {
-    "item": "paimeng:food_xiehuang"
+    "item": "paimeng:stuff_xiehuang"
   }
 }

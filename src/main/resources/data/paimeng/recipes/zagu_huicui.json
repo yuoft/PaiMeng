@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_shuwang_shengtigu",
+      "item": "paimeng:stuff_shuwang_shengtigu",
       "count": 1
     },
     {
-      "item": "paimeng:food_mogu",
+      "item": "paimeng:stuff_mogu",
       "count": 1
     },
     {
-      "item": "paimeng:xingxun",
+      "item": "paimeng:food_xingxun",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:zagu_huicui"
+    "item": "paimeng:food_zagu_huicui"
   }
 }

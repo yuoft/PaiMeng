@@ -2,14 +2,14 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:food_lenxianrou"
+      "item": "paimeng:stuff_lenxianrou"
     }
   ],
   "catalyzer": {
     "item": "paimeng:shanbianzhichen"
   },
   "result": {
-    "item": "paimeng:food_shourou",
+    "item": "paimeng:stuff_shourou",
     "count": 2
   }
 }

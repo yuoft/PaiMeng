@@ -2,19 +2,19 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:food_shourou"
+      "item": "paimeng:stuff_shourou"
     },
     {
-      "item": "paimeng:food_shourou"
+      "item": "paimeng:stuff_shourou"
     },
     {
-      "item": "paimeng:food_yan"
+      "item": "paimeng:stuff_yan"
     }
   ],
   "catalyzer": {
     "item": "paimeng:shanbianzhichen"
   },
   "result": {
-    "item": "paimeng:food_huotui"
+    "item": "paimeng:stuff_huotui"
   }
 }

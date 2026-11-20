@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 3
     },
     {
-      "item": "paimeng:food_baocai",
+      "item": "paimeng:stuff_baocai",
       "count": 2
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 1
     },
     {
@@ -19,6 +19,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:shijin_chaomian"
+    "item": "paimeng:food_shijin_chaomian"
   }
 }

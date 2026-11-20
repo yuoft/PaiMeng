@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 2
     },
     {
-      "item": "paimeng:food_padishalan",
+      "item": "paimeng:stuff_padishalan",
       "count": 2
     },
     {
-      "item": "paimeng:food_xiangxinliao",
+      "item": "paimeng:stuff_xiangxinliao",
       "count": 1
     },
     {
-      "item": "paimeng:food_yangcong",
+      "item": "paimeng:stuff_yangcong",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:dujinguo"
+    "item": "paimeng:food_dujinguo"
   }
 }

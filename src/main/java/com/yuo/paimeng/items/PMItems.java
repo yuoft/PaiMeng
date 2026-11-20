@@ -12,12 +12,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-//鐗╁搧娉ㄥ唽绠＄悊鍣?
+//物品注册管理器
 public class PMItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PaiMeng.MOD_ID);
 	public static final Item.Properties GROUP = new Item.Properties();
 
-	//鐗╁搧
+	//物品
 	public static RegistryObject<Item> shanbianzhichen = ITEMS.register("shanbianzhichen", EvolutionDust::new);
 	public static RegistryObject<Item> yimengrongmei = ITEMS.register("yimengrongmei", EvolutionDust::new);
 	public static RegistryObject<Item> huazhongxia = ITEMS.register("huazhongxia", SeedBox::new);
@@ -25,7 +25,7 @@ public class PMItems {
 	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
 	public static RegistryObject<Item> yuanshi = ITEMS.register("yuanshi", OrdinaryItem::new);
 	public static RegistryObject<Item> jiejing = ITEMS.register("jiejing", OrdinaryItem::new);
-	//鏃犵浉涔嬪博锛氬彫鍞ょキ鍧涚殑閽ュ寵
+	//无相之岩：召唤祭坛的钥匙
 	public static RegistryObject<Item> netherHeart = ITEMS.register("nether_heart", NetherHeart::new);
 
 	public static RegistryObject<ModSpawnEgg> boarSpawnEgg = ITEMS.register("boar_spawn_egg", () ->
@@ -35,7 +35,7 @@ public class PMItems {
 	public static RegistryObject<ModSpawnEgg> hypostasisSpawnEgg = ITEMS.register("hypostasis_spawn_egg", () ->
 			new ModSpawnEgg(PMEntityTypes.HYPOSTASIS, 0x26262B, 0xC0A24A));
 
-	//姝﹀櫒
+	//武器
 	public static RegistryObject<Item> danshoujian = ITEMS.register("danshoujian", PMWeaponMaterial::new);
 	public static RegistryObject<Item> shuangshoujian = ITEMS.register("shuangshoujian", PMWeaponMaterial::new);
 	public static RegistryObject<Item> changqiang = ITEMS.register("changqiang", PMWeaponMaterial::new);
@@ -68,85 +68,85 @@ public class PMItems {
 	public static RegistryObject<Item> pmBow3 = ITEMS.register("pm_bow3", () -> new PMBow(4));
 	public static RegistryObject<Item> pmBow4 = ITEMS.register("pm_bow4", () -> new PMBow(5));
 
-	//绱犳潗
-	public static RegistryObject<Item> bailuobo = ITEMS.register("food_bailuobo", PMFoodItem::new);
-	public static RegistryObject<Item> baocai = ITEMS.register("food_baocai", PMFoodItem::new);
-	public static RegistryObject<Item> bohe = ITEMS.register("food_bohe", PMFoodItem::new);
-	public static RegistryObject<Item> ceciliaHua = ITEMS.register("food_cecilia_hua", PMFoodItem::new);
-	public static RegistryObject<Item> daomi = ITEMS.register("food_daomi", PMFoodItem::new);
-	public static RegistryObject<Item> doufu = ITEMS.register("food_doufu", PMFoodItem::new);
-	public static RegistryObject<Item> dudulian = ITEMS.register("food_dudulian", PMFoodItem::new);
-	public static RegistryObject<Item> fanqie = ITEMS.register("food_fanqie", PMFoodItem::new);
-	public static RegistryObject<Item> feiyingXiuqiu = ITEMS.register("food_feiying_xiuqiu", PMFoodItem::new);
-	public static RegistryObject<Item> fengcheju = ITEMS.register("food_fengcheju", PMFoodItem::new);
-	public static RegistryObject<Item> gougouguo = ITEMS.register("food_gougouguo", PMFoodItem::new);
-	public static RegistryObject<Item> guidouchong = ITEMS.register("food_guidouchong", PMFoodItem::new);
-	public static RegistryObject<Item> guojiang = ITEMS.register("food_guojiang", PMFoodItem::new);
-	public static RegistryObject<Item> haicao = ITEMS.register("food_haicao", PMFoodItem::new);
-	public static RegistryObject<Item> hailingzhi = ITEMS.register("food_hailingzhi", PMFoodItem::new);
-	public static RegistryObject<Item> huangyou = ITEMS.register("food_huangyou", PMFoodItem::new);
-	public static RegistryObject<Item> hujiao = ITEMS.register("food_hujiao", PMFoodItem::new);
-	public static RegistryObject<Item> huluobo = ITEMS.register("food_huluobo", PMFoodItem::new);
-	public static RegistryObject<Item> huotui = ITEMS.register("food_huotui", PMFoodItem::new);
+	//素材
+	public static RegistryObject<Item> bailuobo = ITEMS.register("stuff_bailuobo", PMFoodItem::new);
+	public static RegistryObject<Item> baocai = ITEMS.register("stuff_baocai", PMFoodItem::new);
+	public static RegistryObject<Item> bohe = ITEMS.register("stuff_bohe", PMFoodItem::new);
+	public static RegistryObject<Item> ceciliaHua = ITEMS.register("stuff_cecilia_hua", PMFoodItem::new);
+	public static RegistryObject<Item> daomi = ITEMS.register("stuff_daomi", PMFoodItem::new);
+	public static RegistryObject<Item> doufu = ITEMS.register("stuff_doufu", PMFoodItem::new);
+	public static RegistryObject<Item> dudulian = ITEMS.register("stuff_dudulian", PMFoodItem::new);
+	public static RegistryObject<Item> fanqie = ITEMS.register("stuff_fanqie", PMFoodItem::new);
+	public static RegistryObject<Item> feiyingXiuqiu = ITEMS.register("stuff_feiying_xiuqiu", PMFoodItem::new);
+	public static RegistryObject<Item> fengcheju = ITEMS.register("stuff_fengcheju", PMFoodItem::new);
+	public static RegistryObject<Item> gougouguo = ITEMS.register("stuff_gougouguo", PMFoodItem::new);
+	public static RegistryObject<Item> guidouchong = ITEMS.register("stuff_guidouchong", PMFoodItem::new);
+	public static RegistryObject<Item> guojiang = ITEMS.register("stuff_guojiang", PMFoodItem::new);
+	public static RegistryObject<Item> haicao = ITEMS.register("stuff_haicao", PMFoodItem::new);
+	public static RegistryObject<Item> hailingzhi = ITEMS.register("stuff_hailingzhi", PMFoodItem::new);
+	public static RegistryObject<Item> huangyou = ITEMS.register("stuff_huangyou", PMFoodItem::new);
+	public static RegistryObject<Item> hujiao = ITEMS.register("stuff_hujiao", PMFoodItem::new);
+	public static RegistryObject<Item> huluobo = ITEMS.register("stuff_huluobo", PMFoodItem::new);
+	public static RegistryObject<Item> huotui = ITEMS.register("stuff_huotui", PMFoodItem::new);
 	public static RegistryObject<Item> jinghuaGusui = ITEMS.register("jinghua_gusui", PMMaterial::new);
-	public static RegistryObject<Item> jingua = ITEMS.register("food_jingua", PMFoodItem::new);
-	public static RegistryObject<Item> jinyucao = ITEMS.register("food_jinyucao", PMFoodItem::new);
-	public static RegistryObject<Item> jueyunJiaojiao = ITEMS.register("food_jueyun_jiaojiao", PMFoodItem::new);
-	public static RegistryObject<Item> lenxianrou = ITEMS.register("food_lenxianrou", PMFoodItem::new);
-	public static RegistryObject<Item> lianpeng = ITEMS.register("food_lianpeng", PMFoodItem::new);
-	public static RegistryObject<Item> liuliBaihe = ITEMS.register("food_liuli_baihe", PMFoodItem::new);
-	public static RegistryObject<Item> liuliDai = ITEMS.register("food_liuli_dai", PMFoodItem::new);
-	public static RegistryObject<Item> luoluomei = ITEMS.register("food_luoluomei", PMFoodItem::new);
-	public static RegistryObject<Item> manrou = ITEMS.register("food_manrou", PMFoodItem::new);
-	public static RegistryObject<Item> mianfen = ITEMS.register("food_mianfen", PMFoodItem::new);
-	public static RegistryObject<Item> mingcao = ITEMS.register("food_mingcao", PMFoodItem::new);
-	public static RegistryObject<Item> mogu = ITEMS.register("food_mogu", PMFoodItem::new);
-	public static RegistryObject<Item> mufeng_mogu = ITEMS.register("food_mufeng_mogu", PMFoodItem::new);
-	public static RegistryObject<Item> nailao = ITEMS.register("food_nailao", PMFoodItem::new);
-	public static RegistryObject<Item> naiyou = ITEMS.register("food_naiyou", PMFoodItem::new);
-	public static RegistryObject<Item> niaodan = ITEMS.register("food_niaodan", PMFoodItem::new);
-	public static RegistryObject<Item> nichanghua = ITEMS.register("food_nichanghua", PMFoodItem::new);
-	public static RegistryObject<Item> niunai = ITEMS.register("food_niunai", PMFoodItem::new);
-	public static RegistryObject<Item> pangxie = ITEMS.register("food_pangxie", PMFoodItem::new);
-	public static RegistryObject<Item> peigen = ITEMS.register("food_peigen", PMFoodItem::new);
-	public static RegistryObject<Item> pugongying_zhongzi = ITEMS.register("food_pugongying_zhongzi", PMFoodItem::new);
-	public static RegistryObject<Item> qingxin = ITEMS.register("food_qingxin", PMFoodItem::new);
-	public static RegistryObject<Item> qinrou = ITEMS.register("food_qinrou", PMFoodItem::new);
+	public static RegistryObject<Item> jingua = ITEMS.register("stuff_jingua", PMFoodItem::new);
+	public static RegistryObject<Item> jinyucao = ITEMS.register("stuff_jinyucao", PMFoodItem::new);
+	public static RegistryObject<Item> jueyunJiaojiao = ITEMS.register("stuff_jueyun_jiaojiao", PMFoodItem::new);
+	public static RegistryObject<Item> lenxianrou = ITEMS.register("stuff_lenxianrou", PMFoodItem::new);
+	public static RegistryObject<Item> lianpeng = ITEMS.register("stuff_lianpeng", PMFoodItem::new);
+	public static RegistryObject<Item> liuliBaihe = ITEMS.register("stuff_liuli_baihe", PMFoodItem::new);
+	public static RegistryObject<Item> liuliDai = ITEMS.register("stuff_liuli_dai", PMFoodItem::new);
+	public static RegistryObject<Item> luoluomei = ITEMS.register("stuff_luoluomei", PMFoodItem::new);
+	public static RegistryObject<Item> manrou = ITEMS.register("stuff_manrou", PMFoodItem::new);
+	public static RegistryObject<Item> mianfen = ITEMS.register("stuff_mianfen", PMFoodItem::new);
+	public static RegistryObject<Item> mingcao = ITEMS.register("stuff_mingcao", PMFoodItem::new);
+	public static RegistryObject<Item> mogu = ITEMS.register("stuff_mogu", PMFoodItem::new);
+	public static RegistryObject<Item> mufeng_mogu = ITEMS.register("stuff_mufeng_mogu", PMFoodItem::new);
+	public static RegistryObject<Item> nailao = ITEMS.register("stuff_nailao", PMFoodItem::new);
+	public static RegistryObject<Item> naiyou = ITEMS.register("stuff_naiyou", PMFoodItem::new);
+	public static RegistryObject<Item> niaodan = ITEMS.register("stuff_niaodan", PMFoodItem::new);
+	public static RegistryObject<Item> nichanghua = ITEMS.register("stuff_nichanghua", PMFoodItem::new);
+	public static RegistryObject<Item> niunai = ITEMS.register("stuff_niunai", PMFoodItem::new);
+	public static RegistryObject<Item> pangxie = ITEMS.register("stuff_pangxie", PMFoodItem::new);
+	public static RegistryObject<Item> peigen = ITEMS.register("stuff_peigen", PMFoodItem::new);
+	public static RegistryObject<Item> pugongying_zhongzi = ITEMS.register("stuff_pugongying_zhongzi", PMFoodItem::new);
+	public static RegistryObject<Item> qingxin = ITEMS.register("stuff_qingxin", PMFoodItem::new);
+	public static RegistryObject<Item> qinrou = ITEMS.register("stuff_qinrou", PMFoodItem::new);
 	public static RegistryObject<Item> shanhu_zhenzhu = ITEMS.register("shanhu_zhenzhu", PMMaterial::new);
 	public static RegistryObject<Item> shipo = ITEMS.register("shipo", PMMaterial::new);
-	public static RegistryObject<Item> shourou = ITEMS.register("food_shourou", PMFoodItem::new);
-	public static RegistryObject<Item> shumei = ITEMS.register("food_shumei", PMFoodItem::new);
-	public static RegistryObject<Item> songguo = ITEMS.register("food_songguo", PMFoodItem::new);
-	public static RegistryObject<Item> songrong = ITEMS.register("food_songrong", PMFoodItem::new);
-	public static RegistryObject<Item> tang = ITEMS.register("food_tang", PMFoodItem::new);
-	public static RegistryObject<Item> tiantianhua = ITEMS.register("food_tiantianhua", PMFoodItem::new);
-	public static RegistryObject<Item> tianyun_caoshi = ITEMS.register("food_tianyun_caoshi", PMFoodItem::new);
-	public static RegistryObject<Item> tudou = ITEMS.register("food_tudou", PMFoodItem::new);
-	public static RegistryObject<Item> xiangchang = ITEMS.register("food_xiangchang", PMFoodItem::new);
-	public static RegistryObject<Item> xiaodengcao = ITEMS.register("food_xiaodengcao", PMFoodItem::new);
-	public static RegistryObject<Item> xiaomai = ITEMS.register("food_xiaomai", PMFoodItem::new);
-	public static RegistryObject<Item> xiaren = ITEMS.register("food_xiaren", PMFoodItem::new);
-	public static RegistryObject<Item> xiehuang = ITEMS.register("food_xiehuang", PMFoodItem::new);
+	public static RegistryObject<Item> shourou = ITEMS.register("stuff_shourou", PMFoodItem::new);
+	public static RegistryObject<Item> shumei = ITEMS.register("stuff_shumei", PMFoodItem::new);
+	public static RegistryObject<Item> songguo = ITEMS.register("stuff_songguo", PMFoodItem::new);
+	public static RegistryObject<Item> songrong = ITEMS.register("stuff_songrong", PMFoodItem::new);
+	public static RegistryObject<Item> tang = ITEMS.register("stuff_tang", PMFoodItem::new);
+	public static RegistryObject<Item> tiantianhua = ITEMS.register("stuff_tiantianhua", PMFoodItem::new);
+	public static RegistryObject<Item> tianyun_caoshi = ITEMS.register("stuff_tianyun_caoshi", PMFoodItem::new);
+	public static RegistryObject<Item> tudou = ITEMS.register("stuff_tudou", PMFoodItem::new);
+	public static RegistryObject<Item> xiangchang = ITEMS.register("stuff_xiangchang", PMFoodItem::new);
+	public static RegistryObject<Item> xiaodengcao = ITEMS.register("stuff_xiaodengcao", PMFoodItem::new);
+	public static RegistryObject<Item> xiaomai = ITEMS.register("stuff_xiaomai", PMFoodItem::new);
+	public static RegistryObject<Item> xiaren = ITEMS.register("stuff_xiaren", PMFoodItem::new);
+	public static RegistryObject<Item> xiehuang = ITEMS.register("stuff_xiehuang", PMFoodItem::new);
 	public static RegistryObject<Item> xingluo = ITEMS.register("xingluo", PMMaterial::new);
-	public static RegistryObject<Item> xingren = ITEMS.register("food_xingren", PMFoodItem::new);
-	public static RegistryObject<Item> xuekui = ITEMS.register("food_xuekui", PMFoodItem::new);
-	public static RegistryObject<Item> yan = ITEMS.register("food_yan", PMFoodItem::new);
-	public static RegistryObject<Item> yangcong = ITEMS.register("food_yangcong", PMFoodItem::new);
-	public static RegistryObject<Item> yanxunrou = ITEMS.register("food_yanxunrou", PMFoodItem::new);
+	public static RegistryObject<Item> xingren = ITEMS.register("stuff_xingren", PMFoodItem::new);
+	public static RegistryObject<Item> xuekui = ITEMS.register("stuff_xuekui", PMFoodItem::new);
+	public static RegistryObject<Item> yan = ITEMS.register("stuff_yan", PMFoodItem::new);
+	public static RegistryObject<Item> yangcong = ITEMS.register("stuff_yangcong", PMFoodItem::new);
+	public static RegistryObject<Item> yanxunrou = ITEMS.register("stuff_yanxunrou", PMFoodItem::new);
 	public static RegistryObject<Item> yeboshi = ITEMS.register("yeboshi", PMMaterial::new);
-	public static RegistryObject<Item> youdengxun = ITEMS.register("food_youdengxun", PMFoodItem::new);
-	public static RegistryObject<Item> yurou = ITEMS.register("food_yurou", PMFoodItem::new);
-	public static RegistryObject<Item> zhusun = ITEMS.register("food_zhusun", PMFoodItem::new);
+	public static RegistryObject<Item> youdengxun = ITEMS.register("stuff_youdengxun", PMFoodItem::new);
+	public static RegistryObject<Item> yurou = ITEMS.register("stuff_yurou", PMFoodItem::new);
+	public static RegistryObject<Item> zhusun = ITEMS.register("stuff_zhusun", PMFoodItem::new);
 
 	public static RegistryObject<Item> baitie = ITEMS.register("baitie", PMMaterial::new);
-	public static RegistryObject<Item> bingwuhua_huaduo = ITEMS.register("food_bingwuhua_huaduo", PMFoodItem::new);
+	public static RegistryObject<Item> bingwuhua_huaduo = ITEMS.register("stuff_bingwuhua_huaduo", PMFoodItem::new);
 	public static RegistryObject<Item> dianqi_shuijing = ITEMS.register("dianqi_shuijing", PMMaterial::new);
 	public static RegistryObject<Item> faguangsui = ITEMS.register("faguangsui", PMMaterial::new);
 	public static RegistryObject<Item> heitie = ITEMS.register("heitie", PMMaterial::new);
 	public static RegistryObject<Item> jinghe = ITEMS.register("jinghe", PMMaterial::new);
-	public static RegistryObject<Item> lieyanhua_huarui = ITEMS.register("food_lieyanhua_huarui", PMFoodItem::new);
+	public static RegistryObject<Item> lieyanhua_huarui = ITEMS.register("stuff_lieyanhua_huarui", PMFoodItem::new);
 	public static RegistryObject<Item> longya1 = ITEMS.register("longya1", PMMaterial::new);
-	public static RegistryObject<Item> mawei = ITEMS.register("food_mawei", PMFoodItem::new);
+	public static RegistryObject<Item> mawei = ITEMS.register("stuff_mawei", PMFoodItem::new);
 	public static RegistryObject<Item> mojing = ITEMS.register("mojing", PMMaterial::new);
 	public static RegistryObject<Item> qingwa = ITEMS.register("qingwa", PMMaterial::new);
 	public static RegistryObject<Item> qiuqiu_baoyu = ITEMS.register("qiuqiu_baoyu", PMMaterial::new);
@@ -156,395 +156,395 @@ public class PMItems {
 	public static RegistryObject<Item> zijing = ITEMS.register("zijing", PMMaterial::new);
 
 	//3.0~
-	public static RegistryObject<Item> dunduntao = ITEMS.register("food_dunduntao", PMFoodItem::new);
-	public static RegistryObject<Item> padishalan = ITEMS.register("food_padishalan", PMFoodItem::new);
-	public static RegistryObject<Item> piboye = ITEMS.register("food_piboye", PMFoodItem::new);
-	public static RegistryObject<Item> shuwangShengtigu = ITEMS.register("food_shuwang_shengtigu", PMFoodItem::new);
-	public static RegistryObject<Item> tutudou = ITEMS.register("food_tutudou", PMFoodItem::new);
-	public static RegistryObject<Item> xiangxinguo = ITEMS.register("food_xiangxinguo", PMFoodItem::new);
-	public static RegistryObject<Item> xiangxinliao = ITEMS.register("food_xiangxinliao", PMFoodItem::new);
-	public static RegistryObject<Item> xumiQiangwei = ITEMS.register("food_xumi_qiangwei", PMFoodItem::new);
-	public static RegistryObject<Item> zaoye = ITEMS.register("food_zaoye", PMFoodItem::new);
+	public static RegistryObject<Item> dunduntao = ITEMS.register("stuff_dunduntao", PMFoodItem::new);
+	public static RegistryObject<Item> padishalan = ITEMS.register("stuff_padishalan", PMFoodItem::new);
+	public static RegistryObject<Item> piboye = ITEMS.register("stuff_piboye", PMFoodItem::new);
+	public static RegistryObject<Item> shuwangShengtigu = ITEMS.register("stuff_shuwang_shengtigu", PMFoodItem::new);
+	public static RegistryObject<Item> tutudou = ITEMS.register("stuff_tutudou", PMFoodItem::new);
+	public static RegistryObject<Item> xiangxinguo = ITEMS.register("stuff_xiangxinguo", PMFoodItem::new);
+	public static RegistryObject<Item> xiangxinliao = ITEMS.register("stuff_xiangxinliao", PMFoodItem::new);
+	public static RegistryObject<Item> xumiQiangwei = ITEMS.register("stuff_xumi_qiangwei", PMFoodItem::new);
+	public static RegistryObject<Item> zaoye = ITEMS.register("stuff_zaoye", PMFoodItem::new);
 
 	//4.0~
-	public static RegistryObject<Item> fajiaoGuoshizhi = ITEMS.register("food_fajiao_guoshizhi", PMFoodItem::new);
-	public static RegistryObject<Item> kafeidou = ITEMS.register("food_kafeidou", PMFoodItem::new);
-	public static RegistryObject<Item> mojiecao = ITEMS.register("food_mojiecao", PMFoodItem::new);
-	public static RegistryObject<Item> xizao = ITEMS.register("food_xizao", PMFoodItem::new);
-	public static RegistryObject<Item> shenmideRou = ITEMS.register("food_shenmide_rou", PMFoodItem::new);
+	public static RegistryObject<Item> fajiaoGuoshizhi = ITEMS.register("stuff_fajiao_guoshizhi", PMFoodItem::new);
+	public static RegistryObject<Item> kafeidou = ITEMS.register("stuff_kafeidou", PMFoodItem::new);
+	public static RegistryObject<Item> mojiecao = ITEMS.register("stuff_mojiecao", PMFoodItem::new);
+	public static RegistryObject<Item> xizao = ITEMS.register("stuff_xizao", PMFoodItem::new);
+	public static RegistryObject<Item> shenmideRou = ITEMS.register("stuff_shenmide_rou", PMFoodItem::new);
 
-	//椋熺墿
-	public static RegistryObject<Item> baizhiShishuHuirou = ITEMS.register("baizhi_shishu_huirou",
+	//食物
+	public static RegistryObject<Item> baizhiShishuHuirou = ITEMS.register("food_baizhi_shishu_huirou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> baochaoRoupian = ITEMS.register("baochao_roupian",
+	public static RegistryObject<Item> baochaoRoupian = ITEMS.register("food_baochao_roupian",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE, 1,1));
-	public static RegistryObject<Item> beidiPingguoMenrou = ITEMS.register("beidi_pingguo_menrou",
+	public static RegistryObject<Item> beidiPingguoMenrou = ITEMS.register("food_beidi_pingguo_menrou",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE, 3,0));
-	public static RegistryObject<Item> beidiYanxunji = ITEMS.register("beidi_yanxunji",
+	public static RegistryObject<Item> beidiYanxunji = ITEMS.register("food_beidi_yanxunji",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO, 2,2));
-	public static RegistryObject<Item> boheGuodong = ITEMS.register("bohe_guodong",
+	public static RegistryObject<Item> boheGuodong = ITEMS.register("food_bohe_guodong",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE, 1,0));
-	public static RegistryObject<Item> chouziShucaiDunrou = ITEMS.register("chouzi_shucai_dunrou",
+	public static RegistryObject<Item> chouziShucaiDunrou = ITEMS.register("food_chouzi_shucai_dunrou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO_AND_FIRE,2,2));
-	public static RegistryObject<Item> chuanchuanSanwei = ITEMS.register("chuanchuan_sanwei",
+	public static RegistryObject<Item> chuanchuanSanwei = ITEMS.register("food_chuanchuan_sanwei",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> cishenPinpan = ITEMS.register("cishen_pinpan",
+	public static RegistryObject<Item> cishenPinpan = ITEMS.register("food_cishen_pinpan",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> cuicuiJituibao = ITEMS.register("cuicui_jituibao",
+	public static RegistryObject<Item> cuicuiJituibao = ITEMS.register("food_cuicui_jituibao",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> daHuangjinShunzhiji = ITEMS.register("da_huangjin_shunzhiji",
+	public static RegistryObject<Item> daHuangjinShunzhiji = ITEMS.register("food_da_huangjin_shunzhiji",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> danbaofan = ITEMS.register("danbaofan",
+	public static RegistryObject<Item> danbaofan = ITEMS.register("food_danbaofan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> dudulianHaixiangeng = ITEMS.register("dudulian_haixiangeng",
+	public static RegistryObject<Item> dudulianHaixiangeng = ITEMS.register("food_dudulian_haixiangeng",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_THREE,3,4));
-	public static RegistryObject<Item> duigaogao = ITEMS.register("duigaogao",
+	public static RegistryObject<Item> duigaogao = ITEMS.register("food_duigaogao",
 			() -> new PaiMengFood(ModFoodEffects.RATE_THREE,3,5));
-	public static RegistryObject<Item> dulaiQinrou = ITEMS.register("dulai_qinrou",
+	public static RegistryObject<Item> dulaiQinrou = ITEMS.register("food_dulai_qinrou",
 			() -> new PaiMengFood(ModFoodEffects.RATE_THREE,3,5));
-	public static RegistryObject<Item> fantuan = ITEMS.register("fantuan",
+	public static RegistryObject<Item> fantuan = ITEMS.register("food_fantuan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO, 1, 0));
-	public static RegistryObject<Item> feiyingTianfuluo = ITEMS.register("feiying_tianfuluo",
+	public static RegistryObject<Item> feiyingTianfuluo = ITEMS.register("food_feiying_tianfuluo",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_SHIELD,3,4));
-	public static RegistryObject<Item> feiyingbing = ITEMS.register("feiyingbing",
+	public static RegistryObject<Item> feiyingbing = ITEMS.register("food_feiyingbing",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> feiyuShijindai = ITEMS.register("feiyu_shijindai",
+	public static RegistryObject<Item> feiyuShijindai = ITEMS.register("food_feiyu_shijindai",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> fengshenZahuicai = ITEMS.register("fengshen_zahuicai",
+	public static RegistryObject<Item> fengshenZahuicai = ITEMS.register("food_fengshen_zahuicai",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> ganchaoYuhe = ITEMS.register("ganchao_yuhe",
+	public static RegistryObject<Item> ganchaoYuhe = ITEMS.register("food_ganchao_yuhe",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> ganguoLarou = ITEMS.register("ganguo_larou",
+	public static RegistryObject<Item> ganguoLarou = ITEMS.register("food_ganguo_larou",
 			() -> new PaiMengFood(ModFoodEffects.RATE_THREE,3,5));
-	public static RegistryObject<Item> gantianzhu = ITEMS.register("gantianzhu",
+	public static RegistryObject<Item> gantianzhu = ITEMS.register("food_gantianzhu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> honghuiShourou = ITEMS.register("honghui_shourou",
+	public static RegistryObject<Item> honghuiShourou = ITEMS.register("food_honghui_shourou",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_PHYSICS,3,3));
-	public static RegistryObject<Item> huangjinxie = ITEMS.register("huangjinxie",
+	public static RegistryObject<Item> huangjinxie = ITEMS.register("food_huangjinxie",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_FOUR_RECOVER,4,4));
-	public static RegistryObject<Item> huangyouJianyu = ITEMS.register("huangyou_jianyu",
+	public static RegistryObject<Item> huangyouJianyu = ITEMS.register("food_huangyou_jianyu",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_SHIELD,3,4));
-	public static RegistryObject<Item> huangyouSongrong = ITEMS.register("huangyou_songrong",
+	public static RegistryObject<Item> huangyouSongrong = ITEMS.register("food_huangyou_songrong",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> huangyouXiexie = ITEMS.register("huangyou_xiexie",
+	public static RegistryObject<Item> huangyouXiexie = ITEMS.register("food_huangyou_xiexie",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_FOUR_RECOVER,4,4));
-	public static RegistryObject<Item> huoHuoRoujiangmian = ITEMS.register("huohuo_roujiangmian",
+	public static RegistryObject<Item> huoHuoRoujiangmian = ITEMS.register("food_huohuo_roujiangmian",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> jidouhua = ITEMS.register("jidouhua",
+	public static RegistryObject<Item> jidouhua = ITEMS.register("food_jidouhua",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> jinqiangyuShousi = ITEMS.register("jinqiangyu_shousi",
+	public static RegistryObject<Item> jinqiangyuShousi = ITEMS.register("food_jinqiangyu_shousi",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> jinsiXiaqiu = ITEMS.register("jinsi_xiaqiu",
+	public static RegistryObject<Item> jinsiXiaqiu = ITEMS.register("food_jinsi_xiaqiu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> jueyunGuoba = ITEMS.register("jueyun_guoba",
+	public static RegistryObject<Item> jueyunGuoba = ITEMS.register("food_jueyun_guoba",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_PHYSICS,3,3));
-	public static RegistryObject<Item> kaoChihuyu = ITEMS.register("kao_chihuyu",
+	public static RegistryObject<Item> kaoChihuyu = ITEMS.register("food_kao_chihuyu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> kaoMogupisa = ITEMS.register("kao_mogupisa",
+	public static RegistryObject<Item> kaoMogupisa = ITEMS.register("food_kao_mogupisa",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> kaoroupai = ITEMS.register("kaoroupai",
+	public static RegistryObject<Item> kaoroupai = ITEMS.register("food_kaoroupai",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> kousansi = ITEMS.register("kousansi",
+	public static RegistryObject<Item> kousansi = ITEMS.register("food_kousansi",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_SHIELD,3,4));
-	public static RegistryObject<Item> lailaicai = ITEMS.register("lailaicai",
+	public static RegistryObject<Item> lailaicai = ITEMS.register("food_lailaicai",
 			() -> new PaiMengFood(ModFoodEffects.RATE_THREE,3,5));
-	public static RegistryObject<Item> larouWowotou = ITEMS.register("larou_wowotou",
+	public static RegistryObject<Item> larouWowotou = ITEMS.register("food_larou_wowotou",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_FOUR_SHIELD,4,4));
-	public static RegistryObject<Item> lenrouPinpan = ITEMS.register("lenrou_pinpan",
+	public static RegistryObject<Item> lenrouPinpan = ITEMS.register("food_lenrou_pinpan",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_PHYSICS,3,3));
-	public static RegistryObject<Item> liangbanBohe = ITEMS.register("liangban_bohe",
+	public static RegistryObject<Item> liangbanBohe = ITEMS.register("food_liangban_bohe",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> lianhuasu = ITEMS.register("lianhuasu",
+	public static RegistryObject<Item> lianhuasu = ITEMS.register("food_lianhuasu",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_THREE,3,4));
-	public static RegistryObject<Item> lianziQindangeng = ITEMS.register("lianzi_qindangeng",
+	public static RegistryObject<Item> lianziQindangeng = ITEMS.register("food_lianzi_qindangeng",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> luoboShishutang = ITEMS.register("luobo_shishutang",
+	public static RegistryObject<Item> luoboShishutang = ITEMS.register("food_luobo_shishutang",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> manzuShala = ITEMS.register("manzu_shala",
+	public static RegistryObject<Item> manzuShala = ITEMS.register("food_manzu_shala",
 			() -> new PaiMengFood(ModFoodEffects.RATE_TWO,2,5));
-	public static RegistryObject<Item> maoxianjiaDanta = ITEMS.register("maoxianjia_danta",
+	public static RegistryObject<Item> maoxianjiaDanta = ITEMS.register("food_maoxianjia_danta",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> mengdeTudoubing = ITEMS.register("mengde_tudoubing",
+	public static RegistryObject<Item> mengdeTudoubing = ITEMS.register("food_mengde_tudoubing",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> mengdeKaoyu = ITEMS.register("mengde_kaoyu",
+	public static RegistryObject<Item> mengdeKaoyu = ITEMS.register("food_mengde_kaoyu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> mifanBuding = ITEMS.register("mifan_buding",
+	public static RegistryObject<Item> mifanBuding = ITEMS.register("food_mifan_buding",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> mijiangHuluoboJianrou = ITEMS.register("mijiang_huluobo_jianrou",
+	public static RegistryObject<Item> mijiangHuluoboJianrou = ITEMS.register("food_mijiang_huluobo_jianrou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> mingyuedan = ITEMS.register("mingyuedan",
+	public static RegistryObject<Item> mingyuedan = ITEMS.register("food_mingyuedan",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> miwowo = ITEMS.register("miwowo",
+	public static RegistryObject<Item> miwowo = ITEMS.register("food_miwowo",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> molarou = ITEMS.register("molarou",
+	public static RegistryObject<Item> molarou = ITEMS.register("food_molarou",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> niaodanShousi = ITEMS.register("niaodan_shousi",
+	public static RegistryObject<Item> niaodanShousi = ITEMS.register("food_niaodan_shousi",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1, 0));
-	public static RegistryObject<Item> niaodanshao = ITEMS.register("niaodanshao",
+	public static RegistryObject<Item> niaodanshao = ITEMS.register("food_niaodanshao",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> pushaoManrou = ITEMS.register("pushao_manrou",
+	public static RegistryObject<Item> pushaoManrou = ITEMS.register("food_pushao_manrou",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> qingcezhuangNongjiacai = ITEMS.register("qingcezhuang_nongjiacai",
+	public static RegistryObject<Item> qingcezhuangNongjiacai = ITEMS.register("food_qingcezhuang_nongjiacai",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> qingchaoXiaren = ITEMS.register("qingchao_xiaren",
+	public static RegistryObject<Item> qingchaoXiaren = ITEMS.register("food_qingchao_xiaren",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_SHIELD,3,4));
-	public static RegistryObject<Item> sancaiTuanzi = ITEMS.register("sancai_tuanzi",
+	public static RegistryObject<Item> sancaiTuanzi = ITEMS.register("food_sancai_tuanzi",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> shanzhenRelumian = ITEMS.register("shanzhen_relumian",
+	public static RegistryObject<Item> shanzhenRelumian = ITEMS.register("food_shanzhen_relumian",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> shijinChaomian = ITEMS.register("shijin_chaomian",
+	public static RegistryObject<Item> shijinChaomian = ITEMS.register("food_shijin_chaomian",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> shijingZazhu = ITEMS.register("shijing_zazhu",
+	public static RegistryObject<Item> shijingZazhu = ITEMS.register("food_shijing_zazhu",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_THREE,3,4));
-	public static RegistryObject<Item> shourouBohejuan = ITEMS.register("shourou_bohejuan",
+	public static RegistryObject<Item> shourouBohejuan = ITEMS.register("food_shourou_bohejuan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> shouguLamain = ITEMS.register("shougu_lamain",
+	public static RegistryObject<Item> shouguLamain = ITEMS.register("food_shougu_lamain",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> shuijingxia = ITEMS.register("shuijingxia",
+	public static RegistryObject<Item> shuijingxia = ITEMS.register("food_shuijingxia",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> shuizhuHeibeilu = ITEMS.register("shuizhu_heibeilu",
+	public static RegistryObject<Item> shuizhuHeibeilu = ITEMS.register("food_shuizhu_heibeilu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> sifangHeping = ITEMS.register("sifang_heping",
+	public static RegistryObject<Item> sifangHeping = ITEMS.register("food_sifang_heping",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> songrongNiangroujuan = ITEMS.register("songrong_niangroujuan",
+	public static RegistryObject<Item> songrongNiangroujuan = ITEMS.register("food_songrong_niangroujuan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> songshuyu = ITEMS.register("songshuyu",
+	public static RegistryObject<Item> songshuyu = ITEMS.register("food_songshuyu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> subaoyu = ITEMS.register("subaoyu",
+	public static RegistryObject<Item> subaoyu = ITEMS.register("food_subaoyu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> tianshurou = ITEMS.register("tianshurou",
+	public static RegistryObject<Item> tianshurou = ITEMS.register("food_tianshurou",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_PHYSICS_RATE,4,3));
-	public static RegistryObject<Item> tiantianhuaNiangji = ITEMS.register("tiantianhua_niangji",
+	public static RegistryObject<Item> tiantianhuaNiangji = ITEMS.register("food_tiantianhua_niangji",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> tianxiaShousi = ITEMS.register("tianxia_shousi",
+	public static RegistryObject<Item> tianxiaShousi = ITEMS.register("food_tianxia_shousi",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> tiwateJiandan = ITEMS.register("tiwate_jiandan",
+	public static RegistryObject<Item> tiwateJiandan = ITEMS.register("food_tiwate_jiandan",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> weicengtang = ITEMS.register("weicengtang",
+	public static RegistryObject<Item> weicengtang = ITEMS.register("food_weicengtang",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> wenxinDoufu = ITEMS.register("wenxin_doufu",
+	public static RegistryObject<Item> wenxinDoufu = ITEMS.register("food_wenxin_doufu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> xiangnenJiaojiaoji = ITEMS.register("xiangnen_jiaojiaoji",
+	public static RegistryObject<Item> xiangnenJiaojiaoji = ITEMS.register("food_xiangnen_jiaojiaoji",
 			() -> new PaiMengFood(ModFoodEffects.RATE_TWO,2,5));
-	public static RegistryObject<Item> xiangnongTudouni = ITEMS.register("xiangnong_tudouni",
+	public static RegistryObject<Item> xiangnongTudouni = ITEMS.register("food_xiangnong_tudouni",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> xiantiaoqiang = ITEMS.register("xiantiaoqiang",
+	public static RegistryObject<Item> xiantiaoqiang = ITEMS.register("food_xiantiaoqiang",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FIVE_RATE_DAMAGE,5,3));
-	public static RegistryObject<Item> xianxiaCuishuzhan = ITEMS.register("xianxia_cuishuzhan",
+	public static RegistryObject<Item> xianxiaCuishuzhan = ITEMS.register("food_xianxia_cuishuzhan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> xiehuangDoufu = ITEMS.register("xiehuang_doufu",
+	public static RegistryObject<Item> xiehuangDoufu = ITEMS.register("food_xiehuang_doufu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> xiehuangHuotuiXunshishu = ITEMS.register("xiehuang_huotui_xunshishu",
+	public static RegistryObject<Item> xiehuangHuotuiXunshishu = ITEMS.register("food_xiehuang_huotui_xunshishu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> xiehuangKekeshao = ITEMS.register("xiehuang_kekeshao",
+	public static RegistryObject<Item> xiehuangKekeshao = ITEMS.register("food_xiehuang_kekeshao",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> xingrenDoufu = ITEMS.register("xingren_doufu",
+	public static RegistryObject<Item> xingrenDoufu = ITEMS.register("food_xingren_doufu",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> yangangSanxian = ITEMS.register("yangang_sanxian",
+	public static RegistryObject<Item> yangangSanxian = ITEMS.register("food_yangang_sanxian",
 			() -> new PaiMengFood(ModFoodEffects.RATE_TWO,2,5));
-	public static RegistryObject<Item> yanduxian = ITEMS.register("yanduxian",
+	public static RegistryObject<Item> yanduxian = ITEMS.register("food_yanduxian",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> yeguJirouchuan = ITEMS.register("yegu_jirouchuan",
+	public static RegistryObject<Item> yeguJirouchuan = ITEMS.register("food_yegu_jirouchuan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> yueliangpai = ITEMS.register("yueliangpai",
+	public static RegistryObject<Item> yueliangpai = ITEMS.register("food_yueliangpai",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_FOUR_SHIELD,4,4));
-	public static RegistryObject<Item> yurenTusi = ITEMS.register("yuren_tusi",
+	public static RegistryObject<Item> yurenTusi = ITEMS.register("food_yuren_tusi",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_TWO,2,4));
-	public static RegistryObject<Item> zhaLuoboWanzi = ITEMS.register("zha_luobo_wanzi",
+	public static RegistryObject<Item> zhaLuoboWanzi = ITEMS.register("food_zha_luobo_wanzi",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> zhenzhuFeicuiBaiyutang = ITEMS.register("zhenzhu_feicui_baiyutang",
+	public static RegistryObject<Item> zhenzhuFeicuiBaiyutang = ITEMS.register("food_zhenzhu_feicui_baiyutang",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_TWO,2,4));
-	public static RegistryObject<Item> zhongyuanZasui = ITEMS.register("zhongyuan_zasui",
+	public static RegistryObject<Item> zhongyuanZasui = ITEMS.register("food_zhongyuan_zasui",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> zhuangyuanKaosongbing = ITEMS.register("zhuangyuan_kaosongbing",
+	public static RegistryObject<Item> zhuangyuanKaosongbing = ITEMS.register("food_zhuangyuan_kaosongbing",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> pingguo = ITEMS.register("pingguo",
+	public static RegistryObject<Item> pingguo = ITEMS.register("food_pingguo",
 			() -> new PaiMengFood(Foods.APPLE,0,0));
-	public static RegistryObject<Item> riluoguo = ITEMS.register("riluoguo",
+	public static RegistryObject<Item> riluoguo = ITEMS.register("food_riluoguo",
 			() -> new PaiMengFood(Foods.GOLDEN_APPLE,0,0));
 
-	public static RegistryObject<Item> duoduoshao = ITEMS.register("duoduoshao",
+	public static RegistryObject<Item> duoduoshao = ITEMS.register("food_duoduoshao",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_PHYSICS,3,3));
-	public static RegistryObject<Item> feiyingXiaxianbei = ITEMS.register("feiying_xiaxianbei",
+	public static RegistryObject<Item> feiyingXiaxianbei = ITEMS.register("food_feiying_xiaxianbei",
 			() -> new PaiMengFood(ModFoodEffects.HEALTH_BOOST,3,6));
-	public static RegistryObject<Item> ganshaoXiangyu = ITEMS.register("ganshao_xiangyu",
+	public static RegistryObject<Item> ganshaoXiangyu = ITEMS.register("food_ganshao_xiangyu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> manrouChapaofan = ITEMS.register("manrou_chapaofan",
+	public static RegistryObject<Item> manrouChapaofan = ITEMS.register("food_manrou_chapaofan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> qiaomaimian = ITEMS.register("qiaomaimian",
+	public static RegistryObject<Item> qiaomaimian = ITEMS.register("food_qiaomaimian",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> riluoChouyushao = ITEMS.register("riluo_chouyushao",
+	public static RegistryObject<Item> riluoChouyushao = ITEMS.register("food_riluo_chouyushao",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> ruozhuzhu = ITEMS.register("ruozhuzhu",
+	public static RegistryObject<Item> ruozhuzhu = ITEMS.register("food_ruozhuzhu",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_TWO,2,4));
-	public static RegistryObject<Item> shumeiShuimantou = ITEMS.register("shumei_shuimantou",
+	public static RegistryObject<Item> shumeiShuimantou = ITEMS.register("food_shumei_shuimantou",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> tuanziNiunai = ITEMS.register("tuanzi_niunai",
+	public static RegistryObject<Item> tuanziNiunai = ITEMS.register("food_tuanzi_niunai",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2, 0));
-	public static RegistryObject<Item> wubaoYancai = ITEMS.register("wubao_yancai",
+	public static RegistryObject<Item> wubaoYancai = ITEMS.register("food_wubao_yancai",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> xianyuDunluobo = ITEMS.register("xianyu_dunluobo",
+	public static RegistryObject<Item> xianyuDunluobo = ITEMS.register("food_xianyu_dunluobo",
 			() -> new PaiMengFood(ModFoodEffects.RATE_TWO,2,5));
-	public static RegistryObject<Item> bugFood = ITEMS.register("bug_food",
+	public static RegistryObject<Item> bugFood = ITEMS.register("food_bug_food",
 			() -> new PaiMengFood(ModFoodEffects.BUG_FOOD,6,0));
-	public static RegistryObject<Item> paimengFood = ITEMS.register("paimeng_food",
+	public static RegistryObject<Item> paimengFood = ITEMS.register("food_paimeng_food",
 			() -> new PaiMengFood(ModFoodEffects.PAIMENG_FOOD,6,0));
 
-	//3.0~涔嬪悗鐗堟湰
-	public static RegistryObject<Item> aruBanfan = ITEMS.register("aru_banfan",
+	//3.0~之后版本
+	public static RegistryObject<Item> aruBanfan = ITEMS.register("food_aru_banfan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> boheDoutang = ITEMS.register("bohe_doutang",
+	public static RegistryObject<Item> boheDoutang = ITEMS.register("food_bohe_doutang",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_ONE,1,1));
-	public static RegistryObject<Item> fengnianYouyu = ITEMS.register("fengnian_youyu",
+	public static RegistryObject<Item> fengnianYouyu = ITEMS.register("food_fengnian_youyu",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> galixia = ITEMS.register("galixia",
+	public static RegistryObject<Item> galixia = ITEMS.register("food_galixia",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,2,0));
-	public static RegistryObject<Item> huangyouji = ITEMS.register("huangyouji",
+	public static RegistryObject<Item> huangyouji = ITEMS.register("food_huangyouji",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> jiariGuoniang = ITEMS.register("jiari_guoniang",
+	public static RegistryObject<Item> jiariGuoniang = ITEMS.register("food_jiari_guoniang",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_THREE,3,4));
-	public static RegistryObject<Item> kaoroujuan = ITEMS.register("kaoroujuan",
+	public static RegistryObject<Item> kaoroujuan = ITEMS.register("food_kaoroujuan",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> koudaibing = ITEMS.register("koudaibing",
+	public static RegistryObject<Item> koudaibing = ITEMS.register("food_koudaibing",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> lanbadeYujuan = ITEMS.register("lanbade_yujuan",
+	public static RegistryObject<Item> lanbadeYujuan = ITEMS.register("food_lanbade_yujuan",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> longxumian = ITEMS.register("longxumian",
+	public static RegistryObject<Item> longxumian = ITEMS.register("food_longxumian",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> lvzhiChuiqiu = ITEMS.register("lvzhi_chuiqiu",
+	public static RegistryObject<Item> lvzhiChuiqiu = ITEMS.register("food_lvzhi_chuiqiu",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> masalaZhishiqiu = ITEMS.register("masala_zhishiqiu",
+	public static RegistryObject<Item> masalaZhishiqiu = ITEMS.register("food_masala_zhishiqiu",
 			() -> new PaiMengFood(ModFoodEffects.RATE_TWO,2,3));
-	public static RegistryObject<Item> miyuanta = ITEMS.register("miyuanta",
+	public static RegistryObject<Item> miyuanta = ITEMS.register("food_miyuanta",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> naijiangXianyu = ITEMS.register("naijiang_xianyu",
+	public static RegistryObject<Item> naijiangXianyu = ITEMS.register("food_naijiang_xianyu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> naixiangjunguCuita = ITEMS.register("naixiangjungu_cuita",
+	public static RegistryObject<Item> naixiangjunguCuita = ITEMS.register("food_naixiangjungu_cuita",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,0));
-	public static RegistryObject<Item> padishalanBuding = ITEMS.register("padishalan_buding",
+	public static RegistryObject<Item> padishalanBuding = ITEMS.register("food_padishalan_buding",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> qiancengsusu = ITEMS.register("qiancengsusu",
+	public static RegistryObject<Item> qiancengsusu = ITEMS.register("food_qiancengsusu",
 			() -> new PaiMengFood(ModFoodEffects.RATE_THREE,3,5));
-	public static RegistryObject<Item> qiangweiNaihu = ITEMS.register("qiangwei_naihu",
+	public static RegistryObject<Item> qiangweiNaihu = ITEMS.register("food_qiangwei_naihu",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> qipaoSuanmeizhi = ITEMS.register("qipao_suanmeizhi",
+	public static RegistryObject<Item> qipaoSuanmeizhi = ITEMS.register("food_qipao_suanmeizhi",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> riluoMeimeicha = ITEMS.register("riluo_meimeicha",
+	public static RegistryObject<Item> riluoMeimeicha = ITEMS.register("food_riluo_meimeicha",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_THREE,3,3));
-	public static RegistryObject<Item> rourouKaomoguPisa = ITEMS.register("rourou_kaomogu_pisa",
+	public static RegistryObject<Item> rourouKaomoguPisa = ITEMS.register("food_rourou_kaomogu_pisa",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> sabasangZhajiao = ITEMS.register("sabasang_zhajiao",
+	public static RegistryObject<Item> sabasangZhajiao = ITEMS.register("food_sabasang_zhajiao",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_TWO,2,0));
-	public static RegistryObject<Item> shanjiashao = ITEMS.register("shanjiashao",
+	public static RegistryObject<Item> shanjiashao = ITEMS.register("food_shanjiashao",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> shoumiXiangxiang = ITEMS.register("shoumi_xiangxiang",
+	public static RegistryObject<Item> shoumiXiangxiang = ITEMS.register("food_shoumi_xiangxiang",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_FOUR_RECOVER,4,4));
-	public static RegistryObject<Item> tangduerShaoji = ITEMS.register("tangduer_shaoji",
+	public static RegistryObject<Item> tangduerShaoji = ITEMS.register("food_tangduer_shaoji",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_FOUR_RATE,4,3));
-	public static RegistryObject<Item> tudouchuan = ITEMS.register("tudouchuan",
+	public static RegistryObject<Item> tudouchuan = ITEMS.register("food_tudouchuan",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_THREE,3,1));
-	public static RegistryObject<Item> wudongmian = ITEMS.register("wudongmian",
+	public static RegistryObject<Item> wudongmian = ITEMS.register("food_wudongmian",
 			() -> new PaiMengFood(ModFoodEffects.REVIVE_TWO,2,1));
-	public static RegistryObject<Item> xingxun = ITEMS.register("xingxun",
+	public static RegistryObject<Item> xingxun = ITEMS.register("food_xingxun",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_ONE,1,0));
-	public static RegistryObject<Item> yetanbing = ITEMS.register("yetanbing",
+	public static RegistryObject<Item> yetanbing = ITEMS.register("food_yetanbing",
 			() -> new PaiMengFood(ModFoodEffects.RECOVER_THREE,3,1));
-	public static RegistryObject<Item> yezhaoMitang = ITEMS.register("yezhao_mitang",
+	public static RegistryObject<Item> yezhaoMitang = ITEMS.register("food_yezhao_mitang",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_THREE,3,4));
-	public static RegistryObject<Item> yulinShala = ITEMS.register("yulin_shala",
+	public static RegistryObject<Item> yulinShala = ITEMS.register("food_yulin_shala",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
-	public static RegistryObject<Item> zaguHuicui = ITEMS.register("zagu_huicui",
+	public static RegistryObject<Item> zaguHuicui = ITEMS.register("food_zagu_huicui",
 			() -> new PaiMengFood(ModFoodEffects.DEFENSE_TWO,2,4));
-	public static RegistryObject<Item> zharoupaiSanmingzhi = ITEMS.register("zharoupai_sanmingzhi",
+	public static RegistryObject<Item> zharoupaiSanmingzhi = ITEMS.register("food_zharoupai_sanmingzhi",
 			() -> new PaiMengFood(ModFoodEffects.ATTACK_TWO,2,3));
-	public static RegistryObject<Item> ziyuanYunni = ITEMS.register("ziyuan_yunni",
+	public static RegistryObject<Item> ziyuanYunni = ITEMS.register("food_ziyuan_yunni",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
 
 	//4.0~
-	public static RegistryObject<Item> baisongXiantang = ITEMS.register("baisong_xiantang",
+	public static RegistryObject<Item> baisongXiantang = ITEMS.register("food_baisong_xiantang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> baiweiYilu = ITEMS.register("baiwei_yilu",
+	public static RegistryObject<Item> baiweiYilu = ITEMS.register("food_baiwei_yilu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,3));
-	public static RegistryObject<Item> boheManguocha = ITEMS.register("bohe_manguocha",
+	public static RegistryObject<Item> boheManguocha = ITEMS.register("food_bohe_manguocha",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> chaojiZhizhunPisa = ITEMS.register("chaoji_zhizhun_pisa",
+	public static RegistryObject<Item> chaojiZhizhunPisa = ITEMS.register("food_chaoji_zhizhun_pisa",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,4,3));
-	public static RegistryObject<Item> chunjieZhishui = ITEMS.register("chunjie_zhishui",
+	public static RegistryObject<Item> chunjieZhishui = ITEMS.register("food_chunjie_zhishui",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,3));
-	public static RegistryObject<Item> cuibingFati = ITEMS.register("cuibing_fati",
+	public static RegistryObject<Item> cuibingFati = ITEMS.register("food_cuibing_fati",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,1));
-	public static RegistryObject<Item> dujinguo = ITEMS.register("dujinguo",
+	public static RegistryObject<Item> dujinguo = ITEMS.register("food_dujinguo",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> eyuRougan = ITEMS.register("eyu_rougan",
+	public static RegistryObject<Item> eyuRougan = ITEMS.register("food_eyu_rougan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,3));
-	public static RegistryObject<Item> fengda = ITEMS.register("fengda",
+	public static RegistryObject<Item> fengda = ITEMS.register("food_fengda",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,0));
-	public static RegistryObject<Item> fengdanFeigan = ITEMS.register("fengdan_feigan",
+	public static RegistryObject<Item> fengdanFeigan = ITEMS.register("food_fengdan_feigan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> fengdanYangcongtang = ITEMS.register("fengdan_yangcongtang",
+	public static RegistryObject<Item> fengdanYangcongtang = ITEMS.register("food_fengdan_yangcongtang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,4));
-	public static RegistryObject<Item> fuluBaishuang = ITEMS.register("fulu_baishuang",
+	public static RegistryObject<Item> fuluBaishuang = ITEMS.register("food_fulu_baishuang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,0));
-	public static RegistryObject<Item> gangwanNiudu = ITEMS.register("gangwan_niudu",
+	public static RegistryObject<Item> gangwanNiudu = ITEMS.register("food_gangwan_niudu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,1));
-	public static RegistryObject<Item> guoguoRuantang = ITEMS.register("guoguo_ruantang",
+	public static RegistryObject<Item> guoguoRuantang = ITEMS.register("food_guoguo_ruantang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,3));
-	public static RegistryObject<Item> guoguoXianlao = ITEMS.register("guoguo_xianlao",
+	public static RegistryObject<Item> guoguoXianlao = ITEMS.register("food_guoguo_xianlao",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,1));
-	public static RegistryObject<Item> huaguoSancongzou = ITEMS.register("huaguo_sancongzou",
+	public static RegistryObject<Item> huaguoSancongzou = ITEMS.register("food_huaguo_sancongzou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> jinluogao = ITEMS.register("jinluogao",
+	public static RegistryObject<Item> jinluogao = ITEMS.register("food_jinluogao",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> jujuBobing = ITEMS.register("juju_bobing",
+	public static RegistryObject<Item> jujuBobing = ITEMS.register("food_juju_bobing",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> kafeiBabalu = ITEMS.register("kafei_babalu",
+	public static RegistryObject<Item> kafeiBabalu = ITEMS.register("food_kafei_babalu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> kasulaiShaguo = ITEMS.register("kasulai_shaguo",
+	public static RegistryObject<Item> kasulaiShaguo = ITEMS.register("food_kasulai_shaguo",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> mijinPaoguo = ITEMS.register("mijin_paoguo",
+	public static RegistryObject<Item> mijinPaoguo = ITEMS.register("food_mijin_paoguo",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> mixiangRoutuan = ITEMS.register("mixiang_routuan",
+	public static RegistryObject<Item> mixiangRoutuan = ITEMS.register("food_mixiang_routuan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> naboneiFanqiegu = ITEMS.register("nabonei_fanqiegu",
+	public static RegistryObject<Item> naboneiFanqiegu = ITEMS.register("food_nabonei_fanqiegu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,3));
-	public static RegistryObject<Item> naiyouMogutang = ITEMS.register("naiyou_mogutang",
+	public static RegistryObject<Item> naiyouMogutang = ITEMS.register("food_naiyou_mogutang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,1));
-	public static RegistryObject<Item> pingguoHeibuding = ITEMS.register("pingguo_heibuding",
+	public static RegistryObject<Item> pingguoHeibuding = ITEMS.register("food_pingguo_heibuding",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,2));
-	public static RegistryObject<Item> qioyuGuotang = ITEMS.register("qioyu_guotang",
+	public static RegistryObject<Item> qioyuGuotang = ITEMS.register("food_qioyu_guotang",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,4));
-	public static RegistryObject<Item> roujiangQiancengmian = ITEMS.register("roujiang_qiancengmian",
+	public static RegistryObject<Item> roujiangQiancengmian = ITEMS.register("food_roujiang_qiancengmian",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> sabuziDunrou = ITEMS.register("sabuzi_dunrou",
+	public static RegistryObject<Item> sabuziDunrou = ITEMS.register("food_sabuzi_dunrou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> shengrouTata = ITEMS.register("shengrou_tata",
+	public static RegistryObject<Item> shengrouTata = ITEMS.register("food_shengrou_tata",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,0));
-	public static RegistryObject<Item> shuangguoQinglu = ITEMS.register("shuangguo_qinglu",
+	public static RegistryObject<Item> shuangguoQinglu = ITEMS.register("food_shuangguo_qinglu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,3));
-	public static RegistryObject<Item> shuixiangRoudong = ITEMS.register("shuixiang_roudong",
+	public static RegistryObject<Item> shuixiangRoudong = ITEMS.register("food_shuixiang_roudong",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,3));
-	public static RegistryObject<Item> suanxiangMianbaogun = ITEMS.register("suanxiang_mianbaogun",
+	public static RegistryObject<Item> suanxiangMianbaogun = ITEMS.register("food_suanxiang_mianbaogun",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,3));
-	public static RegistryObject<Item> tasaisiZahui = ITEMS.register("tasaisi_zahui",
+	public static RegistryObject<Item> tasaisiZahui = ITEMS.register("food_tasaisi_zahui",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,0));
-	public static RegistryObject<Item> weixiji = ITEMS.register("weixiji",
+	public static RegistryObject<Item> weixiji = ITEMS.register("food_weixiji",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,4,3));
-	public static RegistryObject<Item> xiangkaoLeipai = ITEMS.register("xiangkao_leipai",
+	public static RegistryObject<Item> xiangkaoLeipai = ITEMS.register("food_xiangkao_leipai",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,2,0));
-	public static RegistryObject<Item> xingrenZunyu = ITEMS.register("xingren_zunyu",
+	public static RegistryObject<Item> xingrenZunyu = ITEMS.register("food_xingren_zunyu",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,1,0));
-	public static RegistryObject<Item> yangzaHajisi = ITEMS.register("yangza_hajisi",
+	public static RegistryObject<Item> yangzaHajisi = ITEMS.register("food_yangza_hajisi",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,4,4));
-	public static RegistryObject<Item> youfengYatui = ITEMS.register("youfeng_yatui",
+	public static RegistryObject<Item> youfengYatui = ITEMS.register("food_youfeng_yatui",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,1,0));
-	public static RegistryObject<Item> yuyuYongchangpai = ITEMS.register("yuyu_yongchangpai",
+	public static RegistryObject<Item> yuyuYongchangpai = ITEMS.register("food_yuyu_yongchangpai",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,1));
-	public static RegistryObject<Item> zhayuShutiao = ITEMS.register("zhayu_shutiao",
+	public static RegistryObject<Item> zhayuShutiao = ITEMS.register("food_zhayu_shutiao",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_THREE,3,2));
-	public static RegistryObject<Item> paopaoju = ITEMS.register("paopaoju",
+	public static RegistryObject<Item> paopaoju = ITEMS.register("food_paopaoju",
 			() -> new PaiMengFood(Foods.APPLE,0,0));
 
-	//鍦ｉ仐鐗?
+	//圣遗物
 	public static RegistryObject<Item> xingyunerRelics = ITEMS.register("xingyuner_relics", () -> new Relics(1, 3));
 	public static RegistryObject<Item> maoxianjiaRelics = ITEMS.register("maoxianjia_relics", () -> new Relics(1, 3));
 	public static RegistryObject<Item> youyiRelics = ITEMS.register("youyi_relics", () -> new Relics(1, 3));
@@ -554,16 +554,16 @@ public class PMItems {
 	public static RegistryObject<Item> juedoushiRelics = ITEMS.register("juedoushi_relics", () -> new Relics(4, 5));
 	public static RegistryObject<Item> yuetuanRelics = ITEMS.register("yuetuan_relics", () -> new Relics(4, 5));
 
-	//鍦ｉ仐鐗╃粡楠岀摱
+	//圣遗物经验瓶
 	public static RegistryObject<Item> relicsExpBig = ITEMS.register("relics_exp_big", () -> new RelicsExp(10000));
 	public static RegistryObject<Item> relicsExpSmall = ITEMS.register("relics_exp_small", () -> new RelicsExp(1000));
 
-	//鍦ｇ墿鍖?
+	//圣物匣
 	public static RegistryObject<Item> relicsBoxOne = ITEMS.register("relics_box_one", () -> new RelicsBox(1));
 	public static RegistryObject<Item> relicsBoxTwo = ITEMS.register("relics_box_two", () -> new RelicsBox(2));
 	public static RegistryObject<Item> relicsBoxThree = ITEMS.register("relics_box_three", () -> new RelicsBox(3));
 
-	//娉ㄥ唽鏂瑰潡鐗╁搧
+	//注册方块物品
 	public static RegistryObject<BlockItem> cookingPot = ITEMS.register("cooking_pot",
 			() -> new BlockItem(PMBlocks.cookingPot.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> cookingBench = ITEMS.register("cooking_bench",
@@ -614,7 +614,7 @@ public class PMItems {
 	public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;
 	public static CropUseBlockEnum LOGS = CropUseBlockEnum.LOGS;
 
-	//X鍨嬩綔鐗╃瀛?
+	//X型作物种子
 	public static RegistryObject<BlockItem> bailuoboSeed = ITEMS.register("bailuobo_seed",
 			() -> new CropBlockItem(PMBlocks.bailuoboCrop.get(), COMMON));
 	public static RegistryObject<BlockItem> baocaiSeed = ITEMS.register("baocai_seed",
@@ -705,7 +705,7 @@ public class PMItems {
 			() -> new CropBlockItem(PMBlocks.mojiecaoCrop.get(), COMMON));
 
 
-	//鏍?
+	//树
 	public static RegistryObject<BlockItem> appleLog = ITEMS.register("apple_log",
 			() -> new BlockItem(PMBlocks.appleLog.get(), GROUP));
 	public static RegistryObject<BlockItem> witheredLog = ITEMS.register("withered_log",

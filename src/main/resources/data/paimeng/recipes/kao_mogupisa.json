@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_mogu",
+      "item": "paimeng:stuff_mogu",
       "count": 4
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 3
     },
     {
-      "item": "paimeng:food_baocai",
+      "item": "paimeng:stuff_baocai",
       "count": 2
     },
     {
-      "item": "paimeng:food_nailao",
+      "item": "paimeng:stuff_nailao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:kao_mogupisa"
+    "item": "paimeng:food_kao_mogupisa"
   }
 }

@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_dunduntao",
+      "item": "paimeng:stuff_dunduntao",
       "count": 2
     },
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 2
     },
     {
-      "item": "paimeng:food_xumi_qiangwei",
+      "item": "paimeng:stuff_xumi_qiangwei",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:yulin_shala"
+    "item": "paimeng:food_yulin_shala"
   }
 }

@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:food_xingren",
+      "item": "paimeng:stuff_xingren",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:xingren_zunyu"
+    "item": "paimeng:food_xingren_zunyu"
   }
 }

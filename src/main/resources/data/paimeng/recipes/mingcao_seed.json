@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_mingcao",
+    "item": "paimeng:stuff_mingcao",
     "count": 8
   },
   "result": {

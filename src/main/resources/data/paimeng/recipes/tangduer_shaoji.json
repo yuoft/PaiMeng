@@ -2,23 +2,23 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:food_qinrou",
+      "item": "paimeng:stuff_qinrou",
       "count": 3
     },
     {
-      "item": "paimeng:food_shuwang_shengtigu",
+      "item": "paimeng:stuff_shuwang_shengtigu",
       "count": 2
     },
     {
-      "item": "paimeng:food_padishalan",
+      "item": "paimeng:stuff_padishalan",
       "count": 1
     },
     {
-      "item": "paimeng:food_xiangxinliao",
+      "item": "paimeng:stuff_xiangxinliao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:tangduer_shaoji"
+    "item": "paimeng:food_tangduer_shaoji"
   }
 }

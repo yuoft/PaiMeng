@@ -2,11 +2,11 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 2
     },
     {
-      "item": "paimeng:food_yan",
+      "item": "paimeng:stuff_yan",
       "count": 2
     }
   ],
@@ -14,6 +14,6 @@
     "item": "paimeng:shanbianzhichen"
   },
   "result": {
-    "item": "paimeng:food_peigen"
+    "item": "paimeng:stuff_peigen"
   }
 }

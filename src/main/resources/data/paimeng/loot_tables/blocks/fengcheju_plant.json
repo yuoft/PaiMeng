@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_fengcheju"
+          "name": "paimeng:stuff_fengcheju"
         }
       ],
       "conditions": [

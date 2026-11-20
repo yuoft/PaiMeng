@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_mufeng_mogu"
+          "name": "paimeng:stuff_mufeng_mogu"
         }
       ],
       "conditions": [

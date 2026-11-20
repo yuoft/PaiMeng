@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 1
     },
     {
-      "item": "paimeng:food_tang",
+      "item": "paimeng:stuff_tang",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:bohe_guodong"
+    "item": "paimeng:food_bohe_guodong"
   }
 }

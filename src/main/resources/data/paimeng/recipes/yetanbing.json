@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_zaoye",
+      "item": "paimeng:stuff_zaoye",
       "count": 2
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 1
     },
     {
-      "item": "paimeng:food_guojiang",
+      "item": "paimeng:stuff_guojiang",
       "count": 1
     },
     {
@@ -19,6 +19,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:yetanbing"
+    "item": "paimeng:food_yetanbing"
   }
 }

@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 4
     },
     {
-      "item": "paimeng:food_qinrou",
+      "item": "paimeng:stuff_qinrou",
       "count": 2
     },
     {
-      "item": "paimeng:food_mogu",
+      "item": "paimeng:stuff_mogu",
       "count": 2
     },
     {
-      "item": "paimeng:food_huotui",
+      "item": "paimeng:stuff_huotui",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:longxumian"
+    "item": "paimeng:food_longxumian"
   }
 }

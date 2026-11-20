@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 4
     },
     {
-      "item": "paimeng:food_fanqie",
+      "item": "paimeng:stuff_fanqie",
       "count": 2
     },
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 2
     },
     {
-      "item": "paimeng:food_mojiecao",
+      "item": "paimeng:stuff_mojiecao",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:baisong_xiantang"
+    "item": "paimeng:food_baisong_xiantang"
   }
 }

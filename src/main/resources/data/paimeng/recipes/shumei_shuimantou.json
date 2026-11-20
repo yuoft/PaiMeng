@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_daomi",
+      "item": "paimeng:stuff_daomi",
       "count": 2
     },
     {
-      "item": "paimeng:food_shumei",
+      "item": "paimeng:stuff_shumei",
       "count": 2
     },
     {
-      "item": "paimeng:food_tang",
+      "item": "paimeng:stuff_tang",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:shumei_shuimantou"
+    "item": "paimeng:food_shumei_shuimantou"
   }
 }

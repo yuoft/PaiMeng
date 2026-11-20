@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 4
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 3
     },
     {
-      "item": "paimeng:food_jueyun_jiaojiao",
+      "item": "paimeng:stuff_jueyun_jiaojiao",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:shourou_bohejuan"
+    "item": "paimeng:food_shourou_bohejuan"
   }
 }

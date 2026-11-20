@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_songrong",
+      "item": "paimeng:stuff_songrong",
       "count": 2
     },
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:songrong_niangroujuan"
+    "item": "paimeng:food_songrong_niangroujuan"
   }
 }

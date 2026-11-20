@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_zhusun",
+    "item": "paimeng:stuff_zhusun",
     "count": 8
   },
   "result": {

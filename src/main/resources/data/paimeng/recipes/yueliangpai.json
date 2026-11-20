@@ -2,23 +2,23 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:food_shourou",
+      "item": "paimeng:stuff_shourou",
       "count": 4
     },
     {
-      "item": "paimeng:food_niaodan",
+      "item": "paimeng:stuff_niaodan",
       "count": 4
     },
     {
-      "item": "paimeng:food_huangyou",
+      "item": "paimeng:stuff_huangyou",
       "count": 3
     },
     {
-      "item": "paimeng:food_mianfen",
+      "item": "paimeng:stuff_mianfen",
       "count": 2
     }
   ],
   "result": {
-    "item": "paimeng:yueliangpai"
+    "item": "paimeng:food_yueliangpai"
   }
 }

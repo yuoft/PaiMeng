@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_jinyucao",
+      "item": "paimeng:stuff_jinyucao",
       "count": 2
     },
     {
-      "item": "paimeng:food_doufu",
+      "item": "paimeng:stuff_doufu",
       "count": 2
     },
     {
-      "item": "paimeng:food_lianpeng",
+      "item": "paimeng:stuff_lianpeng",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:zhenzhu_feicui_baiyutang"
+    "item": "paimeng:food_zhenzhu_feicui_baiyutang"
   }
 }

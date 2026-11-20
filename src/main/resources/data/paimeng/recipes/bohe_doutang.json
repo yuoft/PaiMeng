@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_tutudou",
+      "item": "paimeng:stuff_tutudou",
       "count": 2
     },
     {
-      "item": "paimeng:food_bohe",
+      "item": "paimeng:stuff_bohe",
       "count": 2
     },
     {
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:bohe_doutang"
+    "item": "paimeng:food_bohe_doutang"
   }
 }

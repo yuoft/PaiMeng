@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_niaodan",
+      "item": "paimeng:stuff_niaodan",
       "count": 1
     },
     {
@@ -11,6 +11,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:tiwate_jiandan"
+    "item": "paimeng:food_tiwate_jiandan"
   }
 }

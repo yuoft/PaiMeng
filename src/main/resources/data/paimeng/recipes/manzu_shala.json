@@ -2,23 +2,23 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_baocai",
+      "item": "paimeng:stuff_baocai",
       "count": 2
     },
     {
-      "item": "paimeng:pingguo",
+      "item": "paimeng:food_pingguo",
       "count": 2
     },
     {
-      "item": "paimeng:food_niaodan",
+      "item": "paimeng:stuff_niaodan",
       "count": 1
     },
     {
-      "item": "paimeng:food_tudou",
+      "item": "paimeng:stuff_tudou",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:manzu_shala"
+    "item": "paimeng:food_manzu_shala"
   }
 }

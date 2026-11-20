@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_niunai",
+      "item": "paimeng:stuff_niunai",
       "count": 2
     },
     {
-      "item": "paimeng:food_xumi_qiangwei",
+      "item": "paimeng:stuff_xumi_qiangwei",
       "count": 2
     },
     {
-      "item": "paimeng:food_tang",
+      "item": "paimeng:stuff_tang",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:qiangwei_naihu"
+    "item": "paimeng:food_qiangwei_naihu"
   }
 }

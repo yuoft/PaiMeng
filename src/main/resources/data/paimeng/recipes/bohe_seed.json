@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_bohe",
+    "item": "paimeng:stuff_bohe",
     "count": 5
   },
   "result": {

@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_gougouguo",
+      "item": "paimeng:stuff_gougouguo",
       "count": 2
     },
     {
-      "item": "paimeng:riluoguo",
+      "item": "paimeng:food_riluoguo",
       "count": 2
     },
     {
-      "item": "paimeng:food_tang",
+      "item": "paimeng:stuff_tang",
       "count": 1
     }
   ],
   "result": {
-    "item": "paimeng:jiari_guoniang"
+    "item": "paimeng:food_jiari_guoniang"
   }
 }

@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:food_yurou",
+      "item": "paimeng:stuff_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:food_hujiao",
+      "item": "paimeng:stuff_hujiao",
       "count": 1
     },
     {
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "paimeng:mengde_kaoyu"
+    "item": "paimeng:food_mengde_kaoyu"
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:food_shuwang_shengtigu",
+    "item": "paimeng:stuff_shuwang_shengtigu",
     "count": 8
   },
   "result": {

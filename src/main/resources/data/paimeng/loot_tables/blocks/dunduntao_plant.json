@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_dunduntao"
+          "name": "paimeng:stuff_dunduntao"
         }
       ],
       "conditions": [

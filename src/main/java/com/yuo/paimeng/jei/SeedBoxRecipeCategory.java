@@ -59,9 +59,8 @@ public class SeedBoxRecipeCategory implements IRecipeCategory<SeedBoxRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SeedBoxRecipe recipe, IFocusGroup focuses) {
         NonNullList<Ingredient> ingredients = recipe.getIngredients();
-        IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 12, 10);
+        IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 13, 11);
         PotRecipeCategory.addIngredient(input, ingredients, 0);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 70, 10)
-                .addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 71, 11).addItemStack(recipe.getResultItem(RegistryAccess.EMPTY));
     }
 }

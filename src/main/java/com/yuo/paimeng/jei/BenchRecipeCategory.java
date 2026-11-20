@@ -31,9 +31,9 @@ public class BenchRecipeCategory implements IRecipeCategory<BenchRecipe> {
     public static final RecipeType<BenchRecipe> RECIPE_TYPE = RecipeType.create(PaiMeng.MOD_ID, "bench", BenchRecipe.class);
 
     //输入槽位坐标（与 1.16.5 的 setRecipe 完全一致）
-    private static final int[][] INPUT_POSITIONS = {{3, 17}, {33, 17}, {3, 44}, {33, 44}, {86, 11}};
-    private static final int OUTPUT_X = 127;
-    private static final int OUTPUT_Y = 28;
+    private static final int[][] INPUT_POSITIONS = {{4, 18}, {34, 18}, {4, 45}, {34, 45}, {87, 12}};
+    private static final int OUTPUT_X = 128;
+    private static final int OUTPUT_Y = 29;
 
     private final IDrawable background;
     private final IDrawable icon;

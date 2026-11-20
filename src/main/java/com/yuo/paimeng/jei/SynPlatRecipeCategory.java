@@ -28,14 +28,14 @@ public class SynPlatRecipeCategory implements IRecipeCategory<SynPlatRecipe> {
     public static final RecipeType<SynPlatRecipe> RECIPE_TYPE = RecipeType.create(PaiMeng.MOD_ID, "syn_plat", SynPlatRecipe.class);
 
     /** 三个原料槽位的 x 坐标（y 固定 26），与 1.16.5 的 setRecipe 一致 */
-    private static final int[] INPUT_X = {3, 46, 89};
-    private static final int INPUT_Y = 26;
+    private static final int[] INPUT_X = {4, 47, 90};
+    private static final int INPUT_Y = 27;
     /** 催化剂槽位 */
-    private static final int CATALYZER_X = 116;
-    private static final int CATALYZER_Y = 2;
+    private static final int CATALYZER_X = 117;
+    private static final int CATALYZER_Y = 3;
     /** 输出槽位 */
-    private static final int OUTPUT_X = 147;
-    private static final int OUTPUT_Y = 26;
+    private static final int OUTPUT_X = 148;
+    private static final int OUTPUT_Y = 27;
 
     private final IDrawable background;
     private final IDrawable icon;

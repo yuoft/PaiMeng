@@ -697,6 +697,8 @@
     "paimeng.message.food":"§c无法食用!",
     "paimeng.message.login":"§b欢迎游玩本模组[应急食品]，问题反馈§a点击此处!",
     "paimeng.message.login0":"§ahttps://space.bilibili.com/21854371",
+    "paimeng.command.food.level.success": "§a已将玩家 §e%s §a的烹饪等级设置为 §e%s",
+    "paimeng.command.food.exp.success": "§a已将玩家 §e%s §a的烹饪经验设置为 §e%s",
     
     "gui.paimeng.pot":"烹饪锅",
     "gui.paimeng.bench":"灶台",

@@ -22,7 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("paimeng")
 public class PaiMeng {
 	public static final String MOD_ID = "paimeng";
-    public static CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new); //用于客户端获取tile坐标
+    public static CommonProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
 	@SuppressWarnings("removal")
 	public PaiMeng() {

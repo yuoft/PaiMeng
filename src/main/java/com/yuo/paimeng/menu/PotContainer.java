@@ -1,152 +1,29 @@
 package com.yuo.paimeng.menu;
 
-import com.yuo.paimeng.items.PMFoodItem;
-import com.yuo.paimeng.network.CookingPacket;
 import com.yuo.paimeng.recipe.ModRecipeType;
 import com.yuo.paimeng.tiles.PotTile;
-import com.yuo.paimeng.tiles.TileUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.crafting.RecipeType;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PotContainer extends AbstractContainerMenu {
-    private final PotTile potTile; //存储食材
-    private final CookingIntArray data;
-    private final FoodRecipesIntArray fooData;
-    private final Level world;
-    private final BlockPos pos;
-
-    public PotContainer(int id, Inventory playerInventory, FriendlyByteBuf buf){
-        this(id, playerInventory , (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
+public class PotContainer extends AbstractCookingContainer<PotTile> {
+    
+    public PotContainer(int id, Inventory playerInventory, FriendlyByteBuf buf) {
+        this(id, playerInventory, (Container) playerInventory.player.level().getBlockEntity(buf.readBlockPos()));
     }
 
     public PotContainer(int id, Inventory playerInventory, Container tile) {
-        super(PMMenuTypes.potContainer.get(), id);
-        this.potTile = (PotTile) tile;
-        this.pos = potTile.getBlockPos();
-        this.fooData = potTile.foodData;
-        this.world = playerInventory.player.level();
-        this.data = potTile.data;
-        addDataSlots(data); //同步数据
-        addDataSlots(fooData);
-        //食材槽
-        for (int m = 0; m < 2; m++){
-            for (int n = 0; n < 2; n++){
-                this.addSlot(new CookingSlot(potTile, n + m * 2, 8 + n * 30, 22 + m * 27));
-            }
-        }
-        this.addSlot(new CookingSlot(potTile,4, 91, 16));
-        //食品槽
-        this.addSlot(new ModOutputSlot(potTile, 5, 132, 33));
-        //添加玩家物品栏
-        for(int i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-        //添加玩家快捷栏
-        for(int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
-        }
-    }
-
-    public BlockPos getPos(){
-        return pos;
-    }
-
-    /**
-     * 燃烧进度
-     */
-    public int getBurnTime(){
-        return (int) Math.ceil((this.data.get(0) / (20 * 60 * 8.0)) * 14.0);
-    }
-
-    /** 燃烧时间 s*/
-    public int getTime(){ return (int) Math.ceil(this.data.get(0) / 20.0);}
-
-    /**
-     * 获取批量制作数量
-     * @return 数量
-     */
-    public int getItemMaxCount(){
-        NonNullList<ItemStack> inputs = TileUtils.getRecipeInputs(world, ModRecipeType.POT, this.potTile);
-        List<Integer> list = new ArrayList<>();
-        if (canRecipe()){
-            for (ItemStack input : inputs) {
-                for (int i = 0; i < this.potTile.getContainerSize(); i++) {
-                    ItemStack item = this.potTile.getItem(i);
-                    if (input.getItem() == item.getItem()){
-                       list.add(item.getCount() / input.getCount());
-                    }
-                }
-            }
-        }
-
-        int min = 65;
-        for (Integer i : list) {
-            if (i < min) min = i;
-        }
-
-        return min;
-    }
-
-    /** 烹饪等级*/
-    public int getFoodRecipesLevel(){
-        return this.fooData.get(0);
-    }
-
-    /** 烹饪经验*/
-    public int getExp(){
-        return  (int) Math.floor(this.fooData.get(1) / (double)CookingPacket.getUpExp(getFoodRecipesLevel()) * 49);
+        super(PMMenuTypes.potContainer.get(), id, playerInventory, (PotTile) tile);
     }
 
     @Override
-    public boolean stillValid(Player playerIn) {
-        return this.potTile.stillValid(playerIn);
+    protected RecipeType<?> getRecipeType() {
+        return ModRecipeType.POT;
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
-        if (slot.hasItem()) {
-            ItemStack itemStack1 = slot.getItem();
-            itemstack = itemStack1.copy();
-            if (index > 5){
-                if (itemStack1.getItem() instanceof PMFoodItem)
-                    if (!this.moveItemStackTo(itemStack1, 0, 5, false)) return ItemStack.EMPTY;
-                if (index < 32) { //从物品栏到快捷栏
-                    if (!this.moveItemStackTo(itemStack1, 34, 42, false)) return ItemStack.EMPTY;
-                } else if (index < 41) {
-                    if (!this.moveItemStackTo(itemStack1, 6, 33, false)) return ItemStack.EMPTY;
-                }
-            }else if (!this.moveItemStackTo(itemStack1, 6, 42, false)) return ItemStack.EMPTY; //取出来
-
-            if (itemStack1.isEmpty()) slot.set(ItemStack.EMPTY);
-            else slot.setChanged();
-
-            if (itemStack1.getCount() == itemstack.getCount()) return ItemStack.EMPTY;
-            slot.onTake(playerIn, itemStack1);
-        }
-
-        return itemstack;
-    }
-
-    public boolean canRecipe(){
-        return this.data.get(1) != 0;
-    }
-
-    public int getFoodLevel(){
-        return this.data.get(2);
+    protected double getMaxBurnTime() {
+        return 20 * 60 * 8.0; // 锅最大燃烧 8 分钟
     }
 }

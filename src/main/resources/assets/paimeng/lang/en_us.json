@@ -697,6 +697,8 @@
     "paimeng.message.food":"§cInedible!",
     "paimeng.message.login":"§bWelcome to this module[PaiMeng]，Problem feedback§aClick here!",
     "paimeng.message.login0":"§ahttps://space.bilibili.com/21854371",
+    "paimeng.command.food.level.success": "§aSet §e%s §a's cooking level to §e%s",
+    "paimeng.command.food.exp.success": "§aSet §e%s §a's cooking exp to §e%s",
     
     "gui.paimeng.pot":"Cooking pot",
     "gui.paimeng.bench":"cooking bench",

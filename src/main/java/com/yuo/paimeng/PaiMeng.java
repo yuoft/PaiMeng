@@ -42,7 +42,6 @@ public class PaiMeng {
         PROXY.registerHandlers(modEventBus);
 
         /*
-         * 圣遗物界面添加总属性显示（修改gui），烹饪界面添加开始烹饪按钮
          * 设计无相BOSS，2*2方块加中间倾斜方块核心，掉落神之心
          * 第6个圣遗物栏位放置神之心。
          */

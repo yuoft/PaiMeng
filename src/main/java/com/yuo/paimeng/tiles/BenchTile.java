@@ -65,7 +65,6 @@ public class BenchTile extends AbstractCookingTile {
         // 1. 燃烧时间减少
         if (this.isBurning()) {
             TIME--;
-            if (TIME < 0) TIME = 0;
             this.data.set(0, TIME);
             changed = true;
         }

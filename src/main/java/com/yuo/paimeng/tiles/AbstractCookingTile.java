@@ -81,7 +81,7 @@ public abstract class AbstractCookingTile extends BaseContainerBlockEntity imple
         }
         
         // 有输出 产物栏无物品或物品相同 则能合成
-        if (!output.isEmpty() && LEVEL <= getMaxRecipeLevel() 
+        if (!output.isEmpty() && LEVEL <= getMaxRecipeLevel()
                 && (this.items.get(getOutputSlot()).getItem() == output.getItem() || this.items.get(getOutputSlot()).isEmpty())) {
             FLAG = true;
             this.data.set(1, 1);

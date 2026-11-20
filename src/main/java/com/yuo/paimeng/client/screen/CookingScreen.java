@@ -23,7 +23,8 @@ public class CookingScreen extends Screen {
     private static final int textureHeight = 12;
     private final AbstractContainerScreen<?> screen; //容器
     private final int FOOD_RECIPE_LEVEL; //食品等级
-    private double FOOD_RECEIPTING_GROW = 0; //指针速度
+    private double FOOD_RECEIPTING_POS = 0; //指针位置
+    private boolean FOOD_FACING = true; //指针方向
     private final int minValue; //成功区间最小值
     private final int maxValue; //最大值
     private int count; //烹饪数量
@@ -59,16 +60,19 @@ public class CookingScreen extends Screen {
         int j = (this.height - textureHeight) / 2;
         graphics.blit(RESOURCE, i, j, 0, 0, textureWidth, textureHeight);
         graphics.blit(RESOURCE, i + minValue, j + 1, 0, 12, 120 - FOOD_RECIPE_LEVEL * 20, 10); //成功区间
-        if (FOOD_RECEIPTING_GROW <= 200) {
-            setFOOD_RECEIPTING_GROW(FOOD_RECIPE_LEVEL); //模拟指针移动
-            graphics.blit(RESOURCE, i + (int) Math.floor(FOOD_RECEIPTING_GROW), j - 5, 0, 22, 10, 18); //指针
-        }
-        if (FOOD_RECEIPTING_GROW > 200) this.button.onClick(0, 0);
+        foodReceiptingTick(); //模拟指针移动
+        graphics.blit(RESOURCE, i + (int) Math.floor(FOOD_RECEIPTING_POS), j - 5, 0, 22, 10, 18); //指针
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    @Override
+    public void onClose() {
+        super.onClose();
+        this.button.onClick(0,0);
+    }
+
     private void button(Button button) {
-        if (FOOD_RECEIPTING_GROW < minValue || FOOD_RECEIPTING_GROW > maxValue) { //成功烹饪
+        if (FOOD_RECEIPTING_POS < minValue || FOOD_RECEIPTING_POS > maxValue) { //成功烹饪
             count = 0;
         }
         if (screen instanceof PotScreen pot) {
@@ -85,27 +89,29 @@ public class CookingScreen extends Screen {
         }
     }
 
-    //设置指针速度
-    private void setFOOD_RECEIPTING_GROW(int lv) {
-        switch (lv) {
+    /** 指针位置更新 */
+    private void foodReceiptingTick() {
+        double facing = FOOD_FACING ? 1 : -1;
+        switch (FOOD_RECIPE_LEVEL) {
             case 1:
-                FOOD_RECEIPTING_GROW += 0.4d;
+                FOOD_RECEIPTING_POS += 0.4d * facing;
                 break;
             case 2:
-                FOOD_RECEIPTING_GROW += 0.6d;
+                FOOD_RECEIPTING_POS += 0.6d * facing;
                 break;
             case 3:
-                FOOD_RECEIPTING_GROW += 0.9d;
+                FOOD_RECEIPTING_POS += 0.9d * facing;
                 break;
             case 4:
-                FOOD_RECEIPTING_GROW += 1.2d;
+                FOOD_RECEIPTING_POS += 1.2d * facing;
                 break;
             case 5:
-                FOOD_RECEIPTING_GROW += 1.5d;
+                FOOD_RECEIPTING_POS += 1.5d * facing;
                 break;
             default:
-                FOOD_RECEIPTING_GROW += 1d;
+                FOOD_RECEIPTING_POS += 0.75f * facing;
                 break;
         }
+        if (FOOD_RECEIPTING_POS >= 200 || FOOD_RECEIPTING_POS <= 0) FOOD_FACING = !FOOD_FACING;
     }
 }

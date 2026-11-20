@@ -138,6 +138,7 @@ public class FoodRecipeSaveData extends SavedData {
             return playerUUID;
         }
 
+        /** 当前玩家烹饪等级 用于解锁批量制作*/
         public int getLevel() {
             return level;
         }

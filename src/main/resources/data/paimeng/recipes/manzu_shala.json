@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:baocai",
+      "item": "paimeng:food_baocai",
       "count": 2
     },
     {
@@ -10,11 +10,11 @@
       "count": 2
     },
     {
-      "item": "paimeng:niaodan",
+      "item": "paimeng:food_niaodan",
       "count": 1
     },
     {
-      "item": "paimeng:tudou",
+      "item": "paimeng:food_tudou",
       "count": 1
     }
   ],

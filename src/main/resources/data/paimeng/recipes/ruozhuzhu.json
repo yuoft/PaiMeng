@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:zhusun",
+      "item": "paimeng:food_zhusun",
       "count": 3
     },
     {
-      "item": "paimeng:haicao",
+      "item": "paimeng:food_haicao",
       "count": 2
     }
   ],

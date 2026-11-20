@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:lenxianrou",
+      "item": "paimeng:food_lenxianrou",
       "count": 2
     },
     {
-      "item": "paimeng:huluobo",
+      "item": "paimeng:food_huluobo",
       "count": 2
     },
     {
-      "item": "paimeng:fanqie",
+      "item": "paimeng:food_fanqie",
       "count": 1
     }
   ],

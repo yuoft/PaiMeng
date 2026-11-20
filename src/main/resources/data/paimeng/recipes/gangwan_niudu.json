@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:shourou",
+      "item": "paimeng:food_shourou",
       "count": 3
     },
     {
-      "item": "paimeng:huluobo",
+      "item": "paimeng:food_huluobo",
       "count": 3
     },
     {
-      "item": "paimeng:yangcong",
+      "item": "paimeng:food_yangcong",
       "count": 2
     },
     {
-      "item": "paimeng:fajiao_guoshizhi",
+      "item": "paimeng:food_fajiao_guoshizhi",
       "count": 1
     },
     {

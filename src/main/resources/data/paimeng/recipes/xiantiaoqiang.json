@@ -2,19 +2,19 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:pangxie",
+      "item": "paimeng:food_pangxie",
       "count": 3
     },
     {
-      "item": "paimeng:huotui",
+      "item": "paimeng:food_huotui",
       "count": 4
     },
     {
-      "item": "paimeng:xiaren",
+      "item": "paimeng:food_xiaren",
       "count": 3
     },
     {
-      "item": "paimeng:songrong",
+      "item": "paimeng:food_songrong",
       "count": 3
     }
   ],

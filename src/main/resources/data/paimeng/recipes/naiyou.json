@@ -2,13 +2,13 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:niunai"
+      "item": "paimeng:food_niunai"
     }
   ],
   "catalyzer": {
     "item": "minecraft:bowl"
   },
   "result": {
-    "item": "paimeng:naiyou"
+    "item": "paimeng:food_naiyou"
   }
 }

@@ -2,17 +2,17 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:qinrou",
+      "item": "paimeng:food_qinrou",
       "count": 3
     },
     {
-      "item": "paimeng:yan"
+      "item": "paimeng:food_yan"
     }
   ],
   "catalyzer": {
     "item": "paimeng:shanbianzhichen"
   },
   "result": {
-    "item": "paimeng:yanxunrou"
+    "item": "paimeng:food_yanxunrou"
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:bingwuhua_huaduo",
+    "item": "paimeng:food_bingwuhua_huaduo",
     "count": 8
   },
   "result": {

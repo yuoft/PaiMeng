@@ -72,7 +72,7 @@ public class CraneEntity extends Parrot implements NeutralMob {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob entity) {
-        return EntityTypeRegister.CRANE.get().create(serverWorld);
+        return PMEntityTypes.CRANE.get().create(serverWorld);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

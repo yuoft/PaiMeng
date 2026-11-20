@@ -1,7 +1,7 @@
 package com.yuo.paimeng.items.Weapon;
 
 import com.yuo.paimeng.ModUtils;
-import com.yuo.paimeng.entity.EntityTypeRegister;
+import com.yuo.paimeng.entity.PMEntityTypes;
 import com.yuo.paimeng.entity.PMBookBallEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -23,7 +23,7 @@ public class PMBook extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         if (!worldIn.isClientSide){
-            PMBookBallEntity ball = new PMBookBallEntity(EntityTypeRegister.PM_BALL.get(), playerIn, worldIn, getBallDamage());
+            PMBookBallEntity ball = new PMBookBallEntity(PMEntityTypes.PM_BALL.get(), playerIn, worldIn, getBallDamage());
             ball.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0, 1.0f, 1.0f);
             worldIn.addFreshEntity(ball);
             playerIn.playSound(SoundEvents.SNOWBALL_THROW, 1.0f, 3.0f);

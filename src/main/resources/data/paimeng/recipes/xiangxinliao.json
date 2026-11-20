@@ -2,19 +2,19 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:xiangxinguo"
+      "item": "paimeng:food_xiangxinguo"
     },
     {
-      "item": "paimeng:xiangxinguo"
+      "item": "paimeng:food_xiangxinguo"
     },
     {
-      "item": "paimeng:xiangxinguo"
+      "item": "paimeng:food_xiangxinguo"
     }
   ],
   "catalyzer": {
     "item": "minecraft:glass_bottle"
   },
   "result": {
-    "item": "paimeng:xiangxinliao"
+    "item": "paimeng:food_xiangxinliao"
   }
 }

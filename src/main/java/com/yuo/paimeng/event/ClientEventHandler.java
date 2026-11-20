@@ -39,6 +39,7 @@ public class ClientEventHandler {
                     event.addListener(new RelicsButton(screen, 77, 44, 16, 16));
             }
         }
+
     }
 
 }

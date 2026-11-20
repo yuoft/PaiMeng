@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:xiangxinguo",
+    "item": "paimeng:food_xiangxinguo",
     "count": 5
   },
   "result": {

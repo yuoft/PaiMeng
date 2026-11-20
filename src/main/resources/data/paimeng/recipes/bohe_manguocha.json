@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:bohe",
+      "item": "paimeng:food_bohe",
       "count": 3
     },
     {
@@ -10,11 +10,11 @@
       "count": 3
     },
     {
-      "item": "paimeng:shumei",
+      "item": "paimeng:food_shumei",
       "count": 3
     },
     {
-      "item": "paimeng:tang",
+      "item": "paimeng:food_tang",
       "count": 1
     }
   ],

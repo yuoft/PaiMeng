@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:yurou",
+      "item": "paimeng:food_yurou",
       "count": 4
     },
     {
-      "item": "paimeng:xiaren",
+      "item": "paimeng:food_xiaren",
       "count": 2
     },
     {
-      "item": "paimeng:niaodan",
+      "item": "paimeng:food_niaodan",
       "count": 2
     },
     {
-      "item": "paimeng:mianfen",
+      "item": "paimeng:food_mianfen",
       "count": 1
     },
     {

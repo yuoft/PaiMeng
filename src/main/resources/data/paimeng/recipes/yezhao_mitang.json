@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:zaoye",
+      "item": "paimeng:food_zaoye",
       "count": 4
     },
     {
-      "item": "paimeng:xingren",
+      "item": "paimeng:food_xingren",
       "count": 2
     },
     {
-      "item": "paimeng:huangyou",
+      "item": "paimeng:food_huangyou",
       "count": 2
     },
     {
-      "item": "paimeng:xumi_qiangwei",
+      "item": "paimeng:food_xumi_qiangwei",
       "count": 1
     }
   ],

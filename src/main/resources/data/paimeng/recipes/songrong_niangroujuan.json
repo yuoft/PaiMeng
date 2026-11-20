@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:songrong",
+      "item": "paimeng:food_songrong",
       "count": 2
     },
     {
-      "item": "paimeng:shourou",
+      "item": "paimeng:food_shourou",
       "count": 2
     }
   ],

@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:mogu",
+      "item": "paimeng:food_mogu",
       "count": 1
     },
     {
-      "item": "paimeng:qinrou",
+      "item": "paimeng:food_qinrou",
       "count": 1
     }
   ],

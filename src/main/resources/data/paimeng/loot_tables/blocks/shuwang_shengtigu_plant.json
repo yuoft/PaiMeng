@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:shuwang_shengtigu"
+          "name": "paimeng:food_shuwang_shengtigu"
         }
       ],
       "conditions": [

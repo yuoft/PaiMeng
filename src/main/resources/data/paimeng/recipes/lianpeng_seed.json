@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:lianpeng",
+    "item": "paimeng:food_lianpeng",
     "count": 6
   },
   "result": {

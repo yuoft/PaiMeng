@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:jinyucao",
+    "item": "paimeng:food_jinyucao",
     "count": 5
   },
   "result": {

@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:songguo",
+      "item": "paimeng:food_songguo",
       "count": 2
     },
     {
-      "item": "paimeng:tudou",
+      "item": "paimeng:food_tudou",
       "count": 1
     },
     {
-      "item": "paimeng:guojiang",
+      "item": "paimeng:food_guojiang",
       "count": 1
     }
   ],

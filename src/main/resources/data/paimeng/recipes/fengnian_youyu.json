@@ -2,19 +2,19 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:yurou",
+      "item": "paimeng:food_yurou",
       "count": 4
     },
     {
-      "item": "paimeng:huluobo",
+      "item": "paimeng:food_huluobo",
       "count": 4
     },
     {
-      "item": "paimeng:yangcong",
+      "item": "paimeng:food_yangcong",
       "count": 2
     },
     {
-      "item": "paimeng:liuli_dai",
+      "item": "paimeng:food_liuli_dai",
       "count": 1
     }
   ],

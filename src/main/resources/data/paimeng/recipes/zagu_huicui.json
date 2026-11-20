@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:shuwang_shengtigu",
+      "item": "paimeng:food_shuwang_shengtigu",
       "count": 1
     },
     {
-      "item": "paimeng:mogu",
+      "item": "paimeng:food_mogu",
       "count": 1
     },
     {

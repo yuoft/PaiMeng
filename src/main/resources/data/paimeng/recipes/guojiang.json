@@ -6,17 +6,17 @@
       "count": 3
     },
     {
-      "item": "paimeng:shumei",
+      "item": "paimeng:food_shumei",
       "count": 2
     },
     {
-      "item": "paimeng:tang"
+      "item": "paimeng:food_tang"
     }
   ],
   "catalyzer": {
     "item": "minecraft:glass_bottle"
   },
   "result": {
-    "item": "paimeng:guojiang"
+    "item": "paimeng:food_guojiang"
   }
 }

@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:mogu",
+    "item": "paimeng:food_mogu",
     "count": 5
   },
   "result": {

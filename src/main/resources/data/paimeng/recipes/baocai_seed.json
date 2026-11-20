@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:baocai",
+    "item": "paimeng:food_baocai",
     "count": 5
   },
   "result": {

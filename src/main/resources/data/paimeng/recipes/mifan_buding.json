@@ -2,19 +2,19 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:niaodan",
+      "item": "paimeng:food_niaodan",
       "count": 3
     },
     {
-      "item": "paimeng:daomi",
+      "item": "paimeng:food_daomi",
       "count": 2
     },
     {
-      "item": "paimeng:niunai",
+      "item": "paimeng:food_niunai",
       "count": 2
     },
     {
-      "item": "paimeng:tang",
+      "item": "paimeng:food_tang",
       "count": 2
     }
   ],

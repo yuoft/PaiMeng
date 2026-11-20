@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:dunduntao",
+      "item": "paimeng:food_dunduntao",
       "count": 2
     },
     {
-      "item": "paimeng:bohe",
+      "item": "paimeng:food_bohe",
       "count": 2
     },
     {
-      "item": "paimeng:xumi_qiangwei",
+      "item": "paimeng:food_xumi_qiangwei",
       "count": 2
     }
   ],

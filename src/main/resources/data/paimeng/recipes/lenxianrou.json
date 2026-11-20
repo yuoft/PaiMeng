@@ -7,13 +7,13 @@
   ],
   "key": {
     "y": {
-      "item": "paimeng:shourou"
+      "item": "paimeng:food_shourou"
     },
     "x": {
       "item": "minecraft:ice"
     }
   },
   "result": {
-    "item": "paimeng:lenxianrou"
+    "item": "paimeng:food_lenxianrou"
   }
 }

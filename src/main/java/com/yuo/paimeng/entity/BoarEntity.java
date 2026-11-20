@@ -57,7 +57,7 @@ public class BoarEntity extends Animal implements NeutralMob {
     @Nullable
     @Override
     public BoarEntity getBreedOffspring(ServerLevel serverWorld, AgeableMob entity) {
-        return EntityTypeRegister.BOAR.get().create(serverWorld);
+        return PMEntityTypes.BOAR.get().create(serverWorld);
     }
 
     @Override

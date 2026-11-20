@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:piboye"
+          "name": "paimeng:food_piboye"
         }
       ],
       "conditions": [

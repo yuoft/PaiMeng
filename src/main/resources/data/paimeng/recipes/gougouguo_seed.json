@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:gougouguo",
+    "item": "paimeng:food_gougouguo",
     "count": 5
   },
   "result": {

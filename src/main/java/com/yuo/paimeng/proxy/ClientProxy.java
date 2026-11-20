@@ -7,9 +7,11 @@ import com.yuo.paimeng.client.model.CraneModel;
 import com.yuo.paimeng.client.render.BenchTileTER;
 import com.yuo.paimeng.client.render.BoarRender;
 import com.yuo.paimeng.client.render.CraneRender;
+import com.yuo.paimeng.client.render.HypostasisProjectileRenderer;
+import com.yuo.paimeng.client.render.HypostasisRenderer;
 import com.yuo.paimeng.client.render.SevenGodTileRender;
 import com.yuo.paimeng.client.screen.*;
-import com.yuo.paimeng.entity.EntityTypeRegister;
+import com.yuo.paimeng.entity.PMEntityTypes;
 import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.items.Relics;
 import com.yuo.paimeng.items.RelicsHelper;
@@ -66,9 +68,12 @@ public class ClientProxy extends CommonProxy{
             BlockEntityRenderers.register(TileTypeRegistry.BENCH_TILE.get(), BenchTileTER::new); //特殊ter渲染
             BlockEntityRenderers.register(TileTypeRegistry.SEVEN_GOD.get(), SevenGodTileRender::new); //特殊ter渲染
             //实体渲染
-            EntityRenderers.register(EntityTypeRegister.BOAR.get(), BoarRender::new);
-            EntityRenderers.register(EntityTypeRegister.CRANE.get(), CraneRender::new);
-            EntityRenderers.register(EntityTypeRegister.PM_BALL.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(PMEntityTypes.BOAR.get(), BoarRender::new);
+            EntityRenderers.register(PMEntityTypes.CRANE.get(), CraneRender::new);
+            EntityRenderers.register(PMEntityTypes.PM_BALL.get(), ThrownItemRenderer::new);
+            //无相之岩：外壳与核心直接按原版方块模型渲染，不走 EntityModel
+            EntityRenderers.register(PMEntityTypes.HYPOSTASIS.get(), HypostasisRenderer::new);
+            EntityRenderers.register(PMEntityTypes.HYPOSTASIS_PROJECTILE.get(), HypostasisProjectileRenderer::new);
             //绑定Container和ContainerScreen
             MenuScreens.register(PMMenuTypes.potContainer.get(), PotScreen::new);
             MenuScreens.register(PMMenuTypes.benchContainer.get(), BenchScreen::new);

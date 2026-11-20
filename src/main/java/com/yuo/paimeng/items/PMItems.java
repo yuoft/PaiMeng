@@ -1,7 +1,7 @@
 package com.yuo.paimeng.items;
 
 import com.yuo.paimeng.blocks.PMBlocks;
-import com.yuo.paimeng.entity.EntityTypeRegister;
+import com.yuo.paimeng.entity.PMEntityTypes;
 import com.yuo.paimeng.items.Food.ModFoodEffects;
 import com.yuo.paimeng.items.Food.PaiMengFood;
 import com.yuo.paimeng.items.Weapon.*;
@@ -12,12 +12,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-//物品注册管理器
+//鐗╁搧娉ㄥ唽绠＄悊鍣?
 public class PMItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PaiMeng.MOD_ID);
 	public static final Item.Properties GROUP = new Item.Properties();
 
-	//物品
+	//鐗╁搧
 	public static RegistryObject<Item> shanbianzhichen = ITEMS.register("shanbianzhichen", EvolutionDust::new);
 	public static RegistryObject<Item> yimengrongmei = ITEMS.register("yimengrongmei", EvolutionDust::new);
 	public static RegistryObject<Item> huazhongxia = ITEMS.register("huazhongxia", SeedBox::new);
@@ -25,13 +25,17 @@ public class PMItems {
 	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
 	public static RegistryObject<Item> yuanshi = ITEMS.register("yuanshi", OrdinaryItem::new);
 	public static RegistryObject<Item> jiejing = ITEMS.register("jiejing", OrdinaryItem::new);
+	//鏃犵浉涔嬪博锛氬彫鍞ょキ鍧涚殑閽ュ寵
+	public static RegistryObject<Item> netherHeart = ITEMS.register("nether_heart", NetherHeart::new);
 
 	public static RegistryObject<ModSpawnEgg> boarSpawnEgg = ITEMS.register("boar_spawn_egg", () ->
-			new ModSpawnEgg(EntityTypeRegister.BOAR, 0x112233, 0x332211));
+			new ModSpawnEgg(PMEntityTypes.BOAR, 0x112233, 0x332211));
 	public static RegistryObject<ModSpawnEgg> craneSpawnEgg = ITEMS.register("crane_spawn_egg", () ->
-			new ModSpawnEgg(EntityTypeRegister.CRANE, 0x155683, 0x338271));
+			new ModSpawnEgg(PMEntityTypes.CRANE, 0x155683, 0x338271));
+	public static RegistryObject<ModSpawnEgg> hypostasisSpawnEgg = ITEMS.register("hypostasis_spawn_egg", () ->
+			new ModSpawnEgg(PMEntityTypes.HYPOSTASIS, 0x26262B, 0xC0A24A));
 
-	//武器
+	//姝﹀櫒
 	public static RegistryObject<Item> danshoujian = ITEMS.register("danshoujian", PMWeaponMaterial::new);
 	public static RegistryObject<Item> shuangshoujian = ITEMS.register("shuangshoujian", PMWeaponMaterial::new);
 	public static RegistryObject<Item> changqiang = ITEMS.register("changqiang", PMWeaponMaterial::new);
@@ -64,85 +68,85 @@ public class PMItems {
 	public static RegistryObject<Item> pmBow3 = ITEMS.register("pm_bow3", () -> new PMBow(4));
 	public static RegistryObject<Item> pmBow4 = ITEMS.register("pm_bow4", () -> new PMBow(5));
 
-	//素材
-	public static RegistryObject<Item> bailuobo = ITEMS.register("bailuobo", PMFoodItem::new);
-	public static RegistryObject<Item> baocai = ITEMS.register("baocai", PMFoodItem::new);
-	public static RegistryObject<Item> bohe = ITEMS.register("bohe", PMFoodItem::new);
-	public static RegistryObject<Item> ceciliaHua = ITEMS.register("cecilia_hua", PMFoodItem::new);
-	public static RegistryObject<Item> daomi = ITEMS.register("daomi", PMFoodItem::new);
-	public static RegistryObject<Item> doufu = ITEMS.register("doufu", PMFoodItem::new);
-	public static RegistryObject<Item> dudulian = ITEMS.register("dudulian", PMFoodItem::new);
-	public static RegistryObject<Item> fanqie = ITEMS.register("fanqie", PMFoodItem::new);
-	public static RegistryObject<Item> feiyingXiuqiu = ITEMS.register("feiying_xiuqiu", PMFoodItem::new);
-	public static RegistryObject<Item> fengcheju = ITEMS.register("fengcheju", PMFoodItem::new);
-	public static RegistryObject<Item> gougouguo = ITEMS.register("gougouguo", PMFoodItem::new);
-	public static RegistryObject<Item> guidouchong = ITEMS.register("guidouchong", PMFoodItem::new);
-	public static RegistryObject<Item> guojiang = ITEMS.register("guojiang", PMFoodItem::new);
-	public static RegistryObject<Item> haicao = ITEMS.register("haicao", PMFoodItem::new);
-	public static RegistryObject<Item> hailingzhi = ITEMS.register("hailingzhi", PMFoodItem::new);
-	public static RegistryObject<Item> huangyou = ITEMS.register("huangyou", PMFoodItem::new);
-	public static RegistryObject<Item> hujiao = ITEMS.register("hujiao", PMFoodItem::new);
-	public static RegistryObject<Item> huluobo = ITEMS.register("huluobo", PMFoodItem::new);
-	public static RegistryObject<Item> huotui = ITEMS.register("huotui", PMFoodItem::new);
+	//绱犳潗
+	public static RegistryObject<Item> bailuobo = ITEMS.register("food_bailuobo", PMFoodItem::new);
+	public static RegistryObject<Item> baocai = ITEMS.register("food_baocai", PMFoodItem::new);
+	public static RegistryObject<Item> bohe = ITEMS.register("food_bohe", PMFoodItem::new);
+	public static RegistryObject<Item> ceciliaHua = ITEMS.register("food_cecilia_hua", PMFoodItem::new);
+	public static RegistryObject<Item> daomi = ITEMS.register("food_daomi", PMFoodItem::new);
+	public static RegistryObject<Item> doufu = ITEMS.register("food_doufu", PMFoodItem::new);
+	public static RegistryObject<Item> dudulian = ITEMS.register("food_dudulian", PMFoodItem::new);
+	public static RegistryObject<Item> fanqie = ITEMS.register("food_fanqie", PMFoodItem::new);
+	public static RegistryObject<Item> feiyingXiuqiu = ITEMS.register("food_feiying_xiuqiu", PMFoodItem::new);
+	public static RegistryObject<Item> fengcheju = ITEMS.register("food_fengcheju", PMFoodItem::new);
+	public static RegistryObject<Item> gougouguo = ITEMS.register("food_gougouguo", PMFoodItem::new);
+	public static RegistryObject<Item> guidouchong = ITEMS.register("food_guidouchong", PMFoodItem::new);
+	public static RegistryObject<Item> guojiang = ITEMS.register("food_guojiang", PMFoodItem::new);
+	public static RegistryObject<Item> haicao = ITEMS.register("food_haicao", PMFoodItem::new);
+	public static RegistryObject<Item> hailingzhi = ITEMS.register("food_hailingzhi", PMFoodItem::new);
+	public static RegistryObject<Item> huangyou = ITEMS.register("food_huangyou", PMFoodItem::new);
+	public static RegistryObject<Item> hujiao = ITEMS.register("food_hujiao", PMFoodItem::new);
+	public static RegistryObject<Item> huluobo = ITEMS.register("food_huluobo", PMFoodItem::new);
+	public static RegistryObject<Item> huotui = ITEMS.register("food_huotui", PMFoodItem::new);
 	public static RegistryObject<Item> jinghuaGusui = ITEMS.register("jinghua_gusui", PMMaterial::new);
-	public static RegistryObject<Item> jingua = ITEMS.register("jingua", PMFoodItem::new);
-	public static RegistryObject<Item> jinyucao = ITEMS.register("jinyucao", PMFoodItem::new);
-	public static RegistryObject<Item> jueyunJiaojiao = ITEMS.register("jueyun_jiaojiao", PMFoodItem::new);
-	public static RegistryObject<Item> lenxianrou = ITEMS.register("lenxianrou", PMFoodItem::new);
-	public static RegistryObject<Item> lianpeng = ITEMS.register("lianpeng", PMFoodItem::new);
-	public static RegistryObject<Item> liuliBaihe = ITEMS.register("liuli_baihe", PMFoodItem::new);
-	public static RegistryObject<Item> liuliDai = ITEMS.register("liuli_dai", PMFoodItem::new);
-	public static RegistryObject<Item> luoluomei = ITEMS.register("luoluomei", PMFoodItem::new);
-	public static RegistryObject<Item> manrou = ITEMS.register("manrou", PMFoodItem::new);
-	public static RegistryObject<Item> mianfen = ITEMS.register("mianfen", PMFoodItem::new);
-	public static RegistryObject<Item> mingcao = ITEMS.register("mingcao", PMFoodItem::new);
-	public static RegistryObject<Item> mogu = ITEMS.register("mogu", PMFoodItem::new);
-	public static RegistryObject<Item> mufeng_mogu = ITEMS.register("mufeng_mogu", PMFoodItem::new);
-	public static RegistryObject<Item> nailao = ITEMS.register("nailao", PMFoodItem::new);
-	public static RegistryObject<Item> naiyou = ITEMS.register("naiyou", PMFoodItem::new);
-	public static RegistryObject<Item> niaodan = ITEMS.register("niaodan", PMFoodItem::new);
-	public static RegistryObject<Item> nichanghua = ITEMS.register("nichanghua", PMFoodItem::new);
-	public static RegistryObject<Item> niunai = ITEMS.register("niunai", PMFoodItem::new);
-	public static RegistryObject<Item> pangxie = ITEMS.register("pangxie", PMFoodItem::new);
-	public static RegistryObject<Item> peigen = ITEMS.register("peigen", PMFoodItem::new);
-	public static RegistryObject<Item> pugongying_zhongzi = ITEMS.register("pugongying_zhongzi", PMFoodItem::new);
-	public static RegistryObject<Item> qingxin = ITEMS.register("qingxin", PMFoodItem::new);
-	public static RegistryObject<Item> qinrou = ITEMS.register("qinrou", PMFoodItem::new);
+	public static RegistryObject<Item> jingua = ITEMS.register("food_jingua", PMFoodItem::new);
+	public static RegistryObject<Item> jinyucao = ITEMS.register("food_jinyucao", PMFoodItem::new);
+	public static RegistryObject<Item> jueyunJiaojiao = ITEMS.register("food_jueyun_jiaojiao", PMFoodItem::new);
+	public static RegistryObject<Item> lenxianrou = ITEMS.register("food_lenxianrou", PMFoodItem::new);
+	public static RegistryObject<Item> lianpeng = ITEMS.register("food_lianpeng", PMFoodItem::new);
+	public static RegistryObject<Item> liuliBaihe = ITEMS.register("food_liuli_baihe", PMFoodItem::new);
+	public static RegistryObject<Item> liuliDai = ITEMS.register("food_liuli_dai", PMFoodItem::new);
+	public static RegistryObject<Item> luoluomei = ITEMS.register("food_luoluomei", PMFoodItem::new);
+	public static RegistryObject<Item> manrou = ITEMS.register("food_manrou", PMFoodItem::new);
+	public static RegistryObject<Item> mianfen = ITEMS.register("food_mianfen", PMFoodItem::new);
+	public static RegistryObject<Item> mingcao = ITEMS.register("food_mingcao", PMFoodItem::new);
+	public static RegistryObject<Item> mogu = ITEMS.register("food_mogu", PMFoodItem::new);
+	public static RegistryObject<Item> mufeng_mogu = ITEMS.register("food_mufeng_mogu", PMFoodItem::new);
+	public static RegistryObject<Item> nailao = ITEMS.register("food_nailao", PMFoodItem::new);
+	public static RegistryObject<Item> naiyou = ITEMS.register("food_naiyou", PMFoodItem::new);
+	public static RegistryObject<Item> niaodan = ITEMS.register("food_niaodan", PMFoodItem::new);
+	public static RegistryObject<Item> nichanghua = ITEMS.register("food_nichanghua", PMFoodItem::new);
+	public static RegistryObject<Item> niunai = ITEMS.register("food_niunai", PMFoodItem::new);
+	public static RegistryObject<Item> pangxie = ITEMS.register("food_pangxie", PMFoodItem::new);
+	public static RegistryObject<Item> peigen = ITEMS.register("food_peigen", PMFoodItem::new);
+	public static RegistryObject<Item> pugongying_zhongzi = ITEMS.register("food_pugongying_zhongzi", PMFoodItem::new);
+	public static RegistryObject<Item> qingxin = ITEMS.register("food_qingxin", PMFoodItem::new);
+	public static RegistryObject<Item> qinrou = ITEMS.register("food_qinrou", PMFoodItem::new);
 	public static RegistryObject<Item> shanhu_zhenzhu = ITEMS.register("shanhu_zhenzhu", PMMaterial::new);
 	public static RegistryObject<Item> shipo = ITEMS.register("shipo", PMMaterial::new);
-	public static RegistryObject<Item> shourou = ITEMS.register("shourou", PMFoodItem::new);
-	public static RegistryObject<Item> shumei = ITEMS.register("shumei", PMFoodItem::new);
-	public static RegistryObject<Item> songguo = ITEMS.register("songguo", PMFoodItem::new);
-	public static RegistryObject<Item> songrong = ITEMS.register("songrong", PMFoodItem::new);
-	public static RegistryObject<Item> tang = ITEMS.register("tang", PMFoodItem::new);
-	public static RegistryObject<Item> tiantianhua = ITEMS.register("tiantianhua", PMFoodItem::new);
-	public static RegistryObject<Item> tianyun_caoshi = ITEMS.register("tianyun_caoshi", PMFoodItem::new);
-	public static RegistryObject<Item> tudou = ITEMS.register("tudou", PMFoodItem::new);
-	public static RegistryObject<Item> xiangchang = ITEMS.register("xiangchang", PMFoodItem::new);
-	public static RegistryObject<Item> xiaodengcao = ITEMS.register("xiaodengcao", PMFoodItem::new);
-	public static RegistryObject<Item> xiaomai = ITEMS.register("xiaomai", PMFoodItem::new);
-	public static RegistryObject<Item> xiaren = ITEMS.register("xiaren", PMFoodItem::new);
-	public static RegistryObject<Item> xiehuang = ITEMS.register("xiehuang", PMFoodItem::new);
+	public static RegistryObject<Item> shourou = ITEMS.register("food_shourou", PMFoodItem::new);
+	public static RegistryObject<Item> shumei = ITEMS.register("food_shumei", PMFoodItem::new);
+	public static RegistryObject<Item> songguo = ITEMS.register("food_songguo", PMFoodItem::new);
+	public static RegistryObject<Item> songrong = ITEMS.register("food_songrong", PMFoodItem::new);
+	public static RegistryObject<Item> tang = ITEMS.register("food_tang", PMFoodItem::new);
+	public static RegistryObject<Item> tiantianhua = ITEMS.register("food_tiantianhua", PMFoodItem::new);
+	public static RegistryObject<Item> tianyun_caoshi = ITEMS.register("food_tianyun_caoshi", PMFoodItem::new);
+	public static RegistryObject<Item> tudou = ITEMS.register("food_tudou", PMFoodItem::new);
+	public static RegistryObject<Item> xiangchang = ITEMS.register("food_xiangchang", PMFoodItem::new);
+	public static RegistryObject<Item> xiaodengcao = ITEMS.register("food_xiaodengcao", PMFoodItem::new);
+	public static RegistryObject<Item> xiaomai = ITEMS.register("food_xiaomai", PMFoodItem::new);
+	public static RegistryObject<Item> xiaren = ITEMS.register("food_xiaren", PMFoodItem::new);
+	public static RegistryObject<Item> xiehuang = ITEMS.register("food_xiehuang", PMFoodItem::new);
 	public static RegistryObject<Item> xingluo = ITEMS.register("xingluo", PMMaterial::new);
-	public static RegistryObject<Item> xingren = ITEMS.register("xingren", PMFoodItem::new);
-	public static RegistryObject<Item> xuekui = ITEMS.register("xuekui", PMFoodItem::new);
-	public static RegistryObject<Item> yan = ITEMS.register("yan", PMFoodItem::new);
-	public static RegistryObject<Item> yangcong = ITEMS.register("yangcong", PMFoodItem::new);
-	public static RegistryObject<Item> yanxunrou = ITEMS.register("yanxunrou", PMFoodItem::new);
+	public static RegistryObject<Item> xingren = ITEMS.register("food_xingren", PMFoodItem::new);
+	public static RegistryObject<Item> xuekui = ITEMS.register("food_xuekui", PMFoodItem::new);
+	public static RegistryObject<Item> yan = ITEMS.register("food_yan", PMFoodItem::new);
+	public static RegistryObject<Item> yangcong = ITEMS.register("food_yangcong", PMFoodItem::new);
+	public static RegistryObject<Item> yanxunrou = ITEMS.register("food_yanxunrou", PMFoodItem::new);
 	public static RegistryObject<Item> yeboshi = ITEMS.register("yeboshi", PMMaterial::new);
-	public static RegistryObject<Item> youdengxun = ITEMS.register("youdengxun", PMFoodItem::new);
-	public static RegistryObject<Item> yurou = ITEMS.register("yurou", PMFoodItem::new);
-	public static RegistryObject<Item> zhusun = ITEMS.register("zhusun", PMFoodItem::new);
+	public static RegistryObject<Item> youdengxun = ITEMS.register("food_youdengxun", PMFoodItem::new);
+	public static RegistryObject<Item> yurou = ITEMS.register("food_yurou", PMFoodItem::new);
+	public static RegistryObject<Item> zhusun = ITEMS.register("food_zhusun", PMFoodItem::new);
 
 	public static RegistryObject<Item> baitie = ITEMS.register("baitie", PMMaterial::new);
-	public static RegistryObject<Item> bingwuhua_huaduo = ITEMS.register("bingwuhua_huaduo", PMFoodItem::new);
+	public static RegistryObject<Item> bingwuhua_huaduo = ITEMS.register("food_bingwuhua_huaduo", PMFoodItem::new);
 	public static RegistryObject<Item> dianqi_shuijing = ITEMS.register("dianqi_shuijing", PMMaterial::new);
 	public static RegistryObject<Item> faguangsui = ITEMS.register("faguangsui", PMMaterial::new);
 	public static RegistryObject<Item> heitie = ITEMS.register("heitie", PMMaterial::new);
 	public static RegistryObject<Item> jinghe = ITEMS.register("jinghe", PMMaterial::new);
-	public static RegistryObject<Item> lieyanhua_huarui = ITEMS.register("lieyanhua_huarui", PMFoodItem::new);
+	public static RegistryObject<Item> lieyanhua_huarui = ITEMS.register("food_lieyanhua_huarui", PMFoodItem::new);
 	public static RegistryObject<Item> longya1 = ITEMS.register("longya1", PMMaterial::new);
-	public static RegistryObject<Item> mawei = ITEMS.register("mawei", PMFoodItem::new);
+	public static RegistryObject<Item> mawei = ITEMS.register("food_mawei", PMFoodItem::new);
 	public static RegistryObject<Item> mojing = ITEMS.register("mojing", PMMaterial::new);
 	public static RegistryObject<Item> qingwa = ITEMS.register("qingwa", PMMaterial::new);
 	public static RegistryObject<Item> qiuqiu_baoyu = ITEMS.register("qiuqiu_baoyu", PMMaterial::new);
@@ -152,24 +156,24 @@ public class PMItems {
 	public static RegistryObject<Item> zijing = ITEMS.register("zijing", PMMaterial::new);
 
 	//3.0~
-	public static RegistryObject<Item> dunduntao = ITEMS.register("dunduntao", PMFoodItem::new);
-	public static RegistryObject<Item> padishalan = ITEMS.register("padishalan", PMFoodItem::new);
-	public static RegistryObject<Item> piboye = ITEMS.register("piboye", PMFoodItem::new);
-	public static RegistryObject<Item> shuwangShengtigu = ITEMS.register("shuwang_shengtigu", PMFoodItem::new);
-	public static RegistryObject<Item> tutudou = ITEMS.register("tutudou", PMFoodItem::new);
-	public static RegistryObject<Item> xiangxinguo = ITEMS.register("xiangxinguo", PMFoodItem::new);
-	public static RegistryObject<Item> xiangxinliao = ITEMS.register("xiangxinliao", PMFoodItem::new);
-	public static RegistryObject<Item> xumiQiangwei = ITEMS.register("xumi_qiangwei", PMFoodItem::new);
-	public static RegistryObject<Item> zaoye = ITEMS.register("zaoye", PMFoodItem::new);
+	public static RegistryObject<Item> dunduntao = ITEMS.register("food_dunduntao", PMFoodItem::new);
+	public static RegistryObject<Item> padishalan = ITEMS.register("food_padishalan", PMFoodItem::new);
+	public static RegistryObject<Item> piboye = ITEMS.register("food_piboye", PMFoodItem::new);
+	public static RegistryObject<Item> shuwangShengtigu = ITEMS.register("food_shuwang_shengtigu", PMFoodItem::new);
+	public static RegistryObject<Item> tutudou = ITEMS.register("food_tutudou", PMFoodItem::new);
+	public static RegistryObject<Item> xiangxinguo = ITEMS.register("food_xiangxinguo", PMFoodItem::new);
+	public static RegistryObject<Item> xiangxinliao = ITEMS.register("food_xiangxinliao", PMFoodItem::new);
+	public static RegistryObject<Item> xumiQiangwei = ITEMS.register("food_xumi_qiangwei", PMFoodItem::new);
+	public static RegistryObject<Item> zaoye = ITEMS.register("food_zaoye", PMFoodItem::new);
 
 	//4.0~
-	public static RegistryObject<Item> fajiaoGuoshizhi = ITEMS.register("fajiao_guoshizhi", PMFoodItem::new);
-	public static RegistryObject<Item> kafeidou = ITEMS.register("kafeidou", PMFoodItem::new);
-	public static RegistryObject<Item> mojiecao = ITEMS.register("mojiecao", PMFoodItem::new);
-	public static RegistryObject<Item> xizao = ITEMS.register("xizao", PMFoodItem::new);
-	public static RegistryObject<Item> shenmideRou = ITEMS.register("shenmide_rou", PMFoodItem::new);
+	public static RegistryObject<Item> fajiaoGuoshizhi = ITEMS.register("food_fajiao_guoshizhi", PMFoodItem::new);
+	public static RegistryObject<Item> kafeidou = ITEMS.register("food_kafeidou", PMFoodItem::new);
+	public static RegistryObject<Item> mojiecao = ITEMS.register("food_mojiecao", PMFoodItem::new);
+	public static RegistryObject<Item> xizao = ITEMS.register("food_xizao", PMFoodItem::new);
+	public static RegistryObject<Item> shenmideRou = ITEMS.register("food_shenmide_rou", PMFoodItem::new);
 
-	//食物
+	//椋熺墿
 	public static RegistryObject<Item> baizhiShishuHuirou = ITEMS.register("baizhi_shishu_huirou",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
 	public static RegistryObject<Item> baochaoRoupian = ITEMS.register("baochao_roupian",
@@ -386,7 +390,7 @@ public class PMItems {
 	public static RegistryObject<Item> paimengFood = ITEMS.register("paimeng_food",
 			() -> new PaiMengFood(ModFoodEffects.PAIMENG_FOOD,6,0));
 
-	//3.0~之后版本
+	//3.0~涔嬪悗鐗堟湰
 	public static RegistryObject<Item> aruBanfan = ITEMS.register("aru_banfan",
 			() -> new PaiMengFood(ModFoodEffects.FOOD_TWO,2,2));
 	public static RegistryObject<Item> boheDoutang = ITEMS.register("bohe_doutang",
@@ -540,7 +544,7 @@ public class PMItems {
 	public static RegistryObject<Item> paopaoju = ITEMS.register("paopaoju",
 			() -> new PaiMengFood(Foods.APPLE,0,0));
 
-	//圣遗物
+	//鍦ｉ仐鐗?
 	public static RegistryObject<Item> xingyunerRelics = ITEMS.register("xingyuner_relics", () -> new Relics(1, 3));
 	public static RegistryObject<Item> maoxianjiaRelics = ITEMS.register("maoxianjia_relics", () -> new Relics(1, 3));
 	public static RegistryObject<Item> youyiRelics = ITEMS.register("youyi_relics", () -> new Relics(1, 3));
@@ -550,16 +554,16 @@ public class PMItems {
 	public static RegistryObject<Item> juedoushiRelics = ITEMS.register("juedoushi_relics", () -> new Relics(4, 5));
 	public static RegistryObject<Item> yuetuanRelics = ITEMS.register("yuetuan_relics", () -> new Relics(4, 5));
 
-	//圣遗物经验瓶
+	//鍦ｉ仐鐗╃粡楠岀摱
 	public static RegistryObject<Item> relicsExpBig = ITEMS.register("relics_exp_big", () -> new RelicsExp(10000));
 	public static RegistryObject<Item> relicsExpSmall = ITEMS.register("relics_exp_small", () -> new RelicsExp(1000));
 
-	//圣物匣
+	//鍦ｇ墿鍖?
 	public static RegistryObject<Item> relicsBoxOne = ITEMS.register("relics_box_one", () -> new RelicsBox(1));
 	public static RegistryObject<Item> relicsBoxTwo = ITEMS.register("relics_box_two", () -> new RelicsBox(2));
 	public static RegistryObject<Item> relicsBoxThree = ITEMS.register("relics_box_three", () -> new RelicsBox(3));
 
-	//注册方块物品
+	//娉ㄥ唽鏂瑰潡鐗╁搧
 	public static RegistryObject<BlockItem> cookingPot = ITEMS.register("cooking_pot",
 			() -> new BlockItem(PMBlocks.cookingPot.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> cookingBench = ITEMS.register("cooking_bench",
@@ -610,7 +614,7 @@ public class PMItems {
 	public static CropUseBlockEnum AQUATIC = CropUseBlockEnum.AQUATIC;
 	public static CropUseBlockEnum LOGS = CropUseBlockEnum.LOGS;
 
-	//X型作物种子
+	//X鍨嬩綔鐗╃瀛?
 	public static RegistryObject<BlockItem> bailuoboSeed = ITEMS.register("bailuobo_seed",
 			() -> new CropBlockItem(PMBlocks.bailuoboCrop.get(), COMMON));
 	public static RegistryObject<BlockItem> baocaiSeed = ITEMS.register("baocai_seed",
@@ -701,7 +705,7 @@ public class PMItems {
 			() -> new CropBlockItem(PMBlocks.mojiecaoCrop.get(), COMMON));
 
 
-	//树
+	//鏍?
 	public static RegistryObject<BlockItem> appleLog = ITEMS.register("apple_log",
 			() -> new BlockItem(PMBlocks.appleLog.get(), GROUP));
 	public static RegistryObject<BlockItem> witheredLog = ITEMS.register("withered_log",

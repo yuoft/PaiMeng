@@ -2,8 +2,9 @@ package com.yuo.paimeng.event;
 
 import com.yuo.paimeng.entity.BoarEntity;
 import com.yuo.paimeng.entity.CraneEntity;
-import com.yuo.paimeng.entity.EntityTypeRegister;
+import com.yuo.paimeng.entity.PMEntityTypes;
 import com.yuo.paimeng.PaiMeng;
+import com.yuo.paimeng.entity.HypostasisEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +21,8 @@ public class MobEvent {
     @SubscribeEvent
     public static void onRegisterEntitiesAttr(EntityAttributeCreationEvent event) {
         //1.20.1: AttributeSupplier.Builder#create() -> build()
-        event.put(EntityTypeRegister.BOAR.get(), BoarEntity.createAttributes().build());
-        event.put(EntityTypeRegister.CRANE.get(), CraneEntity.createAttributes().build());
+        event.put(PMEntityTypes.BOAR.get(), BoarEntity.createAttributes().build());
+        event.put(PMEntityTypes.CRANE.get(), CraneEntity.createAttributes().build());
+        event.put(PMEntityTypes.HYPOSTASIS.get(), HypostasisEntity.createAttributes().build());
     }
 }

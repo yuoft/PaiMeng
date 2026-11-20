@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:bohe",
+      "item": "paimeng:food_bohe",
       "count": 4
     },
     {
-      "item": "paimeng:jueyun_jiaojiao",
+      "item": "paimeng:food_jueyun_jiaojiao",
       "count": 1
     }
   ],

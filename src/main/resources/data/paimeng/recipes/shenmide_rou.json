@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "paimeng:shenmide_rou"
+      "item": "paimeng:food_shenmide_rou"
     }
   ],
   "result": {
-    "item": "paimeng:shourou",
+    "item": "paimeng:food_shourou",
     "count": 3
   }
 }

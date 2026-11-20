@@ -2,19 +2,19 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:qinrou",
+      "item": "paimeng:food_qinrou",
       "count": 4
     },
     {
-      "item": "paimeng:shourou",
+      "item": "paimeng:food_shourou",
       "count": 4
     },
     {
-      "item": "paimeng:mojiecao",
+      "item": "paimeng:food_mojiecao",
       "count": 3
     },
     {
-      "item": "paimeng:fajiao_guoshizhi",
+      "item": "paimeng:food_fajiao_guoshizhi",
       "count": 2
     }
   ],

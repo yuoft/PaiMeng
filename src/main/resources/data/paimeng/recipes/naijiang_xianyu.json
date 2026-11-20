@@ -2,15 +2,15 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:yurou",
+      "item": "paimeng:food_yurou",
       "count": 3
     },
     {
-      "item": "paimeng:niunai",
+      "item": "paimeng:food_niunai",
       "count": 2
     },
     {
-      "item": "paimeng:bohe",
+      "item": "paimeng:food_bohe",
       "count": 1
     }
   ],

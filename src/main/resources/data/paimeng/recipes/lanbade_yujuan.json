@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:yurou",
+      "item": "paimeng:food_yurou",
       "count": 1
     },
     {
-      "item": "paimeng:xumi_qiangwei",
+      "item": "paimeng:food_xumi_qiangwei",
       "count": 1
     }
   ],

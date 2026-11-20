@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:tianyun_caoshi",
+    "item": "paimeng:food_tianyun_caoshi",
     "count": 8
   },
   "result": {

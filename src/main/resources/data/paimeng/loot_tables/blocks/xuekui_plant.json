@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "paimeng:xuekui"
+          "name": "paimeng:food_xuekui"
         }
       ],
       "conditions": [

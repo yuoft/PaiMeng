@@ -2,11 +2,11 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:pangxie",
+      "item": "paimeng:food_pangxie",
       "count": 1
     },
     {
-      "item": "paimeng:xiehuang",
+      "item": "paimeng:food_xiehuang",
       "count": 1
     }
   ],

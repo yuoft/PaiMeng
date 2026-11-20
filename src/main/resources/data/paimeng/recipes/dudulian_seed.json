@@ -1,7 +1,7 @@
 {
   "type": "paimeng:seed_box",
   "input": {
-    "item": "paimeng:dudulian",
+    "item": "paimeng:food_dudulian",
     "count": 5
   },
   "result": {

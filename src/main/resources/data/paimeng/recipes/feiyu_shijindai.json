@@ -2,19 +2,19 @@
   "type": "paimeng:bench",
   "inputs": [
     {
-      "item": "paimeng:lianpeng",
+      "item": "paimeng:food_lianpeng",
       "count": 3
     },
     {
-      "item": "paimeng:jueyun_jiaojiao",
+      "item": "paimeng:food_jueyun_jiaojiao",
       "count": 2
     },
     {
-      "item": "paimeng:baocai",
+      "item": "paimeng:food_baocai",
       "count": 2
     },
     {
-      "item": "paimeng:huotui",
+      "item": "paimeng:food_huotui",
       "count": 1
     }
   ],

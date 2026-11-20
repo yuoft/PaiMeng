@@ -2,19 +2,19 @@
   "type": "paimeng:syn_plat",
   "inputs": [
     {
-      "item": "paimeng:niunai"
+      "item": "paimeng:food_niunai"
     },
     {
-      "item": "paimeng:niunai"
+      "item": "paimeng:food_niunai"
     },
     {
-      "item": "paimeng:niunai"
+      "item": "paimeng:food_niunai"
     }
   ],
   "catalyzer": {
     "item": "paimeng:shanbianzhichen"
   },
   "result": {
-    "item": "paimeng:nailao"
+    "item": "paimeng:food_nailao"
   }
 }

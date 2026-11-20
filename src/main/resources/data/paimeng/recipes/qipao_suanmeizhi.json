@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:luoluomei",
+      "item": "paimeng:food_luoluomei",
       "count": 3
     },
     {
@@ -10,7 +10,7 @@
       "count": 2
     },
     {
-      "item": "paimeng:tang",
+      "item": "paimeng:food_tang",
       "count": 1
     }
   ],

@@ -2,7 +2,7 @@
   "type": "paimeng:pot",
   "inputs": [
     {
-      "item": "paimeng:shourou",
+      "item": "paimeng:food_shourou",
       "count": 3
     },
     {
@@ -10,11 +10,11 @@
       "count": 3
     },
     {
-      "item": "paimeng:huangyou",
+      "item": "paimeng:food_huangyou",
       "count": 1
     },
     {
-      "item": "paimeng:hujiao",
+      "item": "paimeng:food_hujiao",
       "count": 1
     }
   ],

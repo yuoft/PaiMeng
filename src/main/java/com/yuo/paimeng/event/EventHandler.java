@@ -9,13 +9,11 @@ import com.yuo.paimeng.effects.EffectRegistry;
 import com.yuo.paimeng.effects.ReviveEffect;
 import com.yuo.paimeng.items.Food.PaiMengFood;
 import com.yuo.paimeng.items.PMItems;
-import com.yuo.paimeng.items.Relics;
-import com.yuo.paimeng.items.RelicsBox;
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsBox;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import com.yuo.paimeng.tiles.SevenGodTile;
 import com.yuo.paimeng.world.data.SevenGodSavedData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.ClickEvent;
@@ -54,7 +52,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -149,6 +146,7 @@ public class EventHandler {
             }
         }
     }
+
     //添加物品信息
     @SubscribeEvent
     public static void itemMessage(ItemTooltipEvent event){
@@ -192,7 +190,6 @@ public class EventHandler {
             capability.ifPresent(e -> {
                 RelicsHelper.clearModifier(player);
                 Multimap<Attribute, AttributeModifier> relicsModifier = RelicsHelper.getRelicsModifier(player);
-                //1.20.1: Entity#getAttributeManager() 已删除，逐属性重新应用永久修饰器
                 relicsModifier.forEach((attribute, modifier) -> {
                     AttributeInstance instance = player.getAttribute(attribute);
                     if (instance != null && !instance.hasModifier(modifier)) {
@@ -201,12 +198,15 @@ public class EventHandler {
                 });
             });
             EventHelper.changeAttribute(player);
+            //神之眼被动（第 6 圣遗物栏位）
+            GodEyeEffects.tick(player);
         }
     }
 
     //实体受伤
     @SubscribeEvent
     public static void attackEntity(LivingHurtEvent event){
+        GodEyeEffects.onHurt(event); //神之眼的元素免疫与攻击附加效果
         LivingEntity entityLiving = event.getEntity();
         Entity source = event.getSource().getEntity(); //攻击者
         if (source instanceof Player player){
@@ -320,26 +320,6 @@ public class EventHandler {
         if (entityLiving instanceof Player player){
             float amount = event.getAmount(); //增加血量回复
             event.setAmount((float) (amount + amount * RelicsHelper.getRelicsHeal(player)));
-        }
-    }
-
-    @SubscribeEvent
-    public static void wearRelics(PlayerInteractEvent.RightClickItem event){
-        Player player = event.getEntity();
-        ItemStack relics = event.getItemStack();
-        if (relics.getItem() instanceof Relics){ //快速装备圣遗物
-            if (player.isShiftKeyDown()){
-                // 为没有属性的圣遗物初始化属性
-                if (!RelicsHelper.hasMainAttrNbt(relics)){
-                    RelicsHelper.addRelicsBaseAttr0(relics);
-                }
-            }else {
-                LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
-                capability.ifPresent(e ->{
-                    NonNullList<ItemStack> stacks = e.getStacks();
-                    EventHelper.wearRelics(player, event.getHand() , event.getLevel(), RelicsHelper.getTypeForStack(relics).getId(), stacks, relics);
-                });
-            }
         }
     }
 

@@ -1,7 +1,7 @@
 package com.yuo.paimeng.client.screen;
 
 import com.yuo.paimeng.ModUtils;
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import com.yuo.paimeng.menu.RelicsContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

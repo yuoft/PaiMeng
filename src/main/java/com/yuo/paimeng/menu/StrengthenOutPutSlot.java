@@ -1,6 +1,6 @@
 package com.yuo.paimeng.menu;
 
-import com.yuo.paimeng.items.Relics;
+import com.yuo.paimeng.items.relics.Relics;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

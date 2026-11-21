@@ -6,6 +6,10 @@ import com.yuo.paimeng.items.Food.ModFoodEffects;
 import com.yuo.paimeng.items.Food.PaiMengFood;
 import com.yuo.paimeng.items.Weapon.*;
 import com.yuo.paimeng.PaiMeng;
+import com.yuo.paimeng.items.relics.GodEyeType;
+import com.yuo.paimeng.items.relics.Relics;
+import com.yuo.paimeng.items.relics.RelicsBox;
+import com.yuo.paimeng.items.relics.RelicsExp;
 import net.minecraft.world.item.*;
 import net.minecraft.world.food.Foods;
 import net.minecraftforge.registries.RegistryObject;
@@ -25,8 +29,6 @@ public class PMItems {
 	public static RegistryObject<Item> drugBottle = ITEMS.register("drug_bottle", DrugBottle::new);
 	public static RegistryObject<Item> yuanshi = ITEMS.register("yuanshi", OrdinaryItem::new);
 	public static RegistryObject<Item> jiejing = ITEMS.register("jiejing", OrdinaryItem::new);
-	//无相之岩：召唤祭坛的钥匙
-	public static RegistryObject<Item> netherHeart = ITEMS.register("nether_heart", NetherHeart::new);
 
 	public static RegistryObject<ModSpawnEgg> boarSpawnEgg = ITEMS.register("boar_spawn_egg", () ->
 			new ModSpawnEgg(PMEntityTypes.BOAR, 0x112233, 0x332211));
@@ -553,6 +555,14 @@ public class PMItems {
 	public static RegistryObject<Item> liufangzheRelics = ITEMS.register("liufangzhe_relics", () -> new Relics(3, 4));
 	public static RegistryObject<Item> juedoushiRelics = ITEMS.register("juedoushi_relics", () -> new Relics(4, 5));
 	public static RegistryObject<Item> yuetuanRelics = ITEMS.register("yuetuan_relics", () -> new Relics(4, 5));
+	//神之眼
+	public static RegistryObject<Item> godEyeWind = ITEMS.register("god_eye_wind", () -> new Relics(GodEyeType.WIND));
+	public static RegistryObject<Item> godEyeStone = ITEMS.register("god_eye_stone", () -> new Relics(GodEyeType.STONE));
+	public static RegistryObject<Item> godEyeThunder = ITEMS.register("god_eye_thunder", () -> new Relics(GodEyeType.THUNDER));
+	public static RegistryObject<Item> godEyeGrass = ITEMS.register("god_eye_grass", () -> new Relics(GodEyeType.GRASS));
+	public static RegistryObject<Item> godEyeWater = ITEMS.register("god_eye_water", () -> new Relics(GodEyeType.WATER));
+	public static RegistryObject<Item> godEyeFire = ITEMS.register("god_eye_fire", () -> new Relics(GodEyeType.FIRE));
+	public static RegistryObject<Item> godEyeIce = ITEMS.register("god_eye_ice", () -> new Relics(GodEyeType.ICE));
 
 	//圣遗物经验瓶
 	public static RegistryObject<Item> relicsExpBig = ITEMS.register("relics_exp_big", () -> new RelicsExp(10000));
@@ -724,4 +734,5 @@ public class PMItems {
 			() -> new BlockItem(PMBlocks.zaoyeSapling.get(), GROUP));
 	public static RegistryObject<BlockItem> paopaojuSapling = ITEMS.register("paopaoju_sapling",
 			() -> new BlockItem(PMBlocks.paopaojuSapling.get(), GROUP));
+
 }

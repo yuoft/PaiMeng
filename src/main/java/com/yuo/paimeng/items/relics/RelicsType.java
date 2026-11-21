@@ -1,4 +1,4 @@
-package com.yuo.paimeng.items;
+package com.yuo.paimeng.items.relics;
 
 /**圣遗物部位枚举 */
 public enum RelicsType {
@@ -8,7 +8,7 @@ public enum RelicsType {
     CLOCK(2,"clock"),
     FEATHER(3, "feather"),
     FLOWER(4,"flower"),
-    EYE(5, "eye"); //神之眼或特殊道具
+    EYE(5, "eye"); //神之眼
 
     public static final RelicsType[] ALL = new RelicsType[]{HEAD, CUP, CLOCK, FEATHER, FLOWER, EYE};
 

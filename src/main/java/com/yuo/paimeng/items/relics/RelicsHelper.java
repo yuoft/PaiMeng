@@ -1,4 +1,4 @@
-package com.yuo.paimeng.items;
+package com.yuo.paimeng.items.relics;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-//圣遗物操作类
+/** 圣遗物操作类 */
 public class RelicsHelper {
     //数据保存字段
     public static final String NBT_RELICS = "nbt_relics";
@@ -120,6 +120,37 @@ public class RelicsHelper {
 
     public static Random random = new Random();
 
+    /** 物品是否是神之眼 */
+    public static boolean isGodEye(ItemStack stack) {
+        return stack.getItem() instanceof Relics relics && relics.getGodEyeType() != null;
+    }
+
+    /**
+     * 获取玩家圣遗物栏第 6 格里的神之眼物品
+     */
+    public static ItemStack getGodEye(Player player) {
+        LazyOptional<RelicsItemHandler> capability = player.getCapability(ModCapability.RELICS_CAPABILITY);
+        if (capability.isPresent()) {
+            NonNullList<ItemStack> stacks = capability.orElseThrow(NullPointerException::new).getStacks();
+            if (stacks.size() > 5) {
+                ItemStack stack = stacks.get(5);
+                if (isGodEye(stack)) return stack;
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    /**
+     * 玩家当前装备的神之眼元素，没有则返回 {@link GodEyeType#EMPTY}
+     */
+    public static GodEyeType getGodEyeType(Player player) {
+        ItemStack stack = getGodEye(player);
+        if (stack.getItem() instanceof Relics relics && relics.getGodEyeType() != null) {
+            return relics.getGodEyeType();
+        }
+        return GodEyeType.EMPTY;
+    }
+
     public static int getMaxStar(ItemStack stack){
         return stack.getOrCreateTag().getInt("maxStar");
     }
@@ -216,6 +247,7 @@ public class RelicsHelper {
      * @return 部位
      */
     public static RelicsType getTypeForStack(ItemStack stack){
+        if (isGodEye(stack)) return RelicsType.EYE; //神之眼固定第 6 格
         int id = stack.getOrCreateTag().getCompound(NBT_RELICS).getInt(NBT_TYPE);
         return RelicsType.getTypeForId(id);
     }
@@ -264,9 +296,9 @@ public class RelicsHelper {
      */
     public static void addRelicsBaseAttr(ItemStack crafting) {
         Relics relics = (Relics) crafting.getItem();
+        if (relics.getGodEyeType() != null) return; //神之眼不生成随机属性
         CompoundTag orCreateTag = crafting.getOrCreateTag();
         CompoundTag nbt = new CompoundTag();
-        //Mth.nextInt 在 1.20.1 要求 RandomSource，这里仍用 java.util.Random 字段，语义等价（上下界都为闭区间）
         int star = relics.getMinStar() + random.nextInt(relics.getMaxStar() - relics.getMinStar() + 1);
         nbt.putInt(NBT_STAR, star);
         relics.setStar(star);
@@ -286,15 +318,49 @@ public class RelicsHelper {
      * @param crafting 物品
      */
     public static void addRelicsBaseAttr0(ItemStack crafting) {
-        Relics relics = (Relics) crafting.getItem();
         CompoundTag tag = crafting.getOrCreateTag();
         CompoundTag nbt = tag.getCompound(NBT_RELICS);
         int star = nbt.getInt(NBT_STAR);
-        setMainAttr(nbt, star, RelicsType.getTypeForId(nbt.getInt(NBT_TYPE)));
+        RelicsType relicsType = RelicsType.getTypeForId(nbt.getInt(NBT_TYPE));
+        if (relicsType == RelicsType.EYE){ //神之眼属性固定
+            addGodEyeBaseAttr(crafting);
+            return;
+        }
+        setMainAttr(nbt, star, relicsType);
         nbt.putInt(NBT_LEVEL, 0);
         nbt.putInt(NBT_EXP, 0);
         if (star > 1)
             setViceAttr(nbt, nbt.getInt(NBT_ATTR_TYPE), star);
+    }
+
+    /** 为神之眼添加基础属性加成*/
+    public static void addGodEyeBaseAttr(ItemStack crafting) {
+        CompoundTag tag = crafting.getOrCreateTag();
+        CompoundTag nbt = tag.getCompound(NBT_RELICS);
+        if (crafting.getItem() instanceof Relics relics){
+            GodEyeType godEyeType = relics.getGodEyeType();
+            switch (godEyeType){
+                case WIND -> {
+                    nbt.putFloat(NBT_ATTR, 0.1f);
+                    nbt.putInt(NBT_ATTR_TYPE, RelicsAttrType.MOVE_SPEED.getId());
+                    nbt.putFloat(NBT_ATTR1, 1);
+                    nbt.putInt(NBT_ATTR_TYPE1, RelicsAttrType.ATTACK_SPEED.getId());
+                }
+                case STONE -> {
+                    nbt.putFloat(NBT_ATTR, 10);
+                    nbt.putInt(NBT_ATTR_TYPE, RelicsAttrType.HEALTH.getId());
+                    nbt.putFloat(NBT_ATTR1, 20);
+                    nbt.putInt(NBT_ATTR_TYPE1, RelicsAttrType.DEFENSE.getId());
+                    nbt.putFloat(NBT_ATTR2, 1);
+                    nbt.putInt(NBT_ATTR_TYPE2, RelicsAttrType.HEAL.getId());
+                }
+                case WATER -> {
+                    nbt.putFloat(NBT_ATTR, 0.1f);
+                    nbt.putInt(NBT_ATTR_TYPE, RelicsAttrType.SWIM_SPEED.getId());
+                }
+            }
+
+        }
     }
 
     /**
@@ -343,7 +409,7 @@ public class RelicsHelper {
      * @param star 星级
      */
     private static RandomAttrValue setRandomMainAttr(RelicsAttrType[] attrTypes, int star){
-        RelicsAttrType attrType = attrTypes[random.nextInt(attrTypes.length)];
+        RelicsAttrType attrType = attrTypes[random.nextInt(11)];
         float baseValue = switch (attrType.getId()) {
             case 2, 6 -> mainHealthAttackRateBase[star - 1]; //攻击和生命值%
             case 4, 10 -> mainDefensePhysicsRateBase[star - 1]; //防御和物理伤害%
@@ -484,84 +550,65 @@ public class RelicsHelper {
      * @return 属性值组
      */
     private static float[] getViceAttrBaseValue(RelicsAttrType attrType, int star){
-        float[] values;
-        switch (attrType){
-            case HEALTH:
-                values = switch (star) {
-                    case 2 -> healthTwo;
-                    case 3 -> healthThree;
-                    case 4 -> healthFour;
-                    case 5 -> healthFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case HEALTH_RATE:
-                values = switch (star) {
-                    case 2 -> healthRateTwo;
-                    case 3 -> healthRateThree;
-                    case 4 -> healthRateFour;
-                    case 5 -> healthRateFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case DEFENSE:
-                values = switch (star) {
-                    case 2 -> defenseTwo;
-                    case 3 -> defenseThree;
-                    case 4 -> defenseFour;
-                    case 5 -> defenseFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case DEFENSE_RATE:
-                values = switch (star) {
-                    case 2 -> defenseRateTwo;
-                    case 3 -> defenseRateThree;
-                    case 4 -> defenseRateFour;
-                    case 5 -> defenseRateFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case ATTACK_DAMAGE:
-                values = switch (star) {
-                    case 2 -> attackDamageTwo;
-                    case 3 -> attackDamageThree;
-                    case 4 -> attackDamageFour;
-                    case 5 -> attackDamageFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case ATTACK_DAMAGE_RATE:
-                values = switch (star) {
-                    case 2 -> attackDamageRateTwo;
-                    case 3 -> attackDamageRateThree;
-                    case 4 -> attackDamageRateFour;
-                    case 5 -> attackDamageRateFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case CRITICAL_RATE:
-                values = switch (star) {
-                    case 2 -> criticalRateTwo;
-                    case 3 -> criticalRateThree;
-                    case 4 -> criticalRateFour;
-                    case 5 -> criticalRateFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            case CRITICAL_DAMAGE:
-                values = switch (star) {
-                    case 2 -> criticalDamageTwo;
-                    case 3 -> criticalDamageThree;
-                    case 4 -> criticalDamageFour;
-                    case 5 -> criticalDamageFive;
-                    default -> throw new IllegalStateException("Unexpected value: " + star);
-                };
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + attrType);
-        }
-        return values;
+        return switch (attrType) {
+            case HEALTH -> switch (star) {
+                case 2 -> healthTwo;
+                case 3 -> healthThree;
+                case 4 -> healthFour;
+                case 5 -> healthFive;
+                default -> throw new IllegalStateException("Unexpected health value: " + star);
+            };
+            case HEALTH_RATE -> switch (star) {
+                case 2 -> healthRateTwo;
+                case 3 -> healthRateThree;
+                case 4 -> healthRateFour;
+                case 5 -> healthRateFive;
+                default -> throw new IllegalStateException("Unexpected health rate value: " + star);
+            };
+            case DEFENSE -> switch (star) {
+                case 2 -> defenseTwo;
+                case 3 -> defenseThree;
+                case 4 -> defenseFour;
+                case 5 -> defenseFive;
+                default -> throw new IllegalStateException("Unexpected defense value: " + star);
+            };
+            case DEFENSE_RATE -> switch (star) {
+                case 2 -> defenseRateTwo;
+                case 3 -> defenseRateThree;
+                case 4 -> defenseRateFour;
+                case 5 -> defenseRateFive;
+                default -> throw new IllegalStateException("Unexpected defense rate value: " + star);
+            };
+            case ATTACK_DAMAGE -> switch (star) {
+                case 2 -> attackDamageTwo;
+                case 3 -> attackDamageThree;
+                case 4 -> attackDamageFour;
+                case 5 -> attackDamageFive;
+                default -> throw new IllegalStateException("Unexpected attack damage value: " + star);
+            };
+            case ATTACK_DAMAGE_RATE -> switch (star) {
+                case 2 -> attackDamageRateTwo;
+                case 3 -> attackDamageRateThree;
+                case 4 -> attackDamageRateFour;
+                case 5 -> attackDamageRateFive;
+                default -> throw new IllegalStateException("Unexpected attack damage rate value: " + star);
+            };
+            case CRITICAL_RATE -> switch (star) {
+                case 2 -> criticalRateTwo;
+                case 3 -> criticalRateThree;
+                case 4 -> criticalRateFour;
+                case 5 -> criticalRateFive;
+                default -> throw new IllegalStateException("Unexpected critical rate value: " + star);
+            };
+            case CRITICAL_DAMAGE -> switch (star) {
+                case 2 -> criticalDamageTwo;
+                case 3 -> criticalDamageThree;
+                case 4 -> criticalDamageFour;
+                case 5 -> criticalDamageFive;
+                default -> throw new IllegalStateException("Unexpected critical damage value: " + star);
+            };
+            default -> throw new IllegalStateException("Unexpected default value: " + attrType);
+        };
     }
 
     /**
@@ -575,7 +622,7 @@ public class RelicsHelper {
         if (capability.isPresent()){
             RelicsItemHandler itemHandler = capability.orElseThrow(NullPointerException::new);
             for (ItemStack stack : itemHandler.getStacks()) {
-                if (stack.getItem() instanceof Relics){
+                if (stack.getItem() instanceof Relics) { //神之眼不参与圣遗物属性统计
                     RandomAttrValue mainAttr = getMainAttrTypeFormStack(stack);
                     List<RandomAttrValue> viceAttr = getViceAttrTypeFormStack(stack);
                     viceAttr.add(mainAttr);

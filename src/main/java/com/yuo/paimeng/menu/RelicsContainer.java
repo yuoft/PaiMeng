@@ -3,8 +3,8 @@ package com.yuo.paimeng.menu;
 import com.yuo.paimeng.capability.IBlowCapability;
 import com.yuo.paimeng.capability.ModCapability;
 import com.yuo.paimeng.capability.RelicsItemHandler;
-import com.yuo.paimeng.items.Relics;
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.Relics;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
@@ -110,7 +110,10 @@ public class RelicsContainer extends AbstractContainerMenu {
         if (slot.hasItem()) {
             ItemStack itemStack1 = slot.getItem();
             itemstack = itemStack1.copy();
-            if (index > 6){
+            if (index >= 6){
+                if (RelicsHelper.isGodEye(itemStack1)) { //神之眼进第 6 格
+                    if (!this.moveItemStackTo(itemStack1, 5, 6, false)) return ItemStack.EMPTY;
+                }
                 if (itemStack1.getItem() instanceof Relics){
                     switch (RelicsHelper.getTypeForStack(itemStack1)){
                         case HEAD:
@@ -130,12 +133,12 @@ public class RelicsContainer extends AbstractContainerMenu {
                             break;
                     }
                 }
-                if (index < 34) { //从物品栏到快捷栏
-                    if (!this.moveItemStackTo(itemStack1, 35, 43, false)) return ItemStack.EMPTY;
-                } else if (index < 43) {
-                    if (!this.moveItemStackTo(itemStack1, 7, 34, false)) return ItemStack.EMPTY;
+                if (index < 33) { //从物品栏到快捷栏
+                    if (!this.moveItemStackTo(itemStack1, 33, 42, false)) return ItemStack.EMPTY;
+                } else if (index < 42) {
+                    if (!this.moveItemStackTo(itemStack1, 6, 33, false)) return ItemStack.EMPTY;
                 }
-            }else if (!this.moveItemStackTo(itemStack1, 7, 43, false)) return ItemStack.EMPTY; //取出来
+            }else if (!this.moveItemStackTo(itemStack1, 6, 42, false)) return ItemStack.EMPTY; //取出来
 
             if (itemStack1.isEmpty()) slot.set(ItemStack.EMPTY);
             else slot.setChanged();

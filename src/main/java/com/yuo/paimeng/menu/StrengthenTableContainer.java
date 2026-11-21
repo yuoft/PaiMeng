@@ -1,6 +1,6 @@
 package com.yuo.paimeng.menu;
 
-import com.yuo.paimeng.items.Relics;
+import com.yuo.paimeng.items.relics.Relics;
 import com.yuo.paimeng.tiles.StrengthenTableTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 public class StrengthenTableContainer extends AbstractContainerMenu {
     private final StrengthenTableTile sTTile; //存储食材

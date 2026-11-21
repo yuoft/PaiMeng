@@ -1,6 +1,6 @@
 package com.yuo.paimeng.network;
 
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import com.yuo.paimeng.tiles.StrengthenTableTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

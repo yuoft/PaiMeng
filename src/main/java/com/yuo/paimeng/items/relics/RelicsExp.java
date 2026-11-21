@@ -1,5 +1,6 @@
-package com.yuo.paimeng.items;
+package com.yuo.paimeng.items.relics;
 
+import com.yuo.paimeng.items.PMItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

@@ -1,8 +1,8 @@
 package com.yuo.paimeng.menu;
 
-import com.yuo.paimeng.items.Relics;
-import com.yuo.paimeng.items.RelicsHelper;
-import com.yuo.paimeng.items.RelicsType;
+import com.yuo.paimeng.items.relics.Relics;
+import com.yuo.paimeng.items.relics.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -25,7 +25,8 @@ public class RelicsSlot extends SlotItemHandler {
                 case CLOCK -> this.getSlotIndex() == 2;
                 case FEATHER -> this.getSlotIndex() == 3;
                 case FLOWER -> this.getSlotIndex() == 4;
-                default -> throw new IllegalStateException("Unexpected value: " + relicsType);
+                case EYE -> this.getSlotIndex() == 5;
+                default -> false;
             };
         }
         return false;

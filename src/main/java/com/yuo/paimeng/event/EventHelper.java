@@ -3,7 +3,7 @@ package com.yuo.paimeng.event;
 import com.yuo.paimeng.capability.IBlowCapability;
 import com.yuo.paimeng.capability.ModCapability;
 import com.yuo.paimeng.effects.EffectRegistry;
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;

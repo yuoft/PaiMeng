@@ -1,8 +1,9 @@
-package com.yuo.paimeng.items;
+package com.yuo.paimeng.items.relics;
 
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;
 
@@ -18,7 +19,10 @@ public enum RelicsAttrType {
     CRITICAL_RATE("criticalRate", "暴率", true,7), //暴击率
     CRITICAL_DAMAGE("criticalDamage","暴伤", true,8), //暴击伤害
     HEAL("heal","治疗", true,9), //治疗加成
-    ATTACK_PHYSICS("attackPhysics", "物伤", true,10); //物理伤害加成
+    ATTACK_PHYSICS("attackPhysics", "物伤", true,10), //物理伤害加成
+    MOVE_SPEED("move_speed", "移速", false, "363a072e-e5fd-1526-b0f4-17ace1da81c3", Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.ADDITION,11), //移动速度
+    ATTACK_SPEED("attack_speed", "攻速", false, "93a95ee5-dbde-7b5f-9577-567cea851314", Attributes.ATTACK_SPEED, AttributeModifier.Operation.ADDITION,12), //攻击速度
+    SWIM_SPEED("swim_speed", "游速", false, "3e2930c1-52bc-3aaf-1d80-ba826fc34695", ForgeMod.SWIM_SPEED.get(), AttributeModifier.Operation.ADDITION,13); //游泳速度
 
     //怀表可选值
     public static final RelicsAttrType[] ALL_CLOCK = new RelicsAttrType[]{HEALTH_RATE, DEFENSE_RATE, ATTACK_DAMAGE_RATE};
@@ -38,7 +42,7 @@ public enum RelicsAttrType {
     public static final RelicsAttrType[] ALL_MODIFIER = new RelicsAttrType[]{HEALTH, HEALTH_RATE, DEFENSE, DEFENSE_RATE, ATTACK_DAMAGE,
             ATTACK_DAMAGE_RATE};
     public static final RelicsAttrType[] ALL = new RelicsAttrType[]{HEALTH, HEALTH_RATE, DEFENSE, DEFENSE_RATE, ATTACK_DAMAGE,
-            ATTACK_DAMAGE_RATE, CRITICAL_RATE, CRITICAL_DAMAGE, HEAL, ATTACK_PHYSICS};
+            ATTACK_DAMAGE_RATE, CRITICAL_RATE, CRITICAL_DAMAGE, HEAL, ATTACK_PHYSICS, MOVE_SPEED, ATTACK_SPEED, SWIM_SPEED};
 
     private final String tip; //属性描述字段
     private final String attrName; //属性描述字段

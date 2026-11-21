@@ -1,6 +1,6 @@
 package com.yuo.paimeng.tiles;
 
-import com.yuo.paimeng.items.RelicsHelper;
+import com.yuo.paimeng.items.relics.RelicsHelper;
 import com.yuo.paimeng.menu.StrengthenIntArray;
 import com.yuo.paimeng.menu.StrengthenTableContainer;
 import net.minecraft.core.BlockPos;

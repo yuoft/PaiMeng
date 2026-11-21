@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * 悬浮跟随：绕在目标身前上方 4 格、高度 +3.4 的位置，左右横向游走。
+ * 悬浮跟随：绕在目标身前上方 2 格、左右横向游走。
  */
 public class HypostasisHoverGoal extends Goal {
     private final HypostasisEntity entity;
@@ -38,6 +38,11 @@ public class HypostasisHoverGoal extends Goal {
         LivingEntity target = entity.getTarget();
         if (target == null) return;
 
+        // 🔴 如果是攻击状态，不执行悬停（由实体本身的 tick 确保速度归零）
+        if (!entity.isIdle()) {
+            return;
+        }
+
         entity.getLookControl().setLookAt(target, 25.0F, 25.0F);
 
         Vec3 self = entity.position();
@@ -51,24 +56,22 @@ public class HypostasisHoverGoal extends Goal {
             strafeDirection = entity.getRandom().nextBoolean() ? 1.0F : -1.0F;
         }
 
-        // 二阶段贴得更近，但始终与玩家保持一段距离，避免外壳直接糊在镜头上
         double keepDistance = entity.getPhase() >= 2 ? 4.5D : 5.5D;
         double sideOffset = 1.6D * strafeDirection * (entity.getPhase() >= 2 ? 1.6D : 1.0D);
 
+        // 🔴 离地高度下调到 2 格（原为 3.4D）
         Vec3 desired = new Vec3(
                 targetPos.x - direction.x * keepDistance - direction.z * sideOffset,
-                targetPos.y + 3.4D,
+                targetPos.y + 2.0D,
                 targetPos.z - direction.z * keepDistance + direction.x * sideOffset);
 
         double speed = entity.getPhase() >= 2 ? 0.24D : 0.16D;
         entity.hoverTowards(desired, speed);
-
-        // 偶尔抬头/俯冲的小幅摆动，避免看起来像静止贴图
-        entity.setXRot((float) (Math.sin(entity.tickCount * 0.06D) * 8.0D));
     }
 
     @Override
     public void stop() {
-        entity.setDeltaMovement(entity.getDeltaMovement().scale(0.4D));
+        entity.setDeltaMovement(Vec3.ZERO);
+        strafeTimer = 0;
     }
 }

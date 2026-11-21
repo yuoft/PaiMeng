@@ -2,6 +2,7 @@ package com.yuo.paimeng.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.entity.HypostasisProjectile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,7 +17,7 @@ import net.minecraftforge.client.model.data.ModelData;
 /** 抛掷方块投射物的渲染：旋转的小方块，直接使用原版方块纹理。 */
 public class HypostasisProjectileRenderer extends EntityRenderer<HypostasisProjectile> {
 
-    private static final ResourceLocation DUMMY_TEXTURE = new ResourceLocation("textures/misc/white.png");
+    private static final ResourceLocation DUMMY_TEXTURE = ModUtils.def("textures/misc/white.png");
     private final BlockRenderDispatcher blockRenderer;
 
     public HypostasisProjectileRenderer(EntityRendererProvider.Context context) {
@@ -31,9 +32,8 @@ public class HypostasisProjectileRenderer extends EntityRenderer<HypostasisProje
     }
 
     @Override
-    public void render(HypostasisProjectile entity, float entityYaw, float partialTick, PoseStack pose,
-                       MultiBufferSource buffer, int packedLight) {
-        float spin = (entity.tickCount + partialTick) * 20.0F;
+    public void render(HypostasisProjectile entity, float entityYaw, float partialTick, PoseStack pose, MultiBufferSource buffer, int packedLight) {
+        float spin = (entity.tickCount + partialTick) * 10.0F;
         pose.pushPose();
         pose.translate(0.0D, 0.32D, 0.0D);
         pose.mulPose(Axis.YP.rotationDegrees(spin));

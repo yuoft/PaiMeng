@@ -19,7 +19,6 @@ import net.minecraft.world.phys.EntityHitResult;
 
 /**
  * 无相之岩抛出的“外壳方块”投射物：命中生物造成伤害并击退，命中方块破碎消失。
- * 外观直接渲染原版方块模型（见 {@link com.yuo.paimeng.client.render.HypostasisProjectileRenderer}）。
  */
 public class HypostasisProjectile extends ThrowableProjectile {
 
@@ -31,12 +30,11 @@ public class HypostasisProjectile extends ThrowableProjectile {
             Blocks.EMERALD_BLOCK,
             Blocks.LAPIS_BLOCK,
             Blocks.REDSTONE_BLOCK,
-            Blocks.COAL_BLOCK,
+            Blocks.NETHERITE_BLOCK,
             Blocks.COPPER_BLOCK
     };
 
-    private static final EntityDataAccessor<Integer> DATA_BLOCK =
-            SynchedEntityData.defineId(HypostasisProjectile.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_BLOCK = SynchedEntityData.defineId(HypostasisProjectile.class, EntityDataSerializers.INT);
 
     private float damage = 8.0F;
 
@@ -46,7 +44,6 @@ public class HypostasisProjectile extends ThrowableProjectile {
 
     @Override
     protected void defineSynchedData() {
-        // 1.20.1 的 ThrowableProjectile 没有可复用的同步槽位，这里只定义自己的方块索引
         this.entityData.define(DATA_BLOCK, 0);
     }
 
@@ -87,6 +84,8 @@ public class HypostasisProjectile extends ThrowableProjectile {
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         if (!this.level().isClientSide) {
+            // 🔴 击中方块时产生小范围爆炸
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.2F, Level.ExplosionInteraction.BLOCK);
             this.discard();
         }
     }

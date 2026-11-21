@@ -2,6 +2,7 @@ package com.yuo.paimeng.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.entity.HypostasisEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,14 +19,10 @@ import net.minecraftforge.client.model.data.ModelData;
 
 /**
  * 无相之岩渲染：8 个原版矿物方块拼成 2×2×2 外壳，中间是一块倾斜 45° 的基岩核心。
- * 直接借用原版方块模型与方块纹理，因此贴图全部来自原版资源，没有额外 PNG 依赖。
- *
- * <p>动画全部由服务端同步过来的状态（形态 + 动画帧）推导，客户端只做插值：
- * 一字型横扫、十字型镇压、X 型砸击、远程抛掷、雷击收拢，二阶段外壳散得更开、转速更快。
+ * 外壳保持静态结构，不再自转或公转；核心会持续缓慢旋转（作为生命核心的特征）。
  */
 public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
 
-    /** 外壳 8 种矿物方块，顺序与投射物、召唤祭坛保持一致。 */
     private static final BlockState[] SHELLS = {
             Blocks.IRON_BLOCK.defaultBlockState(),
             Blocks.GOLD_BLOCK.defaultBlockState(),
@@ -33,15 +30,14 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
             Blocks.EMERALD_BLOCK.defaultBlockState(),
             Blocks.LAPIS_BLOCK.defaultBlockState(),
             Blocks.REDSTONE_BLOCK.defaultBlockState(),
-            Blocks.COAL_BLOCK.defaultBlockState(),
+            Blocks.NETHERITE_BLOCK.defaultBlockState(),
             Blocks.COPPER_BLOCK.defaultBlockState()
     };
 
     private static final BlockState CORE = Blocks.BEDROCK.defaultBlockState();
     private static final int FULL_BRIGHT = 0xF000F0;
-    private static final ResourceLocation DUMMY_TEXTURE = new ResourceLocation("textures/misc/white.png");
+    private static final ResourceLocation DUMMY_TEXTURE = ModUtils.def("textures/misc/white.png");
 
-    /** 十字型的 5 个正交点（XY 平面），多出来的 3 个方块往身后叠做厚度。 */
     private static final float[][] CROSS_POINTS = {{0.0F, 0.0F}, {1.0F, 0.0F}, {-1.0F, 0.0F}, {0.0F, 1.0F}, {0.0F, -1.0F}};
 
     private final BlockRenderDispatcher blockRenderer;
@@ -57,9 +53,9 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
         return DUMMY_TEXTURE;
     }
 
+
     @Override
-    public void render(HypostasisEntity entity, float entityYaw, float partialTick, PoseStack pose,
-                       MultiBufferSource buffer, int packedLight) {
+    public void render(HypostasisEntity entity, float entityYaw, float partialTick, PoseStack pose, MultiBufferSource buffer, int packedLight) {
         float time = entity.tickCount + partialTick;
         HypostasisEntity.AttackState state = entity.getAttackState();
         boolean phaseTwo = entity.getPhase() >= 2;
@@ -70,17 +66,25 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
         pose.translate(0.0D, 1.02D, 0.0D);
         pose.mulPose(Axis.YP.rotationDegrees(entityYaw));
 
-        // ---- 倾斜基岩核心（自发光，二阶段会脉动放大）
+        // ---- 🔴 倾斜基岩核心的渲染（在暴露时会停顿） ----
         float pulse = 1.0F + (phaseTwo ? 0.09F : 0.04F) * Mth.sin(time * 0.35F);
+        float coreRot = time * 1.6F;
+
+        if (entity.isCoreExposed()) {
+            // 核心暴露期间：完全停止自转，用高频闪烁和放大来表现“停顿的破绽”
+            coreRot = 0.0F; // 🔴 停止旋转
+            pulse = 1.25F + 0.1F * Mth.sin(time * 2.0F); // 🔴 放大并闪烁
+        }
+
         pose.pushPose();
         pose.scale(0.72F * size * pulse, 0.72F * size * pulse, 0.72F * size * pulse);
-        pose.mulPose(Axis.YP.rotationDegrees(time * 1.6F));
+        pose.mulPose(Axis.YP.rotationDegrees(coreRot));
         pose.mulPose(Axis.XP.rotationDegrees(45.0F));
         pose.mulPose(Axis.ZP.rotationDegrees(45.0F));
         renderBlock(CORE, pose, buffer, FULL_BRIGHT);
         pose.popPose();
 
-        // ---- 外壳整体姿态：近战是“抬起 → 俯冲砸下 → 收招”
+        // ---- 外壳整体姿态：近战是“抬起 → 俯冲砸下 → 收招” ----
         float lift = 0.0F;
         float pitch = 0.0F;
         float forwardOffset = 0.0F;
@@ -114,14 +118,11 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
         pose.mulPose(Axis.XP.rotationDegrees(pitch));
 
         for (int i = 0; i < HypostasisEntity.SHELL_COUNT; i++) {
-            float[] placement = shellPlacement(state, i, time, size, forwardOffset);
-            if (placement == null) continue;
+            // 🔴 传入 progress 用于形态过渡
+            float[] placement = shellPlacement(state, i, time, size, forwardOffset, progress);
 
             pose.pushPose();
             pose.translate(placement[0], placement[1], placement[2]);
-            float spin = time * 14.0F + i * 37.0F;
-            pose.mulPose(Axis.YP.rotationDegrees(spin));
-            pose.mulPose(Axis.XP.rotationDegrees(spin * 0.6F));
             float scale = placement[3];
             pose.scale(scale, scale, scale);
             renderBlock(SHELLS[i], pose, buffer, packedLight);
@@ -131,11 +132,50 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
         pose.popPose();
     }
 
-    /** 返回 {x, y, z, 缩放}，坐标相对核心中心；forwardOffset 是砸击时外壳整体前探的距离。 */
-    private float[] shellPlacement(HypostasisEntity.AttackState state, int index, float time, float size, float forwardOffset) {
-        float x;
-        float y;
-        float z;
+    /**
+     * 返回 {x, y, z, 缩放}，引入 blend 插值消除从待机到攻击形态的瞬间瞬移（卡顿感）。
+     */
+    private float[] shellPlacement(HypostasisEntity.AttackState state, int index, float time, float size, float forwardOffset, float progress) {
+        // 1. 获取待机形态坐标
+        float[] idle = getIdlePlacement(index, time, size);
+        // 2. 获取攻击目标坐标
+        float[] target = getAttackPlacement(state, index, time, size, forwardOffset);
+
+        // 3. 计算过渡系数 (blend)
+        float blend = 1.0F;
+        if (isMelee(state)) {
+            // 前 15% 进度聚拢变身，后 15% 进度散开复原
+            if (progress < 0.15F) {
+                blend = smooth(progress / 0.15F);
+            } else if (progress > 0.85F) {
+                blend = 1.0F - smooth((progress - 0.85F) / 0.15F);
+            }
+        } else if (state == HypostasisEntity.AttackState.IDLE) {
+            blend = 0.0F;
+        }
+
+        // 4. 线性插值，让方块平滑飞向目标点
+        float x = Mth.lerp(blend, idle[0], target[0]);
+        float y = Mth.lerp(blend, idle[1], target[1]);
+        float z = Mth.lerp(blend, idle[2], target[2]);
+        float scale = Mth.lerp(blend, idle[3], target[3]);
+
+        return new float[]{x, y, z, scale};
+    }
+
+    private float[] getIdlePlacement(int index, float time, float size) {
+        float baseX = ((index & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
+        float baseY = (((index >> 1) & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
+        float baseZ = (((index >> 2) & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
+        float x = baseX;
+        float z = baseZ;
+        float y = baseY + 0.06F * Mth.sin(time * 0.12F + index);
+        float scale = 0.9F * size;
+        return new float[]{x, y, z, scale};
+    }
+
+    private float[] getAttackPlacement(HypostasisEntity.AttackState state, int index, float time, float size, float forwardOffset) {
+        float x = 0, y = 0, z = 0;
         float scale = 0.9F * size;
 
         switch (state) {
@@ -187,20 +227,13 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
                 scale = 0.78F;
             }
             default -> {
-                // 待机：2×2×2 立方外壳整体缓慢自转
-                float baseX = ((index & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
-                float baseY = (((index >> 1) & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
-                float baseZ = (((index >> 2) & 1) == 0 ? -1.0F : 1.0F) * 0.56F * size;
-                double angle = Math.toRadians(time * 2.4D);
-                x = (float) (baseX * Math.cos(angle) - baseZ * Math.sin(angle));
-                z = (float) (baseX * Math.sin(angle) + baseZ * Math.cos(angle));
-                y = baseY + 0.06F * Mth.sin(time * 0.12F + index);
-                scale = 0.9F * size;
+                return getIdlePlacement(index, time, size);
             }
         }
         return new float[]{x, y, z, scale};
     }
 
+    // ... (保留你原有的 renderBlock, isMelee, attackProgress, smooth 方法)
     private void renderBlock(BlockState state, PoseStack pose, MultiBufferSource buffer, int light) {
         pose.pushPose();
         pose.translate(-0.5D, -0.5D, -0.5D);
@@ -208,22 +241,49 @@ public class HypostasisRenderer extends EntityRenderer<HypostasisEntity> {
         pose.popPose();
     }
 
+    /**
+     * 判断当前攻击状态是否属于近战攻击。
+     * 近战攻击包括：一字型横扫、十字型镇压、X型砸击。
+     *
+     * @param state 实体当前所处的攻击状态枚举
+     * @return 如果是近战状态返回 true，否则返回 false
+     */
     private static boolean isMelee(HypostasisEntity.AttackState state) {
         return state == HypostasisEntity.AttackState.MELEE_LINE
                 || state == HypostasisEntity.AttackState.MELEE_CROSS
                 || state == HypostasisEntity.AttackState.MELEE_X;
     }
 
+    /**
+     * 计算当前攻击动画的播放进度。
+     * 进度值被限制在 0.0 到 1.0 之间，用于控制外壳在不同阶段的位移和旋转（如近战的抬起、砸下、收招）。
+     *
+     * @param entity     实体对象，用于获取当前动画已流逝的 tick
+     * @param state      实体当前的攻击状态
+     * @param partialTick 渲染帧的插值时间（使得动画在低帧率下也流畅）
+     * @return 动画进度值（0.0 表示刚开始，1.0 表示结束）
+     */
     private static float attackProgress(HypostasisEntity entity, HypostasisEntity.AttackState state, float partialTick) {
         if (state == HypostasisEntity.AttackState.IDLE) return 0.0F;
+
+        // 根据不同的攻击状态获取该动作的总持续时间
         int duration = switch (state) {
             case RANGED -> HypostasisEntity.DUR_RANGED;
             case THUNDER -> HypostasisEntity.DUR_THUNDER;
             default -> HypostasisEntity.DUR_MELEE;
         };
+        // 当前已进行的 tick / 总 tick，并限制在 0~1 之间
         return Mth.clamp((entity.getAnimTick() + partialTick) / duration, 0.0F, 1.0F);
     }
 
+    /**
+     * 平滑步进函数（Smoothstep）。
+     * 将线性的动画进度（0~1）转换为“缓入缓出”的非线性曲线（3x² - 2x³）。
+     * 用于让动画的起步和结束更加柔和自然，避免机械生硬的速度变化。
+     *
+     * @param value 线性的进度值
+     * @return 经过缓动处理后的进度值
+     */
     private static float smooth(float value) {
         float t = Mth.clamp(value, 0.0F, 1.0F);
         return t * t * (3.0F - 2.0F * t);

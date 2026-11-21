@@ -1,5 +1,6 @@
 package com.yuo.paimeng.entity;
 
+import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.entity.AI.HypostasisHoverGoal;
 import com.yuo.paimeng.entity.AI.HypostasisMeleeGoal;
 import com.yuo.paimeng.entity.AI.HypostasisRangedGoal;
@@ -20,6 +21,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.FlyingMob;
@@ -32,12 +34,19 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 无相之岩：2×2×2 矿物方块外壳 + 倾斜基岩核心的浮空 BOSS。
@@ -47,14 +56,22 @@ import java.util.List;
  *   <li>近战三种形态：一字型扫击、十字型镇压、X 型砸击，命中判定覆盖身前三到六格、横向四格内的生物，
  *       并把落点硬度小于 10 的方块击碎（正常掉落）。</li>
  *   <li>远程：向远处目标抛掷随机矿物方块（真正的实体投射物）。</li>
- *   <li>雷击：五到十六格内按概率触发，多层环状落雷，每层环只劈击环点附近的生物。</li>
+ *   <li>雷击：以 BOSS 为中心的 3/6/9 格三个环，分别释放 8/16/24 道雷击（共 48 道），
+ *       命中同一生物只造成一次伤害。</li>
  * </ul>
- * 半血进入二阶段：外壳散开、移动与出招更快、雷击环数增加。
+ * 半血进入二阶段：外壳散开、移动与出招更快、雷击伤害提升。
  */
 public class HypostasisEntity extends FlyingMob {
 
     /** 外壳方块数量（2×2×2）。 */
     public static final int SHELL_COUNT = 8;
+
+    /** 战利品表路径常量，避免每次创建新对象。 */
+    private static final ResourceLocation LOOT_TABLE = ModUtils.fa( "entities/hypostasis");
+
+    /** 雷击环参数：每个环的 {半径, 落雷点数}。 */
+    private static final double[] THUNDER_RING_RADII = {3.0D, 6.0D, 9.0D};
+    private static final int[] THUNDER_RING_POINTS = {8, 16, 24};
 
     /** 出招阶段枚举，客户端渲染器据此播放不同形态动画。 */
     public enum AttackState {
@@ -76,13 +93,14 @@ public class HypostasisEntity extends FlyingMob {
     public static final int[] RANGED_FIRE_TICKS = {8, 18, 28};
     /** 雷击落下的帧。 */
     public static final int THUNDER_IMPACT_TICK = 34;
+    /** 飞行清路：硬度低于该值的方块会被撞碎（树叶 0.2、花草 0、雪片 0.1、玻璃 0.3…；泥土/沙子 0.5 不会被破坏）。 */
+    private static final float PATH_CLEAR_MAX_HARDNESS = 0.6F;
+    /** 每 tick 最多破坏的方块数，防止穿林时瞬间刷爆区块更新。 */
+    private static final int PATH_CLEAR_LIMIT = 6;
 
-    private static final EntityDataAccessor<Integer> DATA_STATE =
-            SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_PHASE =
-            SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_ANIM =
-            SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_STATE = SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_PHASE = SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_ANIM = SynchedEntityData.defineId(HypostasisEntity.class, EntityDataSerializers.INT);
 
     private final ServerBossEvent bossEvent = (ServerBossEvent) (new ServerBossEvent(
             this.getDisplayName(), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
@@ -96,7 +114,7 @@ public class HypostasisEntity extends FlyingMob {
     public HypostasisEntity(EntityType<? extends FlyingMob> type, Level level) {
         super(type, level);
         this.setNoGravity(true);
-        this.noPhysics = true;
+        this.noPhysics = false;
         this.setPersistenceRequired();
         this.xpReward = 150;
     }
@@ -123,11 +141,11 @@ public class HypostasisEntity extends FlyingMob {
 
     @Override
     protected void registerGoals() {
-        // 优先级数字越小越先执行：贴脸先近战，其次雷击，最后远程
-        this.goalSelector.addGoal(0, new HypostasisMeleeGoal(this));
-        this.goalSelector.addGoal(1, new HypostasisThunderGoal(this));
-        this.goalSelector.addGoal(2, new HypostasisRangedGoal(this));
-        this.goalSelector.addGoal(3, new HypostasisHoverGoal(this));
+        // 🔴 重新排定优先级：近战 > 远程 > 雷击 > 悬浮
+        this.goalSelector.addGoal(0, new HypostasisMeleeGoal(this));     // 水平 6 格内
+        this.goalSelector.addGoal(1, new HypostasisRangedGoal(this));    // 8~28 格
+        this.goalSelector.addGoal(2, new HypostasisThunderGoal(this));   // 4~10 格 + 概率 CD
+        this.goalSelector.addGoal(3, new HypostasisHoverGoal(this));     // 悬浮跟随
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
     }
@@ -172,13 +190,14 @@ public class HypostasisEntity extends FlyingMob {
     /** 由 AI 目标调用：开始一次出招。 */
     public boolean startAttack(AttackState state) {
         if (!canStartAttack()) return false;
+        LivingEntity target = this.getTarget();
+        if (target == null) return false; // 防御性检查，防止其他代码直接调用引发 NPE
         this.attacking = true;
         this.attackTicks = 0;
-        this.attackDuration = state == AttackState.RANGED ? DUR_RANGED
-                : state == AttackState.THUNDER ? DUR_THUNDER : DUR_MELEE;
+        this.attackDuration = state == AttackState.RANGED ? DUR_RANGED : state == AttackState.THUNDER ? DUR_THUNDER : DUR_MELEE;
         this.setAttackState(state);
         this.setAnimTick(0);
-        this.getLookControl().setLookAt(getTarget(), 60.0F, 40.0F);
+        this.getLookControl().setLookAt(target, 60.0F, 40.0F);
         this.level().playSound(null, this.blockPosition(), SoundEvents.STONE_PLACE, SoundSource.HOSTILE, 1.2F, 0.6F);
         return true;
     }
@@ -191,7 +210,19 @@ public class HypostasisEntity extends FlyingMob {
             return;
         }
 
+        // 🔴 兜底：万一被指令传送 / 地形变化卡进方块，强制顶回地表之上
+        this.ensureAboveGround();
+        // 🔴 撞碎移动路径上的软方块（树叶、花草、雪片等），避免被卡住
+        this.clearMovementPath();
+
         if (this.attacking) {
+            // 🔴 近战攻击时，强制停止 BOSS 的移动，使其僵在空中
+            AttackState state = getAttackState();
+            if (state == AttackState.MELEE_LINE || state == AttackState.MELEE_CROSS || state == AttackState.MELEE_X
+                    || state == AttackState.THUNDER) {
+                this.setDeltaMovement(Vec3.ZERO);
+            }
+
             this.attackTicks++;
             this.setAnimTick(this.attackTicks);
             this.onAttackTick(this.attackTicks);
@@ -250,7 +281,6 @@ public class HypostasisEntity extends FlyingMob {
     }
 
     // ---------------------------------------------------------------- 近战：一字 / 十字 / X
-
     private void performMeleeImpact(AttackState state) {
         Vec3 forward = horizontalForward();
         Vec3 right = new Vec3(-forward.z, 0.0D, forward.x);
@@ -312,8 +342,8 @@ public class HypostasisEntity extends FlyingMob {
                     if (blockState.isAir() || !blockState.getFluidState().isEmpty()) continue;
 
                     float hardness = blockState.getDestroySpeed(this.level(), pos);
-                    if (hardness >= 0.0F && hardness < 10.0F && blockState.getBlock() != Blocks.BEDROCK
-                            && this.level().getBlockEntity(pos) == null) {
+                    // 硬度 >= 0 已经排除基岩（-1），无需额外判断 Blocks.BEDROCK
+                    if (hardness >= 0.0F && hardness < 10.0F && this.level().getBlockEntity(pos) == null) {
                         this.level().destroyBlock(pos, true, this);
                         broken++;
                     }
@@ -349,62 +379,151 @@ public class HypostasisEntity extends FlyingMob {
         projectile.setOwner(this);
         projectile.setDamage(getPhase() >= 2 ? 10.0F : 8.0F);
 
-        Vec3 direction = target.getEyePosition().subtract(eye).normalize();
+        // 简单预判：按目标当前速度外推 10 tick，让命中更精准
+        Vec3 aimPos = target.getEyePosition().add(target.getDeltaMovement().scale(10.0D));
+        Vec3 direction = aimPos.subtract(eye).normalize();
         projectile.shoot(direction.x, direction.y, direction.z, 1.35F, 3.0F);
         this.level().addFreshEntity(projectile);
 
         this.level().playSound(null, this.blockPosition(), SoundEvents.SNOWBALL_THROW, SoundSource.HOSTILE, 1.2F, 0.6F);
     }
 
-    // ---------------------------------------------------------------- 雷击：多层环状
-
-    /** 环状落雷：五到十六格范围按层采样，只劈击环点附近的生物，避免无差别刷闪电。 */
+    /**
+     * 环状落雷：以 BOSS 为中心的 3 / 6 / 9 格处固定点位落雷。
+     * 不检查生物，而是直接对雷击点周围 2 格内的生物造成伤害。
+     */
     private void performThunderRings() {
-        int rings = getPhase() >= 2 ? 4 : 3;
-        int struck = 0;
+        double centerX = this.getX();
+        double centerZ = this.getZ();
+        Set<LivingEntity> victimsToStrike = new HashSet<>();
 
-        for (int ring = 0; ring < rings; ring++) {
-            double radius = 6.0D + ring * 3.0D;            // 6 / 9 / 12 / 15，覆盖 5~16 格
-            int points = 8 + ring * 2;
+        for (int ringIdx = 0; ringIdx < THUNDER_RING_RADII.length; ringIdx++) {
+            double radius = THUNDER_RING_RADII[ringIdx];
+            int points = THUNDER_RING_POINTS[ringIdx];
+            double angleOffset = ringIdx * (Math.PI / points);
+
             for (int i = 0; i < points; i++) {
-                double angle = (Math.PI * 2.0D * i) / points + this.random.nextDouble() * 0.25D;
-                double x = this.getX() + Math.cos(angle) * radius;
-                double z = this.getZ() + Math.sin(angle) * radius;
+                double angle = (Math.PI * 2.0D * i) / points + angleOffset;
+                double x = centerX + Math.cos(angle) * radius;
+                double z = centerZ + Math.sin(angle) * radius;
 
+                // 🔴 获取固定点位的地表高度
+                int groundY = this.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int)Math.floor(x), (int)Math.floor(z));
+                double strikeY = groundY + 0.1D;
+
+                // 生成视觉闪电实体
+                LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(this.level());
+                if (bolt != null) {
+                    bolt.moveTo(x, strikeY, z);
+                    bolt.setVisualOnly(true); // 仅作视觉，伤害由下方逻辑判定
+                    this.level().addFreshEntity(bolt);
+                }
+
+                // 视觉粒子：落雷点火花
+                if (this.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, strikeY + 0.2D, z, 6, 0.3D, 0.8D, 0.3D, 0.08D);
+                }
+
+                // 判定该点位周围 2 格的生物
                 List<LivingEntity> victims = this.level().getEntitiesOfClass(LivingEntity.class,
-                        new net.minecraft.world.phys.AABB(x - 2.2D, this.getY() - 8.0D, z - 2.2D,
-                                x + 2.2D, this.getY() + 10.0D, z + 2.2D),
+                        new AABB(x - 2.0D, strikeY - 8.0D, z - 2.0D, x + 2.0D, strikeY + 10.0D, z + 2.0D),
                         t -> t != this && t.isAlive() && !(t instanceof HypostasisEntity));
 
                 for (LivingEntity victim : victims) {
                     if (victim instanceof Player player && (player.isCreative() || player.isSpectator())) continue;
-                    strikeLightning(victim);
-                    struck++;
-                }
-
-                if (this.level() instanceof ServerLevel server) {
-                    server.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, this.getY() - 1.0D, z,
-                            4, 0.25D, 0.6D, 0.25D, 0.05D);
+                    // 用 Set 去重，确保同一实体在一次雷击中只受 1 次伤害
+                    if (victimsToStrike.add(victim)) {
+                        victim.hurt(this.damageSources().mobAttack(this), getPhase() >= 2 ? 10.0F : 8.0F);
+                        victim.setSecondsOnFire(2);
+                    }
                 }
             }
         }
 
-        if (struck == 0 && this.level() instanceof ServerLevel server) {
-            server.sendParticles(ParticleTypes.ELECTRIC_SPARK, this.getX(), this.getY() - 1.0D, this.getZ(),
-                    60, 6.0D, 1.0D, 6.0D, 0.25D);
-        }
         this.level().playSound(null, this.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 2.2F, 1.0F);
     }
 
-    private void strikeLightning(LivingEntity victim) {
-        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(this.level());
-        if (bolt != null) {
-            bolt.moveTo(victim.getX(), victim.getY(), victim.getZ());
-            bolt.setVisualOnly(true);
-            this.level().addFreshEntity(bolt);
+    /**
+     * 强制中止当前出招：立即回到待机并给一个短冷却。
+     * 用于目标死亡 / 逃出范围时取消砸击，避免对空气造成伤害和地形破坏。
+     */
+    public void abortAttack() {
+        if (!this.attacking) return;
+        this.attacking = false;
+        this.setAttackState(AttackState.IDLE);
+        this.setAnimTick(0);
+        this.attackTicks = 0;
+        this.attackCooldown = 20;
+    }
+
+    /**
+     * 🔴 防止遁地兜底：若 BOSS 被卡进方块内部（被指令传送、周围地形被修改等），
+     * 直接把它抬到该列地表上方，避免它在地底穿模或徘徊。
+     */
+    private void ensureAboveGround() {
+        if (this.level().isClientSide) return;
+
+        double centerX = this.getX();
+        double centerZ = this.getZ();
+        BlockPos feetPos = BlockPos.containing(centerX, this.getY() + 0.1D, centerZ);
+        BlockPos bodyPos = BlockPos.containing(centerX, this.getY() + this.getBbHeight() * 0.5D, centerZ);
+
+        boolean embedded = hasBlockCollision(feetPos) || hasBlockCollision(bodyPos);
+        if (!embedded) return;
+
+        int surfaceY = this.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Mth.floor(centerX), Mth.floor(centerZ));
+        double safeY = Math.max(surfaceY + 0.05D, this.level().getMinBuildHeight() + 3.0D);
+        if (this.getY() < safeY) {
+            this.setPos(centerX, safeY, centerZ);
+            this.setDeltaMovement(this.getDeltaMovement().x, 0.0D, this.getDeltaMovement().z);
         }
-        victim.hurt(this.damageSources().lightningBolt(), getPhase() >= 2 ? 10.0F : 8.0F);
-        victim.setSecondsOnFire(2);
+    }
+
+    /** 该坐标是否被方块碰撞箱占据（流体、空气不算）。 */
+    private boolean hasBlockCollision(BlockPos pos) {
+        BlockState state = this.level().getBlockState(pos);
+        if (state.isAir()) return false;
+        return !state.getCollisionShape(this.level(), pos).isEmpty();
+    }
+
+    /**
+     * 🔴 飞行清路：撞碎包围盒范围内硬度低于 {@link #PATH_CLEAR_MAX_HARDNESS} 的方块，
+     * 让 BOSS 能穿过树叶、花丛、雪层等软阻挡，同时不会啃掉泥土、沙子、石头和地形。
+     * <p>不掉落方块（避免走过森林时刷一地树叶）；想让它掉材料可把 destroyBlock 的第二个参数改成 true。
+     */
+    private void clearMovementPath() {
+        if (this.level().isClientSide) return;
+
+        // 略微外扩 0.05：贴住软方块时让判定"咬"进对方一点点，逐层吃掉阻挡
+        AABB box = this.getBoundingBox().inflate(0.05D);
+        int minX = Mth.floor(box.minX);
+        int maxX = Mth.floor(box.maxX);
+        int minY = Mth.floor(box.minY);
+        int maxY = Mth.floor(box.maxY);
+        int minZ = Mth.floor(box.minZ);
+        int maxZ = Mth.floor(box.maxZ);
+
+        int broken = 0;
+        BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    cursor.set(x, y, z);
+                    BlockState state = this.level().getBlockState(cursor);
+                    if (state.isAir() || !state.getFluidState().isEmpty()) continue;
+
+                    float hardness = state.getDestroySpeed(this.level(), cursor);
+                    // 基岩(-1) 等负硬度跳过；泥土/沙子(0.5) 及以上不破坏
+                    if (hardness < 0.0F || hardness >= PATH_CLEAR_MAX_HARDNESS) continue;
+                    // 带方块实体的方块（箱子、熔炉、刷怪笼等）不破坏
+                    if (this.level().getBlockEntity(cursor) != null) continue;
+
+                    this.level().destroyBlock(cursor, false, this);
+                    if (++broken >= PATH_CLEAR_LIMIT) return;
+                }
+            }
+        }
     }
 
     // ---------------------------------------------------------------- 二阶段
@@ -448,9 +567,15 @@ public class HypostasisEntity extends FlyingMob {
 
     @Override
     public void travel(Vec3 travelVector) {
-        // 自由飞行：不吃重力、不吃地面摩擦，直接按 AI 给的期望速度移动
+        // 自由飞行：不吃重力、不吃地面摩擦;与方块的挤压交给 move 处理（已开启碰撞）
         this.move(MoverType.SELF, this.getDeltaMovement());
-        this.setDeltaMovement(this.getDeltaMovement().scale(0.86D));
+
+        // 🔴 防止 noPhysics 状态下钻进地底：低于世界最低可建造高度 +5 时强制上浮
+        int minY = this.level().getMinBuildHeight() + 5;
+        if (this.getY() < minY) {
+            this.setPos(this.getX(), minY, this.getZ());
+            this.setDeltaMovement(this.getDeltaMovement().x, Math.max(0.1D, this.getDeltaMovement().y), this.getDeltaMovement().z);
+        }
     }
 
     private Vec3 horizontalForward() {
@@ -483,18 +608,65 @@ public class HypostasisEntity extends FlyingMob {
 
     // ---------------------------------------------------------------- 杂项
 
+    /**
+     * 判断核心是否处于暴露状态。
+     * 在近战攻击的前摇和砸击瞬间，外壳防护减弱，核心会停顿暴露。
+     */
+    public boolean isCoreExposed() {
+        AttackState state = getAttackState();
+        if (state == AttackState.MELEE_LINE || state == AttackState.MELEE_CROSS || state == AttackState.MELEE_X) {
+            int tick = getAnimTick();
+            // 在命中帧(23)的前后 10 tick 内是暴露期
+            return tick >= MELEE_IMPACT_TICK - 10 && tick <= MELEE_IMPACT_TICK + 8;
+        }
+        return false;
+    }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        // 🔴 判断是否为远程伤害（箭矢、投掷物、自定义的 HypostasisProjectile）
+        boolean isRanged = source.is(DamageTypes.ARROW)
+                || source.is(DamageTypes.THROWN)
+                || source.is(DamageTypes.MOB_PROJECTILE)
+                || source.getDirectEntity() instanceof AbstractArrow
+                || source.getDirectEntity() instanceof Projectile;
+
+        if (isRanged) {
+            if (!isCoreExposed()) {
+                // 🔴 未暴露时，远程伤害减免 90%
+                amount *= 0.1F;
+                // 播放金属格挡音效和火花
+                this.level().playSound(null, this.blockPosition(), SoundEvents.SHIELD_BLOCK, SoundSource.HOSTILE, 1.2F, 0.6F);
+                if (this.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.ENCHANTED_HIT, this.getX(), this.getY() + 1.0D, this.getZ(),
+                            10, 1.0D, 1.0D, 1.0D, 0.1D);
+                }
+            } else {
+                // 🔴 核心暴露时，受到全额伤害，附带金属受击音效
+                this.level().playSound(null, this.blockPosition(), SoundEvents.ANVIL_PLACE, SoundSource.HOSTILE, 1.0F, 1.2F);
+                if (this.level() instanceof ServerLevel server) {
+                    server.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY() + 1.0D, this.getZ(),
+                            15, 1.0D, 1.0D, 1.0D, 0.2F);
+                }
+            }
+        }
+
         boolean hurt = super.hurt(source, amount);
         if (hurt && source.getEntity() instanceof LivingEntity attacker && !(attacker instanceof HypostasisEntity)) {
-            if (this.getTarget() == null || this.getTarget() != attacker) this.setTarget(attacker);
+            this.setTarget(attacker);
         }
         return hurt;
     }
 
     @Override
+    protected void dropCustomDeathLoot(DamageSource source, int loot, boolean isPlayer) {
+        super.dropCustomDeathLoot(source, loot, isPlayer);
+//        this.spawnAtLocation(new ItemStack(Items.DIAMOND_BLOCK));
+    }
+
+    @Override
     protected ResourceLocation getDefaultLootTable() {
-        return new ResourceLocation("paimeng", "entities/hypostasis");
+        return LOOT_TABLE;
     }
 
     @Override

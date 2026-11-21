@@ -5,7 +5,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 /**
- * 远程：对 6~28 格的目标连续抛掷随机矿物方块。
+ * 远程：对 8~28 格的目标连续抛掷随机矿物方块。
+ * <p>距离阈值从 6 格上调到 8 格，避免和近战触发范围重叠。
  */
 public class HypostasisRangedGoal extends Goal {
     private final HypostasisEntity entity;
@@ -19,7 +20,7 @@ public class HypostasisRangedGoal extends Goal {
         LivingEntity target = entity.getTarget();
         if (target == null || !target.isAlive() || !entity.canStartAttack()) return false;
         double distance = entity.distanceTo(target);
-        return distance > 6.0D && distance <= 28.0D;
+        return distance > 8.0D && distance <= 28.0D;
     }
 
     @Override

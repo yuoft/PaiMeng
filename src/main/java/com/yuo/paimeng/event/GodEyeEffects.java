@@ -123,7 +123,7 @@ public final class GodEyeEffects {
     /** 维持一个常驻效果：快到期时才续，避免每 tick 发包。 */
     private static void keepEffect(Player player, MobEffect effect, int amplifier) {
         MobEffectInstance current = player.getEffect(effect);
-        if (current == null || current.getDuration() < 20 || current.getAmplifier() != 0) {
+        if (current == null || current.getDuration() < 20) {
             player.addEffect(new MobEffectInstance(effect, 100, amplifier, true, false, false));
         }
     }

@@ -674,7 +674,7 @@
   "paimeng.text.itemInfo.seven_god": "七天神像",
   "paimeng.text.itemInfo.yuanshi": "亮晶晶的石头",
   "paimeng.text.itemInfo.jiejing": "蕴含创世之力的物质",
-  "paimeng.text.itemInfo.god_eye": "传闻中，当愿望过于强烈之时，神明便会向他投下视线，「神之眼」便会出现…",
+  "paimeng.text.itemInfo.god_eye": "传闻中，当愿望过于强烈之时，神明便会向他投下视线，「神之眼」便会出现",
 
   "paimeng.text.god_eye.slot": "可装备于圣遗物栏第 6 格",
   "paimeng.text.god_eye.wind.desc": "移动速度 +0.1，攻击速度 +1，免疫缓慢",
@@ -682,7 +682,7 @@
   "paimeng.text.god_eye.thunder.desc": "免疫负面药水效果与小怪的魔法攻击",
   "paimeng.text.god_eye.fire.desc": "免疫火焰与岩浆伤害，攻击附带点燃",
   "paimeng.text.god_eye.ice.desc": "免疫冻伤与细雪，攻击附带减速",
-  "paimeng.text.god_eye.water.desc": "水中移动速度 +0.1，水下呼吸1",
+  "paimeng.text.god_eye.water.desc": "水中移动速度 +1，水下呼吸1",
   "paimeng.text.god_eye.grass.desc": "持续生命恢复2 ，免疫中毒",
   "paimeng.text.hypostasis.altar_fail": "祭坛不完整：需要 8 种各不相同的矿物块拼成 2×2×2",
   "paimeng.text.hypostasis.altar_success": "无相之岩苏醒了",

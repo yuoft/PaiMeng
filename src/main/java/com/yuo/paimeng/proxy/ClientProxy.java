@@ -3,6 +3,7 @@ package com.yuo.paimeng.proxy;
 import com.yuo.paimeng.ModUtils;
 import com.yuo.paimeng.PMKeyManager;
 import com.yuo.paimeng.blocks.PMBlocks;
+import com.yuo.paimeng.client.model.BoarModel;
 import com.yuo.paimeng.client.model.CraneModel;
 import com.yuo.paimeng.client.render.BenchTileTER;
 import com.yuo.paimeng.client.render.BoarRender;
@@ -44,6 +45,7 @@ public class ClientProxy extends CommonProxy{
         modBus.addListener(this::registerKeyMappings);
         //1.20.1 实体模型层必须在 mod 总线注册
         modBus.addListener((EntityRenderersEvent.RegisterLayerDefinitions event) -> event.registerLayerDefinition(CraneModel.LAYER, CraneModel::createBodyLayer));
+        modBus.addListener((EntityRenderersEvent.RegisterLayerDefinitions event) -> event.registerLayerDefinition(BoarModel.LAYER, BoarModel::createBodyLayer));
         PMKeyManager.init();//快捷键注册
     }
 

@@ -355,7 +355,7 @@ public class RelicsHelper {
                     nbt.putInt(NBT_ATTR_TYPE2, RelicsAttrType.HEAL.getId());
                 }
                 case WATER -> {
-                    nbt.putFloat(NBT_ATTR, 0.1f);
+                    nbt.putFloat(NBT_ATTR, 1);
                     nbt.putInt(NBT_ATTR_TYPE, RelicsAttrType.SWIM_SPEED.getId());
                 }
             }
@@ -657,10 +657,6 @@ public class RelicsHelper {
         }
     }
 
-    //原版增益属性 用于属性修饰符
-    private static final RelicsAttrType[] ATTRS = new RelicsAttrType[]{RelicsAttrType.HEALTH, RelicsAttrType.HEALTH_RATE, RelicsAttrType.ATTACK_DAMAGE_RATE,
-            RelicsAttrType.ATTACK_DAMAGE, RelicsAttrType.DEFENSE, RelicsAttrType.DEFENSE_RATE};
-
     /**
      * 获取玩家圣遗物所有生效属性修饰符
      * @param player 玩家
@@ -670,7 +666,7 @@ public class RelicsHelper {
         List<RandomAttrValue> relicsData = getRelicsData(player);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         for (RandomAttrValue data : relicsData) {
-            for (RelicsAttrType attr : ATTRS) {
+            for (RelicsAttrType attr : RelicsAttrType.ALL_MODIFIER) {
                 if (attr.isEquals(data.attrType) && attr.isAttr()){
                     builder.put(attr.getAttribute(), new AttributeModifier(attr.getUuid(),
                             PaiMeng.MOD_ID + attr.getTip(), data.baseValue, attr.getOperation()));

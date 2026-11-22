@@ -1,0 +1,128 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:xingyuner_relics"
+    },
+    "title": {
+      "translate": "advancements.paimeng.relics.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.relics.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "xingyuner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:xingyuner_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "maoxianjia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:maoxianjia_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "youyi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:youyi_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "yongshi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:yongshi_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "jiaoguan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:jiaoguan_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "liufangzhe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:liufangzhe_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "juedoushi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:juedoushi_relics"
+            ]
+          }
+        ]
+      }
+    },
+    "yuetuan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:yuetuan_relics"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "xingyuner",
+      "maoxianjia",
+      "youyi",
+      "yongshi",
+      "jiaoguan",
+      "liufangzhe",
+      "juedoushi",
+      "yuetuan"
+    ]
+  ]
+}

@@ -91,7 +91,7 @@ public class CookingPacket {
                     if (!foodRecipesInfo.isEmpty()) {
                         int foodRecipLv = foodRecipesInfo.getLevel();
                         int foodRecipeExp = foodRecipesInfo.getExp();
-                        if (foodRecipLv > 5) {
+                        if (foodRecipLv == 5) {
                             foodRecipesInfo.setExp(0);
                         } else {
                             int foodRecipeUpExp = getLvUpExp(foodRecipLv, foodRecipeExp, msg.exp);
@@ -114,7 +114,7 @@ public class CookingPacket {
      * 获取升级后的剩余经验 为0则不可升级
      */
     public static int getLvUpExp(int level, int exp, int upExp) {
-        if (level > 5) return 0;
+        if (level == 5) return 0;
         int expAll = exp + upExp;
         int expDown = getUpExp(level);
         if (expAll > expDown) {

@@ -1,0 +1,32 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:cooking_super_bench"
+    },
+    "title": {
+      "translate": "advancements.paimeng.super_bench.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.super_bench.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_super_bench": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:cooking_super_bench"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

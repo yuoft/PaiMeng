@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "paimeng:cooking_pot"
+    },
+    "title": {
+      "translate": "advancements.paimeng.root.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_pot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:cooking_pot"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

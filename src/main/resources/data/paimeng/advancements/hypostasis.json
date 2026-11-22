@@ -1,0 +1,28 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:hypostasis_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.paimeng.hypostasis.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.hypostasis.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "paimeng:hypostasis"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:cooking_bench"
+    },
+    "title": {
+      "translate": "advancements.paimeng.hunter.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.hunter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "boar": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "paimeng:boar"
+        }
+      }
+    },
+    "crane": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "paimeng:crane"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "boar",
+      "crane"
+    ]
+  ]
+}

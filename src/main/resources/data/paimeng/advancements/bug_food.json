@@ -1,0 +1,30 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:food_bug_food"
+    },
+    "title": {
+      "translate": "advancements.paimeng.bug_food.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.bug_food.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "eaten": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "paimeng:food_bug_food"
+          ]
+        }
+      }
+    }
+  }
+}

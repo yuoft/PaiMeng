@@ -1,0 +1,23 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:food_duigaogao"
+    },
+    "title": {
+      "translate": "advancements.paimeng.big_eater.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.big_eater.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "all_food": {
+      "trigger": "paimeng:all_food_eaten"
+    }
+  }
+}

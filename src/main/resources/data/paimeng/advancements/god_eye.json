@@ -1,0 +1,115 @@
+{
+  "parent": "paimeng:hypostasis",
+  "display": {
+    "icon": {
+      "item": "paimeng:god_eye_wind"
+    },
+    "title": {
+      "translate": "advancements.paimeng.god_eye.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.god_eye.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "wind": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_wind"
+            ]
+          }
+        ]
+      }
+    },
+    "stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_stone"
+            ]
+          }
+        ]
+      }
+    },
+    "thunder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_thunder"
+            ]
+          }
+        ]
+      }
+    },
+    "grass": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_grass"
+            ]
+          }
+        ]
+      }
+    },
+    "water": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_water"
+            ]
+          }
+        ]
+      }
+    },
+    "fire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_fire"
+            ]
+          }
+        ]
+      }
+    },
+    "ice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:god_eye_ice"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wind",
+      "stone",
+      "thunder",
+      "grass",
+      "water",
+      "fire",
+      "ice"
+    ]
+  ]
+}

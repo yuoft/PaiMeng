@@ -1,0 +1,32 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:food_paimeng_food"
+    },
+    "title": {
+      "translate": "advancements.paimeng.paimeng_food.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.paimeng_food.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "has": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:food_paimeng_food"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

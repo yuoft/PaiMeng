@@ -66,7 +66,8 @@ public abstract class AbstractCookingScreen<T extends AbstractCookingContainer<?
         int exp = this.menu.getExp();
         int expBarX = getExpBarX();
         graphics.blit(RESOURCE, i + expBarX, j + 8, 176, 15, 51, 5);
-        graphics.blit(RESOURCE, i + expBarX, j + 8, 176, 20, 1 + exp, 5);
+        graphics.blit(RESOURCE, i + expBarX, j + 8, 176, 20,
+                this.menu.getFoodRecipesLevel() >= 5 ? 50 : 1 + exp, 5);
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 

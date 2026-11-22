@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xzx",
+    "xyx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "paimeng:jiejing"
+    },
+    "y": {
+      "item": "paimeng:cooking_bench"
+    },
+    "z": {
+      "item": "paimeng:god_eye_fire"
+    }
+  },
+  "result": {
+    "item": "paimeng:cooking_super_bench"
+  }
+}

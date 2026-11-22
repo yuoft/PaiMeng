@@ -12,6 +12,7 @@ import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.items.relics.RelicsBox;
 import com.yuo.paimeng.items.relics.RelicsHelper;
 import com.yuo.paimeng.tiles.SevenGodTile;
+import com.yuo.paimeng.world.data.HypostasisBorderSavedData;
 import com.yuo.paimeng.world.data.SevenGodSavedData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -76,6 +77,20 @@ public class EventHandler {
 
     //不被禁用的原版食物
     private static final List<Item> ITEMS = Arrays.asList(Items.ENCHANTED_GOLDEN_APPLE, Items.GOLDEN_APPLE, Items.SWEET_BERRIES, Items.APPLE);
+
+    /**
+     * 服务器启动兜底：若存档里残留无相之岩的边界封锁（崩溃/关服时正在二阶段），
+     * 且当前边界仍是封锁尺寸，就把世界边界恢复成原值。
+     */
+    @SubscribeEvent
+    public static void serverStarted(net.minecraftforge.event.server.ServerStartedEvent event) {
+        ServerLevel overworld = event.getServer().overworld();
+        HypostasisBorderSavedData data = HypostasisBorderSavedData.get(overworld);
+        if (data.isActive()) {
+            data.restoreIfStillBlocked(overworld.getWorldBorder(),
+                    com.yuo.paimeng.entity.HypostasisEntity.barrierSize());
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

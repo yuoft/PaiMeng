@@ -43,7 +43,10 @@ public class HypostasisHoverGoal extends Goal {
             return;
         }
 
-        entity.getLookControl().setLookAt(target, 25.0F, 25.0F);
+        // 🔴 快速转向目标（原来 LookControl 只有 25°/tick，跟不上绕圈的玩家）
+        float turnSpeed = entity.getPhase() >= 2 ? HypostasisEntity.TURN_SPEED_PHASE2 : HypostasisEntity.TURN_SPEED;
+        entity.turnTo(target, turnSpeed);
+        entity.getLookControl().setLookAt(target, turnSpeed, 60.0F);
 
         Vec3 self = entity.position();
         Vec3 targetPos = target.position();

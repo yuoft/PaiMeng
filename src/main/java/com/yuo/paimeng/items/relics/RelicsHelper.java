@@ -322,7 +322,7 @@ public class RelicsHelper {
         CompoundTag nbt = tag.getCompound(NBT_RELICS);
         int star = nbt.getInt(NBT_STAR);
         RelicsType relicsType = RelicsType.getTypeForId(nbt.getInt(NBT_TYPE));
-        if (relicsType == RelicsType.EYE){ //神之眼属性固定
+        if (relicsType == RelicsType.EYE || (crafting.getItem() instanceof Relics relics && relics.getGodEyeType() != null)){ //神之眼属性固定
             addGodEyeBaseAttr(crafting);
             return;
         }

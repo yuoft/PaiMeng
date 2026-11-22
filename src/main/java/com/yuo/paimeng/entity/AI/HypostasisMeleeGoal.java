@@ -3,10 +3,10 @@ package com.yuo.paimeng.entity.AI;
 import com.yuo.paimeng.entity.HypostasisEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.player.Player;
 
 /**
- * 近战形态选择：贴身时随机进入一字型 / 十字型 / X 型砸击。
+ * 近战形态选择：贴身时从「能真正打到目标」的一字型 / 十字型 / X 型里随机挑一个。
+ * 目标不在身前命中区、或三种形态都覆盖不到时不启动，避免对着空气挥击。
  */
 public class HypostasisMeleeGoal extends Goal {
     private final HypostasisEntity entity;
@@ -18,12 +18,7 @@ public class HypostasisMeleeGoal extends Goal {
     @Override
     public boolean canUse() {
         LivingEntity target = entity.getTarget();
-        if (target == null || !target.isAlive() || !entity.canStartAttack()) return false;
-
-        // 🔴 排除创造/旁观模式玩家，避免"对着玩家放技能但没伤害"的假象
-        if (target instanceof Player player && (player.isCreative() || player.isSpectator())) {
-            return false;
-        }
+        if (!HypostasisRangedGoal.canUse(entity, target)) return false;
 
         // 水平距离判定
         double dx = target.getX() - entity.getX();
@@ -31,21 +26,24 @@ public class HypostasisMeleeGoal extends Goal {
         if (dx * dx + dz * dz > 6.0D * 6.0D) return false;
 
         // Y 差不超过 5 格
-        return Math.abs(target.getY() - entity.getY()) <= 5.0D;
+        if (Math.abs(target.getY() - entity.getY()) > 5.0D) return false;
+
+        // 必须在身前，且至少有一种形态能覆盖到目标
+        return entity.isMeleeTargetInFront() && entity.pickMeleeShape() != null;
     }
 
     @Override
     public boolean canContinueToUse() {
         if (entity.isIdle()) return false;
 
-        // 🔴 目标死亡或消失：中止攻击，避免砸地判定对空气生效
+        // 目标死亡或消失：中止攻击
         LivingEntity target = entity.getTarget();
         if (target == null || !target.isAlive()) {
             entity.abortAttack();
             return false;
         }
 
-        // 🔴 目标在蓄力期间跑出 9 格：提前收招
+        // 目标在蓄力期间跑出 9 格：提前收招
         double dx = target.getX() - entity.getX();
         double dz = target.getZ() - entity.getZ();
         if (dx * dx + dz * dz > 9.0D * 9.0D) {
@@ -63,11 +61,10 @@ public class HypostasisMeleeGoal extends Goal {
 
     @Override
     public void start() {
-        int roll = entity.getRandom().nextInt(3);
-        HypostasisEntity.AttackState state = roll == 0 ? HypostasisEntity.AttackState.MELEE_LINE
-                : roll == 1 ? HypostasisEntity.AttackState.MELEE_CROSS
-                : HypostasisEntity.AttackState.MELEE_X;
-        entity.startAttack(state);
+        HypostasisEntity.AttackState shape = entity.pickMeleeShape();
+        if (shape == null || !entity.startAttack(shape)) {
+            entity.abortAttack();
+        }
     }
 
     @Override

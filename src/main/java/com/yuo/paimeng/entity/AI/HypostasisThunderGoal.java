@@ -3,6 +3,7 @@ package com.yuo.paimeng.entity.AI;
 import com.yuo.paimeng.entity.HypostasisEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
 
 /**
  * 雷击：4~10 格内按概率触发多层环状落雷。
@@ -29,7 +30,7 @@ public class HypostasisThunderGoal extends Goal {
         }
 
         LivingEntity target = entity.getTarget();
-        if (target == null || !target.isAlive() || !entity.canStartAttack()) return false;
+        if (!HypostasisRangedGoal.canUse(entity, target)) return false;
 
         // 🔴 距离范围与雷击覆盖范围匹配：4~10 格
         double distance = entity.distanceTo(target);

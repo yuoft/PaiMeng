@@ -2,6 +2,7 @@ package com.yuo.paimeng.recipe;
 
 import com.yuo.paimeng.tiles.BenchTile;
 import com.yuo.paimeng.tiles.PotTile;
+import com.yuo.paimeng.tiles.SuperBenchTile;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,11 @@ public abstract class CookingRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container inv, Level worldIn) {
+        if (inv instanceof SuperBenchTile){
+            //工作台：0~4 为食材，5 为产出
+            int size = RecipeUtils.match(inv.getContainerSize() - 1, inv, inputs);
+            return size == this.inputs.size() && size == ((SuperBenchTile) inv).getInputSize();
+        }
         if (inv instanceof BenchTile){
             //工作台：0~4 为食材，5 为产出，6 为燃料
             int size = RecipeUtils.match(inv.getContainerSize() - 2, inv, inputs);

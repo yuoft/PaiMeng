@@ -180,7 +180,7 @@ public class CookingBench extends BaseEntityBlock {
     }
 
     //灶台碰撞箱
-    private VoxelShape makeShapeNorth(){
+    protected VoxelShape makeShapeNorth(){
         VoxelShape shape = Block.box(1, 0, 0, 5, 14, 15);
         VoxelShape shape1 = Block.box(11, 0, 0, 15, 14, 15);
         VoxelShape shape2 = Block.box(5, 0, 0, 11, 1, 13);
@@ -192,7 +192,7 @@ public class CookingBench extends BaseEntityBlock {
         return Shapes.or(shape, shape1, shape2, shape3, shape4, shape5, shape6, shape7);
     }
 
-    private VoxelShape makeShapeSouth(){
+    protected VoxelShape makeShapeSouth(){
         VoxelShape shape = Block.box(11, 0, 1, 15, 14, 16);
         VoxelShape shape1 = Block.box(1, 0, 1, 5, 14, 16);
         VoxelShape shape2 = Block.box(3, 0, 3, 11, 1, 16);
@@ -203,7 +203,7 @@ public class CookingBench extends BaseEntityBlock {
         VoxelShape shape7 = Block.box(4, 10, 4, 12, 16, 12);
         return Shapes.or(shape, shape1, shape2, shape3, shape4, shape5, shape6, shape7);
     }
-    private VoxelShape makeShapeWest(){
+    protected VoxelShape makeShapeWest(){
         VoxelShape shape = Block.box(0, 0, 11, 15, 14, 15);
         VoxelShape shape1 = Block.box(0, 0, 1, 15, 14, 5);
         VoxelShape shape2 = Block.box(0, 0, 5, 13, 1, 11);
@@ -214,7 +214,7 @@ public class CookingBench extends BaseEntityBlock {
         VoxelShape shape7 = Block.box(4, 10, 4, 12, 16, 12);
         return Shapes.or(shape, shape1, shape2, shape3, shape4, shape5, shape6, shape7);
     }
-    private VoxelShape makeShapeEast(){
+    protected VoxelShape makeShapeEast(){
         VoxelShape shape = Block.box(1, 0, 1, 16, 14, 5);
         VoxelShape shape1 = Block.box(1, 0, 11, 16, 14, 15);
         VoxelShape shape2 = Block.box(3, 0, 5, 16, 1, 11);

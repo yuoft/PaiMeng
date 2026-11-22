@@ -14,6 +14,8 @@ public class TileTypeRegistry {
             () -> BlockEntityType.Builder.of(PotTile::new, PMBlocks.cookingPot.get()).build(null));
     public static final RegistryObject<BlockEntityType<BenchTile>> BENCH_TILE = TILE_ENTITIES.register("bench_tile",
             () -> BlockEntityType.Builder.of(BenchTile::new, PMBlocks.cookingBench.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SuperBenchTile>> SUPER_BENCH_TILE = TILE_ENTITIES.register("super_bench_tile",
+            () -> BlockEntityType.Builder.of(SuperBenchTile::new, PMBlocks.cookingSuperBench.get()).build(null));
     public static final RegistryObject<BlockEntityType<SynPlatTile>> SYN_PLAT_TILE = TILE_ENTITIES.register("syn_plat_tile",
             () -> BlockEntityType.Builder.of(SynPlatTile::new, PMBlocks.syntheticPlatform.get()).build(null));
     public static final RegistryObject<BlockEntityType<StrengthenTableTile>> strengthenTableTile = TILE_ENTITIES.register("strengthen_table_tile",

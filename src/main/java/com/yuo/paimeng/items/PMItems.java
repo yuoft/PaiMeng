@@ -578,6 +578,8 @@ public class PMItems {
 			() -> new BlockItem(PMBlocks.cookingPot.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> cookingBench = ITEMS.register("cooking_bench",
 			() -> new BlockItem(PMBlocks.cookingBench.get(), new Item.Properties()));
+	public static RegistryObject<BlockItem> cookingSuperBench = ITEMS.register("cooking_super_bench",
+			() -> new BlockItem(PMBlocks.cookingSuperBench.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> syntheticPlatform = ITEMS.register("synthetic_platform",
 			() -> new BlockItem(PMBlocks.syntheticPlatform.get(), new Item.Properties()));
 	public static RegistryObject<BlockItem> commonFarmland = ITEMS.register("common_farmland",

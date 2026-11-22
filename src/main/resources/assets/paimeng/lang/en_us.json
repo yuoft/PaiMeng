@@ -422,6 +422,7 @@
 
   "block.paimeng.cooking_pot": "Cooking pot",
   "block.paimeng.cooking_bench": "Cooking bench",
+  "block.paimeng.cooking_super_bench": "Super Cooking bench",
   "block.paimeng.synthetic_platform": "Alchemical synthesis platform",
   "block.paimeng.apple_log": "Fruit tree",
   "block.paimeng.withered_log": "Withered tree",
@@ -705,7 +706,8 @@
   "paimeng.command.food.exp.success": "§aSet §e%s §a's cooking exp to §e%s",
 
   "gui.paimeng.pot": "Cooking pot",
-  "gui.paimeng.bench": "cooking bench",
+  "gui.paimeng.bench": "Cooking bench",
+  "gui.paimeng.super_bench": "Super Cooking bench",
   "gui.paimeng.synthetic_platform": "Alchemical synthesis platform",
   "gui.paimeng.seed_box": "Seed box",
   "gui.paimeng.cooking_finish": "determine",

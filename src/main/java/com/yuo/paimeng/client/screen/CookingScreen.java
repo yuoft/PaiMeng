@@ -41,6 +41,8 @@ public class CookingScreen extends Screen {
 
     @Override
     protected void init() {
+        // 每次打开都是新界面，但保险起见先清空，避免控件叠加
+        this.clearWidgets();
         this.button = Button.builder(Component.translatable("gui.paimeng.cooking_button"), this::button)
                 .bounds(this.width / 2 - 15, this.height / 2 + 20, 30, 20).build(); //回调
         this.addRenderableWidget(button);
@@ -67,8 +69,11 @@ public class CookingScreen extends Screen {
 
     @Override
     public void onClose() {
-        super.onClose();
-        this.button.onClick(0,0);
+        // 取消烹饪：直接回到容器界面，不再走 super.onClose()（那会把界面关成 null 再重开，
+        // 还会通过 button.onClick 误触发一次烹饪并再次 init 父界面）
+        if (this.minecraft != null) {
+            this.minecraft.setScreen(this.screen);
+        }
     }
 
     private void button(Button button) {

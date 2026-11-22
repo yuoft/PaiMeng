@@ -1,24 +1,12 @@
 package com.yuo.paimeng.jei;
 
-import com.yuo.paimeng.menu.BenchContainer;
-import com.yuo.paimeng.menu.PotContainer;
-import com.yuo.paimeng.menu.SeedBoxContainer;
-import com.yuo.paimeng.menu.SynPlatContainer;
-import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.ModUtils;
-import com.yuo.paimeng.recipe.BenchRecipe;
-import com.yuo.paimeng.recipe.CookingRecipe;
-import com.yuo.paimeng.recipe.PotRecipe;
-import com.yuo.paimeng.recipe.SeedBoxRecipe;
-import com.yuo.paimeng.recipe.SynPlatRecipe;
+import com.yuo.paimeng.items.PMItems;
+import com.yuo.paimeng.recipe.*;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -45,6 +33,7 @@ public class JeiPlugin implements IModPlugin {
         registration.addRecipeCategories(
                 new PotRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new BenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
+                new SuperBenchRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new CookingRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new SynPlatRecipeCategory(registration.getJeiHelpers().getGuiHelper()),
                 new SeedBoxRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -59,6 +48,7 @@ public class JeiPlugin implements IModPlugin {
 
         registration.addRecipes(PotRecipeCategory.RECIPE_TYPE, getRecipes(recipeManager, PotRecipe.class));
         registration.addRecipes(BenchRecipeCategory.RECIPE_TYPE, getRecipes(recipeManager, BenchRecipe.class));
+        registration.addRecipes(SuperBenchRecipeCategory.RECIPE_TYPE, getRecipes(recipeManager, BenchRecipe.class));
         //1.16.5 原实现里 cooking 类别注册的是 pot 配方，这里保持同样行为
         List<CookingRecipe> cookingRecipes = new ArrayList<>(getRecipes(recipeManager, PotRecipe.class));
         registration.addRecipes(CookingRecipeCategory.RECIPE_TYPE, cookingRecipes);
@@ -92,19 +82,22 @@ public class JeiPlugin implements IModPlugin {
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         IJeiHelpers jeiHelpers = registration.getJeiHelpers();
         registration.addRecipeTransferHandler(
-                new CookingTransferHandler<PotContainer, PotRecipe>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new PotTransferInfo()),
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new PotTransferInfo()),
                 PotRecipeCategory.RECIPE_TYPE);
         registration.addRecipeTransferHandler(
-                new CookingTransferHandler<BenchContainer, BenchRecipe>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new BenchTransferInfo()),
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new BenchTransferInfo()),
                 BenchRecipeCategory.RECIPE_TYPE);
         registration.addRecipeTransferHandler(
-                new CookingTransferHandler<BenchContainer, CookingRecipe>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new CookingTransferInfo()),
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new SuperBenchTransferInfo()),
+                SuperBenchRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeTransferHandler(
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new CookingTransferInfo()),
                 CookingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeTransferHandler(
-                new CookingTransferHandler<SynPlatContainer, SynPlatRecipe>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new SynPlatTransferInfo()),
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new SynPlatTransferInfo()),
                 SynPlatRecipeCategory.RECIPE_TYPE);
         registration.addRecipeTransferHandler(
-                new CookingTransferHandler<SeedBoxContainer, SeedBoxRecipe>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new SeedBoxTransferInfo()),
+                new CookingTransferHandler<>(jeiHelpers.getStackHelper(), registration.getTransferHelper(), new SeedBoxTransferInfo()),
                 SeedBoxRecipeCategory.RECIPE_TYPE);
     }
 
@@ -113,6 +106,7 @@ public class JeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(PMItems.cookingPot.get()), PotRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(PMItems.cookingBench.get()), BenchRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(PMItems.cookingSuperBench.get()), SuperBenchRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(PMItems.cookingBench.get()), CookingRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(PMItems.syntheticPlatform.get()), SynPlatRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(PMItems.huazhongxia.get()), SeedBoxRecipeCategory.RECIPE_TYPE);

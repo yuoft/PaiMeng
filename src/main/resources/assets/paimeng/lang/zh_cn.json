@@ -423,6 +423,7 @@
 
   "block.paimeng.cooking_pot": "烹饪锅",
   "block.paimeng.cooking_bench": "灶台",
+  "block.paimeng.cooking_super_bench": "高级烹饪台",
   "block.paimeng.synthetic_platform": "炼金合成台",
   "block.paimeng.apple_log": "果木",
   "block.paimeng.withered_log": "枯木",
@@ -710,6 +711,7 @@
 
   "gui.paimeng.pot": "烹饪锅",
   "gui.paimeng.bench": "灶台",
+  "gui.paimeng.super_bench": "高级烹饪台",
   "gui.paimeng.synthetic_platform": "炼金合成台",
   "gui.paimeng.seed_box": "化种匣",
   "gui.paimeng.cooking_finish": "确定",

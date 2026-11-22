@@ -41,6 +41,7 @@ public class PMBlocks {
 
     public static RegistryObject<Block> cookingPot = BLOCKS.register("cooking_pot", CookingPot::new);
     public static RegistryObject<Block> cookingBench = BLOCKS.register("cooking_bench", CookingBench::new);
+    public static RegistryObject<Block> cookingSuperBench = BLOCKS.register("cooking_super_bench", CookingSuperBench::new);
     public static RegistryObject<Block> syntheticPlatform = BLOCKS.register("synthetic_platform", SyntheticPlatform::new);
     public static RegistryObject<Block> strengthenTable = BLOCKS.register("strengthen_table", StrengthenTable::new);
     public static RegistryObject<Block> sevenGod = BLOCKS.register("seven_god", SevenGodBlock::new);

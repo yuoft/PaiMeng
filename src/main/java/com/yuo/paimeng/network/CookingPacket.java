@@ -4,6 +4,7 @@ import com.yuo.paimeng.items.PMItems;
 import com.yuo.paimeng.recipe.ModRecipeType;
 import com.yuo.paimeng.tiles.BenchTile;
 import com.yuo.paimeng.tiles.PotTile;
+import com.yuo.paimeng.tiles.SuperBenchTile;
 import com.yuo.paimeng.tiles.TileUtils;
 import com.yuo.paimeng.world.data.FoodRecipeSaveData;
 import net.minecraft.core.BlockPos;
@@ -61,31 +62,22 @@ public class CookingPacket {
 
             if (world.isLoaded(msg.pos)) {
                 BlockEntity tile = world.getBlockEntity(msg.pos);
-//                BlockEntity tile = null;
-//                if (player.containerMenu instanceof PotContainer potMenu) {
-//                    tile = potMenu.getPotTile();
-//                } else if (player.containerMenu instanceof BenchContainer benchMenu) {
-//                    tile = benchMenu.getBenchTile();
-//                }
-//
-//                // 如果拿不到 Tile 或者方块已被破坏，直接退出
-//                if (tile == null || tile.isRemoved()) return;
-//
-//                // 获取真实坐标
-//                BlockPos actualPos = tile.getBlockPos();
-                
                 // 处理锅的烹饪结果
                 if (tile instanceof PotTile potTile) {
                     potTile.setItem(5, TileUtils.getTileStack(world, ModRecipeType.POT, potTile, msg.count, msg.star));
                     TileUtils.shirkItem(potTile, TileUtils.getRecipeInputs(world, ModRecipeType.POT, potTile), msg.count);
                 }
-                
+
                 // 处理灶台的烹饪结果
                 if (tile instanceof BenchTile benchTile) {
                     benchTile.setItem(5, TileUtils.getTileStack(world, ModRecipeType.BENCH, benchTile, msg.count, msg.star));
                     TileUtils.shirkItem(benchTile, TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, benchTile), msg.count);
                 }
-                
+                if (tile instanceof SuperBenchTile superBenchTile) {
+                    superBenchTile.setItem(5, TileUtils.getTileStack(world, ModRecipeType.BENCH, superBenchTile, msg.count, msg.star));
+                    TileUtils.shirkItem(superBenchTile, TileUtils.getRecipeInputs(world, ModRecipeType.BENCH, superBenchTile), msg.count);
+                }
+
                 // 额外产出判定
                 spawnOtherFood(world, tile, msg.pos, msg.count, msg.star);
                 
@@ -99,7 +91,7 @@ public class CookingPacket {
                     if (!foodRecipesInfo.isEmpty()) {
                         int foodRecipLv = foodRecipesInfo.getLevel();
                         int foodRecipeExp = foodRecipesInfo.getExp();
-                        if (foodRecipLv == 5) {
+                        if (foodRecipLv > 5) {
                             foodRecipesInfo.setExp(0);
                         } else {
                             int foodRecipeUpExp = getLvUpExp(foodRecipLv, foodRecipeExp, msg.exp);
@@ -122,7 +114,7 @@ public class CookingPacket {
      * 获取升级后的剩余经验 为0则不可升级
      */
     public static int getLvUpExp(int level, int exp, int upExp) {
-        if (level == 5) return 0;
+        if (level > 5) return 0;
         int expAll = exp + upExp;
         int expDown = getUpExp(level);
         if (expAll > expDown) {

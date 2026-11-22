@@ -79,6 +79,7 @@ public class ClientProxy extends CommonProxy{
             //绑定Container和ContainerScreen
             MenuScreens.register(PMMenuTypes.potContainer.get(), PotScreen::new);
             MenuScreens.register(PMMenuTypes.benchContainer.get(), BenchScreen::new);
+            MenuScreens.register(PMMenuTypes.superBenchContainer.get(), SuperBenchScreen::new);
             MenuScreens.register(PMMenuTypes.synPlatContainer.get(), SynPlatScreen::new);
             MenuScreens.register(PMMenuTypes.seedBoxContainer.get(), SeedBoxScreen::new);
             MenuScreens.register(PMMenuTypes.relicsContainer.get(), RelicsScreen::new);

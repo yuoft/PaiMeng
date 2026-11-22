@@ -16,6 +16,8 @@ public class PMMenuTypes {
             () -> IForgeMenuType.create(PotContainer::new));
     public static final RegistryObject<MenuType<BenchContainer>> benchContainer = CONTAINERS.register("bench_container",
             () -> IForgeMenuType.create(BenchContainer::new));
+    public static final RegistryObject<MenuType<SuperBenchContainer>> superBenchContainer = CONTAINERS.register("super_bench_container",
+            () -> IForgeMenuType.create(SuperBenchContainer::new));
     public static final RegistryObject<MenuType<SynPlatContainer>> synPlatContainer = CONTAINERS.register("syn_plat_container",
             () -> IForgeMenuType.create(SynPlatContainer::new));
     public static final RegistryObject<MenuType<SeedBoxContainer>> seedBoxContainer = CONTAINERS.register("seed_box_container",

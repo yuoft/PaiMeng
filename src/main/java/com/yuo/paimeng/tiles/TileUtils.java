@@ -48,6 +48,7 @@ public class TileUtils {
         NonNullList<ItemStack> stacks = NonNullList.create();
         if (tile instanceof PotTile) stacks = ((PotTile) tile).items;
         if (tile instanceof BenchTile) stacks = ((BenchTile) tile).items;
+        if (tile instanceof SuperBenchTile) stacks = ((SuperBenchTile) tile).items;
 
         if (stacks.size() <= 0) return;
         for (ItemStack stack : stacks){
@@ -110,7 +111,7 @@ public class TileUtils {
     public static void sendPotPacket(int count, int exp, int satr, BlockPos pos) {
         if (pos == null) return;
 
-        // 原逻辑保留
+        // 批量制作物经验
         exp = count > 1 ? 0 : exp;
         if (count == 0) exp = 0;
 

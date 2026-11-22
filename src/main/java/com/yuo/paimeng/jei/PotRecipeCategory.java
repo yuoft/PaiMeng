@@ -25,10 +25,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.Arrays;
 
 public class PotRecipeCategory implements IRecipeCategory<PotRecipe> {
-
-    public static final ResourceLocation UID = ModUtils.fa("pot");
     //合成配方背景
-    public static final ResourceLocation TEXTURE = ModUtils.fa( "textures/gui/pot.png");
+    public static final ResourceLocation TEXTURE = ModUtils.fa( "textures/gui/bench.png");
     //JEI 15 用 RecipeType 取代 1.16 的配方类别 UID 字符串
     public static final RecipeType<PotRecipe> RECIPE_TYPE = RecipeType.create(PaiMeng.MOD_ID, "pot", PotRecipe.class);
 

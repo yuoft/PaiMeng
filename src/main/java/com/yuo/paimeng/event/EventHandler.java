@@ -393,6 +393,8 @@ public class EventHandler {
         if (entityLiving instanceof EnderDragon || entityLiving instanceof WitherBoss){ // 末影龙/凋零 额外掉落
             EventHelper.spawnDrops(PMItems.jiejing.get(), 1, world, pos, event);
             EventHelper.spawnDrops(PMItems.yuanshi.get(), random.nextInt(4) + looting, world, pos, event);
+            // 忆梦融媒：Boss 必掉 1~2 个
+            EventHelper.spawnDrops(PMItems.yimengrongmei.get(), 1 + random.nextInt(2), world, pos, event);
         } else {
             // 击杀特定动物掉落兽肉
             if (entityLiving instanceof Fox || entityLiving instanceof Wolf || entityLiving instanceof PolarBear
@@ -404,6 +406,11 @@ public class EventHandler {
             if (entityLiving instanceof Parrot) {
                 // 🔴 注意：你之前的代码这里复制粘贴写成了 shourou.get()，如果是禽肉，请确认物品 ID 是否为 qinrou
                 EventHelper.spawnDrops(PMItems.qinrou.get(), random.nextInt(3) + looting, world, pos, event);
+            }
+
+            // 忆梦融媒：稀有掉落（0.3% + 抢夺每级 +0.1%）
+            if (random.nextDouble() < 0.003D + 0.001D * looting) {
+                EventHelper.spawnDrops(PMItems.yimengrongmei.get(), 1, world, pos, event);
             }
 
             // 所有非 boss 生物小概率掉落原石

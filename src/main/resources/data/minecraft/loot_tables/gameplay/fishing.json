@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "minecraft:gameplay/fishing/fish",
+          "weight": 85
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "minecraft:gameplay/fishing/junk",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "minecraft:gameplay/fishing/treasure",
+          "weight": 5,
+          "quality": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paimeng:food_xingxun",
+          "weight": 4
+        }
+      ]
+    }
+  ]
+}

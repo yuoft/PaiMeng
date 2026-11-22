@@ -2,7 +2,6 @@ package com.yuo.paimeng;
 
 
 
-import com.yuo.paimeng.advancement.PMTriggers;
 import com.yuo.paimeng.blocks.PMBlocks;
 import com.yuo.paimeng.effects.EffectRegistry;
 import com.yuo.paimeng.entity.PMEntityTypes;
@@ -41,12 +40,11 @@ public class PaiMeng {
         FeatureInit.FEATURES.register(modEventBus);
         EffectRegistry.EFFECTS.register(modEventBus);
         PMEntityTypes.ENTITY_TYPE.register(modEventBus);
-        PMTriggers.register();
         MinecraftForge.EVENT_BUS.addListener(EntityGen::registerSpawnPlacements);
         PROXY.registerHandlers(modEventBus);
 
         /*
-         * 添加高级烹饪台（无需燃料，不用合成进度条）
+         * 更多进度
          */
     }
 

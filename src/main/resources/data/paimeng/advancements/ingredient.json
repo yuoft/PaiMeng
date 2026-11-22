@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "item": "paimeng:stuff_bailuobo"
+    },
+    "title": {
+      "translate": "advancements.paimeng.ingredient.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.ingredient.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_ingredient": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "paimeng:ingredients"
+          }
+        ]
+      }
+    }
+  }
+}

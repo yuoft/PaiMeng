@@ -36,6 +36,8 @@ public class VillagerEvents {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
             trades.get(3).add(new ItemsForEmeraldsTrade(PMItems.chunjieZhishui.get(), 26, 1,3, 10));
+            // 大师级：忆梦融媒 + 下界合金锭 → 随机武器原胚（原胚本身没有其它来源）
+            trades.get(5).add(new BilletTrade());
         }
         if (VillagerProfession.CLERIC.equals(type)) { //牧师
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
@@ -155,9 +157,32 @@ public class VillagerEvents {
         rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xingluo.get(), 7, 1, 2,4));
         rareTrades.add(new ItemsForEmeraldsTrade(PMItems.xiyi_weiba.get(), 8, 1, 2,4));
     }
+    //武器匠大师级：忆梦融媒 + 下界合金锭 → 随机一把武器原胚
+    static class BilletTrade implements VillagerTrades.ItemListing {
+        private static final Item[] BILLETS = {
+                PMItems.danshoujian.get(),
+                PMItems.shuangshoujian.get(),
+                PMItems.changqiang.get(),
+                PMItems.faqi.get(),
+                PMItems.gong.get()
+        };
+
+        @Nullable
+        @Override
+        public MerchantOffer getOffer(Entity trader, RandomSource rand) {
+            Item billet = BILLETS[rand.nextInt(BILLETS.length)];
+            return new MerchantOffer(
+                    new ItemStack(PMItems.yimengrongmei.get(), 1),
+                    new ItemStack(Items.NETHERITE_INGOT, 1),
+                    new ItemStack(billet, 1),
+                    3,
+                    30,
+                    0.05F);
+        }
+    }
+
     //物品换绿宝石
-    static class EmeraldForItemsTrade implements VillagerTrades.ItemListing {
-        private final Item tradeItem;
+    static class EmeraldForItemsTrade implements VillagerTrades.ItemListing {        private final Item tradeItem;
         private final int count;
         private final int maxUses;
         private final int xpValue;

@@ -709,6 +709,8 @@
   "paimeng.command.food.query.exp": "§aPlayer §e%s §acooking exp: §e%s",
 
   "advancements.paimeng.root.title": "Traveler's Pot",
+  "advancements.paimeng.ingredient.title": "First Ingredient",
+  "advancements.paimeng.ingredient.description": "Obtain any kind of ingredient",
   "advancements.paimeng.root.description": "Obtain a cooking pot, and let the taste of Teyvat begin",
   "advancements.paimeng.super_bench.title": "Master's Hearth",
   "advancements.paimeng.super_bench.description": "Obtain the advanced cooking bench, no more minigame",

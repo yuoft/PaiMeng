@@ -713,6 +713,8 @@
   "paimeng.command.food.query.exp": "§a玩家 §e%s §a的烹饪经验：§e%s",
 
   "advancements.paimeng.root.title": "旅人的锅",
+  "advancements.paimeng.ingredient.title": "第一份食材",
+  "advancements.paimeng.ingredient.description": "获得任意一种食材",
   "advancements.paimeng.root.description": "获得一个烹饪锅，提瓦特的味道从此刻开始",
   "advancements.paimeng.super_bench.title": "大师的灶台",
   "advancements.paimeng.super_bench.description": "获得高级烹饪台，烹饪不再需要小游戏",

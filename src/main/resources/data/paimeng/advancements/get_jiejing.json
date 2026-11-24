@@ -1,0 +1,29 @@
+{
+  "parent": "paimeng:get_yuanshi",
+  "display": {
+    "icon": {
+      "item": "paimeng:jiejing"
+    },
+    "title": {
+      "translate": "advancements.paimeng.get_jiejing.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.get_jiejing.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "has": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:jiejing"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

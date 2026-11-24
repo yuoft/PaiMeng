@@ -1,8 +1,7 @@
 {
-  "parent": "paimeng:ingredient",
   "display": {
     "icon": {
-      "item": "paimeng:cooking_pot"
+      "item": "paimeng:food_paimeng_food"
     },
     "title": {
       "translate": "advancements.paimeng.root.title"
@@ -10,20 +9,19 @@
     "description": {
       "translate": "advancements.paimeng.root.description"
     },
+    "background": "paimeng:textures/block/ore/shuijing_ore.png",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
-    "has_pot": {
+    "has_ingredient": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "paimeng:cooking_pot"
-            ]
+            "tag": "paimeng:ingredients"
           }
         ]
       }

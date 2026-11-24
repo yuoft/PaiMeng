@@ -1,0 +1,27 @@
+{
+  "parent": "paimeng:use_alchemy",
+  "display": {
+    "icon": {
+      "item": "paimeng:drug"
+    },
+    "title": {
+      "translate": "advancements.paimeng.drink_potion.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.drink_potion.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "drunk": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "paimeng:drug"
+          ]
+        }
+      }
+    }
+  }
+}

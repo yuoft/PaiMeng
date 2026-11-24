@@ -256,6 +256,7 @@ public final class PMWorldGenData {
         list.add(patchFeature("plant_piboye_flower_forest", block(PMBlocks.piboyePlant), 3));
         list.add(patchFeature("plant_padishalan_flower_forest", block(PMBlocks.padishalanPlant), 3));
         list.add(patchFeature("plant_mogu_jungle", block(PMBlocks.moguPlant), 3));
+        list.add(patchFeature("plant_xingxun_jungle", block(PMBlocks.moguPlant), 3));
         list.add(patchFeature("plant_shuwang_jungle", block(PMBlocks.shuwangShengtiguPlant), 3));
         list.add(patchFeature("plant_songrong_taiga", block(PMBlocks.songrongPlant), 3));
         list.add(patchFeature("plant_bingwuhua_icy", block(PMBlocks.bingwuhuaHuaduoPlant), 2));

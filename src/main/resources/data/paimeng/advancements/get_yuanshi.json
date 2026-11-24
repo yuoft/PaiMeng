@@ -1,0 +1,29 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:yuanshi"
+    },
+    "title": {
+      "translate": "advancements.paimeng.get_yuanshi.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.get_yuanshi.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:yuanshi"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

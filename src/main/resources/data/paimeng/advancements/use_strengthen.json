@@ -1,0 +1,34 @@
+{
+  "parent": "paimeng:relics",
+  "display": {
+    "icon": {
+      "item": "paimeng:strengthen_table"
+    },
+    "title": {
+      "translate": "advancements.paimeng.use_strengthen.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.use_strengthen.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "used": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "paimeng:strengthen_table"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

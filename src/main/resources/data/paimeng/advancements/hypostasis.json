@@ -10,10 +10,7 @@
     "description": {
       "translate": "advancements.paimeng.hypostasis.description"
     },
-    "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "challenge"
   },
   "criteria": {
     "killed": {
@@ -24,5 +21,8 @@
         }
       }
     }
+  },
+  "rewards": {
+    "experience": 200
   }
 }

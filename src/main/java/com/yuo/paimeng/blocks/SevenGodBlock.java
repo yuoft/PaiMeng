@@ -1,5 +1,6 @@
 package com.yuo.paimeng.blocks;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import com.yuo.paimeng.tiles.SevenGodTile;
 import com.yuo.paimeng.world.data.SevenGodSavedData;
 import net.minecraft.core.BlockPos;
@@ -93,6 +94,10 @@ public class SevenGodBlock extends BaseEntityBlock {
 
                     if (!heldItem.isEmpty() && data.donateItem(player.getUUID(), pos, level.dimension(), heldItem, player.isCrouching())) {
                         player.sendSystemMessage(Component.translatable("paimeng.message.shrine.donate_success"));
+                        // 进度：只要不失去你的崇高，整个世界都为你敞开（原版 item_used_on_block）
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, heldItem);
+                        }
                         return InteractionResult.SUCCESS;
                     } else if (!heldItem.isEmpty()) {
                         player.sendSystemMessage(Component.translatable("paimeng.message.shrine.donate_fail"));

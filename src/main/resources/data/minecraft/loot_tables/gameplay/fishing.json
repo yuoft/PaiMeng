@@ -7,7 +7,7 @@
         {
           "type": "minecraft:loot_table",
           "name": "minecraft:gameplay/fishing/fish",
-          "weight": 85
+          "weight": 80
         },
         {
           "type": "minecraft:loot_table",
@@ -22,8 +22,28 @@
         },
         {
           "type": "minecraft:item",
-          "name": "paimeng:food_xingxun",
-          "weight": 4
+          "name": "paimeng:stuff_yurou",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paimeng:xingluo",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paimeng:stuff_xizao",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paimeng:stuff_pangxie",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "paimeng:stuff_haicao",
+          "weight": 1
         }
       ]
     }

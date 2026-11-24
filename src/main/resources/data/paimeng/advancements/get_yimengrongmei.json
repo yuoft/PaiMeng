@@ -1,0 +1,29 @@
+{
+  "parent": "paimeng:get_shanbianzhichen",
+  "display": {
+    "icon": {
+      "item": "paimeng:yimengrongmei"
+    },
+    "title": {
+      "translate": "advancements.paimeng.get_yimengrongmei.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.get_yimengrongmei.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:yimengrongmei"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

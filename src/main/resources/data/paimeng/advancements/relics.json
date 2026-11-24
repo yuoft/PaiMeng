@@ -10,10 +10,7 @@
     "description": {
       "translate": "advancements.paimeng.relics.description"
     },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "task"
   },
   "criteria": {
     "xingyuner": {

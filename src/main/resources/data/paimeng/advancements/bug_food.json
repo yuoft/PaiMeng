@@ -1,5 +1,5 @@
 {
-  "parent": "paimeng:root",
+  "parent": "paimeng:super_bench",
   "display": {
     "icon": {
       "item": "paimeng:food_bug_food"
@@ -10,10 +10,8 @@
     "description": {
       "translate": "advancements.paimeng.bug_food.description"
     },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": false,
-    "hidden": true
+    "frame": "challenge",
+    "hidden": false
   },
   "criteria": {
     "eaten": {

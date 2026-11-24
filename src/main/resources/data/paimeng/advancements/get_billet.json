@@ -1,0 +1,86 @@
+{
+  "parent": "paimeng:get_yimengrongmei",
+  "display": {
+    "icon": {
+      "item": "paimeng:danshoujian"
+    },
+    "title": {
+      "translate": "advancements.paimeng.get_billet.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.get_billet.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "danshoujian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:danshoujian"
+            ]
+          }
+        ]
+      }
+    },
+    "shuangshoujian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:shuangshoujian"
+            ]
+          }
+        ]
+      }
+    },
+    "changqiang": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:changqiang"
+            ]
+          }
+        ]
+      }
+    },
+    "faqi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:faqi"
+            ]
+          }
+        ]
+      }
+    },
+    "gong": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:gong"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "danshoujian",
+      "shuangshoujian",
+      "changqiang",
+      "faqi",
+      "gong"
+    ]
+  ]
+}

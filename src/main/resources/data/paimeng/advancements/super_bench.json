@@ -1,5 +1,5 @@
 {
-  "parent": "paimeng:root",
+  "parent": "paimeng:pot",
   "display": {
     "icon": {
       "item": "paimeng:cooking_super_bench"
@@ -10,10 +10,7 @@
     "description": {
       "translate": "advancements.paimeng.super_bench.description"
     },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "goal"
   },
   "criteria": {
     "has_super_bench": {

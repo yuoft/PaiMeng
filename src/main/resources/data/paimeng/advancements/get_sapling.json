@@ -1,0 +1,27 @@
+{
+  "parent": "paimeng:plant_crop",
+  "display": {
+    "icon": {
+      "item": "paimeng:apple_sapling"
+    },
+    "title": {
+      "translate": "advancements.paimeng.get_sapling.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.get_sapling.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has_sapling": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "paimeng:saplings"
+          }
+        ]
+      }
+    }
+  }
+}

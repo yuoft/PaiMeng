@@ -1,5 +1,5 @@
 {
-  "parent": "paimeng:root",
+  "parent": "paimeng:super_bench",
   "display": {
     "icon": {
       "item": "paimeng:food_duigaogao"
@@ -11,8 +11,6 @@
       "translate": "advancements.paimeng.big_eater.description"
     },
     "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {
@@ -196,5 +194,8 @@
     "yuyu_yongchangpai": {"trigger": "minecraft:consume_item", "conditions": {"item": {"items": ["paimeng:food_yuyu_yongchangpai"]}}},
     "zhayu_shutiao": {"trigger": "minecraft:consume_item", "conditions": {"item": {"items": ["paimeng:food_zhayu_shutiao"]}}},
     "paopaoju": {"trigger": "minecraft:consume_item", "conditions": {"item": {"items": ["paimeng:food_paopaoju"]}}}
+  },
+  "rewards": {
+    "experience": 500
   }
 }

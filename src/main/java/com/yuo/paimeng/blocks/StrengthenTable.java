@@ -1,5 +1,6 @@
 package com.yuo.paimeng.blocks;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import com.yuo.paimeng.tiles.StrengthenTableTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,6 +60,10 @@ public class StrengthenTable extends BaseEntityBlock {
             if (tileEntity instanceof StrengthenTableTile strengthenTableTile){
                 NetworkHooks.openScreen((ServerPlayer) player, strengthenTableTile, pos);
                 player.awardStat(Stats.INTERACT_WITH_FURNACE);
+                // 进度：搏一搏，单车变摩托！（原版 item_used_on_block）
+                if (player instanceof ServerPlayer serverPlayer) {
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, player.getItemInHand(handIn));
+                }
             }
         }
         return InteractionResult.SUCCESS;

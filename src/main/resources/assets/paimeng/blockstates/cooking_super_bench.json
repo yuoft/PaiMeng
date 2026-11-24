@@ -3,6 +3,10 @@
     "facing=north,lit=true": { "model": "paimeng:block/cooking_super_bench" },
     "facing=east,lit=true": { "model": "paimeng:block/cooking_super_bench" ,"y": 90},
     "facing=south,lit=true": { "model": "paimeng:block/cooking_super_bench" ,"y": 180},
-    "facing=west,lit=true": { "model": "paimeng:block/cooking_super_bench" ,"y": 270}
+    "facing=west,lit=true": { "model": "paimeng:block/cooking_super_bench" ,"y": 270},
+    "facing=north,lit=false": { "model": "paimeng:block/cooking_super_bench" },
+    "facing=east,lit=false": { "model": "paimeng:block/cooking_super_bench" ,"y": 90},
+    "facing=south,lit=false": { "model": "paimeng:block/cooking_super_bench" ,"y": 180},
+    "facing=west,lit=false": { "model": "paimeng:block/cooking_super_bench" ,"y": 270}
   }
 }

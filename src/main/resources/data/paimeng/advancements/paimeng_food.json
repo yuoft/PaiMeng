@@ -1,5 +1,5 @@
 {
-  "parent": "paimeng:root",
+  "parent": "paimeng:super_bench",
   "display": {
     "icon": {
       "item": "paimeng:food_paimeng_food"
@@ -11,9 +11,7 @@
       "translate": "advancements.paimeng.paimeng_food.description"
     },
     "frame": "challenge",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": true
+    "hidden": false
   },
   "criteria": {
     "has": {
@@ -28,5 +26,8 @@
         ]
       }
     }
+  },
+  "rewards": {
+    "experience": 1000
   }
 }

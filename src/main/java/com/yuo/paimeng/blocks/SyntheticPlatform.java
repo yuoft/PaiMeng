@@ -1,6 +1,7 @@
 package com.yuo.paimeng.blocks;
 
 import com.yuo.paimeng.menu.SynPlatContainer;
+import net.minecraft.advancements.CriteriaTriggers;
 import com.yuo.paimeng.tiles.SynPlatTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -46,6 +47,10 @@ public class SyntheticPlatform extends BaseEntityBlock {
             if (tileEntity instanceof SynPlatTile synPlatTile){ //打开gui
                 NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) synPlatTile, pos);
                 player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+                // 进度：炼金术！很神奇吧（原版 item_used_on_block）
+                if (player instanceof ServerPlayer serverPlayer) {
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, player.getItemInHand(handIn));
+                }
                 return InteractionResult.CONSUME;
             }
             return InteractionResult.SUCCESS;

@@ -1,0 +1,35 @@
+{
+  "parent": "paimeng:get_yuanshi",
+  "display": {
+    "icon": {
+      "item": "paimeng:seven_god"
+    },
+    "title": {
+      "translate": "advancements.paimeng.shrine_offer.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.shrine_offer.description"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "criteria": {
+    "offered": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "paimeng:seven_god"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

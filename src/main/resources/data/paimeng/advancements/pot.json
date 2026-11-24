@@ -1,0 +1,29 @@
+{
+  "parent": "paimeng:root",
+  "display": {
+    "icon": {
+      "item": "paimeng:cooking_pot"
+    },
+    "title": {
+      "translate": "advancements.paimeng.pot.title"
+    },
+    "description": {
+      "translate": "advancements.paimeng.pot.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "has_pot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paimeng:cooking_pot"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

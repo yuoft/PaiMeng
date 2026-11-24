@@ -10,10 +10,7 @@
     "description": {
       "translate": "advancements.paimeng.god_eye.description"
     },
-    "frame": "goal",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "goal"
   },
   "criteria": {
     "wind": {

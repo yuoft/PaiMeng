@@ -2,7 +2,7 @@
   "parent": "paimeng:root",
   "display": {
     "icon": {
-      "item": "paimeng:cooking_bench"
+      "item": "paimeng:stuff_shourou"
     },
     "title": {
       "translate": "advancements.paimeng.hunter.title"
@@ -10,10 +10,7 @@
     "description": {
       "translate": "advancements.paimeng.hunter.description"
     },
-    "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
-    "hidden": false
+    "frame": "goal"
   },
   "criteria": {
     "boar": {

@@ -23,9 +23,6 @@ import java.util.List;
 
 /**
  * 添加村民交易处理类
- * 1.20.1: VillagerTrades.ITrade -> VillagerTrades.ItemListing，
- *         MerchantOffer 移到 net.minecraft.world.item.trading，
- *         IItemProvider -> ItemLike，Random -> RandomSource
  */
 @Mod.EventBusSubscriber(modid = PaiMeng.MOD_ID)
 public class VillagerEvents {
@@ -172,8 +169,8 @@ public class VillagerEvents {
         public MerchantOffer getOffer(Entity trader, RandomSource rand) {
             Item billet = BILLETS[rand.nextInt(BILLETS.length)];
             return new MerchantOffer(
-                    new ItemStack(PMItems.yimengrongmei.get(), 1),
-                    new ItemStack(Items.NETHERITE_INGOT, 1),
+                    new ItemStack(PMItems.yimengrongmei.get(), 3),
+                    new ItemStack(Items.NETHERITE_INGOT, 16),
                     new ItemStack(billet, 1),
                     3,
                     30,
